@@ -1,0 +1,74 @@
+// 1.变量
+mainColor = #0982c1;
+siteWidth = 1024px;
+$borderStyle = dotted;
+
+body {
+    color: mainColor;
+    border: 1px $borderStyle mainColor;
+    max-width: siteWidth;
+}
+
+// 2.嵌套
+section {
+    margin: 10px;
+
+    nav {
+        height: 25px;
+
+        a {
+            color: #0982C1;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+// 3.Mixins (混入)
+error(borderWidth = 2px) {
+    border: borderWidth solid #F00;
+    color: #F00;
+}
+
+.generic-error {
+    padding: 20px;
+    margin: 4px;
+    error(); /* Applies styles from mixin error */
+}
+
+.login-error {
+    left: 12px;
+    position: absolute;
+    top: 20px;
+    error(5px); /* Applies styles from mixin error with argument borderWidth equal to 5px */
+}
+
+// 4.继承
+.block {
+    margin: 10px 5px;
+    padding: 2px;
+}
+
+p {
+    @extend .block;
+    /* Inherit styles from '.block' */
+    border: 1px solid #EEE;
+}
+
+ul, ol {
+    @extend .block;
+    /* Inherit styles from '.block' */
+    color: #333;
+    text-transform: uppercase;
+}
+
+// 5.导入 (Import)
+// @extend
+// @at-root
+// 控制指令 (Control Directives)
+// 混合指令 (Mixin Directives)
+.example {
+    position: relative;
+}

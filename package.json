@@ -1,0 +1,63 @@
+{
+  "name": "w-design-vue",
+  "version": "0.0.10",
+  "title": "W Design Vue",
+  "description": "A simple components UI based on Vue 3.x + Vite 2.x.",
+  "private": true,
+  "license": "MIT",
+  "author": "Weijuer<https://github.com/weijuer>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weijuer/w-design-vue.git"
+  },
+  "homepage": "https://weijuer.github.io/w-design-vue",
+  "bugs": {
+    "url": "https://github.com/weijuer/w-design-vue/issues"
+  },
+  "keywords": [
+    "vitejs",
+    "vue3",
+    "component",
+    "components",
+    "ui",
+    "framework",
+    "frontend"
+  ],
+  "files": [
+    "lib",
+    "packages"
+  ],
+  "main": "lib/w-design-vue.umd.js",
+  "module": "lib/w-design-vue.es.js",
+  "style": "lib/style.css",
+  "exports": {
+    ".": {
+      "import": "./lib/w-design-vue.es.js",
+      "require": "./lib/w-design-vue.umd.js"
+    },
+    "./lib/style.css": "./lib/style.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
+  },
+  "dependencies": {
+    "vue": "^3.1.4"
+  },
+  "peerDependencies": {
+    "@vue/compiler-sfc": ">=3.1.0",
+    "vue": ">=3.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.5",
+    "@vue/compiler-sfc": "^3.1.4",
+    "sass": "^1.35.2",
+    "stylus": "^0.54.8",
+    "vite": "^2.4.2",
+    "vitepress": "^0.15.6"
+  }
+}

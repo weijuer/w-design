@@ -1,0 +1,45 @@
+@import './_vars.styl';
+
+.w-button {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  margin: 0.25rem 0.375rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  for theme in $themes {
+    &.w-button-{theme} {
+      color: theme == 'light' ? #888 : #fff;
+      background: $themes[theme];
+      border-color: $themes[theme];
+      border-style: solid;
+
+      &:active, &:hover {
+        background: darken($themes[theme], 30%);
+        border-color: darken($themes[theme], 30%);
+      }
+    }
+
+    &.w-button--outline-{theme} {
+      color: $themes[theme];
+      background-color: transparent;
+      background-image: none;
+      border-color: $themes[theme];
+
+      &:active, &:hover {
+        color: #fff;
+        background-color: $themes[theme];
+        border-color: $themes[theme];
+      }
+    }
+  }
+}

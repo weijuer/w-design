@@ -1,0 +1,37 @@
+<template>
+  <w-button v-for="theme of state.themes" round :key="theme" :type="theme">{{ theme }}</w-button>
+
+  <w-icon></w-icon>
+  <!-- <w-main></w-main> -->
+</template>
+
+<script setup>
+import { reactive, ref } from 'vue'
+import { Main as WMain } from 'Layout'
+
+const state = reactive({
+  themes: [
+    'primary',
+    'success',
+    'warning',
+    'danger',
+    'info',
+    'metal',
+    'dark',
+    'light',
+    'brand',
+    'focus'
+  ]
+})
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
