@@ -1,7 +1,6 @@
 <template>
-  <w-button v-for="theme of state.themes" round :key="theme" :type="theme">{{ theme }}</w-button>
-
   <w-icon></w-icon>
+  <w-badge>asd</w-badge>
   <!-- <w-main></w-main> -->
 </template>
 
@@ -10,18 +9,7 @@ import { reactive, ref } from 'vue'
 import { Main as WMain } from 'Layout'
 
 const state = reactive({
-  themes: [
-    'primary',
-    'success',
-    'warning',
-    'danger',
-    'info',
-    'metal',
-    'dark',
-    'light',
-    'brand',
-    'focus'
-  ]
+  message: 'hello'
 })
 </script>
 

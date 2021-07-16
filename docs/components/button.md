@@ -25,7 +25,7 @@ title: Button 按钮
 - 禁用：行动点不可用的时候，一般需要文案解释。
 - 加载中：用于异步操作等待反馈的时候，也可以避免多次提交。
 
-### 代码演示
+## 代码演示
 
 <w-button v-for="theme of state.themes" round :key="theme" :type="theme">{{ theme }}</w-button>
 

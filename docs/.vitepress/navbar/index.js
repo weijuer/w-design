@@ -10,9 +10,9 @@ module.exports = [
   {
     text: '日志',
     link: '/blog/'
-  },
-  {
+  }
+  /* {
     text: '关于我',
     link: '/contact/'
-  }
+  } */
 ]

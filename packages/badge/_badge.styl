@@ -1,0 +1,27 @@
+@import '../assets/styles/_vars.styl';
+
+.badge {
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+
+    &.middle {
+        vertical-align: middle;
+    }
+
+    &.top {
+        vertical-align: top;
+    }
+
+    for theme in $themes {
+        &.{theme} {
+            background-color: $themes[theme];
+        }
+    }
+}

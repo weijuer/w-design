@@ -10,22 +10,18 @@ const config = {
   },
   // 默认主题配置
   themeConfig: {
-    logo: './logo.png',
+    logo: 'logo.png',
     repo: 'weijuer/w-design-vue',
     docsDir: 'packages',
     editLinks: true,
-    editLinkText: 'Edit this page',
-    lastUpdated: 'Last Updated',
+    editLinkText: '编辑此页',
+    lastUpdated: '上次更新',
     nav: require('./navbar'),
     sidebar: require('./sidebar')
   },
   head: [
     // ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }],
-    ['meta', { name: 'author', content: 'Weijuer' }],
-    [
-      'link',
-      { href: 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap', rel: 'stylesheet' }
-    ]
+    ['meta', { name: 'author', content: 'Weijuer' }]
   ]
 }
 
