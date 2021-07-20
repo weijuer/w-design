@@ -4,9 +4,7 @@ sidebar: auto
 
 # 联系方式
 
-- 手机：199**\*\***30
-- Email：ch\_\*\*\*@163.com
-- QQ：151\*\*\*610
+- Github：http://github.com/weijuer
 
 # 个人信息
 

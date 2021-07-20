@@ -1,5 +1,5 @@
 const config = {
-  // base: '/docs/', // 发布路径 `https://domain.com/` 变成 `https://domain.com/base/`
+  base: '/w-design-vue/', // 发布路径 `https://domain.com/` 变成 `https://domain.com/w-design-vue/`
   title: 'W Design Vue',
   description: 'A simple components UI based on Vue 3.x + Vite 2.x.',
   lang: 'en-US',
