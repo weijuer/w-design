@@ -1,6 +1,6 @@
 @import '../assets/styles/_vars.styl';
 
-.badge {
+.w-badge {
     padding: 0;
     margin: 0;
     display: inline-flex;
@@ -10,6 +10,7 @@
     width: 18px;
     border-radius: 50%;
     font-size: 0.8rem;
+    color: #fff;
 
     &.middle {
         vertical-align: middle;
@@ -20,7 +21,7 @@
     }
 
     for theme in $themes {
-        &.{theme} {
+        &.w-badge--{theme} {
             background-color: $themes[theme];
         }
     }
