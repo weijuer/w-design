@@ -5,11 +5,13 @@ module.exports = [
   },
   {
     text: '组件',
-    link: '/components/'
+    link: '/components/',
+    activeMatch: '/components'
   },
   {
     text: '日志',
-    link: '/blog/'
+    link: '/blog/',
+    activeMatch: '/blog'
   }
   /* {
     text: '关于我',

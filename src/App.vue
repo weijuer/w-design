@@ -1,7 +1,5 @@
 <template>
   <w-icon></w-icon>
-  <w-badge>1</w-badge>
-  <w-badge text="2"></w-badge>
   <!-- <w-main></w-main> -->
 </template>
 

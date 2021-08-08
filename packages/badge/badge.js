@@ -2,12 +2,15 @@ import './_badge.styl'
 import { h } from 'vue'
 
 const Badge = ({ type, vertical, text }, { slots }) => {
+  console.log(slots)
+  const name = 'w-badge'
+
   return h(
     'span',
     {
-      class: ['w-badge', type, vertical]
+      class: [name, name + '--' + type, vertical]
     },
-    text || slots?.default()
+    text || slots.default ? slots.default : null
   )
 }
 
