@@ -46,7 +46,7 @@
     "docs:serve": "vitepress serve docs"
   },
   "dependencies": {
-    "vue": "^3.1.5"
+    "vue": "^3.2.3"
   },
   "peerDependencies": {
     "@vue/compiler-sfc": ">=3.1.0",
@@ -54,10 +54,10 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.4.0",
-    "@vue/compiler-sfc": "^3.1.5",
-    "sass": "^1.37.5",
+    "@vue/compiler-sfc": "^3.2.3",
+    "sass": "^1.38.0",
     "stylus": "^0.54.8",
-    "vite": "^2.4.4",
-    "vitepress": "^0.15.6"
+    "vite": "^2.5.0",
+    "vitepress": "^0.16.1"
   }
 }

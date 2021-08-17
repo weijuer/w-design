@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "esnext",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "packages/*": ["packages/*"],
+      "Layout/*": ["src/layout/*"]
+    }
+  },
+  "exclude": ["node_modules", "lib"]
+}
