@@ -17,6 +17,16 @@ npm i w-design-vue
 yarn add w-design-vue
 ```
 
+# Mock
+
+```bash
+# init msw syntax
+npx msw init <PUBLIC_DIR>
+
+# for example
+npx msw init public
+```
+
 # CDN
 
 ```html
@@ -43,7 +53,7 @@ This project is heavily inspired by the following awesome projects.
 
 # 🧪 Developing
 
-- [x] `<w-button>`
+- [X]`<w-button>`
 
 # License
 

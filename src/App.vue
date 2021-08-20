@@ -1,6 +1,10 @@
 <template>
   <w-icon></w-icon>
   <!-- <w-main></w-main> -->
+  <section>
+    <div>{{ state.message }}</div>
+    <w-button @click="getTest">发送</w-button>
+  </section>
 </template>
 
 <script setup>
@@ -10,6 +14,11 @@ import { Main as WMain } from 'Layout'
 const state = reactive({
   message: 'hello'
 })
+
+async function getTest() {
+  const res = await fetch('/test')
+  state.message = res
+}
 </script>
 
 <style>
