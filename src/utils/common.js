@@ -1,14 +1,3 @@
-import { resolve } from 'path'
-
-/**
- * 路径处理
- * @param {*} path
- * @returns
- */
-export function resolvePath(path = '') {
-  return resolve(__dirname, path)
-}
-
 /**
  * 是否是中文
  * @returns

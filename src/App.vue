@@ -16,7 +16,8 @@ const state = reactive({
 })
 
 async function getTest() {
-  const res = await fetch('/test')
+  const res = await fetch('/test').then((response) => response.json())
+  console.log(res)
   state.message = res
 }
 </script>

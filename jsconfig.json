@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    "target": "esnext",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"],
-      "packages/*": ["packages/*"],
-      "Layout/*": ["src/layout/*"]
-    }
+      "packages/*": ["packages/main"]
+    },
+    "strict": true,
+    "target": "es6",
+    "moduleResolution": "node"
   },
-  "exclude": ["node_modules", "lib"]
+  "exclude": ["node_modules", "lib", "docs"]
 }
