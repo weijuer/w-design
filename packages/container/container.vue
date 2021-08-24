@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, useSlots } from 'vue'
 
 const props = defineProps({
   direction: {
@@ -32,3 +32,18 @@ const isVertical = computed(() => {
   }
 })
 </script>
+
+<style lang="stylus">
+.w-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  flex-basis: auto;
+  box-sizing: border-box;
+  min-width: 0;
+
+  @include when(vertical) {
+    flex-direction: column;
+  }
+}
+</style>

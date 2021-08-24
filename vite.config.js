@@ -8,7 +8,8 @@ export default defineConfig({
     alias: {
       '@': resolve('src'),
       packages: resolve('packages'),
-      Layout: resolve('src/components/layout')
+      Layout: resolve('src/components/layout'),
+      Utils: resolve('src/utils')
     }
   },
   build: {

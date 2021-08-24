@@ -1,6 +1,7 @@
 <template>
-  <w-icon></w-icon>
+  <!-- <w-icon></w-icon> -->
   <!-- <w-main></w-main> -->
+  <w-container></w-container>
   <section>
     <div>{{ state.message }}</div>
     <w-button @click="getTest">发送</w-button>

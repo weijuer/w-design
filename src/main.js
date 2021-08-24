@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import wd from 'packages/main'
+import wd from 'packages'
 import { worker } from './mocks/browser'
 
 // Start the mocking conditionally.
