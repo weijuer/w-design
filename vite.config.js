@@ -13,10 +13,11 @@ export default defineConfig({
     }
   },
   build: {
+    target: 'es2015',
     outDir: 'lib',
     lib: {
-      entry: resolve('packages/main.js'),
-      name: 'WUi'
+      entry: resolve('packages/index.js'),
+      name: 'w-design-vue'
     },
     rollupOptions: {
       // 请确保外部化那些你的库中不需要的依赖
