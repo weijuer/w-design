@@ -24,7 +24,7 @@ jobs:
           yarn docs:build
       # 发布
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.1.5
+        uses: JamesIves/github-pages-deploy-action@4.1.5
         # 环境变量
         with:
           # 发布到指定分支
