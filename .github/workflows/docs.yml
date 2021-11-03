@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # 获取仓库源码
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
         with:
           persist-credentials: false
       # 构建和部署
@@ -23,13 +23,11 @@ jobs:
           yarn
           yarn docs:build
       # 发布
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.1.5
         # 环境变量
         with:
-          # GitHub 密钥 ACCESS_TOKEN
-          ACCESS_TOKEN: ${{ secrets.DOCS_ACCESS_TOKEN }}
           # 发布到指定分支
-          BRANCH: gh-pages
+          branch: gh-pages
           # 构建成果所在目录,默认位置都是在根目录
-          FOLDER: ./docs/.vuepress/dist
+          folder: ./docs/.vitepress/dist
