@@ -46,5 +46,4 @@ title: Button 按钮
             'focus'
         ]
     })
-    console.log(WButton)
 </script>

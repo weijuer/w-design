@@ -1,9 +1,9 @@
-import './_badge.styl'
-import { h } from 'vue'
+import './_badge.styl';
+import { h } from 'vue';
 
-const Badge = ({ type, vertical, text }, { slots }) => {
-  console.log(slots)
-  const name = 'w-badge'
+const WBadge = ({ type, vertical, text }, { slots }) => {
+  console.log(slots);
+  const name = 'w-badge';
 
   return h(
     'span',
@@ -11,10 +11,10 @@ const Badge = ({ type, vertical, text }, { slots }) => {
       class: [name, name + '--' + type, vertical]
     },
     text || slots.default ? slots.default : null
-  )
-}
+  );
+};
 
-Badge.props = {
+WBadge.props = {
   type: {
     type: String,
     default: 'primary'
@@ -24,6 +24,6 @@ Badge.props = {
     default: 'top'
   },
   text: String
-}
+};
 
-export default Badge
+export default WBadge;

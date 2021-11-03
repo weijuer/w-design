@@ -1,0 +1,35 @@
+# 当前执行文件名称
+name: docs deploy action
+
+# 触发时机
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    # 运行在ubuntu-latest环境的虚拟机中
+    runs-on: ubuntu-latest
+    steps:
+      # 获取仓库源码
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      # 构建和部署
+      - name: Install and Build
+        run: |
+          yarn
+          yarn docs:build
+      # 发布
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        # 环境变量
+        with:
+          # GitHub 密钥 ACCESS_TOKEN
+          ACCESS_TOKEN: ${{ secrets.DOCS_ACCESS_TOKEN }}
+          # 发布到指定分支
+          BRANCH: gh-pages
+          # 构建成果所在目录,默认位置都是在根目录
+          FOLDER: ./docs/.vuepress/dist
