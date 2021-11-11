@@ -59,14 +59,14 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.4",
     "@vue/compiler-sfc": "^3.2.21",
-    "eslint": "^8.1.0",
+    "eslint": "^8.2.0",
     "eslint-plugin-vue": "^8.0.3",
     "mockjs": "^1.1.0",
     "msw": "latest",
     "sass": "^1.43.4",
     "stylus": "^0.55.0",
-    "vite": "^2.6.13",
-    "vitepress": "^0.20.0"
+    "vite": "^2.6.14",
+    "vitepress": "^0.20.1"
   },
   "msw": {
     "workerDirectory": "public"
