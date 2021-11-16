@@ -5,17 +5,17 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed } from 'vue';
 
 const props = defineProps({
   name: String,
   useClass: String
-})
+});
 
-const iconName = computed(() => (props.name ? `#${props.name}` : '#'))
+const iconName = computed(() => (props.name ? `#${props.name}` : '#'));
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .w-icon {
   width: 24px;
   height: 24px;
