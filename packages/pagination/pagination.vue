@@ -1,56 +1,97 @@
 <template>
   <div class="w-pagination">
     <ul class="w-pagination-list">
-      <li class="w-pagination-item" v-if="pageCount > 1">
+      <li class="w-pagination-item" v-if="total > 1">
         <a class="w-pagination-link" href="javascript:;" @click="changePage(1)">首页</a>
       </li>
-      <li class="w-pagination-item" v-if="pageCount > 1">
-        <a class="w-pagination-link" href="javascript:;" @click="changePage(page - 1)">上一页</a>
+      <li class="w-pagination-item" v-if="total > 1">
+        <a class="w-pagination-link" href="javascript:;" @click="changePage(current - 1)">上一页</a>
       </li>
       <li
         class="w-pagination-item"
         v-for="page in pages"
-        :class="{ 'w-pagination-item-active': page == currentPage }"
+        :class="{ 'w-pagination-item-active': page === current }"
       >
         <a class="w-pagination-link" href="javascript:;" @click="changePage(page)">{{ page }}</a>
       </li>
-      <li class="w-pagination-item" v-if="pageCount > 1">
-        <a class="w-pagination-link" href="javascript:;" @click="changePage(page + 1)">下一页</a>
+      <li class="w-pagination-item" v-if="total > 1">
+        <a class="w-pagination-link" href="javascript:;" @click="changePage(current + 1)">下一页</a>
       </li>
-      <li class="w-pagination-item" v-if="pageCount > 1">
-        <a class="w-pagination-link" href="javascript:;" @click="changePage(pageCount)">尾页</a>
+      <li class="w-pagination-item" v-if="total > 1">
+        <a class="w-pagination-link" href="javascript:;" @click="changePage(total)">尾页</a>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup>
+import { computed, reactive, toRefs } from 'vue';
+
 const props = defineProps({
-  pageCount: {
+  total: {
     type: Number,
-    default: 1
+    default: 100
   },
-  currentPage: {
+  current: {
     type: Number,
     default: 1
   },
   pageSize: {
     type: Number,
     default: 10
+  },
+  pageSizes: {
+    type: Array,
+    default: () => [10, 20, 30]
   }
 });
 
-const emit = defineEmits(['changePage']);
+const emit = defineEmits(['update:current']);
 
 const changePage = (page) => {
   if (page < 1) {
     page = 1;
   }
-  if (page > props.pageCount) {
-    page = props.pageCount;
+  if (page > props.total) {
+    page = props.total;
   }
-  emit('changePage', page);
+  emit('update:current', page);
 };
+
+// 计算分页
+const pages = computed(() => {
+  const total = props.total;
+  const currentPage = props.current;
+  const totalArray = [];
+  if (total <= 5) {
+    for (let i = 1; i <= total; i++) {
+      totalArray.push(i);
+    }
+  } else {
+    if (currentPage <= 3) {
+      for (let i = 1; i <= 5; i++) {
+        totalArray.push(i);
+      }
+      totalArray.push('...');
+      totalArray.push(total);
+    } else if (currentPage >= total - 2) {
+      totalArray.push(1);
+      totalArray.push('...');
+      for (let i = total - 4; i <= total; i++) {
+        totalArray.push(i);
+      }
+    } else {
+      totalArray.push(1);
+      totalArray.push('...');
+      for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+        totalArray.push(i);
+      }
+      totalArray.push('...');
+      totalArray.push(total);
+    }
+  }
+  return totalArray;
+});
 </script>
 
 
@@ -59,7 +100,6 @@ const changePage = (page) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
 
   .w-pagination-list {
     display: flex;
@@ -74,26 +114,40 @@ const changePage = (page) => {
       margin: 0;
       padding: 0;
       list-style: none;
+      margin-right: 10px;
+
+      .w-pagination-link {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        color: #666;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 14px;
+        line-height: 1;
+        border: 1px solid #d9d9d9;
+        border-radius: 4px;
+        background-color: #fff;
+        padding: 5px 10px;
+        transition: all 0.3s;
+
+        &:hover {
+          color: #1890ff;
+          border-color: #1890ff;
+          background-color: #f5f5f5;
+        }
+      }
 
       &.w-pagination-item-active {
-        color: #fff;
-        background-color: #1890ff;
-        border-color: #1890ff;
-      }
-    }
+        color: #1890ff;
 
-    .w-pagination-link {
-      display: inline-block;
-      padding: 0 15px;
-      height: 32px;
-      line-height: 32px;
-      color: #666;
-      background-color: #fff;
-      border: 1px solid #d9d9d9;
-      border-radius: 4px;
-      margin-right: 8px;
-      font-size: 14px;
-      text-decoration: none;
+        .w-pagination-link {
+          color: #1890ff;
+          border-color: #1890ff;
+          background-color: #f5f5f5;
+        }
+      }
     }
   }
 }

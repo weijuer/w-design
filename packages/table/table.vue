@@ -50,7 +50,10 @@
     <tfoot class="w-table-tfoot">
       <tr>
         <td :colspan="colspan">
-          <slot name="footer"> </slot>
+          <slot name="footer" />
+          <slot name="pagination">
+            <w-pagination v-bind="{ ...pagination }" @update:current="onPageChange" />
+          </slot>
         </td>
       </tr>
     </tfoot>
@@ -84,25 +87,18 @@ const props = defineProps({
     type: String,
     default: '暂无数据'
   },
-  currentPage: {
-    type: Number,
-    default: 1
-  },
-  pageSize: {
-    type: Number,
-    default: 10
-  },
-  total: {
-    type: Number,
-    default: 0
+  pagination: {
+    type: Object,
+    default: () => ({
+      total: 0,
+      current: 1,
+      pageSize: 10,
+      pageSizes: [10, 20, 30, 40, 50]
+    })
   }
 });
 
-const emit = defineEmits({
-  onSelect: 'select',
-  onPageChange: 'page-change',
-  onPageSizeChange: 'page-size-change'
-});
+const emit = defineEmits(['update:current']);
 
 const state = reactive({
   isAllSelected: false,
@@ -118,9 +114,13 @@ const colspan = computed(() => {
 const colStyle = (column) => {
   const style = {};
   if (column.width) {
-    style.width = column.width;
+    style.width = typeof column.width ? column.width : `${column.width}px`;
   }
   return style;
+};
+
+const onPageChange = (page) => {
+  emit('update:current', page);
 };
 </script>
 

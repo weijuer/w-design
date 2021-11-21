@@ -29,9 +29,9 @@
       </template>
 
       <template #action="{ row }">
-        <a @click="toView(row)" href="javascript:;" class="btn link-btn">查看</a>
+        <!-- <a @click="toView(row)" href="javascript:;" class="btn link-btn">查看</a>
         <a @click="toView(row)" href="javascript:;" class="btn link-btn">复制</a>
-        <a @click="toView(row)" href="javascript:;" class="btn link-btn">撤回</a>
+        <a @click="toView(row)" href="javascript:;" class="btn link-btn">撤回</a> -->
         <a @click="toView(row)" href="javascript:;" class="btn link-btn">更多</a>
       </template>
     </w-table>
@@ -151,9 +151,10 @@ const state = reactive({
   dataSource: [],
   columns: Storage.getColumns(),
   pagination: {
-    pageSize: 10,
+    total: 101,
     current: 1,
-    total: 0
+    pageSize: 20,
+    pageSizes: [10, 20, 30]
   },
   rowSelection: {
     type: 'checkbox',
