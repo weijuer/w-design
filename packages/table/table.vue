@@ -18,8 +18,8 @@
       </tr>
       <template v-else>
         <tr :key="row[rowKey]" v-for="(row, index) in dataSource">
-          <td
-            ><input
+          <td v-if="rowSelection">
+            <input
               :type="rowSelection.type"
               :value="row[rowKey]"
               v-model="selectedRowKeys"
@@ -52,7 +52,7 @@
         <td :colspan="colspan">
           <slot name="footer" />
           <slot name="pagination">
-            <w-pagination v-bind="{ ...pagination }" @update:current="onPageChange" />
+            <w-pagination v-bind="pagination" @update:current="onPageChange" />
           </slot>
         </td>
       </tr>
@@ -102,7 +102,7 @@ const emit = defineEmits(['update:current']);
 
 const state = reactive({
   isAllSelected: false,
-  selectedRowKeys: []
+  selectedRowKeys: computed(() => props.rowSelection.selectedRowKeys || [])
 });
 
 const { isAllSelected, selectedRowKeys } = toRefs(state);
@@ -114,9 +114,31 @@ const colspan = computed(() => {
 const colStyle = (column) => {
   const style = {};
   if (column.width) {
-    style.width = typeof column.width ? column.width : `${column.width}px`;
+    style.width = typeof column.width === 'string' ? column.width : `${column.width}px`;
   }
   return style;
+};
+
+// 单选(设置半选状态)
+const onSelect = (row) => {
+  var checkAll = $refs.checkAll;
+  if (rowSelection.selectedRowKeys.length > 0 && !isAllSelected) {
+    checkAll.indeterminate = true;
+  } else {
+    checkAll.indeterminate = false;
+  }
+  // 单选时触发
+  rowSelection.onChange(rowSelection.selectedRowKeys, row);
+};
+
+const onChange = (page) => {
+  pagination.currentPage = page;
+  emit('change', pagination);
+};
+
+const onPageSizeChange = (pageSize) => {
+  pagination.pageSize = pageSize;
+  emit('change', pagination);
 };
 
 const onPageChange = (page) => {

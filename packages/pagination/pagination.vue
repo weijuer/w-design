@@ -1,5 +1,20 @@
 <template>
   <div class="w-pagination">
+    <div class="w-pagination-info">
+      <span class="w-pagination-info-text">
+        共
+        <span class="w-pagination-info-total">{{ total }}</span>
+        条记录
+      </span>
+      <span class="w-pagination-info-text">
+        每页显示
+        <select class="w-pagination-info-select" v-model="pageSize">
+          <option v-for="item in pageSizes" :value="item">{{ item }}</option>
+        </select>
+        条
+      </span>
+    </div>
+
     <ul class="w-pagination-list">
       <li class="w-pagination-item" v-if="total > 1">
         <a class="w-pagination-link" href="javascript:;" @click="changePage(1)">首页</a>
@@ -98,7 +113,7 @@ const pages = computed(() => {
 <style lang="stylus">
 .w-pagination {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   .w-pagination-list {
