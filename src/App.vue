@@ -162,6 +162,15 @@ const state = reactive({
     onChange: function (selectedRowKeys, selectedRows) {
       console.log('selectedRowKeys:', selectedRowKeys);
       console.log('selectedRows:', selectedRows);
+    },
+    onSelect: function (record, selected, selectedRows) {
+      console.log('record:', record, 'selected:', selected, 'selectedRows:', selectedRows);
+    },
+    onSelectAll: function (selected, selectedRows, changeRows) {
+      console.log('selected:', selected, 'selectedRows:', selectedRows, 'changeRows:', changeRows);
+    },
+    onSelectInvert: function (selectedRows) {
+      console.log('selectedRows:', selectedRows);
     }
   }
 });

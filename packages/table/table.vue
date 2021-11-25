@@ -7,7 +7,12 @@
     <thead class="w-table-thead">
       <tr>
         <th v-if="rowSelection">
-          <input ref="checkAll" :type="rowSelection.type" v-model="isAllSelected" />
+          <input
+            ref="checkAll"
+            :type="rowSelection.type"
+            v-model="isAllSelected"
+            @change="onSelectAll"
+          />
         </th>
         <th :key="column.name" v-for="column in columns">{{ column.title }}</th>
       </tr>
@@ -22,8 +27,8 @@
             <input
               :type="rowSelection.type"
               :value="row[rowKey]"
-              v-model="selectedRowKeys"
-              @change="onSelect"
+              v-model="rowSelection.selectedRowKeys"
+              @change="onSelect(row)"
             />
           </td>
           <td
@@ -61,7 +66,7 @@
 </template>
 
 <script setup>
-import { computed, reactive, toRefs } from 'vue';
+import { ref, computed, reactive, toRefs, watch } from 'vue';
 
 const props = defineProps({
   dataSource: {
@@ -81,7 +86,14 @@ const props = defineProps({
   },
   rowSelection: {
     type: Object,
-    default: () => null
+    default: () => ({
+      type: 'radio',
+      selectedRowKeys: [],
+      onChange: () => {},
+      onSelect: () => {},
+      onSelectAll: () => {},
+      onSelectInvert: () => {}
+    })
   },
   emptyMessage: {
     type: String,
@@ -101,11 +113,22 @@ const props = defineProps({
 const emit = defineEmits(['update:current']);
 
 const state = reactive({
-  isAllSelected: false,
-  selectedRowKeys: computed(() => props.rowSelection.selectedRowKeys || [])
+  checkAll: ref(null),
+  isAllSelected: false
 });
 
-const { isAllSelected, selectedRowKeys } = toRefs(state);
+const { checkAll, isAllSelected } = toRefs(state);
+
+watch(
+  () => props.rowSelection.selectedRowKeys,
+  (selectedRowKeys) => {
+    if (selectedRowKeys.length === props.dataSource.length) {
+      isAllSelected.value = true;
+    } else {
+      isAllSelected.value = false;
+    }
+  }
+);
 
 const colspan = computed(() => {
   return props.columns.length + (props.rowSelection ? 1 : 0);
@@ -119,16 +142,22 @@ const colStyle = (column) => {
   return style;
 };
 
-// 单选(设置半选状态)
-const onSelect = (row) => {
-  var checkAll = $refs.checkAll;
-  if (rowSelection.selectedRowKeys.length > 0 && !isAllSelected) {
-    checkAll.indeterminate = true;
+// 单选
+const onSelect = (row) => {};
+
+// 全选
+const onSelectAll = () => {
+  const { selectedRowKeys, onSelectAll } = props.rowSelection;
+  if (isAllSelected.value) {
+    selectedRowKeys.splice(0, selectedRowKeys.length);
   } else {
-    checkAll.indeterminate = false;
+    selectedRowKeys.splice(
+      0,
+      selectedRowKeys.length,
+      ...props.dataSource.map((row) => row[props.rowKey])
+    );
   }
-  // 单选时触发
-  rowSelection.onChange(rowSelection.selectedRowKeys, row);
+  onSelectAll(selectedRowKeys);
 };
 
 const onChange = (page) => {

@@ -1,6 +1,13 @@
+---
+title: W Design Vue 's Blog
+lang: en-US
+---
+
 # 🥇W Design Vue
 
+::: tip
 A simple components UI based on Vue 3.x + Vite 2.x.
+:::
 
 # 🚀 Features
 
@@ -44,6 +51,8 @@ This project is heavily inspired by the following awesome projects.
 # 🧪 Developing
 
 - [x] `<w-button>`
+- [x] `<w-container>`
+- [x] `<w-container>`
 
 # License
 
