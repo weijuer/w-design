@@ -4,47 +4,25 @@
   <w-container>
     <w-table
       row-key="id"
-      :row-selection="rowSelection"
-      :data-source="dataSource"
       :columns="columns"
+      :data-source="dataSource"
       :pagination="pagination"
+      :row-selection="rowSelection"
+      @change="onTableChange"
     >
-      <template #device="{ row }">
-        {{ formatData('device', row.device) }}
-      </template>
-      <template #is-force-update="{ row }">
-        {{ formatData('isForceUpdate', row.isForceUpdate) }}
-      </template>
-      <template #update-type="{ row }">
-        {{ formatData('updateType', row.updateType) }}
-      </template>
-      <template #strategy="{ row }">
-        {{ formatData('strategy', row.strategy) }}
-      </template>
-      <template #is-update="{ row }">
-        {{ formatData('isForceUpdate', row.isUpdate) }}
-      </template>
-      <template #status="{ row }">
-        {{ formatData('status', row.status) }}
-      </template>
-
       <template #action="{ row }">
-        <!-- <a @click="toView(row)" href="javascript:;" class="btn link-btn">查看</a>
-        <a @click="toView(row)" href="javascript:;" class="btn link-btn">复制</a>
-        <a @click="toView(row)" href="javascript:;" class="btn link-btn">撤回</a> -->
-        <a @click="toView(row)" href="javascript:;" class="btn link-btn">更多</a>
+        <a @click="toView(row)" href="javascript:;" class="w-btn btn-link">查看</a>
       </template>
     </w-table>
   </w-container>
-  <section>
+  <!-- <section>
     <div>{{ state.message }}</div>
     <w-button @click="getTest">发送</w-button>
-  </section>
+  </section> -->
 </template>
 
 <script setup>
 import { reactive, ref, toRefs } from 'vue';
-import { Main as WMain } from 'Layout';
 
 // 测试数据
 const Storage = {
@@ -57,57 +35,24 @@ const Storage = {
         width: '5%'
       },
       {
-        title: '版本号',
-        name: 'version'
+        title: '姓名',
+        name: 'name'
       },
       {
-        title: '客户端',
-        name: 'device',
-        scopedSlot: 'device'
+        title: '生日',
+        name: 'birthday',
+        scopedSlot: 'birthday'
       },
       {
-        title: '更新内容',
-        name: 'content',
-        ellipsis: true
+        title: '年龄',
+        name: 'age'
       },
       {
-        title: '强制更新',
-        name: 'isForceUpdate',
-        scopedSlot: 'is-force-update'
-      },
-      {
-        title: '更新方式',
-        name: 'updateType',
-        scopedSlot: 'update-type'
-      },
-      {
-        title: '发布时间',
-        name: 'sendTime',
-        scopedSlot: 'sendTime'
-      },
-      {
-        title: '更新策略',
-        name: 'strategy',
-        scopedSlot: 'strategy'
-      },
-      {
-        title: '更新首页安装包',
-        name: 'isUpdate',
-        scopedSlot: 'is-update'
-      },
-      {
-        title: '状态',
-        name: 'status',
-        scopedSlot: 'status'
-      },
-      {
-        title: '文件包大小',
-        name: 'size',
-        scopedSlot: 'size'
+        title: '性别',
+        name: 'sex'
       },
       {
         title: '操作',
-        width: 180,
         name: 'action',
         scopedSlot: 'action'
       }
@@ -184,7 +129,13 @@ async function getTest() {
 }
 
 async function getData() {
-  const { data } = await fetch('/w-table').then((response) => response.json());
+  const { data } = await fetch('/w-table', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(state.pagination)
+  }).then((response) => response.json());
   state.dataSource = data.list;
 }
 
@@ -194,6 +145,12 @@ const formatData = (key, value) => {
 };
 
 getData();
+
+const onTableChange = (pagination, filters, sorter) => {
+  console.log('pagination:', pagination);
+  console.log('filters:', filters);
+  console.log('sorter:', sorter);
+};
 </script>
 
 <style>

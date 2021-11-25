@@ -143,7 +143,18 @@ const colStyle = (column) => {
 };
 
 // 单选
-const onSelect = (row) => {};
+const onSelect = (row) => {
+  const { selectedRowKeys, onChange } = props.rowSelection;
+
+  if (selectedRowKeys.length > 0 && !isAllSelected.value) {
+    checkAll.value.indeterminate = true;
+  } else {
+    checkAll.value.indeterminate = false;
+  }
+
+  // 单选时触发
+  onChange(selectedRowKeys, row);
+};
 
 // 全选
 const onSelectAll = () => {
@@ -151,7 +162,7 @@ const onSelectAll = () => {
   if (isAllSelected.value) {
     selectedRowKeys.splice(0, selectedRowKeys.length);
   } else {
-    selectedRowKeys.splice(
+    props.rowSelection.selectedRowKeys.splice(
       0,
       selectedRowKeys.length,
       ...props.dataSource.map((row) => row[props.rowKey])

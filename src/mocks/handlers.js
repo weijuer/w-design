@@ -32,27 +32,24 @@ export const handlers = [
     return res(ctx.delay(1000), ctx.status(202, 'Mocked status'), ctx.json(json));
   }),
 
-  rest.get('/w-table', (req, res, ctx) => {
+  rest.post('/w-table', (req, res, ctx) => {
+    const { pageSize, current } = req.body;
+
     // 模拟数据接口
     const data = mock({
       code: 10000,
       data: {
-        'total|100-200': 25,
-        'currentPage|1-20': 1,
-        pageSize: 100,
+        total: 50,
+        current: current,
+        pageSize: pageSize,
         'list|10': [
           {
             'id|+1': 1,
-            'version|1': [3.15, 3.14], // 版本
-            'device|1': [1, 2, 3, 4], // 客户端
-            content: '@csentence', // 更新内容
-            'isForceUpdate|1': [1, 2], // 强制更新
-            'updateType|1': [1, 2, 3], // 更新方式
-            'sendTime|1': '@datetime', // 发布时间
-            'strategy|1': [1, 2], // 更新策略
-            'isUpdate|1': [1, 2], // 更新首页安装包
-            'status|1': [1, 2, 3], // 状态
-            'size|1': '120Mb' // 大小
+            name: '@cname', // 姓名
+            birthday: '@date', // 生日
+            'sex|1': ['男', '女'], // 性别
+            'age|+1': 20, // 年龄
+            'status|1': [1, 2, 3] // 状态
           }
         ]
       }
