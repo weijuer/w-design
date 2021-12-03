@@ -20,9 +20,9 @@ const config = {
     sidebar: require('./sidebar')
   },
   head: [
-    // ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }],
+    ['link', { rel: 'icon', href: '/w-design-vue/favicon.ico' }],
     ['meta', { name: 'author', content: 'Weijuer' }]
   ]
-}
+};
 
-module.exports = config
+module.exports = config;

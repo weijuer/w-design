@@ -1,7 +1,7 @@
-import Pagination from './pagination.vue';
+import WPagination from './pagination.vue';
 
-Pagination.install = (Vue) => {
-  Vue.component(Pagination.name, Pagination);
+WPagination.install = (Vue) => {
+  Vue.component(WPagination.name, WPagination);
 };
 
-export default Pagination;
+export default WPagination;

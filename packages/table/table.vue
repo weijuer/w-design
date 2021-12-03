@@ -10,7 +10,7 @@
           <input
             ref="checkAll"
             :type="rowSelection.type"
-            v-model="isAllSelected"
+            v-model="state.isAllSelected"
             @change="onSelectAll"
           />
         </th>
@@ -66,7 +66,8 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, toRefs, watch } from 'vue';
+import { ref, computed, reactive, watch } from 'vue';
+import wPagination from '../pagination';
 
 const props = defineProps({
   dataSource: {
@@ -82,52 +83,35 @@ const props = defineProps({
   rowKey: {
     type: String,
     required: true,
-    default: 'id'
+    default: 'key'
   },
   rowSelection: {
-    type: Object,
-    default: () => ({
-      type: 'radio',
-      selectedRowKeys: [],
-      onChange: () => {},
-      onSelect: () => {},
-      onSelectAll: () => {},
-      onSelectInvert: () => {}
-    })
+    type: Object
   },
   emptyMessage: {
     type: String,
     default: '暂无数据'
   },
+  // 分页属性
   pagination: {
-    type: Object,
-    default: () => ({
-      total: 0,
-      current: 1,
-      pageSize: 10,
-      pageSizes: [10, 20, 30, 40, 50]
-    })
+    type: [Boolean, Object],
+    default: true
   }
 });
 
 const emit = defineEmits(['update:current']);
 
+const checkAll = ref(null);
 const state = reactive({
-  checkAll: ref(null),
   isAllSelected: false
 });
-
-const { checkAll, isAllSelected } = toRefs(state);
 
 watch(
   () => props.rowSelection.selectedRowKeys,
   (selectedRowKeys) => {
-    if (selectedRowKeys.length === props.dataSource.length) {
-      isAllSelected.value = true;
-    } else {
-      isAllSelected.value = false;
-    }
-  }
+    state.isAllSelected = selectedRowKeys.length === props.dataSource.length;
+  },
+  { immediate: true }
 );
 
 const colspan = computed(() => {
@@ -146,7 +130,7 @@ const colStyle = (column) => {
 const onSelect = (row) => {
   const { selectedRowKeys, onChange } = props.rowSelection;
 
-  if (selectedRowKeys.length > 0 && !isAllSelected.value) {
+  if (selectedRowKeys.length > 0 && !state.isAllSelected) {
     checkAll.value.indeterminate = true;
   } else {
     checkAll.value.indeterminate = false;
@@ -158,17 +142,18 @@ const onSelect = (row) => {
 
 // 全选
 const onSelectAll = () => {
-  const { selectedRowKeys, onSelectAll } = props.rowSelection;
-  if (isAllSelected.value) {
+  const { selectedRowKeys, onSelectAll, onSelectInvert } = props.rowSelection;
+
+  if (state.isAllSelected) {
     selectedRowKeys.splice(0, selectedRowKeys.length);
+    onSelectInvert(selectedRowKeys);
   } else {
-    props.rowSelection.selectedRowKeys.splice(
-      0,
-      selectedRowKeys.length,
-      ...props.dataSource.map((row) => row[props.rowKey])
-    );
+    selectedRowKeys.splice(0, selectedRowKeys.length);
+    props.dataSource.forEach((row) => {
+      selectedRowKeys.push(row[props.rowKey]);
+    });
+    onSelectAll(selectedRowKeys);
   }
-  onSelectAll(selectedRowKeys);
 };
 
 const onChange = (page) => {

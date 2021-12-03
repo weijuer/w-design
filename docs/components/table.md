@@ -17,7 +17,7 @@ title: Table 表格
 
 ## 代码演示
 
-<div class="demo-container">
+<div class="w-container">
     <w-table
         row-key="id"
         :columns="state.columns"
@@ -37,13 +37,11 @@ import { reactive, ref, toRefs } from 'vue';
 
 // 测试数据
 const Storage = {
-  getSource() {},
   getColumns() {
     return [
       {
         title: '序号',
         name: 'index',
-        width: '5%'
       },
       {
         title: '姓名',
@@ -69,42 +67,11 @@ const Storage = {
       }
     ];
   },
-  getFields(key) {
-    var field = [];
-    switch (key) {
-      case 'updateType':
-        field = ['', '安装包', '增量更新包', '全量更新包'];
-        break;
-      case 'isForceUpdate':
-        field = ['', '是', '否'];
-        break;
-      case 'strategy':
-        field = ['', '全局', '分组'];
-        break;
-      case 'status':
-        field = [' ', '编辑中', '发布中', '已完成'];
-        break;
-      case 'device':
-        field = [
-          '全部',
-          'Android',
-          'iOS',
-          'Windows',
-          'Windows xp',
-          'Mac',
-          'Ubuntu',
-          '龙芯中标麒麟'
-        ];
-        break;
-    }
-
-    return field;
-  },
   getDataSource(number) {
       return Array(number).fill(1).map((item,index) => ({
           id: index,
           name: `test-${index}`,
-          age: index,
+          age: index + 1,
           birthday: (new Date().toLocaleString()),
           sex: '男'
       }))
@@ -138,5 +105,11 @@ const state = reactive({
     }
   }
 });
+
+const onTableChange = () => {}
+
+const toView = (row) => {
+  console.log(row);
+}
 
 </script>

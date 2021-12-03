@@ -1,20 +1,22 @@
 <template>
   <!-- <w-icon></w-icon> -->
-  <!-- <w-main></w-main> -->
-  <w-container>
-    <w-table
-      row-key="id"
-      :columns="columns"
-      :data-source="dataSource"
-      :pagination="pagination"
-      :row-selection="rowSelection"
-      @change="onTableChange"
-    >
-      <template #action="{ row }">
-        <a @click="toView(row)" href="javascript:;" class="w-btn btn-link">查看</a>
-      </template>
-    </w-table>
-  </w-container>
+  <w-main>
+    <w-container>
+      <w-table
+        row-key="id"
+        :columns="columns"
+        :data-source="dataSource"
+        :pagination="pagination"
+        :row-selection="rowSelection"
+        @change="onTableChange"
+      >
+        <template #action="{ row }">
+          <a @click="toView(row)" href="javascript:;" class="w-btn btn-link">查看</a>
+        </template>
+      </w-table>
+    </w-container>
+  </w-main>
+
   <!-- <section>
     <div>{{ state.message }}</div>
     <w-button @click="getTest">发送</w-button>
@@ -147,9 +149,11 @@ const formatData = (key, value) => {
 getData();
 
 const onTableChange = (pagination, filters, sorter) => {
-  console.log('pagination:', pagination);
-  console.log('filters:', filters);
-  console.log('sorter:', sorter);
+  console.log('onTableChange', pagination);
+};
+
+const toView = (row) => {
+  console.log(row);
 };
 </script>
 
