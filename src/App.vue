@@ -5,7 +5,7 @@
       <w-table
         row-key="id"
         :columns="columns"
-        :data-source="dataSource"
+        :rows="dataSource"
         :pagination="pagination"
         :row-selection="rowSelection"
         @change="onTableChange"

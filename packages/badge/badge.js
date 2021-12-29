@@ -1,4 +1,3 @@
-import './_badge.styl';
 import { h } from 'vue';
 
 const WBadge = ({ type, vertical, text }, { slots }) => {

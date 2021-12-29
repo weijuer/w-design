@@ -8,7 +8,7 @@
       </span>
       <span class="w-pagination-info-text">
         每页显示
-        <select class="w-pagination-info-select" v-model="pageSize">
+        <select class="w-pagination-info-select" v-model="pageSize" @change="onPageSizeChange">
           <option v-for="item in pageSizes" :value="item">{{ item }}</option>
         </select>
         条
@@ -61,7 +61,15 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['update:current']);
+const emit = defineEmits(['change', 'update:current']);
+
+const onPageSizeChange = () => {
+  emit('update:current', 1);
+  emit('change', {
+    current: 1,
+    pageSize: props.pageSize
+  });
+};
 
 const changePage = (page) => {
   if (page < 1) {

@@ -1,9 +1,15 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import legacy from '@vitejs/plugin-legacy';
+import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    legacy({
+      targets: ['defaults', 'IE 10']
+    })
+  ],
   resolve: {
     alias: {
       '@': resolve('src'),
@@ -13,7 +19,7 @@ export default defineConfig({
     }
   },
   build: {
-    target: 'es2015',
+    target: 'es6',
     outDir: 'lib',
     lib: {
       entry: resolve('packages/index.js'),
@@ -30,4 +36,4 @@ export default defineConfig({
       }
     }
   }
-})
+});

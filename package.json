@@ -46,27 +46,29 @@
     "docs:serve": "vitepress serve docs"
   },
   "dependencies": {
-    "vue": "^3.2.23"
+    "vue": "^3.2.26"
   },
   "engines": {
     "node": ">=12.0.0"
   },
   "peerDependencies": {
     "@vue/compiler-sfc": ">=3.1.0",
-    "vue": ">=3.1.0",
-    "vite": ">=2.0.0"
+    "vite": ">=2.0.0",
+    "vue": ">=3.1.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.10.1",
-    "@vue/compiler-sfc": "^3.2.23",
-    "eslint": "^8.3.0",
-    "eslint-plugin-vue": "^8.1.1",
+    "@vitejs/plugin-legacy": "^1.6.4",
+    "@vitejs/plugin-vue": "^2.0.1",
+    "@vue/compiler-sfc": "^3.2.26",
+    "eslint": "^8.5.0",
+    "eslint-plugin-vue": "^8.2.0",
     "mockjs": "^1.1.0",
     "msw": "latest",
-    "sass": "^1.44.0",
-    "stylus": "^0.55.0",
-    "vite": "^2.6.14",
-    "vitepress": "^0.20.1"
+    "sass": "^1.45.1",
+    "stylus": "^0.56.0",
+    "vite": "^2.7.9",
+    "vitepress": "^0.20.10",
+    "vue-router": "^4.0.12"
   },
   "msw": {
     "workerDirectory": "public"

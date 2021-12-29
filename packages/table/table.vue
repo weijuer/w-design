@@ -18,17 +18,17 @@
       </tr>
     </thead>
     <tbody class="w-table-tbody">
-      <tr key="empty-messgae" v-if="dataSource.length === 0">
+      <tr key="empty-messgae" v-if="rows.length === 0">
         <td :colspan="colspan" class="empty-messgae">{{ emptyMessage }}</td>
       </tr>
       <template v-else>
-        <tr :key="row[rowKey]" v-for="(row, index) in dataSource">
+        <tr :key="row[rowKey]" v-for="(row, index) in rows">
           <td v-if="rowSelection">
             <input
               :type="rowSelection.type"
               :value="row[rowKey]"
-              v-model="rowSelection.selectedRowKeys"
-              @change="onSelect(row)"
+              v-model="state.selectedRowKeys"
+              @change="onSelect(row, $event)"
             />
           </td>
           <td
@@ -57,7 +57,11 @@
         <td :colspan="colspan">
           <slot name="footer" />
           <slot name="pagination">
-            <w-pagination v-bind="pagination" @update:current="onPageChange" />
+            <w-pagination
+              v-bind="pagination"
+              @page-size-change="onPageSizeChange"
+              @change="onPageChange"
+            />
           </slot>
         </td>
       </tr>
@@ -70,7 +74,7 @@ import { ref, computed, reactive, watch } from 'vue';
 import wPagination from '../pagination';
 
 const props = defineProps({
-  dataSource: {
+  rows: {
     type: Array,
     required: true,
     default: () => []
@@ -94,25 +98,19 @@ const props = defineProps({
   },
   // 分页属性
   pagination: {
-    type: [Boolean, Object],
-    default: true
+    type: [Object, Boolean],
+    default: null
   }
 });
 
-const emit = defineEmits(['update:current']);
-
 const checkAll = ref(null);
 const state = reactive({
-  isAllSelected: false
+  selectedRows: [], // 已选中的行
+  selectedRowKeys: [], // 已选中的行的key
+  isAllSelected: false // 是否全选
 });
 
-watch(
-  () => props.rowSelection.selectedRowKeys,
-  (selectedRowKeys) => {
-    state.isAllSelected = selectedRowKeys.length === props.dataSource.length;
-  },
-  { immediate: true }
-);
+const emit = defineEmits(['change', 'update:current']);
 
 const colspan = computed(() => {
   return props.columns.length + (props.rowSelection ? 1 : 0);
@@ -127,47 +125,70 @@ const colStyle = (column) => {
 };
 
 // 单选
-const onSelect = (row) => {
-  const { selectedRowKeys, onChange } = props.rowSelection;
+const onSelect = (row, event) => {
+  const isChecked = event.target.checked;
+  const { onChange, onSelect } = props.rowSelection;
 
-  if (selectedRowKeys.length > 0 && !state.isAllSelected) {
+  // 半选状态处理
+  if (state.selectedRowKeys.length > 0 && !state.isAllSelected) {
     checkAll.value.indeterminate = true;
   } else {
     checkAll.value.indeterminate = false;
   }
 
+  // 选中的行处理
+  if (isChecked) {
+    state.selectedRows.push(row);
+  } else {
+    state.selectedRows = state.selectedRows.filter((item) => item !== row);
+  }
+
+  // 选中项变化时触发
+  onChange?.(state.selectedRowKeys, state.selectedRows);
+
   // 单选时触发
-  onChange(selectedRowKeys, row);
+  onSelect?.(row, isChecked, state.selectedRows, event);
 };
 
 // 全选
-const onSelectAll = () => {
-  const { selectedRowKeys, onSelectAll, onSelectInvert } = props.rowSelection;
+const onSelectAll = (event) => {
+  const isChecked = event.target.checked;
+  const { onChange, onSelectAll } = props.rowSelection;
+  const { rows, rowKey } = props;
 
-  if (state.isAllSelected) {
-    selectedRowKeys.splice(0, selectedRowKeys.length);
-    onSelectInvert(selectedRowKeys);
+  // 选中的行处理
+  if (isChecked) {
+    state.selectedRows = rows;
+    state.selectedRowKeys = rows.map((item) => item[rowKey]);
   } else {
-    selectedRowKeys.splice(0, selectedRowKeys.length);
-    props.dataSource.forEach((row) => {
-      selectedRowKeys.push(row[props.rowKey]);
-    });
-    onSelectAll(selectedRowKeys);
+    state.selectedRows = [];
+    state.selectedRowKeys = [];
   }
+
+  // 选中项变化时触发
+  onChange?.(state.selectedRowKeys, state.selectedRows);
+
+  // 单选时触发
+  onSelectAll?.(isChecked, state.selectedRows);
 };
 
-const onChange = (page) => {
-  pagination.currentPage = page;
-  emit('change', pagination);
+watch(
+  () => state.selectedRowKeys,
+  (selectedRowKeys) => {
+    state.isAllSelected = selectedRowKeys.length === props.rows.length;
+  }
+);
+
+const onPageChange = (page, pageSize) => {
+  props.pagination.current = page;
+  props.pagination.pageSize = pageSize;
+  emit('change', props.pagination);
 };
 
-const onPageSizeChange = (pageSize) => {
-  pagination.pageSize = pageSize;
-  emit('change', pagination);
-};
-
-const onPageChange = (page) => {
-  emit('update:current', page);
+const onPageSizeChange = (current, pageSize) => {
+  props.pagination.current = page;
+  props.pagination.pageSize = pageSize;
+  emit('change', props.pagination);
 };
 </script>
 

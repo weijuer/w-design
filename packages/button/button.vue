@@ -48,13 +48,11 @@ const props = defineProps({
   autofocus: Boolean,
   round: Boolean,
   circle: Boolean
-})
+});
 
-const emit = defineEmits(['click'])
+const emit = defineEmits(['click']);
 
 function handleClick(event) {
-  emit('click', event)
+  emit('click', event);
 }
 </script>
-
-<style lang="stylus" src="../assets/styles/_buttons.styl"></style>
