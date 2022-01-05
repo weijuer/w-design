@@ -1,0 +1,1 @@
+import{_ as n,c as s,o as a,j as e}from"./app.10588c3a.js";const m=`{"title":"W Design Vue 's Blog","description":"","frontmatter":{"title":"W Design Vue 's Blog","lang":"en-US"},"relativePath":"index.md","lastUpdated":1641378306305}`,t={},p=e("",18),i=[p];function c(o,l,r,d,u,h){return a(),s("div",null,i)}var b=n(t,[["render",c]]);export{m as __pageData,b as default};
