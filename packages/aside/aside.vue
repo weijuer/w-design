@@ -4,6 +4,12 @@
   </aside>
 </template>
 
+<script>
+export default {
+  name: 'w-aside',
+}
+</script>
+
 <script setup>
 defineProps({
   width: {

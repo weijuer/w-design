@@ -1,33 +1,22 @@
-import pkg from '../package.json';
+import {version} from '../package.json';
+import { generateModules } from 'Utils/utils';
 
-// version
-const version = pkg.version;
+// 引入组件
+const installs = import.meta.globEager('./*/index.js');
 
-// _modules
-const getAllModules = () => {
-  const modules = import.meta.globEager('./*/*.js');
-  const _modules = {};
-  Object.keys(modules).forEach((key) => {
-    const fileName = key.split('/')[1];
-    const name = `W${fileName.substring(0, 1).toUpperCase() + fileName.substring(1)}`;
-    _modules[name] = modules[key]?.default;
-  });
-  return _modules;
-};
+// vite
+const modules = generateModules(installs);
 
-const modules = getAllModules();
-
-// install
+// 注册组件
 const install = (Vue) => {
-  Object.entries(modules).map(([name, mod]) => {
-    Vue.component(name, mod);
+  Object.values(installs).map((mod) => {
+    Vue.use(mod.default);
   });
 };
 
 export { modules, version, install };
 
 export default {
-  ...modules,
   version,
   install
 };

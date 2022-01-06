@@ -1,7 +1,6 @@
 import { h } from 'vue';
 
 const WBadge = ({ type, vertical, text }, { slots }) => {
-  console.log(slots);
   const name = 'w-badge';
 
   return h(
@@ -12,6 +11,7 @@ const WBadge = ({ type, vertical, text }, { slots }) => {
     text || slots.default ? slots.default : null
   );
 };
+
 
 WBadge.props = {
   type: {

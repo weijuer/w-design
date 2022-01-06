@@ -4,6 +4,12 @@
   </span>
 </template>
 
+<script>
+export default {
+  name: 'w-tooltip',
+}
+</script>
+
 <script setup>
 import { computed } from 'vue';
 

@@ -4,6 +4,12 @@
   </footer>
 </template>
 
+<script>
+export default {
+  name: 'w-footer',
+}
+</script>
+
 <script setup>
 defineProps({
   height: {

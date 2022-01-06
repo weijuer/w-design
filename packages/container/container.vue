@@ -4,6 +4,12 @@
   </section>
 </template>
 
+<script>
+export default {
+  name: 'w-container',
+}
+</script>
+
 <script setup>
 import { computed, useSlots } from 'vue'
 

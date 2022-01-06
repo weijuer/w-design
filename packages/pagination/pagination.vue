@@ -39,6 +39,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'w-pagination',
+}
+</script>
+
 <script setup>
 import { computed, reactive, toRefs } from 'vue';
 

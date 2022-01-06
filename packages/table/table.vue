@@ -69,6 +69,12 @@
   </table>
 </template>
 
+<script>
+export default {
+  name: 'w-table',
+}
+</script>
+
 <script setup>
 import { ref, computed, reactive, watch } from 'vue';
 import wPagination from '../pagination';

@@ -4,6 +4,12 @@
   </svg>
 </template>
 
+<script>
+export default {
+  name: 'w-icon',
+}
+</script>
+
 <script setup>
 import { computed } from 'vue';
 

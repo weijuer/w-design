@@ -25,6 +25,12 @@
   </button>
 </template>
 
+<script>
+export default {
+  name: 'w-button',
+}
+</script>
+
 <script setup>
 const props = defineProps({
   type: {

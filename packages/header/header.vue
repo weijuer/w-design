@@ -4,6 +4,11 @@
   </header>
 </template>
 
+<script>
+export default {
+  name: 'w-header',
+}
+</script>
 
 <script setup>
 defineProps({
