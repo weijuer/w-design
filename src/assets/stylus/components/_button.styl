@@ -1,7 +1,8 @@
-@import './_vars.styl';
+@import '../_vars.styl';
 
 .w-button {
   display: inline-block;
+  position: relative;
   font-weight: 400;
   text-align: center;
   white-space: nowrap;
@@ -15,6 +16,10 @@
   border-radius: 0.25rem;
   cursor: pointer;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:active {
+    top: 2px;
+  }
 
   for theme in $themes {
     &.w-button-{theme} {

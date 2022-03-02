@@ -33,15 +33,15 @@ export const handlers = [
   }),
 
   rest.post('/w-table', (req, res, ctx) => {
-    const { pageSize, current } = req.body;
+    const { pageSize, currentIndex } = req.body;
 
     // 模拟数据接口
     const data = mock({
       code: 10000,
       data: {
         total: 50,
-        current: current,
-        pageSize: pageSize,
+        currentIndex,
+        pageSize,
         'list|10': [
           {
             'id|+1': 1,

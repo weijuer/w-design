@@ -46,7 +46,7 @@
     "docs:serve": "vitepress serve docs"
   },
   "dependencies": {
-    "vue": "^3.2.26"
+    "vue": "^3.2.31"
   },
   "engines": {
     "node": ">=12.0.0"
@@ -57,18 +57,18 @@
     "vue": ">=3.1.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-legacy": "^1.6.4",
-    "@vitejs/plugin-vue": "^2.0.1",
-    "@vue/compiler-sfc": "^3.2.26",
-    "eslint": "^8.6.0",
-    "eslint-plugin-vue": "^8.2.0",
+    "@vitejs/plugin-legacy": "^1.7.1",
+    "@vitejs/plugin-vue": "^2.2.4",
+    "@vue/compiler-sfc": "^3.2.31",
+    "eslint": "^8.10.0",
+    "eslint-plugin-vue": "^8.5.0",
     "mockjs": "^1.1.0",
     "msw": "latest",
-    "sass": "^1.46.0",
+    "sass": "^1.49.9",
     "stylus": "^0.56.0",
-    "vite": "^2.7.10",
-    "vitepress": "^0.20.10",
-    "vue-router": "^4.0.12"
+    "vite": "^2.8.6",
+    "vitepress": "^0.22.3",
+    "vue-router": "^4.0.13"
   },
   "msw": {
     "workerDirectory": "public"

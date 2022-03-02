@@ -41,8 +41,8 @@
 
 <script>
 export default {
-  name: 'w-pagination',
-}
+  name: 'w-pagination'
+};
 </script>
 
 <script setup>
@@ -63,11 +63,55 @@ const props = defineProps({
   },
   pageSizes: {
     type: Array,
-    default: () => [10, 20, 30]
+    default: []
+  },
+  locale: {
+    type: Object,
+    default: () => {
+      return {
+        total: '共',
+        count: '条',
+        perPage: '每页'
+      };
+    }
   }
 });
 
 const emit = defineEmits(['change', 'update:current']);
+
+// 计算分页
+const pages = computed(() => {
+  const { total, current } = props;
+  const totalArray = [];
+  if (total <= 5) {
+    for (let i = 1; i <= total; i++) {
+      totalArray.push(i);
+    }
+  } else {
+    if (current <= 3) {
+      for (let i = 1; i <= 5; i++) {
+        totalArray.push(i);
+      }
+      totalArray.push('...');
+      totalArray.push(total);
+    } else if (current >= total - 2) {
+      totalArray.push(1);
+      totalArray.push('...');
+      for (let i = total - 4; i <= total; i++) {
+        totalArray.push(i);
+      }
+    } else {
+      totalArray.push(1);
+      totalArray.push('...');
+      for (let i = current - 2; i <= current + 2; i++) {
+        totalArray.push(i);
+      }
+      totalArray.push('...');
+      totalArray.push(total);
+    }
+  }
+  return totalArray;
+});
 
 const onPageSizeChange = () => {
   emit('update:current', 1);
@@ -86,41 +130,6 @@ const changePage = (page) => {
   }
   emit('update:current', page);
 };
-
-// 计算分页
-const pages = computed(() => {
-  const total = props.total;
-  const currentPage = props.current;
-  const totalArray = [];
-  if (total <= 5) {
-    for (let i = 1; i <= total; i++) {
-      totalArray.push(i);
-    }
-  } else {
-    if (currentPage <= 3) {
-      for (let i = 1; i <= 5; i++) {
-        totalArray.push(i);
-      }
-      totalArray.push('...');
-      totalArray.push(total);
-    } else if (currentPage >= total - 2) {
-      totalArray.push(1);
-      totalArray.push('...');
-      for (let i = total - 4; i <= total; i++) {
-        totalArray.push(i);
-      }
-    } else {
-      totalArray.push(1);
-      totalArray.push('...');
-      for (let i = currentPage - 2; i <= currentPage + 2; i++) {
-        totalArray.push(i);
-      }
-      totalArray.push('...');
-      totalArray.push(total);
-    }
-  }
-  return totalArray;
-});
 </script>
 
 
@@ -129,6 +138,8 @@ const pages = computed(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  line-height: 40px;
+  height: 40px;
 
   .w-pagination-list {
     display: flex;

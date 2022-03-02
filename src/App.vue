@@ -11,7 +11,7 @@
         @change="onTableChange"
       >
         <template #action="{ row }">
-          <a @click="toView(row)" href="javascript:;" class="w-btn btn-link">查看</a>
+          <w-button @click="toView(row)" href="javascript:;">查看</w-button>
         </template>
       </w-table>
     </w-container>
@@ -99,7 +99,7 @@ const state = reactive({
   columns: Storage.getColumns(),
   pagination: {
     total: 101,
-    current: 1,
+    currentIndex: 1,
     pageSize: 20,
     pageSizes: [10, 20, 30]
   },

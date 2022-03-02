@@ -1,5 +1,6 @@
-import {version} from '../package.json';
+import { version } from '../package.json';
 import { generateModules } from 'Utils/utils';
+import 'Assets/stylus/index.styl';
 
 // 引入组件
 const installs = import.meta.globEager('./*/index.js');
