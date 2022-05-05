@@ -2,7 +2,7 @@
   <!-- <w-icon></w-icon> -->
   <w-main>
     <w-container>
-      <w-table
+      <!-- <w-table
         row-key="id"
         :columns="columns"
         :rows="dataSource"
@@ -13,7 +13,7 @@
         <template #action="{ row }">
           <w-button @click="toView(row)" href="javascript:;">查看</w-button>
         </template>
-      </w-table>
+      </w-table> -->
     </w-container>
   </w-main>
 
@@ -25,6 +25,7 @@
 
 <script setup>
 import { reactive, ref, toRefs } from 'vue';
+import Card from 'packages/card/card.vue';
 
 // 测试数据
 const Storage = {

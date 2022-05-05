@@ -6,7 +6,8 @@
     },
     "strict": true,
     "target": "es6",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "jsx": "preserve"
   },
   "exclude": ["node_modules", "lib", "docs"]
 }

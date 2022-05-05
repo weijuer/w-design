@@ -9,9 +9,9 @@ const installs = import.meta.globEager('./*/index.js');
 const modules = generateModules(installs);
 
 // 注册组件
-const install = (Vue) => {
+const install = (app) => {
   Object.values(installs).map((mod) => {
-    Vue.use(mod.default);
+    app.use(mod.default);
   });
 };
 

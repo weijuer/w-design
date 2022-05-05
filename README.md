@@ -1,6 +1,6 @@
 # 🥇W Design Vue
 
-A simple components UI based on Vue 3.x + Vite 2.x.
+A simple components UI for blog based on Vue 3.x + Vite 2.x.
 
 # 🚀 Features
 

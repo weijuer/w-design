@@ -1,7 +1,7 @@
-import WCard from './card.vue';
+import Card from './card.vue';
 
-WCard.install = (Vue) => {
-  Vue.component(WCard.name, WCard);
+Card.install = (app) => {
+  app.component(Card.name, Card);
 };
 
-export default WCard;
+export default Card;

@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  name: 'w-icon',
-}
+  name: 'w-icon'
+};
 </script>
 
 <script setup>
