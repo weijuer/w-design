@@ -14,6 +14,10 @@
           <w-button @click="toView(row)" href="javascript:;">查看</w-button>
         </template>
       </w-table> -->
+
+      <w-card title="test">
+        <template #title> test1 </template>
+      </w-card>
     </w-container>
   </w-main>
 

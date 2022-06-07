@@ -1,21 +1,22 @@
 import { version } from '../package.json';
-import { generateModules } from 'Utils/utils';
 import 'Assets/stylus/index.styl';
 
-// 引入组件
-const installs = import.meta.globEager('./*/index.js');
+export const install = (app) => {
 
-// vite
-const modules = generateModules(installs);
+  const components = import.meta.globEager('./*/index.js');
 
-// 注册组件
-const install = (app) => {
-  Object.values(installs).map((mod) => {
-    app.use(mod.default);
+  Object.values(components).map(({ default: component }) => {
+    if (component.install) {
+      app.use(component);
+    }
   });
-};
 
-export { modules, version, install };
+  app.config.globalProperties.$message = message => {
+    console.log(message);
+  }
+
+  return app;
+};
 
 export default {
   version,

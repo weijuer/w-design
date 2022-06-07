@@ -17,7 +17,7 @@ export default defineConfig({
     target: 'es6',
     outDir: 'lib',
     lib: {
-      entry: resolve('packages/index.js'),
+      entry: 'packages/index.js',
       name: 'w-design-vue'
     },
     rollupOptions: {
