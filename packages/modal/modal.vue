@@ -25,6 +25,12 @@
   </teleport>
 </template>
 
+<script>
+export default {
+  name: 'w-modal'
+}
+</script>
+
 <script setup>
 const props = defineProps({
   value: Boolean

@@ -6,37 +6,37 @@
 
 <script>
 export default {
-  name: 'w-container',
-}
+  name: 'w-container'
+};
 </script>
 
 <script setup>
-import { computed, useSlots } from 'vue'
+import { computed, useSlots } from 'vue';
 
 const props = defineProps({
   direction: {
     type: String,
     default: ''
   }
-})
-const slots = useSlots()
+});
+const slots = useSlots();
 
 const isVertical = computed(() => {
   if (props.direction === 'vertical') {
-    return true
+    return true;
   } else if (props.direction === 'horizontal') {
-    return false
+    return false;
   }
   if (slots && slots.default) {
-    const vNodes = slots.default()
+    const vNodes = slots.default();
     return vNodes.some((vNode) => {
-      const tag = vNode.type.name
-      return tag === 'ElHeader' || tag === 'ElFooter'
-    })
+      const tag = vNode.type.name;
+      return tag === 'ElHeader' || tag === 'ElFooter';
+    });
   } else {
-    return false
+    return false;
   }
-})
+});
 </script>
 
 <style lang="stylus">

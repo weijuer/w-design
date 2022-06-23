@@ -1,12 +1,14 @@
 <template>
-  <svg class="w-icon">
-    <use :xlink:href="iconName" :class="[useClass]" />
+  <svg class="w-icon" v-bind="$attrs" aria-hidden="true">
+    <use :xlink:href="symbolId"></use>
   </svg>
 </template>
 
 <script>
+import 'virtual:svg-icons-register';
 export default {
-  name: 'w-icon'
+  name: 'w-icon',
+  inheritAttrs: false
 };
 </script>
 
@@ -14,11 +16,21 @@ export default {
 import { computed } from 'vue';
 
 const props = defineProps({
-  name: String,
-  useClass: String
+  prefix: {
+    type: String,
+    default: 'icon'
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  color: {
+    type: String,
+    default: '#333'
+  }
 });
 
-const iconName = computed(() => (props.name ? `#${props.name}` : '#'));
+const symbolId = computed(() => `#${props.prefix}-${props.name}`);
 </script>
 
 <style lang="stylus">

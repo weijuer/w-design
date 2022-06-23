@@ -1,17 +1,21 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 export default defineConfig({
-  plugins: [vue()],
   resolve: {
     alias: {
       '@': resolve('src'),
       packages: resolve('packages'),
+      lib: resolve('lib'),
       Layout: resolve('src/components/layout'),
       Assets: resolve('src/assets'),
       Utils: resolve('src/utils')
-    }
+    },
+    dedupe: [
+      'vue'
+    ]
   },
   build: {
     target: 'es6',
@@ -30,5 +34,13 @@ export default defineConfig({
         }
       }
     }
-  }
+  },
+  plugins: [vue(), createSvgIconsPlugin({
+    // 指定需要缓存的图标文件夹
+    iconDirs: [resolve('src/assets/icons')],
+    // 指定symbolId格式
+    symbolId: 'icon-[dir]-[name]',
+    inject: 'body-first',
+    customDomId: '__w_svg_icons__',
+  })],
 });

@@ -1,17 +1,17 @@
 <template>
   <div class="w-card" :class="[cardType]">
     <div class="w-card-header">
-      <h3 class="w-card-title" v-if="slots.title || title">
+      <h3 class="w-card-title" v-if="$slots.title || title">
         <slot name="title">{{ title }}</slot>
       </h3>
-      <div class="w-card-desc" v-if="slots.desc || desc" @click="descHandler">
+      <div class="w-card-desc" v-if="$slots.desc || desc" @click="descHandler">
         <slot name="desc">{{ desc }}</slot>
       </div>
     </div>
     <div class="w-card-body">
       <slot />
     </div>
-    <div class="w-card-footer" v-if="slots.footer || footer">
+    <div class="w-card-footer" v-if="$slots.footer || footer">
       <slot name="footer"></slot>
     </div>
   </div>
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <script setup>
-import { computed, useSlots } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps({
   type: String,
@@ -33,7 +33,6 @@ const props = defineProps({
   desc: String
 });
 
-const slots = useSlots();
 const cardType = computed(() => (props.type ? `w-card-${props.type}` : ''));
 </script>
 

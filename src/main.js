@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import router from './router';
 import wd from 'packages'
 import { worker } from './mocks/browser'
 
@@ -8,4 +9,8 @@ if (process.env.NODE_ENV === 'development') {
   worker.start()
 }
 
-createApp(App).use(wd).mount('#app')
+const app = createApp(App);
+
+app.use(router);
+app.use(wd);
+app.mount('#app');
