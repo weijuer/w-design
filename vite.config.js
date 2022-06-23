@@ -10,6 +10,7 @@ export default defineConfig({
       packages: resolve('packages'),
       lib: resolve('lib'),
       Layout: resolve('src/components/layout'),
+      Widgets: resolve('src/components/widgets'),
       Assets: resolve('src/assets'),
       Utils: resolve('src/utils')
     },

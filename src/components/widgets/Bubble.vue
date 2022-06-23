@@ -5,13 +5,13 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed } from 'vue';
 
 const props = defineProps({
   type: String
-})
+});
 
-const bubbleType = computed(() => (props.type ? `bubble-${props.type}` : ''))
+const bubbleType = computed(() => (props.type ? `bubble-${props.type}` : ''));
 </script>
 
 <style lang="stylus">
@@ -24,11 +24,10 @@ $theme-color = #2ecc71;
   position: relative;
   margin: 0 auto;
   width: 100%;
-  height: auto;
+  height: 100%;
   background: radial-gradient(circle at 50% 55%, rgba(240, 245, 255, 0.9), rgba(240, 245, 255, 0.9) 40%, rgba(225, 238, 255, 0.8) 60%, rgba(43, 130, 255, 0.4));
   border-radius: 100%;
   cursor: pointer;
-  transform: translate(0, -20px);
 
   &.bubble-moving {
     animation: bubble-moving 2s 0.5s ease-in-out infinite;

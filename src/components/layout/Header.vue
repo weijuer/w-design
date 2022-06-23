@@ -19,9 +19,6 @@
               <router-link class="menu-link text-effect-1" to="/home" data-hover="Home">Home</router-link>
             </li>
             <li>
-              <router-link class="menu-link text-effect-1" to="/articles" data-hover="Article">Article</router-link>
-            </li>
-            <li>
               <router-link class="menu-link text-effect-1" to="/examples" data-hover="Example">Example</router-link>
             </li>
 
