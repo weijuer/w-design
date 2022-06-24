@@ -1,28 +1,38 @@
 <template>
   <w-header>
     <a class="logo" href="/">
+      <span class="text-magic" data-word="W.J">W.J</span>
     </a>
+    <w-menu mode="horizontal">
+      <w-menu-item> Home</w-menu-item>
+      <w-menu-item> Examples</w-menu-item>
+    </w-menu>
   </w-header>
 </template>
 
 <script>
 export default {
-  name: 'app-header',
-}
+  name: 'app-header'
+};
 </script>
 
 <script setup>
-import { ref } from 'vue'
-const theme = ref('moon')
+import { ref } from 'vue';
+const theme = ref('moon');
 
 // 切换暗黑模式
 function toggleTheme() {
-  theme.value = theme.value === 'moon' ? 'sun' : 'moon'
-  document.body.classList.toggle('dark-mode')
+  theme.value = theme.value === 'moon' ? 'sun' : 'moon';
+  document.body.classList.toggle('dark-mode');
 }
 </script>
 
-<style lang="stylus">
+<style lang="scss" scoped>
+.logo-icon {
+  width: 160px;
+  height: 60px
+}
+
 .settings {
   position: absolute;
   top: 0;
