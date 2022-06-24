@@ -1,6 +1,6 @@
-import Header from './Header.vue';
-import Main from './Main.vue';
-import Footer from './Footer.vue';
-import Layout from './Layout.vue';
+import AppHeader from './AppHeader.vue';
+import AppMain from './AppMain.vue';
+import AppFooter from './AppFooter.vue';
+import AppLayout from './AppLayout.vue';
 
-export { Header, Main, Layout, Footer }
+export { AppHeader, AppMain, AppLayout, AppFooter }
