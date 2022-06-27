@@ -18,3 +18,6 @@ body {
   height: 100vh;
 }
 </style>
+
+<style lang="scss" src="Assets/scss/app/app.scss">
+</style>

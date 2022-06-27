@@ -1,11 +1,15 @@
 <template>
-  <w-header>
+  <w-header class="app-header">
     <a class="logo" href="/">
-      <span class="text-magic" data-word="W.J">W.J</span>
+      <span class="text-magic text-magic-tex-stroke" data-word="W.J">W-Design-Vue</span>
     </a>
-    <w-menu mode="horizontal">
-      <w-menu-item> Home</w-menu-item>
-      <w-menu-item> Examples</w-menu-item>
+    <w-menu class="app-menu" theme="dark" mode="horizontal">
+      <w-menu-item>
+        <router-link class="app-router-link" to="/"> Home </router-link>
+      </w-menu-item>
+      <w-menu-item>
+        <router-link class="app-router-link" to="/examples"> Examples </router-link>
+      </w-menu-item>
     </w-menu>
   </w-header>
 </template>
@@ -28,9 +32,26 @@ function toggleTheme() {
 </script>
 
 <style lang="scss" scoped>
-.logo-icon {
-  width: 160px;
-  height: 60px
+.app-header {
+  display: flex;
+
+  .logo {
+    margin-right: 30px;
+    display: inline-flex;
+    align-items: center;
+    height: 64px;
+    text-decoration: none;
+  }
+
+  .app-menu {
+    line-height: 64px;
+    border-bottom: 0;
+
+    .app-router-link {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
 }
 
 .settings {
