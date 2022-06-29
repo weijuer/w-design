@@ -1,14 +1,26 @@
 <template>
   <div class="w-uploader">
-    <input class="w-uploader-input" ref="file" type="file" :accept="accept" :multiple="multiple" @change="onChange" />
+    <input
+      class="w-uploader-input"
+      ref="fileInput"
+      type="file"
+      :accept="accept"
+      :multiple="multiple"
+      @change="onChange"
+    />
     <uploader-dragger v-if="drag" @on-click="onTrigger" @handle-files="uploadFiles" />
-    <div v-else class="w-uploader-trigger" :class="{ 'w-disabled': disabled || isUploaded }" @click="onTrigger">
+    <div
+      v-else
+      class="w-uploader-trigger"
+      :class="{ 'w-disabled': disabled || state.isUploaded }"
+      @click="onTrigger"
+    >
       <slot></slot>
     </div>
 
     <div class="w-uploader-tips" v-if="tips">{{ tips }}</div>
 
-    <uploader-list :files="files" @on-delete="onDelete" />
+    <uploader-list :files="state.files" @on-delete="onDelete" />
   </div>
 </template>
 
@@ -25,10 +37,10 @@ export default {
 </script>
 
 <script setup>
+import { reactive, ref, watch, onBeforeUnmount } from 'vue';
 import UploaderDragger from './UploaderDragger.vue';
 import UploaderList from './UploaderList.vue';
 import request from 'Utils/request';
-import { reactive, ref } from 'vue';
 
 const props = defineProps({
   url: { type: String, default: '' }, // 后台请求地址
@@ -42,11 +54,11 @@ const props = defineProps({
   tips: { type: String, default: '' }, // 文件上传提示
   fileList: { type: Array, default: () => [] }, // 文件列表
   defaultFileList: { type: Array, default: () => [] }, // 默认文件列表
-  headers: { type: Object, default: () => { } }, // 设置上传的请求头部，IE10 以上有效
+  headers: { type: Object, default: () => {} }, // 设置上传的请求头部，IE10 以上有效
   withCredentials: { type: Boolean, default: false }, // 是否允许跨域上传
-  beforeUpload: { type: Function, default: () => { } }, // 上传前的钩子，参数为上传的文件，若返回 false 则停止上传
-  remove: { type: Function, default: () => { } }, // 删除文件时的钩子，参数为文件对象
-  fileClick: { type: Function, default: () => { } }, // 文件点击时的钩子，参数为文件对象
+  beforeUpload: { type: Function, default: () => {} }, // 上传前的钩子，参数为上传的文件，若返回 false 则停止上传
+  remove: { type: Function, default: () => {} }, // 删除文件时的钩子，参数为文件对象
+  fileClick: { type: Function, default: () => {} }, // 文件点击时的钩子，参数为文件对象
   chuncked: { type: Boolean, default: false }, // 是否分片上传
   chunckSize: { type: Number, default: 1024 * 1024 }, // 分片大小，默认 1M
   threads: { type: Number, default: 1 } // 分片上传并发数，默认 3 个
@@ -60,7 +72,7 @@ const state = reactive({
   reqs: {} // 请求列表
 });
 
-const emit = defineEmits(['change'])
+const emit = defineEmits(['change']);
 
 const updateFiles = (files) => {
   state.files = files.map((file) => {
@@ -79,7 +91,7 @@ const updateFiles = (files) => {
 };
 
 function onTrigger() {
-  if (!this.disabled && !this.isUploaded) {
+  if (!props.disabled && !state.isUploaded) {
     fileInput.value.value = null;
     fileInput.value.click();
   }
@@ -126,7 +138,7 @@ function normalizeFile(rawFile) {
 
 function uploadChunks(file) {
   const { uid, raw } = file;
-  const { url, name, data, headers, withCredentials, handleSuccess, handleError, handleProgress } = props;
+  const { url, name, data, headers, withCredentials } = props;
   let chunks = createChunks(raw);
   const options = {
     url,
@@ -149,6 +161,7 @@ function uploadChunks(file) {
   options.data['chunk'] = 0;
   options.data[name] = chunks[0];
   request(options);
+  onChangeFile(file);
   emit('change', file, state.files);
 }
 
@@ -167,9 +180,8 @@ function createChunks(file) {
   return chunks;
 }
 
-
 function uploadSingle(file) {
-  const { url, name, data, headers, withCredentials, handleSuccess, handleError, handleProgress } = props;
+  const { url, name, data, headers, withCredentials } = props;
   const { uid, raw } = file;
   const options = {
     url,
@@ -184,6 +196,7 @@ function uploadSingle(file) {
   };
 
   file.status = 'pending';
+  onChangeFile(file);
   emit('change', file, state.files);
   const req = request(options);
   state.reqs[uid] = req;
@@ -195,20 +208,32 @@ function handleSuccess(file, response) {
   if (chuncked) {
   } else {
     file.status = 'success';
-    this.$set(file, 'response', response);
-    this.$set(file, 'url', response.data);
+    // this.$set(file, 'response', response);
+    // this.$set(file, 'url', response.data);
   }
-
+  onChangeFile(file);
   emit('change', file, state.files);
+}
+
+function onChangeFile(file) {
+  state.files = state.files.map((item) => {
+    if (file.uid === item.uid) {
+      item.status = file.status;
+      item.percent = file.percent;
+    }
+    return item;
+  });
 }
 
 function handleProgress(file, event) {
   file.percent = event.percent;
+  onChangeFile(file);
   emit('change', file, state.files);
 }
 
 function handleError(file, event) {
   file.status = 'failure';
+  onChangeFile(file);
   emit('change', file, state.files);
 }
 
@@ -230,11 +255,25 @@ function abort(file) {
   }
 }
 
-watch([() => props.fileList, () => props.defaultFileList], (fileList) => {
-  if (fileList.length > 0) {
-    updateFiles(fileList);
-  }
-});
+watch(
+  () => props.fileList,
+  (fileList) => {
+    if (fileList.length > 0) {
+      updateFiles(fileList);
+    }
+  },
+  { immediate: true }
+);
+
+watch(
+  () => props.defaultFileList,
+  (defaultFileList) => {
+    if (defaultFileList.length > 0) {
+      updateFiles(defaultFileList);
+    }
+  },
+  { immediate: true }
+);
 
 onBeforeUnmount(() => {
   state.files.forEach((file) => {
@@ -242,5 +281,40 @@ onBeforeUnmount(() => {
       URL.revokeObjectURL(file.url);
     }
   });
-})
+});
 </script>
+
+<style lang="scss" scoped>
+.w-uploader {
+  position: relative;
+
+  .w-uploader-input {
+    display: none;
+    z-index: -1;
+    opacity: 0;
+    filter: alpha(opacity = 0);
+  }
+
+  .w-uploader-trigger {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    outline: 0;
+    box-sizing: border-box;
+
+    &.w-disabled .w-btn {
+      background: #eee;
+      cursor: not-allowed;
+    }
+  }
+
+  .w-uploader-tips {
+    display: block;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #aaa;
+  }
+}
+</style>

@@ -21,30 +21,26 @@
 
 <script>
 export default {
-  name: 'UploaderList',
-}
+  name: 'UploaderList'
+};
 </script>
 
 <script setup>
-import Icon from '../icon';
-import Button from '../button';
-import Progress from '../progress';
-
-import { } from 'vue'
-
 const props = defineProps({
   files: {
     type: Array,
     default: () => []
   }
-})
+});
+
+const emit = defineEmits(['file-click', 'on-delete']);
 
 function onFileClick(file) {
-  this.$emit('file-click', file);
+  emit('file-click', file);
 }
 
 function onDelete(file) {
-  this.$emit('on-delete', file);
+  emit('on-delete', file);
 }
 
 function getFileSize(size) {

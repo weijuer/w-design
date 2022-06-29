@@ -1,7 +1,7 @@
 <template>
   <w-header class="app-header">
     <a class="logo" href="/">
-      <span class="text-magic text-magic-tex-stroke" data-word="W.J">W-Design-Vue</span>
+      <span class="text-magic text-magic-tex-stroke">W-Design-Vue</span>
     </a>
     <w-menu class="app-menu" theme="dark" mode="horizontal">
       <w-menu-item>

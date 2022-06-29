@@ -6,14 +6,13 @@
 
 <script>
 export default {
-  name: 'w-main',
-}
+  name: 'w-main'
+};
 </script>
 
 <style lang="scss" scoped>
 .w-main {
-  flex: 1;
-  min-height: 120px;
-  line-height: 120px;
+  flex: auto;
+  min-height: 0;
 }
 </style>

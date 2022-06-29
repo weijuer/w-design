@@ -4,8 +4,7 @@
 
 <script setup>
 import { reactive, ref, toRefs } from 'vue';
-import { AppLayout } from 'Layout'
-
+import { AppLayout } from 'Layout';
 </script>
 
 <style>
@@ -19,5 +18,4 @@ body {
 }
 </style>
 
-<style lang="scss" src="Assets/scss/app/app.scss">
-</style>
+<style lang="scss" src="Assets/scss/app/app.scss"></style>

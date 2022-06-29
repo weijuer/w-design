@@ -1,6 +1,13 @@
 <template>
-  <div class="w-uploader-dragger" :class="{ dragging }" @dragenter="onDragenter" @dragleave="onDragleave"
-    @dragover="onDragover" @drop="onDrop" @click="onClick">
+  <div
+    class="w-uploader-dragger"
+    :class="{ dragging }"
+    @dragenter="onDragenter"
+    @dragleave="onDragleave"
+    @dragover="onDragover"
+    @drop="onDrop"
+    @click="onClick"
+  >
     <div class="w-uploader-dragger-icon">
       <w-icon name="upload" />
     </div>
@@ -14,12 +21,11 @@
 <script>
 export default {
   name: 'UploadDragger'
-}
+};
 </script>
 
 <script setup>
-import Icon from '../icon';
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const props = defineProps({
   describe: {
@@ -28,6 +34,8 @@ const props = defineProps({
   },
   hint: String
 });
+
+const emit = defineEmits(['handle-files', 'on-click']);
 
 const dragging = ref(false);
 
@@ -53,11 +61,11 @@ function onDrop(e) {
   e.stopPropagation();
   e.preventDefault();
   const files = e.dataTransfer.files;
-  this.$emit('handle-files', files);
+  emit('handle-files', files);
 }
 
 function onClick() {
-  this.$emit('on-click');
+  emit('on-click');
 }
 </script>
 
@@ -69,6 +77,7 @@ function onClick() {
   height: 100%;
   text-align: center;
   background: #fafafa;
+  box-sizing: border-box;
   border: 1px dashed #d9d9d9;
   border-radius: 4px;
   cursor: pointer;

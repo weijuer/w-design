@@ -7,6 +7,8 @@ export function generateRoutes() {
 
   return Object.entries(modules).map(([fileName, component]) => {
     const [, parent, name] = fileName.match(/(?:views\/([\w\-]+)\/)?([\w\-]+)\.vue$/);
+    console.log('parent', parent);
+
     const path = name === 'NotFound' ? '/:pathMatch(.*)*' : `/${name}`;
     return parent ? { name, path, parent, component } : { name, path, children: [], component };
   });

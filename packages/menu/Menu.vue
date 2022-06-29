@@ -33,19 +33,18 @@ const props = defineProps({
 
 <style scoped lang="scss">
 .w-menu {
-  box-sizing: border-box;
-  font-size: 14px;
-  font-variant: tabular-nums;
-  line-height: 1.5;
-  font-feature-settings: 'tnum';
   margin: 0;
   padding: 0;
+  line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
-  line-height: 0;
   list-style: none;
   background: #fff;
+  font-size: 14px;
+  font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   outline: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
   transition: background 0.3s, width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
   zoom: 1;
 

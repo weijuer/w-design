@@ -1,58 +1,60 @@
 <template>
   <div class="uploader-example">
-    <fieldset>
-      <legend>传统上传</legend>
-      <w-uploader
-        url="http://127.0.0.1:4000/api/upload/file"
-        accept="application/zip"
-        :tips="tips"
-        :default-file-list="fileList"
-        :before-upload="beforeUpload"
-        @change="handleChange"
-      >
-        <a href="javascript:;" class="w-btn">
-          <i class="fa fa-upload"></i>
-          <span>传统上传</span>
-        </a>
-      </w-uploader>
-    </fieldset>
+    <form>
+      <fieldset>
+        <legend>传统上传</legend>
+        <w-uploader
+          url="http://127.0.0.1:4000/api/upload/file"
+          accept="application/zip"
+          :tips="tips"
+          :default-file-list="fileList"
+          :before-upload="beforeUpload"
+          @change="handleChange"
+        >
+          <w-button type="primary">
+            <i class="fa fa-upload"></i>
+            <span>传统上传</span>
+          </w-button>
+        </w-uploader>
+      </fieldset>
 
-    <fieldset>
-      <legend>分片上传</legend>
-      <w-uploader
-        url="http://127.0.0.1:4000/api/upload/snippet"
-        accept="application/zip"
-        chuncked
-        :tips="tips"
-        :default-file-list="fileList"
-        :before-upload="beforeUpload"
-        @change="handleChange"
-      >
-        <a href="javascript:;" class="w-btn">
-          <i class="fa fa-upload"></i>
-          <span>分片上传</span>
-        </a>
-      </w-uploader>
-    </fieldset>
+      <fieldset>
+        <legend>分片上传</legend>
+        <w-uploader
+          url="http://127.0.0.1:4000/api/upload/snippet"
+          accept="application/zip"
+          chuncked
+          :tips="tips"
+          :default-file-list="fileList"
+          :before-upload="beforeUpload"
+          @change="handleChange"
+        >
+          <w-button type="primary">
+            <i class="fa fa-upload"></i>
+            <span>分片上传</span>
+          </w-button>
+        </w-uploader>
+      </fieldset>
 
-    <fieldset>
-      <legend>多文件、拖拽上传</legend>
-      <w-uploader
-        url="http://127.0.0.1:4000/api/upload/file"
-        accept="application/zip"
-        multiple
-        drag
-        :tips="tips"
-        :default-file-list="fileList"
-        :before-upload="beforeUpload"
-        @change="handleChange"
-      >
-        <a href="javascript:;" class="w-btn">
-          <i class="fa fa-upload"></i>
-          <span>拖拽上传</span>
-        </a>
-      </w-uploader>
-    </fieldset>
+      <fieldset>
+        <legend>多文件、拖拽上传</legend>
+        <w-uploader
+          url="http://127.0.0.1:4000/api/upload/file"
+          accept="application/zip"
+          multiple
+          drag
+          :tips="tips"
+          :default-file-list="fileList"
+          :before-upload="beforeUpload"
+          @change="handleChange"
+        >
+          <w-button type="primary">
+            <i class="fa fa-upload"></i>
+            <span>拖拽上传</span>
+          </w-button>
+        </w-uploader>
+      </fieldset>
+    </form>
   </div>
 </template>
 
@@ -62,7 +64,17 @@ export default {
   data() {
     return {
       tips: '说明：文件包中包含安装包、升级包、配置文件等必须的文件',
-      fileList: []
+      fileList: [
+        {
+          name: 'LinkdoodUpdate_V6.0.2.zip',
+          size: 91109034,
+          type: 'application/x-zip-compressed',
+          percent: 50,
+          uid: 1656398381462,
+          status: 'pending',
+          raw: '[object File]'
+        }
+      ]
     };
   },
   methods: {
@@ -88,8 +100,8 @@ export default {
 };
 </script>
 
-<style lang="stylus">
+<style lang="scss">
 .uploader-example {
-  // display: flex;
+  padding: 24px;
 }
 </style>

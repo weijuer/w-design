@@ -23,7 +23,7 @@ defineProps({
 .w-header {
   --w-header-height: 64px;
   height: var(--w-header-height);
-  padding: 0 50px;
+  padding: 0 40px;
   line-height: 64px;
   background: #001529;
 }

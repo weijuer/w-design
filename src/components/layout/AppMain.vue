@@ -1,23 +1,19 @@
 <template>
   <w-layout :has-aside="true">
     <w-aside>
-      <w-menu class="app-menu" theme="dark" mode="horizontal">
-        <w-menu-item>
-          <router-link
-            v-for="route in exampleRoutes"
-            :to="route.path"
-            :key="route.name"
-            class="app-router-link"
-            to="/"
-          >
+      <w-menu class="app-menu" theme="dark">
+        <w-menu-item v-for="route in exampleRoutes" :key="route.name">
+          <router-link :to="route.path" class="app-router-link">
             {{ route.name }}
           </router-link>
         </w-menu-item>
       </w-menu>
     </w-aside>
-    <w-main>
-      <router-view />
-    </w-main>
+    <w-layout>
+      <w-main>
+        <router-view />
+      </w-main>
+    </w-layout>
   </w-layout>
 </template>
 
@@ -32,9 +28,10 @@ import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const routes = ref(router.getRoutes());
 
-const exampleRegx = /-example$/gi;
-const exampleRoutes = computed(() => routes.value.filter((route) => exampleRegx.test(route.name)));
+const exampleRegx = /-example$/i;
+const exampleRoutes = computed(() =>
+  router.getRoutes().filter((route) => exampleRegx.test(route.name))
+);
 console.log(exampleRoutes.value);
 </script>

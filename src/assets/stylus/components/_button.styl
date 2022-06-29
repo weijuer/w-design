@@ -8,17 +8,18 @@
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;
+  touch-action: manipulation;
   border: 1px solid transparent;
-  margin: 0.25rem 0.375rem;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
+  padding: 0 15px;
+  font-size: 14px;
   line-height: 1.5;
-  border-radius: 0.25rem;
+  height: 32px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: transform ease-in 0.1s, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
-  &:active {
-    top: 2px;
+  &:not(:disabled):active {
+    transform: scale(0.95);
   }
 
   for theme in $themes {
@@ -29,8 +30,8 @@
       border-style: solid;
 
       &:active, &:hover {
-        background: darken($themes[theme], 30%);
-        border-color: darken($themes[theme], 30%);
+        background: darken($themes[theme], 10%);
+        border-color: darken($themes[theme], 10%);
       }
     }
 

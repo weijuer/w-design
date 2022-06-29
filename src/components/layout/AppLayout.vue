@@ -2,7 +2,7 @@
   <w-layout>
     <app-header />
     <app-main />
-    <app-footer />
+    <!-- <app-footer /> -->
   </w-layout>
 </template>
 

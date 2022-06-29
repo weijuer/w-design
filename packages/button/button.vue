@@ -17,8 +17,8 @@
       }
     ]"
   >
-    <i :class="['w-icon-loading', 'w-icon--left']" v-if="loading"></i>
-    <i :class="[icon, 'w-icon--left']" v-if="icon && !loading"></i>
+    <w-icon class="w-icon-loading w-icon--left" v-if="loading" name="loading"></w-icon>
+    <w-icon class="w-icon--left" v-if="icon && !loading" :name="icon"></w-icon>
     <span v-if="$slots.default">
       <slot></slot>
     </span>
@@ -27,11 +27,13 @@
 
 <script>
 export default {
-  name: 'w-button',
-}
+  name: 'w-button'
+};
 </script>
 
 <script setup>
+import Icon from '../icon';
+
 const props = defineProps({
   type: {
     type: String,
