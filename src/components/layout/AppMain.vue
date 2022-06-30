@@ -35,3 +35,15 @@ const exampleRoutes = computed(() =>
 );
 console.log(exampleRoutes.value);
 </script>
+
+<style lang="scss" scoped>
+.app-menu {
+  line-height: 34px;
+  border-bottom: 0;
+
+  .app-router-link {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+</style>

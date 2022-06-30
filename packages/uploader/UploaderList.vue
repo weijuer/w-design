@@ -2,7 +2,7 @@
   <transition-group tag="ul" class="w-uploader-list" name="w-list">
     <li :class="['w-uploader-item', file.status]" v-for="(file, index) in files" :key="file.uid">
       <div class="w-uploader-status">
-        <w-icon v-if="file.status === 'pending'" name="loading" />
+        <w-icon v-if="file.status === 'pending'" class="w-icon-loading" name="loading" />
         <w-icon v-else-if="file.status === 'success'" name="file" />
         <w-icon v-else name="file" />
       </div>
@@ -59,6 +59,8 @@ function getFileSize(size) {
 </script>
 
 <style lang="scss" scoped>
+@import 'Assets/scss/components/animations.scss';
+
 .w-uploader-list {
   margin: 0;
   padding: 0;
@@ -121,5 +123,9 @@ function getFileSize(size) {
       }
     }
   }
+}
+
+.w-icon-loading {
+  animation: spin 2.5s linear infinite;
 }
 </style>

@@ -158,28 +158,35 @@ function uploadChunks(file) {
   file.status = 'pending';
 
   // 分片上传
-  options.data['chunk'] = 0;
-  options.data[name] = chunks[0];
-  request(options);
-  onChangeFile(file);
-  emit('change', file, state.files);
+  chunks.map((chunk, index) => {
+    options.data['chunk'] = index + 1;
+    options[name] = chunk;
+    request(options);
+    onChangeFile(file);
+    emit('change', file, state.files);
+  });
 }
 
 function createChunks(file) {
   const { chunckSize } = props;
-  const { size } = file;
+  const { size, uid, name } = file;
   let current = 0;
   let chunks = [];
   let chunkSize = chunckSize;
   while (current < size) {
     let end = Math.min(current + chunkSize, size);
     let chunk = file.slice(current, end);
+    chunk.name = `${name}.${uid}.${current}`;
     chunks.push(chunk);
     current = end;
   }
   return chunks;
 }
 
+/**
+ * 上传整个文件
+ * @param {*} file
+ */
 function uploadSingle(file) {
   const { url, name, data, headers, withCredentials } = props;
   const { uid, raw } = file;
@@ -208,6 +215,8 @@ function handleSuccess(file, response) {
   if (chuncked) {
   } else {
     file.status = 'success';
+    file.response = response;
+    file.url = response.data;
     // this.$set(file, 'response', response);
     // this.$set(file, 'url', response.data);
   }
@@ -215,6 +224,10 @@ function handleSuccess(file, response) {
   emit('change', file, state.files);
 }
 
+/**
+ * 更新文件状态
+ * @param {*} file
+ */
 function onChangeFile(file) {
   state.files = state.files.map((item) => {
     if (file.uid === item.uid) {
