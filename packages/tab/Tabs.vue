@@ -28,7 +28,7 @@ export default {
 </script>
 
 <script setup>
-import { ref, provide, onMounted, nextTick } from 'vue';
+import { ref, computed, provide, onMounted, nextTick } from 'vue';
 
 const props = defineProps({
   value: {
@@ -89,11 +89,13 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+$primary: #2980b9;
+
 .w-tabs {
   .w-tabs-label-wrapper {
     position: relative;
     display: flex;
-    border-bottom: 1px solid $gray300;
+    border-bottom: 1px solid #ccc;
     margin-bottom: 16px;
     overflow-x: auto;
     &::-webkit-scrollbar {
@@ -109,7 +111,7 @@ onMounted(() => {
       color: $primary;
     }
     &.disabled {
-      color: $gray500;
+      color: #ccc;
       cursor: not-allowed;
     }
     &.active {
