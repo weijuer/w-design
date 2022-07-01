@@ -17,110 +17,110 @@
 </template>
 
 <script>
-import WTreeNode from './TreeNode.vue';
-
 export default {
   name: 'w-tree',
-  inheritAttrs: false,
-  components: {
-    WTreeNode
-  },
-  model: {
-    prop: 'checkedNodes',
-    event: 'check'
-  },
-  props: {
-    treeData: {
-      type: Array,
-      required: true
-    },
-    defaultSelectedNodes: Array,
-    selectedNodes: Array,
-    defaultCheckedNodes: Array,
-    checkedNodes: Array,
-    defaultExpandedNodes: Array,
-    expandedNodes: Array,
-    multiple: Boolean,
-    disabled: Boolean
-  },
-  provide() {
-    return {
-      wTree: this
-    };
-  },
-  data() {
-    return {
-      _selectedNodes: [], // 当前选中的节点
-      _expandedNodes: [] // 当前展开的节点
-    };
-  },
-  watch: {
-    selectedNodes(val) {
-      this._selectedNodes = [].concat(val);
-    },
-    expandedNodes(val) {
-      this._expandedNodes = [].concat(val);
-    }
-  },
-  mounted: function () {
-    this._selectedNodes = [].concat(this.defaultSelectedNodes);
-    this._expandedNodes = [].concat(this.defaultExpandedNodes);
-  },
-  methods: {
-    // 选中节点
-    onNodeSelect: function (e, treeNode) {
-      console.log('onNodeSelect', e, treeNode);
-      let { _selectedNodes: selectedNodes } = this.$data;
-      const { multiple } = this.$props;
-      const { node, selected } = treeNode;
-      const targetSelected = !selected;
-
-      if (targetSelected) {
-        selectedNodes.push(node);
-      } else if (!multiple) {
-        selectedNodes = [node];
-      } else {
-        selectedNodes = selectedNodes.filter((item) => item !== node);
-      }
-
-      const eventObj = {
-        event: 'select',
-        selected: targetSelected,
-        node: treeNode,
-        nativeEvent: e
-      };
-      this.$emit('select', selectedNodes, eventObj);
-    },
-    // 展开节点
-    onNodeExpand: function (e, treeNode) {
-      console.log('onNodeExpand', e, treeNode);
-      let { _expandedNodes: expandedNodes } = this.$data;
-      const { node, expanded } = treeNode;
-
-      const targetExpanded = !expanded;
-      if (targetExpanded) {
-        expandedNodes.push(node);
-      } else {
-        expandedNodes = expandedNodes.filter((item) => item !== node);
-      }
-      const eventObj = {
-        event: 'expand',
-        expanded,
-        node: treeNode,
-        nativeEvent: e
-      };
-      this.$emit('expand', expandedNodes, eventObj);
-    },
-    // 子节点是否被选中
-    isNodeSelected(node) {
-      return this.$data._selectedNodes.indexOf(node) !== -1;
-    },
-    // 子节点是否展开
-    isNodeExpanded(node) {
-      return this.$data._expandedNodes.indexOf(node) !== -1;
-    }
-  }
+  inheritAttrs: false
 };
+</script>
+
+<script setup>
+import { provide, reactive, watch } from 'vue';
+import WTreeNode from './TreeNode.vue';
+
+const props = defineProps({
+  treeData: {
+    type: Array,
+    required: true
+  },
+  defaultSelectedNodes: Array,
+  selectedNodes: Array,
+  defaultCheckedNodes: Array,
+  checkedNodes: Array,
+  defaultExpandedNodes: Array,
+  expandedNodes: Array,
+  multiple: Boolean,
+  disabled: Boolean
+});
+
+const emit = defineEmits(['update:checkedNodes']);
+provide('wTree', { onNodeSelect, onNodeExpand, isNodeSelected, isNodeExpanded });
+
+const state = reactive({
+  _selectedNodes: [], // 当前选中的节点
+  _expandedNodes: [] // 当前展开的节点
+});
+
+watch(
+  () => props.expandedNodes,
+  (val) => {
+    state._expandedNodes = [].concat(val);
+  },
+  { immediate: true }
+);
+
+watch(
+  () => props.selectedNodes,
+  (val) => {
+    state._selectedNodes = [].concat(val);
+  },
+  { immediate: true }
+);
+
+// 选中节点
+function onNodeSelect(e, treeNode) {
+  console.log('onNodeSelect', e, treeNode);
+  let { _selectedNodes: selectedNodes } = state;
+  const { multiple } = this.$props;
+  const { node, selected } = treeNode;
+  const targetSelected = !selected;
+
+  if (targetSelected) {
+    selectedNodes.push(node);
+  } else if (!multiple) {
+    selectedNodes = [node];
+  } else {
+    selectedNodes = selectedNodes.filter((item) => item !== node);
+  }
+
+  const eventObj = {
+    event: 'select',
+    selected: targetSelected,
+    node: treeNode,
+    nativeEvent: e
+  };
+  emit('select', selectedNodes, eventObj);
+}
+
+// 展开节点
+function onNodeExpand(e, treeNode) {
+  console.log('onNodeExpand', e, treeNode);
+  let { _expandedNodes: expandedNodes } = state;
+  const { node, expanded } = treeNode;
+
+  const targetExpanded = !expanded;
+  if (targetExpanded) {
+    expandedNodes.push(node);
+  } else {
+    expandedNodes = expandedNodes.filter((item) => item !== node);
+  }
+  const eventObj = {
+    event: 'expand',
+    expanded,
+    node: treeNode,
+    nativeEvent: e
+  };
+  emit('expand', expandedNodes, eventObj);
+}
+
+// 子节点是否被选中
+function isNodeSelected(node) {
+  return state._selectedNodes.indexOf(node) !== -1;
+}
+
+// 子节点是否展开
+function isNodeExpanded(node) {
+  return state._expandedNodes.indexOf(node) !== -1;
+}
 </script>
 
 <style lang="scss">

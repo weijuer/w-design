@@ -1,11 +1,11 @@
-import WTree from './Tree.vue';
-import WTreeNode from './TreeNode.vue';
+import Tree from './Tree.vue';
+import TreeNode from './TreeNode.vue';
 
-WTree.node = WTreeNode;
+Tree.node = TreeNode;
 
-WTree.install = (Vue) => {
-  Vue.component(WTree.name, WTree);
-  Vue.component(WTreeNode.name, WTreeNode);
+Tree.install = (Vue) => {
+  Vue.component(Tree.name, Tree);
+  Vue.component(TreeNode.name, TreeNode);
 };
 
-export default WTree;
+export default Tree;

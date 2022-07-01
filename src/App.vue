@@ -8,13 +8,14 @@ import { AppLayout } from 'Layout';
 </script>
 
 <style>
+html,
 body {
   padding: 0;
   margin: 0;
 }
 
-.app-layout {
-  height: 100vh;
+#app {
+  min-height: 100vh;
 }
 </style>
 

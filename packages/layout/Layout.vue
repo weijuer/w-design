@@ -4,11 +4,9 @@
   </section>
 </template>
 
-
-
 <script>
 export default {
-  name: 'w-layout',
+  name: 'w-layout'
 };
 </script>
 
@@ -28,7 +26,7 @@ const props = defineProps({
   display: flex;
   flex: auto;
   flex-direction: column;
-  min-height: 0;
+  min-height: 100%;
   background: #f0f2f5;
 
   &--has-aside {

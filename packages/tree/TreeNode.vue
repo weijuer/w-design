@@ -7,11 +7,7 @@
     <div class="w-tree-node__content" :class="{ bold: isFolder, active: expanded }">
       <span class="w-tree-switcher" @click="onExpand">
         <slot name="icon" v-if="$slots.icon"></slot>
-        <em
-          v-if="isFolder"
-          class="fa fa-chevron-right fa-fw"
-          :class="{ 'fa-rotate-90': expanded }"
-        ></em>
+        <w-icon v-if="isFolder" name="chevron-right" :class="{ 'fa-rotate-90': expanded }"></w-icon>
       </span>
       <span class="w-tree-title" @click="onSelect">
         <slot name="title" v-if="$slots.title || title">
@@ -40,71 +36,34 @@
 <script>
 export default {
   name: 'w-tree-node',
-  inheritAttrs: false,
-  props: {
-    node: {
-      type: [String, Number],
-      required: true
-    },
-    title: {
-      type: [String, Object],
-      required: true
-    },
-    icon: {
-      type: Object,
-      default: null
-    },
-    expanded: Boolean,
-    selected: Boolean,
-    checked: Boolean,
-    halfChecked: Boolean,
-    checkable: Boolean,
-    selectable: Boolean,
-    disabled: Boolean
-  },
-  inject: ['wTree'],
-  provide() {
-    return {
-      wTreeNode: this
-    };
-  },
-  data() {
-    return {};
-  },
-  computed: {
-    children() {
-      return this.$attrs.children;
-    },
-    isFolder() {
-      return this.$attrs.children && this.$attrs.children.length;
-    }
-  },
-  methods: {
-    onSelect(e) {
-      const {
-        wTree: { onNodeSelect }
-      } = this;
-      e.preventDefault();
-      onNodeSelect(e, this);
-    },
-    onExpand(e) {
-      const {
-        wTree: { onNodeExpand }
-      } = this;
-      onNodeExpand(e, this);
-    },
-    isNodeSelected(node) {
-      const {
-        wTree: { isNodeSelected }
-      } = this;
-      return isNodeSelected(node);
-    },
-    isNodeExpanded(node) {
-      const {
-        wTree: { isNodeExpanded }
-      } = this;
-      return isNodeExpanded(node);
-    }
-  }
+  inheritAttrs: false
 };
+</script>
+
+<script setup>
+import { computed, inject } from 'vue';
+
+const props = defineProps({
+  node: {
+    type: [String, Number],
+    required: true
+  },
+  title: {
+    type: [String, Object],
+    required: true
+  },
+  icon: {
+    type: Object,
+    default: null
+  },
+  expanded: Boolean,
+  selected: Boolean,
+  checked: Boolean,
+  halfChecked: Boolean,
+  checkable: Boolean,
+  selectable: Boolean,
+  disabled: Boolean
+});
+
+const wtree = inject('wTree', {});
 </script>

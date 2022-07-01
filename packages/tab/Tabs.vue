@@ -19,11 +19,7 @@
 <script>
 export default {
   name: 'w-tabs',
-  mounted() {
-    this.getLabels();
-    this.calculateLinePosition();
-  },
-  methods: {}
+  inheritAttrs: false
 };
 </script>
 
@@ -31,13 +27,13 @@ export default {
 import { ref, computed, provide, onMounted, nextTick } from 'vue';
 
 const props = defineProps({
-  value: {
+  modelValue: {
     type: [String, Number]
   }
 });
 provide('tabs', { value: props.value });
 
-const emit = defineEmits(['input', 'change']);
+const emit = defineEmits(['update:modelValue', 'change']);
 const labels = ref([]);
 const labelWrapper = ref(null);
 const labelItems = ref(null);
@@ -63,7 +59,7 @@ function onChange(item) {
   if (disabled) {
     return;
   }
-  emit('input', key);
+  emit('update:modelValue', key);
   emit('change', key);
   calculateLinePosition();
 }
