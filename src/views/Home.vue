@@ -1,14 +1,14 @@
 <template>
-    <div class="home">
-        <div class="brand">
-            <Bubble />
-        </div>
+  <div class="home">
+    <div class="brand">
+      <Bubble />
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'Home'
+  name: 'Home'
 };
 </script>
 
@@ -17,6 +17,10 @@ import { Bubble } from 'Widgets';
 </script>
 
 <style scoped lang="stylus">
+.home {
+    min-height: calc(100vh - 64px);
+}
+
 .brand {
   display: flex;
   justify-content: center;

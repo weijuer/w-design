@@ -3,6 +3,8 @@ import { generateRoutes } from 'Utils/routerUtils';
 
 const customRoutes = generateRoutes();
 
+console.log('customRoutes', customRoutes)
+
 const routes = [
   {
     path: '/',

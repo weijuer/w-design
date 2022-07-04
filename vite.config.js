@@ -12,6 +12,7 @@ export default defineConfig({
       Layout: resolve('src/components/layout'),
       Widgets: resolve('src/components/widgets'),
       Assets: resolve('src/assets'),
+      Hooks: resolve('src/hooks'),
       Utils: resolve('src/utils')
     },
     dedupe: [

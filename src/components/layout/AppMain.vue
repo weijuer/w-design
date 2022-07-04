@@ -2,7 +2,7 @@
   <w-layout :has-aside="true">
     <w-aside>
       <w-menu class="app-menu" theme="dark">
-        <w-menu-item v-for="route in exampleRoutes" :key="route.name">
+        <w-menu-item v-for="route in childrenRoutes" :key="route.name">
           <router-link :to="route.path" class="app-router-link">
             {{ route.name }}
           </router-link>
@@ -10,6 +10,9 @@
       </w-menu>
     </w-aside>
     <w-layout>
+      <ul>
+        <li></li>
+      </ul>
       <w-main>
         <router-view />
       </w-main>
@@ -24,16 +27,11 @@ export default {
 </script>
 
 <script setup>
-import { computed, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import useWRouter from 'Hooks/useWRouter';
 
-const router = useRouter();
+const { routeList, childrenRoutes } = useWRouter();
 
-const exampleRegx = /-example$/i;
-const exampleRoutes = computed(() =>
-  router.getRoutes().filter((route) => exampleRegx.test(route.name))
-);
-console.log(exampleRoutes.value);
+console.log(routeList.value, childrenRoutes.value);
 </script>
 
 <style lang="scss" scoped>
