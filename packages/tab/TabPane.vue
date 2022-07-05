@@ -13,7 +13,7 @@ export default {
 </script>
 
 <script setup>
-import { computed, inject, useAttrs } from 'vue';
+import { ref, computed, inject, onMounted } from 'vue';
 
 const props = defineProps({
   label: {
@@ -25,9 +25,21 @@ const props = defineProps({
   }
 });
 
-const tabs = inject('tabs');
-const { key } = useAttrs();
-const visible = computed(() => tabs.value === key);
+const { key, setPanes } = inject('tabs');
+const tabPane = ref();
+
+const visible = computed(() => key === tabPane.key);
+
+onMounted(() => {
+  console.log(tabPane.value);
+
+  const { label, disabled } = props;
+  setPanes({ label, disabled });
+});
+
+defineExpose({
+  tabPane
+});
 </script>
 
 <style lang="scss" scoped></style>

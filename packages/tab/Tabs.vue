@@ -31,14 +31,16 @@ const props = defineProps({
     type: [String, Number]
   }
 });
-provide('tabs', { value: props.value });
 
 const emit = defineEmits(['update:modelValue', 'change']);
 const labels = ref([]);
 const labelWrapper = ref(null);
 const labelItems = ref(null);
 const line = ref(null);
+const activeKey = ref(props.modelValue);
 const activeIndex = computed(() => labels.value.findIndex((label) => label.key === props.value));
+
+provide('tabs', { key: props.modelValue, setPanes });
 
 function getLabelCls(item) {
   return {
@@ -47,11 +49,9 @@ function getLabelCls(item) {
   };
 }
 
-function getLabels() {
-  labels.value = this.$children.map((child) => {
-    const { label, key, disabled } = child;
-    return { label, key, disabled };
-  });
+function setPanes(pane) {
+  const { label, key, disabled } = pane;
+  labels.value.push({ label, key, disabled });
 }
 
 function onChange(item) {
@@ -79,7 +79,7 @@ function calculateLinePosition() {
 }
 
 onMounted(() => {
-  getLabels();
+  // setLabels();
   calculateLinePosition();
 });
 </script>
@@ -91,9 +91,11 @@ $primary: #2980b9;
   .w-tabs-label-wrapper {
     position: relative;
     display: flex;
+    padding: 0;
     border-bottom: 1px solid #ccc;
     margin-bottom: 16px;
     overflow-x: auto;
+    list-style: none;
     &::-webkit-scrollbar {
       height: 0;
       background: transparent; /* Chrome/Safari/Webkit */

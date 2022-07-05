@@ -26,43 +26,56 @@ function getMsg() {
 </script>
 
 <style lang="scss" scoped>
-.status {
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  font-size: 6rem;
-  font-weight: 700;
-  margin: 0;
-  animation: shake 0.6s ease-in-out infinite alternate;
-  user-select: none;
+.not-found {
+  margin: 0 24px;
+  position: relative;
+  overflow: hidden;
 
-  &:before {
-    content: attr(data-t);
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0.34em);
-    height: 0.1em;
-    line-height: 0.5em;
+  .status {
+    text-align: center;
     width: 100%;
-    animation: scan 0.5s ease-in-out 126ms infinite alternate,
-      glitch-anim 0.3s ease-in-out infinite alternate;
-    overflow: hidden;
-    opacity: 0.7;
+    font-size: 6rem;
+    font-weight: 700;
+    margin: 0;
+    animation: shake 0.6s ease-in-out infinite alternate;
+    user-select: none;
+
+    &:before {
+      content: attr(data-t);
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0.34em);
+      height: 0.1em;
+      line-height: 0.5em;
+      width: 100%;
+      animation: scan 0.5s ease-in-out 126ms infinite alternate,
+        glitch-anim 0.3s ease-in-out infinite alternate;
+      overflow: hidden;
+      opacity: 0.7;
+    }
+
+    &:after {
+      content: attr(data-t);
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translate(-50%, 0.34em);
+      height: 0.5em;
+      line-height: 0.1em;
+      width: 100%;
+      animation: scan 665ms ease-in-out 344ms infinite alternate,
+        glitch-anim 0.3s ease-in-out infinite alternate;
+      overflow: hidden;
+      opacity: 0.8;
+    }
   }
 
-  &:after {
-    content: attr(data-t);
-    position: absolute;
-    top: -18px;
-    left: 50%;
-    transform: translate(-50%, 0.34em);
-    height: 0.5em;
-    line-height: 0.1em;
-    width: 100%;
-    animation: scan 665ms ease-in-out 344ms infinite alternate,
-      glitch-anim 0.3s ease-in-out infinite alternate;
-    overflow: hidden;
-    opacity: 0.8;
+  blockquote {
+    font-size: 1rem;
+    color: rgb(153, 153, 153);
+    margin: 1rem 0px;
+    border-left: 0.2rem solid rgb(223, 226, 229);
+    padding: 0.25rem 0px 0.25rem 1rem;
   }
 }
 

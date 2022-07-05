@@ -1,26 +1,16 @@
 <template>
   <div class="home">
-    <div class="brand">
-      <Bubble />
-    </div>
+    <div class="brand"> </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Home'
+  name: 'home'
 };
 </script>
 
-<script setup>
-import { Bubble } from 'Widgets';
-</script>
-
-<style scoped lang="stylus">
-.home {
-    min-height: calc(100vh - 64px);
-}
-
+<style scoped lang="scss">
 .brand {
   display: flex;
   justify-content: center;

@@ -1,7 +1,7 @@
 import Tree from './Tree.vue';
 import TreeNode from './TreeNode.vue';
 
-Tree.node = TreeNode;
+Tree.TreeNode = TreeNode;
 
 Tree.install = (Vue) => {
   Vue.component(Tree.name, Tree);

@@ -10,10 +10,21 @@
       </w-menu>
     </w-aside>
     <w-layout>
-      <ul>
-        <li></li>
-      </ul>
-      <w-main>
+      <w-breadcrumb>
+        <w-breadcrumb-item v-for="(route, index) in routeList" :key="route.name">
+          <router-link
+            v-if="index != routeList.length - 1"
+            :to="route.path"
+            class="app-router-link"
+          >
+            {{ route.name }}
+          </router-link>
+          <template v-else>
+            {{ route.name }}
+          </template>
+        </w-breadcrumb-item>
+      </w-breadcrumb>
+      <w-main class="app-main">
         <router-view />
       </w-main>
     </w-layout>
@@ -27,11 +38,28 @@ export default {
 </script>
 
 <script setup>
-import useWRouter from 'Hooks/useWRouter';
+import { computed, ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
-const { routeList, childrenRoutes } = useWRouter();
+const router = useRouter();
+const route = useRoute();
+const routes = ref(router.getRoutes());
+const routeList = ref([]);
+const childrenRoutes = ref([]);
 
-console.log(routeList.value, childrenRoutes.value);
+watch(
+  () => route.name,
+  (newName) => {
+    childrenRoutes.value = routes.value.find((_route) => newName === _route.name)?.children;
+  }
+);
+
+// 获取路由面包屑
+router.afterEach((to) => {
+  routeList.value = route.matched.filter((route) => {
+    return route.path !== '/index';
+  });
+});
 </script>
 
 <style lang="scss" scoped>
@@ -43,5 +71,10 @@ console.log(routeList.value, childrenRoutes.value);
     color: inherit;
     text-decoration: none;
   }
+}
+
+:deep(.app-main).app-main {
+  padding: 24px 0;
+  min-height: calc(100vh - 64px);
 }
 </style>

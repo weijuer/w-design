@@ -3,8 +3,6 @@ import { generateRoutes } from 'Utils/routerUtils';
 
 const customRoutes = generateRoutes();
 
-console.log('customRoutes', customRoutes)
-
 const routes = [
   {
     path: '/',
@@ -17,6 +15,10 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    // 始终滚动到顶部
+    return { top: 0, left: 0 }
+  }
 });
 
 export default router;
