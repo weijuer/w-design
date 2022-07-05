@@ -38,9 +38,11 @@ const labelWrapper = ref(null);
 const labelItems = ref(null);
 const line = ref(null);
 const activeKey = ref(props.modelValue);
-const activeIndex = computed(() => labels.value.findIndex((label) => label.key === props.value));
+const activeIndex = computed(() =>
+  labels.value.findIndex((label) => label.key === activeKey.value)
+);
 
-provide('tabs', { key: props.modelValue, setPanes });
+provide('tabs', { activeKey, setPanes });
 
 function getLabelCls(item) {
   return {
@@ -66,11 +68,11 @@ function onChange(item) {
 
 function calculateLinePosition() {
   nextTick(() => {
-    if (activeIndex === -1) {
+    if (activeIndex.value === -1) {
       return;
     }
     // line width equal active tab width
-    const activeLabel = labelItems.value[activeIndex];
+    const activeLabel = labelItems.value[activeIndex.value];
     const { left: wrapperLeft } = labelWrapper.value.getBoundingClientRect();
     const { left: labelLeft, width } = activeLabel.getBoundingClientRect();
     line.value.style.left = labelLeft - wrapperLeft + labelWrapper.value.scrollLeft + 'px';

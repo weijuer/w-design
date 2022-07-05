@@ -14,7 +14,7 @@
       <fieldset>
         <legend>数字</legend>
         <w-tabs v-model="state.selected1">
-          <w-tab-pane v-for="n in 40" :key="n" :label="n">
+          <w-tab-pane v-for="n in 5" :key="n" :label="n">
             {{ n }}
           </w-tab-pane>
         </w-tabs>

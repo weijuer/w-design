@@ -19,22 +19,26 @@ const props = defineProps({
   label: {
     type: [String, Number]
   },
+  tabKey: {
+    type: [String, Number],
+    require: true
+  },
   disabled: {
     type: Boolean,
     default: false
   }
 });
 
-const { key, setPanes } = inject('tabs');
+const { activeKey, setPanes } = inject('tabs');
 const tabPane = ref();
-
-const visible = computed(() => key === tabPane.key);
+console.log('tabPane', tabPane.value);
+const visible = computed(() => activeKey === tabPane.key);
 
 onMounted(() => {
   console.log(tabPane.value);
 
-  const { label, disabled } = props;
-  setPanes({ label, disabled });
+  const { label, key, disabled } = props;
+  setPanes({ label, key, disabled });
 });
 
 defineExpose({
