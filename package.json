@@ -67,6 +67,7 @@
     "sass": "^1.53.0",
     "stylus": "^0.58.1",
     "vite": "^2.9.13",
+    "vite-plugin-pages": "^0.25.0",
     "vite-plugin-svg-icons": "^2.0.1",
     "vitepress": "^0.22.3",
     "vue": "^3.2.37",

@@ -6,13 +6,19 @@ export function generateRoutes() {
   const modules = import.meta.glob('../views/**/*.vue');
 
   return Object.entries(modules).reduce((total, [fileName, component]) => {
-    const [, parent, name] = fileName.match(/(?:views\/([\w\-]+)\/)?([\w\-]+)\.vue$/);
-    const path = name === 'NotFound' ? '/:pathMatch(.*)*' : `/${name}`;
-    const _component = { name: name.toLowerCase(), path, children: [], component };
+    let [, parent, name] = fileName.match(/(?:views\/([\w\-]+)\/)?([\w\-]+)\.vue$/);
+    const path = `/${name}`;
+    name = parent ? `${parent}-${name}` : name
+    const _component = { name, path, component };
     if (parent) {
       const _parent = total.find(({ name }) => parent === name);
       if (_parent) {
-        _parent.children.push(_component);
+        if (_parent.children) {
+          _parent.children.push(_component);
+        } else {
+          _parent.children = [];
+          _parent.children.push(_component);
+        }
       } else {
         total.push({ name: parent, path: `/${parent}`, children: [_component] });
       }

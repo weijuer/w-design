@@ -1,10 +1,11 @@
 <template>
   <div class="w-tabs">
+    <slot></slot>
     <ul class="w-tabs-label-wrapper" ref="labelWrapper">
       <li
         class="w-tabs-label-item"
-        @click="onChange(item)"
-        v-for="(item, i) in labels"
+        @click="onLableClick(item, index)"
+        v-for="(item, index) in panes"
         :class="getLabelCls(item)"
         ref="labelItems"
       >
@@ -12,7 +13,15 @@
       </li>
       <div class="line" ref="line"></div>
     </ul>
-    <slot></slot>
+    <div class="w-tabs-panes">
+      <template v-for="(pane, index) in panes" :key="'pane-' + index">
+        <div ref="tab-pane" :class="['w-tab-pane', { active: isActive(pane, index) }]">
+          <div class="w-tab-pane-content" v-if="isActive(pane, index)">
+            <!-- <slot :slots="pane.slots"></slot> -->
+          </div>
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -28,42 +37,49 @@ import { ref, computed, provide, onMounted, nextTick } from 'vue';
 
 const props = defineProps({
   modelValue: {
-    type: [String, Number]
+    type: [String, Number],
+    default: 0
   }
 });
 
 const emit = defineEmits(['update:modelValue', 'change']);
-const labels = ref([]);
-const labelWrapper = ref(null);
-const labelItems = ref(null);
-const line = ref(null);
-const activeKey = ref(props.modelValue);
-const activeIndex = computed(() =>
-  labels.value.findIndex((label) => label.key === activeKey.value)
-);
+const panes = ref([]);
+const labelWrapper = ref();
+const labelItems = ref();
+const line = ref();
 
-provide('tabs', { activeKey, setPanes });
+const activeKey = ref(props.modelValue);
+
+const activeIndex = computed(() => panes.value.findIndex((pane) => pane.name === activeKey.value));
+
+provide('tabs', { activeKey, setTabPanes });
 
 function getLabelCls(item) {
   return {
-    active: item.key === props.value,
+    active: item.name === activeKey.value,
     disabled: item.disabled
   };
 }
 
-function setPanes(pane) {
-  const { label, key, disabled } = pane;
-  labels.value.push({ label, key, disabled });
+function setTabPanes(pane) {
+  console.log('setTabPanes', pane);
+  panes.value.push(pane);
 }
 
-function onChange(item) {
-  const { key, disabled } = item;
+function onLableClick(item, index) {
+  const { name, disabled } = item;
   if (disabled) {
     return;
   }
-  emit('update:modelValue', key);
-  emit('change', key);
+
+  activeKey.value = name || index + 1;
+  emit('change', name, index);
+  emit('update:modelValue', name);
   calculateLinePosition();
+}
+
+function isActive(pane, index) {
+  return activeKey.value === pane.name ? pane.name : index + 1;
 }
 
 function calculateLinePosition() {
@@ -81,7 +97,6 @@ function calculateLinePosition() {
 }
 
 onMounted(() => {
-  // setLabels();
   calculateLinePosition();
 });
 </script>
@@ -98,15 +113,17 @@ $primary: #2980b9;
     margin-bottom: 16px;
     overflow-x: auto;
     list-style: none;
+
     &::-webkit-scrollbar {
       height: 0;
-      background: transparent; /* Chrome/Safari/Webkit */
+      background: transparent;
     }
   }
   .w-tabs-label-item {
     cursor: pointer;
     margin-right: 32px;
     padding: 12px 0;
+
     &:hover {
       color: $primary;
     }
@@ -115,7 +132,6 @@ $primary: #2980b9;
       cursor: not-allowed;
     }
     &.active {
-      font-weight: bold;
       color: $primary;
     }
   }

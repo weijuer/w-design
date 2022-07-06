@@ -5,7 +5,7 @@
     </a>
     <w-menu class="app-menu" theme="dark" mode="horizontal">
       <w-menu-item>
-        <router-link class="app-router-link" to="/"> Home </router-link>
+        <router-link class="app-router-link" to="/"> Index </router-link>
       </w-menu-item>
       <w-menu-item>
         <router-link class="app-router-link" to="/examples"> Examples </router-link>
