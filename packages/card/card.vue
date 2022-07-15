@@ -43,7 +43,7 @@ $theme-color = #2ecc71;
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin: 0;
   padding: 1rem;
   box-shadow: 0 0 13px 0 rgba(82, 63, 105, 0.05);
   background-color: #fff;
