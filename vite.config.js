@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import pages from 'vite-plugin-pages';
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
 export default defineConfig({
   resolve: {
@@ -16,15 +16,13 @@ export default defineConfig({
       Hooks: resolve('src/hooks'),
       Utils: resolve('src/utils')
     },
-    dedupe: [
-      'vue'
-    ]
+    dedupe: ['vue']
   },
   build: {
-    target: 'es6',
     outDir: 'lib',
     lib: {
       entry: 'packages/index.js',
+      formats: ['es', 'umd'],
       name: 'w-design-vue'
     },
     rollupOptions: {
@@ -43,7 +41,7 @@ export default defineConfig({
     pages({
       dirs: [
         { dir: 'src/views', baseRoute: '' },
-        { dir: 'packages', baseRoute: 'packages' },
+        { dir: 'packages', baseRoute: 'packages' }
       ],
       extensions: ['md', 'vue'],
       exclude: ['**/packages/*/*.vue', '**/components/*/*.vue']
@@ -54,7 +52,7 @@ export default defineConfig({
       // 指定symbolId格式
       symbolId: 'icon-[dir]-[name]',
       inject: 'body-first',
-      customDomId: '__w_svg_icons__',
+      customDomId: '__w_svg_icons__'
     })
-  ],
+  ]
 });
