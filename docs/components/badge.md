@@ -21,9 +21,5 @@
 |  <w-badge type="dark" />   |  `*-dark`   |    `<w-badge type="dark" />` |
 
 <script setup>
-import comps from '../../packages'
-// import WBadge from '../../packages/badge/badge.js'
-const { WBadge }  = comps
-
-console.log(WBadge)
+import WBadge from '../../packages/badge'
 </script>

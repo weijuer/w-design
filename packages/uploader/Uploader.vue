@@ -1,20 +1,9 @@
 <template>
   <div class="w-uploader">
-    <input
-      class="w-uploader-input"
-      ref="fileInput"
-      type="file"
-      :accept="accept"
-      :multiple="multiple"
-      @change="onChange"
-    />
+    <input class="w-uploader-input" ref="fileInput" type="file" :accept="accept" :multiple="multiple"
+      @change="onChange" />
     <uploader-dragger v-if="drag" @on-click="onTrigger" @handle-files="uploadFiles" />
-    <div
-      v-else
-      class="w-uploader-trigger"
-      :class="{ 'w-disabled': disabled || state.isUploaded }"
-      @click="onTrigger"
-    >
+    <div v-else class="w-uploader-trigger" :class="{ 'w-disabled': disabled || state.isUploaded }" @click="onTrigger">
       <slot></slot>
     </div>
 
@@ -40,7 +29,7 @@ export default {
 import { reactive, ref, watch, onBeforeUnmount } from 'vue';
 import UploaderDragger from './UploaderDragger.vue';
 import UploaderList from './UploaderList.vue';
-import request from 'Utils/request';
+import request from './utils/request';
 
 const props = defineProps({
   url: { type: String, default: '' }, // 后台请求地址
@@ -54,11 +43,11 @@ const props = defineProps({
   tips: { type: String, default: '' }, // 文件上传提示
   fileList: { type: Array, default: () => [] }, // 文件列表
   defaultFileList: { type: Array, default: () => [] }, // 默认文件列表
-  headers: { type: Object, default: () => {} }, // 设置上传的请求头部，IE10 以上有效
+  headers: { type: Object, default: () => { } }, // 设置上传的请求头部，IE10 以上有效
   withCredentials: { type: Boolean, default: false }, // 是否允许跨域上传
-  beforeUpload: { type: Function, default: () => {} }, // 上传前的钩子，参数为上传的文件，若返回 false 则停止上传
-  remove: { type: Function, default: () => {} }, // 删除文件时的钩子，参数为文件对象
-  fileClick: { type: Function, default: () => {} }, // 文件点击时的钩子，参数为文件对象
+  beforeUpload: { type: Function, default: () => { } }, // 上传前的钩子，参数为上传的文件，若返回 false 则停止上传
+  remove: { type: Function, default: () => { } }, // 删除文件时的钩子，参数为文件对象
+  fileClick: { type: Function, default: () => { } }, // 文件点击时的钩子，参数为文件对象
   chuncked: { type: Boolean, default: false }, // 是否分片上传
   chunckSize: { type: Number, default: 1024 * 1024 }, // 分片大小，默认 1M
   threads: { type: Number, default: 1 } // 分片上传并发数，默认 3 个
@@ -305,7 +294,7 @@ onBeforeUnmount(() => {
     display: none;
     z-index: -1;
     opacity: 0;
-    filter: alpha(opacity = 0);
+    filter: alpha(opacity=0);
   }
 
   .w-uploader-trigger {

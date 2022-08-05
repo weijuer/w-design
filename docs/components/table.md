@@ -21,7 +21,7 @@ title: Table 表格
     <w-table
         row-key="id"
         :columns="state.columns"
-        :data-source="state.dataSource"
+        :rows="state.dataSource"
         :pagination="state.pagination"
         :row-selection="state.rowSelection"
         @change="onTableChange">

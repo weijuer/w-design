@@ -1,8 +1,8 @@
 import { version } from '../package.json';
-import 'Assets/stylus/index.styl';
+import '../src/assets/stylus/index.styl';
+import 'virtual:svg-icons-register';
 
 export const install = (app) => {
-
   const components = import.meta.globEager('./*/index.js');
 
   Object.values(components).map(({ default: component }) => {
@@ -11,9 +11,9 @@ export const install = (app) => {
     }
   });
 
-  app.config.globalProperties.$message = message => {
+  app.config.globalProperties.$message = (message) => {
     console.log(message);
-  }
+  };
 
   return app;
 };

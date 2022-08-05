@@ -59,7 +59,7 @@ function getFileSize(size) {
 </script>
 
 <style lang="scss" scoped>
-@import 'Assets/scss/components/animations.scss';
+@import '../src/assets/scss/components/animations.scss';
 
 .w-uploader-list {
   margin: 0;

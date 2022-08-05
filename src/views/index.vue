@@ -1,6 +1,8 @@
 <template>
   <div class="index">
-    <div class="brand"> </div>
+    <div class="hero">
+      <w-icon name="delete" />
+    </div>
   </div>
 </template>
 
@@ -11,7 +13,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.brand {
+.hero {
   display: flex;
   justify-content: center;
   position: relative;

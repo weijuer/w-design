@@ -1,11 +1,6 @@
 <template>
-  <button
-    class="w-button"
-    @click="handleClick"
-    :disabled="disabled || loading"
-    :autofocus="autofocus"
-    :type="nativeType"
-    :class="[
+  <button class="w-button" @click="handleClick" :disabled="disabled || loading" :autofocus="autofocus"
+    :type="nativeType" :class="[
       type ? 'w-button-' + type : '',
       size ? 'w-button-' + size : '',
       {
@@ -15,8 +10,7 @@
         'is-round': round,
         'is-circle': circle
       }
-    ]"
-  >
+    ]">
     <w-icon class="w-icon-loading w-icon--left" v-if="loading" name="loading"></w-icon>
     <w-icon class="w-icon--left" v-if="icon && !loading" :name="icon"></w-icon>
     <span v-if="$slots.default">
@@ -32,7 +26,7 @@ export default {
 </script>
 
 <script setup>
-import Icon from '../icon';
+import WIcon from '../icon';
 
 const props = defineProps({
   type: {

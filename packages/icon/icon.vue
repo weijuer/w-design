@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import 'virtual:svg-icons-register';
 export default {
   name: 'w-icon',
   inheritAttrs: false
@@ -52,6 +51,7 @@ const symbolId = computed(() => `#${props.prefix}-${props.name}`);
 }
 
 @keyframes octocat-wave {
+
   0%,
   100% {
     transform: rotate(0);
