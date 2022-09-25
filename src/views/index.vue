@@ -2,14 +2,30 @@
   <div class="index">
     <div class="hero">
       <w-icon name="delete" />
+
+
+      <w-button type="primary" @click="visible = true">打开对话框</w-button>
+      <w-modal v-model="visible" @close="onClose" />
+
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'index'
+  name: 'index',
 };
+</script>
+
+<script setup>
+import { ref } from 'vue';
+
+const visible = ref(false);
+const onClose = () => {
+  visible.value = false;
+};
+
+
 </script>
 
 <style scoped lang="scss">

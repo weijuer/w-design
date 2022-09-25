@@ -14,4 +14,10 @@ export default {
 import { Firework } from 'Widgets';
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.fireworks {
+  position: relative;
+  height: 100%;
+  background-color: black;
+}
+</style>

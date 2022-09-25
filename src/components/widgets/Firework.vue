@@ -8,7 +8,12 @@ export default {
 };
 </script>
 
-<script setup></script>
+<script setup>
+const props = defineProps({
+  position: [String, Number],
+  color: String
+});
+</script>
 
 <style scoped lang="scss">
 .firework {
