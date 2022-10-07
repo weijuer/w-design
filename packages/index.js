@@ -1,5 +1,5 @@
 import { version } from '../package.json';
-import '../src/assets/stylus/index.styl';
+import '../examples/src/assets/stylus/index.styl';
 import 'virtual:svg-icons-register';
 
 export const install = (app) => {
