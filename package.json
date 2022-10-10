@@ -1,87 +1,43 @@
 {
-  "name": "w-design-vue",
-  "version": "0.0.11",
-  "title": "W Design Vue",
-  "description": "A simple components UI based on Vue 3.x",
-  "license": "MIT",
+  "private": true,
   "author": "Weijuer<https://github.com/weijuer>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/weijuer/w-design-vue.git"
-  },
-  "homepage": "https://github.com/weijuer/w-design-vue/tree/master/#readme",
-  "bugs": {
-    "url": "https://github.com/weijuer/w-design-vue/issues"
-  },
-  "keywords": [
-    "w-design-vue",
-    "rollup",
-    "vue3",
-    "component library",
-    "components",
-    "ui",
-    "ui framework",
-    "frontend"
-  ],
-  "files": [
+  "packageManager": "pnpm@7.13.0",
+  "workspaces": [
+    "packages/*",
+    "playground",
+    "examples",
     "lib",
-    "packages",
-    "README.md"
+    "docs"
   ],
-  "main": "lib/w-design-vue.cjs.js",
-  "module": "lib/w-design-vue.esm.js",
-  "browser": "lib/w-design-vue.umd.js",
-  "exports": {
-    ".": {
-      "import": "./lib/w-design-vue.esm.js",
-      "require": "./lib/w-design-vue.umd.js"
-    },
-    "./lib/style.css": "./lib/index.css"
-  },
   "scripts": {
-    "dev": "rollup -wc rollup.config.dev.js",
-    "build": "rollup -c",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs"
-  },
-  "engines": {
-    "node": "^14.18.0 || >=16.0.0"
+    "dev": "pnpm -F playground dev",
+    "docs:dev": "pnpm -F docs dev",
+    "docs:build": "pnpm -F docs build",
+    "docs:serve": "pnpm -F docs serve"
   },
   "peerDependencies": {
-    "@vue/compiler-sfc": "^3.2.0",
-    "vite": "^2.9.0"
+    "vue": "^3.2.0"
+  },
+  "dependencies": {
+    "w-design-vue": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.3",
-    "@babel/preset-env": "^7.19.3",
-    "@rollup/plugin-alias": "^3.1.9",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-commonjs": "^22.0.2",
-    "@rollup/plugin-html": "^0.2.4",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^14.1.0",
-    "@rollup/plugin-replace": "^4.0.0",
-    "@rollup/plugin-typescript": "^8.5.0",
-    "@vue/babel-plugin-jsx": "^1.1.1",
-    "@vue/compiler-sfc": "^3.2.40",
-    "autoprefixer": "^10.4.12",
-    "cssnano": "^5.1.13",
+    "@vitejs/plugin-vue": "^3.1.2",
+    "@vitejs/plugin-vue-jsx": "^2.0.1",
     "less": "^4.1.3",
-    "postcss": "^8.4.16",
+    "prettier": "^2.7.1",
     "rollup": "^2.79.1",
-    "rollup-plugin-delete": "^2.0.0",
-    "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-serve": "^2.0.1",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-vue": "^6.0.0",
-    "stylus": "^0.59.0",
-    "typescript": "^4.8.4"
+    "unplugin-vue-macros": "^0.12.0",
+    "vue": "^3.2.37"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "IE 10"
-  ]
+  "engines": {
+    "node": "^14.18.0 || >=16"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "vite"
+      ]
+    }
+  }
 }
