@@ -1,34 +1,25 @@
-import type { ButtonHTMLAttributes } from "vue"
-import { ExtractPropTypes } from "vue"
+import type { PropType } from 'vue'
+import { ExtractPropTypes } from 'vue'
 
-export const buttonTypes = [
-    'default',
-    'primary',
-    'success',
-    'warning',
-    'info',
-    'danger',
-]
+export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
-export const buttonNativeTypes = ['button', 'submit', 'reset']
+export type Type = 'default' | 'primary' | 'success' | 'warning' | 'info' | 'danger'
+
+export type AttrType = 'button' | 'submit' | 'reset'
 
 export const buttonProps = {
     type: {
-        type: String,
-        validator(value: string) {
-            return buttonTypes.includes(value)
-        }
+        type: String as PropType<Type>,
+        dafault: 'default'
     },
-    size: String,
+    size: String as PropType<Size>,
     icon: {
         type: String,
         default: ''
     },
-    nativeType: {
-        type: String,
-        validator(value: string) {
-            return buttonNativeTypes.includes(value)
-        }
+    attrType: {
+        type: String as PropType<AttrType>,
+        default: 'button'
     },
     outline: String,
     block: Boolean,
@@ -38,14 +29,14 @@ export const buttonProps = {
     autofocus: Boolean,
     round: Boolean,
     circle: Boolean
-}
+} as const
 
 export const buttonEmits = {
-    click: (evt: MouseEvent) => evt instanceof MouseEvent,
+    click: (evt: MouseEvent) => evt instanceof MouseEvent
 }
 
 export type ButtonProps = ExtractPropTypes<typeof buttonProps>
 export type ButtonEmits = typeof buttonEmits
 
 export type ButtonType = ButtonProps['type']
-export type ButtonNativeType = ButtonProps['nativeType']
+export type ButtonAttrType = ButtonProps['attrType']

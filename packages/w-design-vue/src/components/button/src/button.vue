@@ -1,6 +1,6 @@
 <template>
   <button ref="_ref" class="w-button" @click="handleClick" :disabled="disabled || loading" :autofocus="autofocus"
-    type="button" :class="[
+    :type="attrType" :class="[
       type ? 'w-button-' + type : '',
       size ? 'w-button-' + size : '',
       {
