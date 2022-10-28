@@ -1,5 +1,5 @@
 {
-    "name": "@w-design-vue/docs",
+    "name": "docs",
     "private": true,
     "scripts": {
         "dev": "vitepress dev",

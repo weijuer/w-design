@@ -1,16 +1,12 @@
 {
+  "name": "w-design",
   "private": true,
-  "author": "Weijuer<https://github.com/weijuer>",
   "packageManager": "pnpm@7.13.0",
-  "workspaces": [
-    "packages/*",
-    "playground",
-    "examples",
-    "lib",
-    "docs"
-  ],
   "scripts": {
-    "dev": "pnpm -F playground dev",
+    "dev": "pnpm -F w-design-vue dev",
+    "build": "pnpm -F w-design-vue build",
+    "web:dev": "pnpm -F w-design-vue-example dev",
+    "play:dev": "pnpm -F playground dev",
     "docs:dev": "pnpm -F docs dev",
     "docs:build": "pnpm -F docs build",
     "docs:serve": "pnpm -F docs serve"
@@ -18,17 +14,14 @@
   "peerDependencies": {
     "vue": "^3.2.0"
   },
-  "dependencies": {
-    "w-design-vue": "workspace:*"
-  },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.1.2",
-    "@vitejs/plugin-vue-jsx": "^2.0.1",
-    "less": "^4.1.3",
+    "esbuild": "^0.15.12",
     "prettier": "^2.7.1",
-    "rollup": "^2.79.1",
-    "unplugin-vue-macros": "^0.12.0",
-    "vue": "^3.2.37"
+    "rollup": "^3.2.3",
+    "typescript": "^4.8.4",
+    "vite": "^3.1.8",
+    "vite-plugin-dts": "^1.6.6",
+    "vue": "^3.2.41"
   },
   "engines": {
     "node": "^14.18.0 || >=16"

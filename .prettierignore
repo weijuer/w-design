@@ -1,0 +1,5 @@
+*.md
+*.vue
+lib
+dist
+pnpm-lock.yaml

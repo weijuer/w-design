@@ -1,11 +1,6 @@
 {
   "printWidth": 100,
-  "eslintIntegration": true,
-  "semi": true,
+  "semi": false,
   "trailingComma": "none",
-  "singleQuote": true,
-  "tabWidth": 2,
-  "htmlWhitespaceSensitivity": "strict",
-  "bracketSpacing": true,
-  "endOfLine": "auto"
+  "singleQuote": true
 }

@@ -1,0 +1,35 @@
+{
+    "name": "w-design-vue-example",
+    "version": "0.0.11",
+    "title": "W Design Vue Example",
+    "description": "A simple example for testing w-design-vue.",
+    "private": true,
+    "author": "Weijuer<https://github.com/weijuer>",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "engines": {
+        "node": "^14.18.0 || >=16.0.0"
+    },
+    "peerDependencies": {
+        "vite": "^2.9.0"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-legacy": "^2.2.0",
+        "@vitejs/plugin-vue": "^3.1.2",
+        "@vue/compiler-sfc": "^3.2.41",
+        "eslint": "^8.26.0",
+        "eslint-plugin-vue": "^9.6.0",
+        "mockjs": "^1.1.0",
+        "pinia": "^2.0.23",
+        "sass": "^1.55.0",
+        "stylus": "^0.59.0",
+        "vite": "^3.1.8",
+        "vite-plugin-pages": "^0.27.1",
+        "vite-plugin-svg-icons": "^2.0.1",
+        "vue": "^3.2.41",
+        "vue-router": "^4.1.6"
+    }
+}
