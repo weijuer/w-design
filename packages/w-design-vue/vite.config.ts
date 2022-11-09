@@ -36,6 +36,5 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    dts()
   ]
 });

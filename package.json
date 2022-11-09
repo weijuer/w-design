@@ -1,5 +1,4 @@
 {
-  "name": "w-design",
   "private": true,
   "packageManager": "pnpm@7.13.0",
   "scripts": {
@@ -15,12 +14,12 @@
     "vue": "^3.2.0"
   },
   "devDependencies": {
-    "esbuild": "^0.15.12",
+    "esbuild": "^0.15.13",
     "prettier": "^2.7.1",
-    "rollup": "^3.2.3",
+    "rollup": "^3.2.5",
     "typescript": "^4.8.4",
-    "vite": "^3.1.8",
-    "vite-plugin-dts": "^1.6.6",
+    "vite": "^3.2.2",
+    "vite-plugin-dts": "^1.7.0",
     "vue": "^3.2.41"
   },
   "engines": {

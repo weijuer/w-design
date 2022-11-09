@@ -1,21 +1,18 @@
 {
   "name": "@w-design/w-design-vue",
-  "version": "1.0.0-beta.01",
+  "version": "1.0.0",
   "title": "W Design Vue",
   "description": "A simple components library based on Vue 3.x",
   "type": "module",
   "packageManager": "pnpm@7.13.0",
-  "main": "lib/w-design-vue.cjs.js",
-  "module": "lib/w-design-vue.esm.js",
-  "browser": "lib/w-design-vue.umd.js",
-  "types": "lib/w-design-vue.d.ts",
+  "main": "lib/w-design-vue.umd.cjs",
+  "module": "lib/w-design-vue.js",
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
-      "import": "./lib/w-design-vue.esm.js",
-      "require": "./lib/w-design-vue.umd.js"
+      "import": "./lib/w-design-vue.js",
+      "require": "./lib/w-design-vue.umd.cjs"
     },
-    "./lib/index.css": "./lib/index.css",
+    "./lib/index.css": "./lib/style.css",
     "./package.json": "./package.json"
   },
   "files": [
@@ -53,9 +50,9 @@
     "@w-design/w-design-icon": "workspace:*"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.1.2",
+    "@vitejs/plugin-vue": "^3.2.0",
     "typescript": "^4.8.4",
-    "vite": "^3.1.8",
+    "vite": "^3.2.2",
     "vue-tsc": "^1.0.9",
     "vue": "^3.2.41"
   },
