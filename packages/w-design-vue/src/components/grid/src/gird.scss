@@ -1,0 +1,29 @@
+$w-grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+.w-grid {
+  display: grid;
+  row-gap: var(--w-grid-row-gap, 15px);
+  column-gap: var(--w-grid-column-gap, 15px);
+  grid-template-columns: repeat(12, 1fr);
+
+  > * {
+    grid-column-start: span 12;
+  }
+
+  @each $breakpoint-name, $breakpoint-value in $w-grid-breakpoints {
+    @media (min-width: #{$breakpoint-value}) {
+      @for $i from 1 through 12 {
+        .w-grid-#{$breakpoint-name}-#{$i} {
+          grid-column-start: span #{$i};
+        }
+      }
+    }
+  }
+}

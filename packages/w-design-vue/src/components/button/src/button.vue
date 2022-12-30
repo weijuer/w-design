@@ -19,16 +19,14 @@
   </button>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'w-button'
-};
-</script>
-
 <script setup lang="ts">
 import WIcon from '../../icon';
-import { buttonEmits, buttonProps } from './button'
-import { useButton } from './use-button';
+import { buttonEmits, buttonProps } from './interface'
+import { useButton } from './useButton';
+
+defineOptions({
+  name: 'w-button'
+})
 
 const props = defineProps(buttonProps);
 const emit = defineEmits(buttonEmits)
@@ -39,3 +37,5 @@ defineExpose({
   ref: _ref
 })
 </script>
+
+<style lang="scss" src="./button.scss" />

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import VueMacros from 'unplugin-vue-macros/vite'
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import dts from "vite-plugin-dts";
@@ -35,6 +36,10 @@ export default defineConfig({
     }
   },
   plugins: [
-    vue(),
+    VueMacros({
+      plugins: {
+        vue: vue(),
+      }
+    })
   ]
 });

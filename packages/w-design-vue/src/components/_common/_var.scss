@@ -1,0 +1,16 @@
+:root {
+  --w-grid-column-gap: 15px;
+  --w-grid-row-gap: 15px;
+}
+
+// Themes
+// ============================================================
+$themes: (
+  primary: #1890ff,
+  success: #52c41a,
+  warning: #faad14,
+  danger: #ff4d4f,
+  info: #1890ff,
+  brand: #2ecc71,
+  focus: #8e44ad
+);

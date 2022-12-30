@@ -1,0 +1,7 @@
+@mixin bordered($width: 1px, $color: #ccc) {
+    border: $width solid $color;
+}
+
+@mixin box-shadow($shadows...) {
+    box-shadow: $shadows;
+}

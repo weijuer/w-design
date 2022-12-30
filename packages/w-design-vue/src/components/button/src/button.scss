@@ -1,0 +1,38 @@
+@import '../../_common/var';
+
+.w-button {
+  display: inline-block;
+  position: relative;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  touch-action: manipulation;
+  border: 1px solid transparent;
+  padding: 0 15px;
+  font-size: 14px;
+  line-height: 1.5;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform ease-in 0.1s, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:not(:disabled):active {
+    transform: scale(0.95);
+  }
+
+  @each $theme-name, $theme-value in $themes {
+    &.w-button-#{$theme-name} {
+      color: if($theme-name == 'light', #888, #fff);
+      background: $theme-value;
+      border-color: $theme-value;
+      border-style: solid;
+
+      &:active, &:hover {
+        background: darken($theme-value, 10%);
+        border-color: darken($theme-value, 10%);
+      }
+    }
+  }
+}

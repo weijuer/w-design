@@ -1,5 +1,5 @@
 import { ref, SetupContext } from 'vue'
-import type { ButtonEmits, ButtonProps } from './button'
+import type { ButtonEmits, ButtonProps } from './interface'
 export const useButton = (props: ButtonProps, emit: SetupContext<ButtonEmits>['emit']) => {
 
     const _ref = ref<HTMLButtonElement>()
