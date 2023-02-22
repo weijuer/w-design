@@ -1,5 +1,5 @@
 import type { vShow } from 'vue'
-import type { INSTALLED_KEY } from '../src/constants'
+import type { INSTALLED_KEY } from '../src/utils/constants'
 
 /// <reference types="vite/client" />
 

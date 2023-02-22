@@ -7,6 +7,7 @@
   "packageManager": "pnpm@7.13.0",
   "main": "lib/w-design-vue.umd.cjs",
   "module": "lib/w-design-vue.js",
+  "typings": "lib/index.d.ts",
   "exports": {
     ".": {
       "import": "./lib/w-design-vue.js",
@@ -16,17 +17,23 @@
     "./package.json": "./package.json"
   },
   "files": [
+    "es",
     "lib",
-    "types",
     "README.md"
   ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
   "keywords": [
-    "w-design-vue",
-    "component library",
-    "components",
-    "ui framework",
     "ui",
-    "vue3"
+    "vue",
+    "vue3",
+    "components",
+    "component library",
+    "ui framework",
+    "w-design-vue"
   ],
   "repository": {
     "type": "git",
@@ -35,14 +42,7 @@
   "author": "Weijuer<https://github.com/weijuer>",
   "license": "MIT",
   "homepage": "https://github.com/weijuer/w-design-vue/tree/master/#readme",
-  "bugs": {
-    "url": "https://github.com/weijuer/w-design-vue/issues"
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview"
-  },
+  "bugs": "https://github.com/weijuer/w-design-vue/issues",
   "peerDependencies": {
     "vue": "^3.2.0"
   },

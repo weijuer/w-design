@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { WButton, WIcon, WModal, WGrid, WGridItem, WBreadcrumb,WBreadcrumbItem } from './components'
+import { WButton, WIcon, WModal, WGrid, WGridItem, WBreadcrumb, WBreadcrumbItem } from './components'
 
 
 const state = reactive({

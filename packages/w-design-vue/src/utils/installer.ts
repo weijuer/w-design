@@ -1,8 +1,8 @@
 
-import { INSTALLED_KEY } from '../constants'
+import { INSTALLED_KEY } from './constants'
 import { version } from '../../package.json'
 
-import type { App, Plugin } from 'vue'
+import type { App, Plugin } from '@vue/runtime-core'
 
 export const installer = (components: Plugin[]) => {
     const install = (app: App, options: any) => {

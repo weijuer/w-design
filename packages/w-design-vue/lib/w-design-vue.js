@@ -1,9 +1,9 @@
-import { defineComponent as _, computed as h, openBlock as d, createElementBlock as u, mergeProps as v, createElementVNode as a, unref as i, ref as $, normalizeClass as w, createBlock as m, createCommentVNode as r, renderSlot as c, Teleport as B, createVNode as S, Transition as C, withCtx as V, createTextVNode as f } from "vue";
-const T = ["xlink:href"], z = {
+import { defineComponent as i, computed as N, openBlock as a, createElementBlock as c, mergeProps as D, createElementVNode as p, unref as u, ref as B, normalizeClass as I, createBlock as b, createCommentVNode as f, renderSlot as d, Teleport as j, createVNode as g, Transition as T, withCtx as m, createTextVNode as w, provide as G, inject as L, toRefs as M, toDisplayString as O, normalizeStyle as A } from "vue";
+const K = ["xlink:href"], Y = {
   name: "w-icon",
   inheritAttrs: !1
-}, E = /* @__PURE__ */ _({
-  ...z,
+}, q = /* @__PURE__ */ i({
+  ...Y,
   props: {
     prefix: {
       type: String,
@@ -18,22 +18,21 @@ const T = ["xlink:href"], z = {
       default: "#333"
     }
   },
-  setup(o) {
-    const n = o, s = h(() => `#${n.prefix}-${n.name}`);
-    return (t, l) => (d(), u("svg", v({ class: "w-icon" }, t.$attrs, { "aria-hidden": "true" }), [
-      a("use", { "xlink:href": i(s) }, null, 8, T)
+  setup(e) {
+    const t = e, s = N(() => `#${t.prefix}-${t.name}`);
+    return (o, n) => (a(), c("svg", D({ class: "w-icon" }, o.$attrs, { "aria-hidden": "true" }), [
+      p("use", { "xlink:href": u(s) }, null, 8, K)
     ], 16));
   }
 });
-const y = (o, n) => {
-  if (o.install = (s) => {
-    for (const t of [o, ...Object.values(n != null ? n : {})])
-      s.component(t.name, t);
-  }, n)
-    for (const [s, t] of Object.entries(n))
-      o[s] = t;
-  return o;
-}, g = y(E), I = {
+const _ = (e) => (e.install = (t) => {
+  t.component(e.name, e);
+}, e), k = Symbol("W_INSTALLED_KEY"), R = "1.0.0", F = (e) => ({
+  version: R,
+  install: (s, o) => {
+    s[k] || (s[k] = !0, e.forEach((n) => s.use(n)));
+  }
+}), h = _(q), H = {
   type: {
     type: String,
     dafault: "default"
@@ -55,61 +54,62 @@ const y = (o, n) => {
   autofocus: Boolean,
   round: Boolean,
   circle: Boolean
-}, N = {
-  click: (o) => o instanceof MouseEvent
-}, O = (o, n) => ({ _ref: $(), handleClick: (l) => {
-  n("click", l);
-} }), M = ["disabled", "autofocus", "type"], W = { key: 2 }, j = {
+}, J = {
+  click: (e) => e instanceof MouseEvent
+}, Q = (e, t) => ({ _ref: B(), handleClick: (n) => {
+  t("click", n);
+} }), U = ["disabled", "autofocus", "type"], X = { key: 2 }, Z = i({
   name: "w-button"
-}, P = /* @__PURE__ */ _({
-  ...j,
-  props: I,
-  emits: N,
-  setup(o, { expose: n, emit: s }) {
-    const t = o, { _ref: l, handleClick: p } = O(t, s);
-    return n({
-      ref: l
-    }), (e, b) => (d(), u("button", {
+}), x = /* @__PURE__ */ i({
+  ...Z,
+  props: H,
+  emits: J,
+  setup(e, { expose: t, emit: s }) {
+    const o = e, { _ref: n, handleClick: l } = Q(o, s);
+    return t({
+      ref: n
+    }), (r, v) => (a(), c("button", {
       ref_key: "_ref",
-      ref: l,
-      class: w(["w-button", [
-        e.type ? "w-button-" + e.type : "",
-        e.size ? "w-button-" + e.size : "",
+      ref: n,
+      class: I(["w-button", [
+        r.type ? "w-button-" + r.type : "",
+        r.size ? "w-button-" + r.size : "",
         {
-          "is-disabled": e.disabled,
-          "is-loading": e.loading,
-          "is-plain": e.plain,
-          "is-round": e.round,
-          "is-circle": e.circle
+          "is-disabled": r.disabled,
+          "is-loading": r.loading,
+          "is-plain": r.plain,
+          "is-round": r.round,
+          "is-circle": r.circle
         }
       ]]),
-      onClick: b[0] || (b[0] = (...k) => i(p) && i(p)(...k)),
-      disabled: e.disabled || e.loading,
-      autofocus: e.autofocus,
-      type: e.attrType
+      onClick: v[0] || (v[0] = (...z) => u(l) && u(l)(...z)),
+      disabled: r.disabled || r.loading,
+      autofocus: r.autofocus,
+      type: r.attrType
     }, [
-      e.loading ? (d(), m(i(g), {
+      r.loading ? (a(), b(u(h), {
         key: 0,
         class: "w-icon-loading w-icon--left",
         name: "loading"
-      })) : r("", !0),
-      e.icon && !e.loading ? (d(), m(i(g), {
+      })) : f("", !0),
+      r.icon && !r.loading ? (a(), b(u(h), {
         key: 1,
         class: "w-icon--left",
-        name: e.icon
-      }, null, 8, ["name"])) : r("", !0),
-      e.$slots.default ? (d(), u("span", W, [
-        c(e.$slots, "default")
-      ])) : r("", !0)
-    ], 10, M));
+        name: r.icon
+      }, null, 8, ["name"])) : f("", !0),
+      r.$slots.default ? (a(), c("span", X, [
+        d(r.$slots, "default")
+      ])) : f("", !0)
+    ], 10, U));
   }
-}), U = y(P), q = {
+});
+const $ = _(x), ee = {
   key: 0,
   class: "modal-mask"
-}, A = { class: "modal-wrapper" }, K = { class: "modal-container" }, D = { class: "modal-header" }, F = { class: "modal-body" }, G = { class: "modal-footer" }, H = {
+}, te = { class: "modal-wrapper" }, se = { class: "modal-container" }, oe = { class: "modal-header" }, ne = { class: "modal-body" }, re = { class: "modal-footer" }, ae = i({
   name: "w-modal"
-}, J = /* @__PURE__ */ _({
-  ...H,
+}), le = /* @__PURE__ */ i({
+  ...ae,
   props: {
     modelValue: {
       type: Boolean,
@@ -121,52 +121,214 @@ const y = (o, n) => {
     }
   },
   emits: ["close", "update:modelValue"],
-  setup(o, { emit: n }) {
-    const s = o;
-    return (t, l) => (d(), m(B, {
+  setup(e, { emit: t }) {
+    const s = e;
+    return (o, n) => (a(), b(j, {
       to: s.to
     }, [
-      S(C, { name: "modal" }, {
-        default: V(() => [
-          s.modelValue ? (d(), u("div", q, [
-            a("div", A, [
-              a("div", K, [
-                a("div", D, [
-                  c(t.$slots, "header", {}, () => [
-                    f("default header")
-                  ])
+      g(T, { name: "modal" }, {
+        default: m(() => [
+          s.modelValue ? (a(), c("div", ee, [
+            p("div", te, [
+              p("div", se, [
+                p("div", oe, [
+                  d(o.$slots, "header", {}, void 0, !0)
                 ]),
-                a("div", F, [
-                  c(t.$slots, "body", {}, () => [
-                    f("default body")
-                  ])
+                p("div", ne, [
+                  d(o.$slots, "body", {}, void 0, !0)
                 ]),
-                a("div", G, [
-                  c(t.$slots, "footer", {}, () => [
-                    f(" default footer "),
-                    a("button", {
-                      class: "modal-default-button",
-                      onClick: l[0] || (l[0] = (p) => t.$emit("close"))
-                    }, "OK")
-                  ])
+                p("div", re, [
+                  d(o.$slots, "footer", {}, () => [
+                    g(u($), {
+                      type: "primary",
+                      onClick: n[0] || (n[0] = (l) => o.$emit("close"))
+                    }, {
+                      default: m(() => [
+                        w("Comfirm")
+                      ]),
+                      _: 1
+                    }),
+                    g(u($), {
+                      type: "default",
+                      onClick: n[1] || (n[1] = (l) => o.$emit("close"))
+                    }, {
+                      default: m(() => [
+                        w("Cancel")
+                      ]),
+                      _: 1
+                    })
+                  ], !0)
                 ])
               ])
             ])
-          ])) : r("", !0)
+          ])) : f("", !0)
         ]),
         _: 3
       })
     ], 8, ["to"]));
   }
 });
-const L = (o, n) => {
-  const s = o.__vccOpts || o;
-  for (const [t, l] of n)
-    s[t] = l;
+const y = (e, t) => {
+  const s = e.__vccOpts || e;
+  for (const [o, n] of t)
+    s[o] = n;
   return s;
-}, Q = /* @__PURE__ */ L(J, [["__scopeId", "data-v-47573564"]]), X = y(Q);
+}, ie = /* @__PURE__ */ y(le, [["__scopeId", "data-v-13b3c658"]]), ce = _(ie), de = /* @__PURE__ */ i({
+  name: "w-grid"
+});
+const ue = { class: "w-grid" };
+function _e(e, t, s, o, n, l) {
+  return a(), c("div", ue, [
+    d(e.$slots, "default")
+  ]);
+}
+const pe = /* @__PURE__ */ y(de, [["render", _e]]), fe = /* @__PURE__ */ i({
+  name: "w-grid-item"
+}), me = { class: "w-grid-item" };
+function be(e, t, s, o, n, l) {
+  return a(), c("div", me, [
+    d(e.$slots, "default")
+  ]);
+}
+const ye = /* @__PURE__ */ y(fe, [["render", be]]), W = _(pe), E = _(ye);
+W.WItem = E;
+const ge = {
+  separator: {
+    type: String,
+    default: "\u2022"
+  }
+}, he = i({
+  name: "w-breadcrumb"
+}), $e = /* @__PURE__ */ i({
+  ...he,
+  props: ge,
+  setup(e, { expose: t }) {
+    const s = e, o = B();
+    return G("breadcrumb", s), t({
+      ref: o
+    }), (n, l) => (a(), c("ul", {
+      ref_key: "_ref",
+      ref: o,
+      class: "w-breadcrumb"
+    }, [
+      d(n.$slots, "default")
+    ], 512));
+  }
+});
+const ve = { class: "w-breadcrumb-item" }, we = { class: "w-breadcrumb-item-separator" }, ke = i({
+  name: "w-breadcrumb-item"
+}), Se = /* @__PURE__ */ i({
+  ...ke,
+  setup(e) {
+    const t = L("breadcrumb", void 0), { separator: s } = M(t);
+    return (o, n) => (a(), c("li", ve, [
+      d(o.$slots, "default"),
+      p("span", we, O(u(s)), 1)
+    ]));
+  }
+}), V = _($e), P = _(Se);
+V.WBreadcrumbItem = P;
+const S = (e, t) => {
+  const o = (e.$options || {}).propsData || {};
+  return t in o;
+};
+const Ce = {
+  name: "w-tag",
+  model: {
+    prop: "visible",
+    event: "close.visible"
+  },
+  props: {
+    color: String,
+    visible: {
+      type: Boolean,
+      default: void 0
+    },
+    closable: {
+      type: Boolean,
+      default: !1
+    }
+  },
+  computed: {
+    tagStyle() {
+      return {
+        backgroundColor: this.color
+      };
+    },
+    hasColor() {
+      const { color: e } = this.$props, t = [
+        "primary",
+        "success",
+        "warning",
+        "danger",
+        "dark",
+        "metal",
+        "info",
+        "light",
+        "brand",
+        "focus"
+      ];
+      return e ? t.includes(e) ? "w-tag-" + e : "w-tag-has-color" : null;
+    }
+  },
+  data() {
+    let e = !0;
+    return S(this, "visible") && (e = this.visible), {
+      isShow: e
+    };
+  },
+  watch: {
+    visible(e) {
+      this.isShow = e;
+    }
+  },
+  methods: {
+    setVisible(e, t) {
+      this.$emit("close", t), this.$emit("close.visible", e), !t.defaultPrevented && (S(this, "visible") || (this.isShow = this.visible));
+    },
+    handleClick(e) {
+      e.stopPropagation(), this.setVisible(!1, e);
+    }
+  }
+};
+function Be(e, t, s, o, n, l) {
+  return a(), b(T, null, {
+    default: m(() => [
+      n.isShow ? (a(), c("span", {
+        key: 0,
+        class: I(["w-tag", l.hasColor]),
+        style: A(l.tagStyle)
+      }, [
+        d(e.$slots, "default"),
+        s.closable ? (a(), c("span", {
+          key: 0,
+          onClick: t[0] || (t[0] = (...r) => l.handleClick && l.handleClick(...r)),
+          class: "w-tag-close"
+        })) : f("", !0)
+      ], 6)) : f("", !0)
+    ]),
+    _: 3
+  });
+}
+const Ie = /* @__PURE__ */ y(Ce, [["render", Be]]), Te = _(Ie), C = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  WIcon: h,
+  WButton: $,
+  WModal: ce,
+  WGrid: W,
+  WGridItem: E,
+  WBreadcrumb: V,
+  WBreadcrumbItem: P,
+  WTag: Te
+}, Symbol.toStringTag, { value: "Module" })), We = Object.keys(C).map((e) => C[e]), Ve = F(We);
 export {
-  U as WButton,
-  g as WIcon,
-  X as WModal
+  V as WBreadcrumb,
+  P as WBreadcrumbItem,
+  $ as WButton,
+  W as WGrid,
+  E as WGridItem,
+  h as WIcon,
+  ce as WModal,
+  Te as WTag,
+  Ve as default
 };

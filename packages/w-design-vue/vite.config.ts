@@ -23,7 +23,6 @@ export default defineConfig({
     outDir: 'lib',
     lib: {
       entry: 'src/index.ts',
-      formats: ['es', 'umd'],
       name: 'w-design-vue'
     },
     rollupOptions: {
@@ -36,6 +35,9 @@ export default defineConfig({
     }
   },
   plugins: [
+    // dts({
+    //   tsConfigFilePath: './tsconfig.declaration.json'
+    // }),
     VueMacros({
       plugins: {
         vue: vue(),
