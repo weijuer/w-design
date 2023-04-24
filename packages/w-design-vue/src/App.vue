@@ -1,14 +1,24 @@
 <template>
     <div class="container">
-        <w-button type="primary" @click="onClick">test</w-button>
+
+
+        <Button data-step-target @click="onClick" type="primary">test</Button>
+
+        <Guide v-model="state.visible" :steps="state.steps"></Guide>
+
+
+        <!-- <w-button type="primary" @click="onClick">test</w-button>
         <w-modal v-model="state.visible" @close="onClose">
             <template #body>test</template>
-        </w-modal>
-        <!-- <w-grid>
-            <w-grid-item>1</w-grid-item>
-            <w-grid-item>2</w-grid-item>
-            <w-grid-item>3</w-grid-item>
-        </w-grid> -->
+        </w-modal> -->
+
+
+        <Grid :gutter="20">
+            <Grid-item v-for="(item, index) in 10" :key="'grid_' + index" :data-step-target="'grid_' + index">
+                {{ item }}
+            </Grid-item>
+        </Grid>
+
 
         <!-- <w-breadcrumb separator="/">
             <w-breadcrumb-item>Home</w-breadcrumb-item>
@@ -20,15 +30,39 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { WButton, WIcon, WModal, WGrid, WGridItem, WBreadcrumb, WBreadcrumbItem } from './components'
-
 
 const state = reactive({
-    visible: false
+    visible: true,
+    steps: [
+        {
+            target: '[data-step-target]',
+            header: 'test',
+            content: 'content'
+        },
+        {
+            target: '[data-step-target="grid_3"]',
+            header: 'test',
+            content: 'content'
+        },
+        {
+            target: '[data-step-target="grid_5"]',
+            header: 'test',
+            content: 'content'
+        },
+        {
+            target: '[data-step-target="grid_7"]',
+            header: 'test',
+            content: 'content'
+        },
+        {
+            target: '[data-step-target="grid_9"]',
+            header: 'test',
+            content: 'content'
+        }
+    ]
 })
 
 function onClick() {
-    console.log(123)
     state.visible = true
 }
 

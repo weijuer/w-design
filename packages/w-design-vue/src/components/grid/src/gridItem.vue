@@ -1,11 +1,15 @@
 <template>
-    <div class="w-grid-item">
-        <slot></slot>
-    </div>
+  <div class="w-grid-item">
+    <slot></slot>
+  </div>
 </template>
 
-<script setup lang="ts">
-defineOptions({
+<script>
+export default {
   name: 'w-grid-item'
-})
+}
+</script>
+
+<script setup lang="ts">
+
 </script>

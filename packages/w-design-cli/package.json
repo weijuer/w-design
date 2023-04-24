@@ -1,8 +1,8 @@
 {
-  "name": "@w-design/w-design-cli",
+  "name": "@w-design/cli",
   "version": "1.0.0",
-  "type": "module",
   "description": "A simple cli for build w design vue",
+  "type": "module",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "bin": {
@@ -32,20 +32,20 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/weijuer/w-design-vue.git",
-    "directory": "packages/vant-cli"
+    "directory": "packages/w-design-cli"
   },
-  "bugs": "https://github.com/vant-ui/vant/issues",
+  "bugs": "https://github.com/weijuer/w-design-vue/issues",
   "author": "weijuer",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^23.0.0",
-    "@rollup/plugin-json": "^5.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.0",
-    "esbuild": "^0.15.10",
-    "execa": "^6.1.0",
-    "minimist": "^1.2.7",
-    "rollup": "^3.0.0",
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "esbuild": "^0.17.18",
+    "execa": "^7.1.1",
+    "minimist": "^1.2.8",
+    "rollup": "^3.21.0",
     "rollup-plugin-typescript2": "^0.34.1",
-    "typescript": "^4.8.4"
+    "typescript": "^5.0.4"
   }
 }

@@ -1,4 +1,6 @@
-$w-grid-breakpoints: (
+$columns: 12;
+$gap: 15px;
+$breakpoints: (
   xs: 0,
   sm: 576px,
   md: 768px,
@@ -7,23 +9,44 @@ $w-grid-breakpoints: (
   xxl: 1400px
 );
 
+@mixin create-selectors($breakpoint: null) {
+  $infix: if($breakpoint ==null, '', '-#{$breakpoint}');
+
+  @for $i from 1 through $columns {
+    .w-col#{$infix}-#{$i} {
+      grid-column-end: span $i;
+    }
+
+    .w-col-offset#{$infix}-#{$i} {
+      grid-column-start: $i + 1;
+    }
+
+    .w-row#{$infix}-#{$i} {
+      grid-row-end: span $i;
+    }
+
+    .w-row-offset#{$infix}-#{$i} {
+      grid-row-start: $i + 1;
+    }
+  }
+}
+
 .w-grid {
   display: grid;
+  grid-template-columns: repeat($columns, 1fr);
   row-gap: var(--w-grid-row-gap, 15px);
   column-gap: var(--w-grid-column-gap, 15px);
-  grid-template-columns: repeat(12, 1fr);
 
-  > * {
-    grid-column-start: span 12;
+  .w-grid-item {
+    grid-column-start: span $columns;
   }
 
-  @each $breakpoint-name, $breakpoint-value in $w-grid-breakpoints {
-    @media (min-width: #{$breakpoint-value}) {
-      @for $i from 1 through 12 {
-        .w-grid-#{$breakpoint-name}-#{$i} {
-          grid-column-start: span #{$i};
-        }
-      }
+  @include create-selectors;
+
+  @each $breakpoint,
+  $width in $breakpoints {
+    @media (min-width: #{$width}) {
+      @include create-selectors($breakpoint);
     }
   }
 }

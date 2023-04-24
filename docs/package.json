@@ -10,9 +10,9 @@
         "vue": "^3.2.40"
     },
     "devDependencies": {
-        "vite": "^3.1.7",
-        "vite-plugin-inspect": "^0.7.5",
-        "vite-plugin-pwa": "^0.13.1",
-        "vitepress": "1.0.0-alpha.19"
+        "vite": "^4.3.1",
+        "vite-plugin-inspect": "^0.7.24",
+        "vite-plugin-pwa": "^0.14.7",
+        "vitepress": "1.0.0-alpha.73"
     }
 }

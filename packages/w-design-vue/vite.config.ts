@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite';
-import VueMacros from 'unplugin-vue-macros/vite'
-import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
-import dts from "vite-plugin-dts";
+import Vue from '@vitejs/plugin-vue';
+import Components from "unplugin-vue-components/vite";
+import AutoImport from "unplugin-auto-import/vite";
+// import dts from "vite-plugin-dts";
 
 export default defineConfig({
   resolve: {
@@ -38,10 +39,13 @@ export default defineConfig({
     // dts({
     //   tsConfigFilePath: './tsconfig.declaration.json'
     // }),
-    VueMacros({
-      plugins: {
-        vue: vue(),
-      }
-    })
+    Components({
+      dirs: ["src/components"],
+      extensions: ["vue"],
+    }),
+    AutoImport({
+      imports: ["vue", "vue-router", "pinia"],
+    }),
+    Vue()
   ]
 });
