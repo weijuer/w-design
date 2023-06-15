@@ -1,4 +1,4 @@
-const config = {
+export default {
   base: '/w-design-vue/', // 发布路径 `https://domain.com/` 变成 `https://domain.com/w-design-vue/`
   title: 'W Design Vue',
   description: 'A simple components UI based on Vue 3.x + Vite 2.x.',
@@ -23,6 +23,4 @@ const config = {
     ['link', { rel: 'icon', href: '/w-design-vue/favicon.ico' }],
     ['meta', { name: 'author', content: 'Weijuer' }]
   ]
-};
-
-module.exports = config;
+}
