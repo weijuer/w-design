@@ -31,7 +31,8 @@ title: Button 按钮
 
 <script setup>
     import { reactive } from 'vue'
-    import WButton from '../../packages/button'
+    import { WButton } from "@w-design/w-design-vue"
+    
     const state = reactive({
         themes: [
             'primary',

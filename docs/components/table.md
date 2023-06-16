@@ -32,8 +32,8 @@ title: Table 表格
 </div>
 
 <script setup>
-import WTable from '../../packages/table'
 import { reactive, ref, toRefs } from 'vue';
+import { WTable } from "@w-design/w-design-vue"
 
 // 测试数据
 const Storage = {

@@ -21,5 +21,5 @@
 |  <w-badge type="dark" />   |  `*-dark`   |    `<w-badge type="dark" />` |
 
 <script setup>
-import WBadge from '../../packages/badge'
+import { WBadge } from "@w-design/w-design-vue"
 </script>
