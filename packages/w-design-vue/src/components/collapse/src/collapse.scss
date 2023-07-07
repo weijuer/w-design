@@ -1,0 +1,41 @@
+.collapse {
+    /* Border */
+    border: 1px solid #d1d5db;
+    border-bottom-color: transparent;
+    border-radius: 4px;
+}
+
+.collapse__item {
+    border-bottom: 1px solid #d1d5db;
+
+    .collapse__header {
+        /* Center the content horizontally */
+        align-items: center;
+        display: flex;
+
+        cursor: pointer;
+        padding: 16px;
+    }
+
+    .collapse__toggle {
+        margin-right: 12px;
+    }
+
+    .collapse__title {
+        /* Take remaining width */
+        flex: 1;
+    }
+
+    .collapse__content {
+        border-top: 1px solid #d1d5db;
+        padding: 16px;
+    }
+
+    .collapse__item--collapsed .collapse__content {
+        display: none;
+    }
+
+    .collapse__item--expanded .collapse__content {
+        display: block;
+    }
+}

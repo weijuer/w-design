@@ -47,7 +47,7 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
-    "@w-design/w-design-icon": "workspace:*"
+    "@w-design/w-design-icon": "workspace:^"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
@@ -60,13 +60,6 @@
   },
   "engines": {
     "node": "^14.18.0 || >=16"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "vite"
-      ]
-    }
   },
   "browserslist": [
     "> 1%",

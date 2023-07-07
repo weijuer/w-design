@@ -17,8 +17,8 @@
         "vite": "^2.9.0"
     },
     "dependencies": {
-        "@w-design/w-design-icon": "workspace:*",
-        "@w-design/w-design-vue": "workspace:*"
+        "@w-design/w-design-icon": "workspace:^",
+        "@w-design/w-design-vue": "workspace:^"
     },
     "devDependencies": {
         "@vitejs/plugin-legacy": "^4.0.4",

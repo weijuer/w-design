@@ -4,7 +4,7 @@
 
         <Button data-step-target @click="onClick" type="primary">test</Button>
 
-        <Guide v-model="state.visible" :steps="state.steps"></Guide>
+        <!-- <Guide v-model="state.visible" :steps="state.steps"></Guide> -->
 
 
         <!-- <w-button type="primary" @click="onClick">test</w-button>
@@ -20,6 +20,19 @@
         </Grid>
 
 
+        <w-collapse v-model:activeKey="activeKey">
+            <w-collapse-panel key="1" header="This is panel header 1">
+                <p>{{ text }}</p>
+            </w-collapse-panel>
+            <w-collapse-panel key="2" header="This is panel header 2">
+                <p>{{ text }}</p>
+            </w-collapse-panel>
+            <w-collapse-panel key="3" header="This is panel header 3" collapsible="disabled">
+                <p>{{ text }}</p>
+            </w-collapse-panel>
+        </w-collapse>
+
+
         <!-- <w-breadcrumb separator="/">
             <w-breadcrumb-item>Home</w-breadcrumb-item>
             <w-breadcrumb-item>List</w-breadcrumb-item>
@@ -29,7 +42,16 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
+import { WCollapse, WCollapseItem } from './components';
+
+
+const text = `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`;
+const activeKey = ref('1');
+
+watch(activeKey, val => {
+    console.log(val);
+});
 
 const state = reactive({
     visible: true,

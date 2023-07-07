@@ -1,5 +1,5 @@
-import Breadcrumb from './src/Breadcrumb.vue'
-import BreadcrumbItem from './src/BreadcrumbItem.vue'
+import Breadcrumb from './src/breadcrumb.vue'
+import BreadcrumbItem from './src/breadcrumb-item.vue'
 import { withInstall } from '../../utils'
 
 export const WBreadcrumb = withInstall(Breadcrumb)

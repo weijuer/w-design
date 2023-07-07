@@ -56,13 +56,6 @@
   "engines": {
     "node": "^14.18.0 || >=16"
   },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "vite"
-      ]
-    }
-  },
   "browserslist": [
     "> 1%",
     "not ie 10",

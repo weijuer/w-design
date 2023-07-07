@@ -35,7 +35,7 @@ const getCalculatedPosition = () => {
 
 const stepStyle = computed(() => {
 
-  targetDOM.value = document.querySelector(props.target);
+  targetDOM.value = document.querySelector(<string>props.target);
 
   if (targetDOM.value && stepRef.value) {
     // 偏移量

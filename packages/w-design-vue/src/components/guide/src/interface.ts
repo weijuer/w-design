@@ -25,7 +25,7 @@ export const stepProps = {
     },
     isFirst: Boolean,
     isLast: Boolean
-} as const
+}
 
 export const stepEmits = {
     next: (evt: MouseEvent) => evt instanceof MouseEvent,

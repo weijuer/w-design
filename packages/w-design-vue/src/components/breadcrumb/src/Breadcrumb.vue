@@ -4,13 +4,15 @@
   </ul>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'w-breadcrumb'
+}
+</script>
+
 <script lang="ts" setup>
 import { provide, ref } from 'vue';
 import { breadcrumbProps } from './interface';
-
-defineOptions({
-  name: 'w-breadcrumb'
-})
 
 const props = defineProps(breadcrumbProps);
 const _ref = ref<HTMLUListElement>()
