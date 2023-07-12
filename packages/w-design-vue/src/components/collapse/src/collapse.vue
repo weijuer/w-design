@@ -1,5 +1,5 @@
 <template>
-    <div ref="_ref" class="collapse">
+    <div ref="_ref" class="collapse" :class="{ 'collapse--borderless': !props.bordered }">
         <slot></slot>
     </div>
 </template>
@@ -11,17 +11,17 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { provide, ref } from 'vue';
-import { collapseProps } from './interface';
+import { collapseEmits, collapseProps } from './interface';
+import { useCollapse } from './useCollapse'
 
 const props = defineProps(collapseProps);
-const _ref = ref<HTMLDivElement>()
+const emit = defineEmits(collapseEmits)
 
-provide('collapse', props);
+const { _ref } = useCollapse(props, emit)
 
 defineExpose({
     ref: _ref
 })
 </script>
 
-<style lang="scss" scoped src="./collapse.scss" />
+<style lang="scss" src="./collapse.scss" />

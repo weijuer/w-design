@@ -9,7 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Accordion: typeof import('./src/components/accordion/src/accordion.vue')['default']
     Aside: typeof import('./src/components/aside/src/aside.vue')['default']
-    Breadcrumb: typeof import('./src/components/breadcrumb/src/Breadcrumb.vue')['default']
+    Breadcrumb: typeof import('./src/components/breadcrumb/src/breadcrumb.vue')['default']
     BreadcrumbItem: typeof import('./src/components/breadcrumb/src/breadcrumb-item.vue')['default']
     Button: typeof import('./src/components/button/src/button.vue')['default']
     Card: typeof import('./src/components/card/card.vue')['default']

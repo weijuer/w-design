@@ -1,14 +1,14 @@
 <template>
-    <w-collapse v-model:activeKey="activeKey">
-        <w-collapse-panel key="1" header="This is panel header 1">
+    <w-collapse v-model:activeKey="activeKey" @change="changeActivekey" :bordered="true" accordion>
+        <w-collapse-item name="1" title="This is item header 1">
             <p>{{ text }}</p>
-        </w-collapse-panel>
-        <w-collapse-panel key="2" header="This is panel header 2">
+        </w-collapse-item>
+        <w-collapse-item name="2" title="This is item header 2">
             <p>{{ text }}</p>
-        </w-collapse-panel>
-        <w-collapse-panel key="3" header="This is panel header 3" collapsible="disabled">
+        </w-collapse-item>
+        <w-collapse-item name="3" title="This is item header 3">
             <p>{{ text }}</p>
-        </w-collapse-panel>
+        </w-collapse-item>
     </w-collapse>
 </template>
 
@@ -16,7 +16,11 @@
 import { ref, watch } from 'vue'
 
 const text = `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`;
-const activeKey = ref(['1']);
+const activeKey = ref('1');
+
+const changeActivekey = (key: string) => {
+    console.log(key);
+};
 
 watch(activeKey, val => {
     console.log(val);

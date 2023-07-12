@@ -2,7 +2,7 @@
     <div class="container">
 
 
-        <Button data-step-target @click="onClick" type="primary">test</Button>
+        <!-- <Button data-step-target @click="onClick" type="primary">test</Button> -->
 
         <!-- <Guide v-model="state.visible" :steps="state.steps"></Guide> -->
 
@@ -13,23 +13,23 @@
         </w-modal> -->
 
 
-        <Grid :gutter="20">
+        <!-- <Grid :gutter="20">
             <Grid-item v-for="(item, index) in 10" :key="'grid_' + index" :data-step-target="'grid_' + index">
                 {{ item }}
             </Grid-item>
-        </Grid>
+        </Grid> -->
 
 
-        <w-collapse v-model:activeKey="activeKey">
-            <w-collapse-panel key="1" header="This is panel header 1">
+        <w-collapse v-model:activeKey="activeKey" @change="changeActivekey" :bordered="true" accordion>
+            <w-collapse-item name="1" title="This is item header 1">
                 <p>{{ text }}</p>
-            </w-collapse-panel>
-            <w-collapse-panel key="2" header="This is panel header 2">
+            </w-collapse-item>
+            <w-collapse-item name="2" title="This is item header 2">
                 <p>{{ text }}</p>
-            </w-collapse-panel>
-            <w-collapse-panel key="3" header="This is panel header 3" collapsible="disabled">
+            </w-collapse-item>
+            <w-collapse-item name="3" title="This is item header 3">
                 <p>{{ text }}</p>
-            </w-collapse-panel>
+            </w-collapse-item>
         </w-collapse>
 
 
@@ -48,6 +48,10 @@ import { WCollapse, WCollapseItem } from './components';
 
 const text = `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`;
 const activeKey = ref('1');
+
+const changeActivekey = (key: string) => {
+    console.log(key);
+};
 
 watch(activeKey, val => {
     console.log(val);
@@ -92,3 +96,18 @@ function onClose() {
     state.visible = false
 }
 </script>
+
+<style>
+body {
+    font-family: -apple-system, Space Grotesk, Arial, ui-sans-serif, system-ui;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 16px;
+}
+</style>

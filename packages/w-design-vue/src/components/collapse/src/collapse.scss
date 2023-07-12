@@ -1,41 +1,77 @@
 .collapse {
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
     /* Border */
     border: 1px solid #d1d5db;
     border-bottom-color: transparent;
-    border-radius: 4px;
+    border-radius: var(--border-radius, 4px);
+
+
+    .collapse__item {
+        border-bottom: 1px solid #d1d5db;
+
+        .collapse__header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .collapse__toggle {
+            margin-right: 12px;
+        }
+
+        .collapse__title {
+            flex: 1;
+        }
+
+        .collapse__content {
+            display: none;
+            padding: 16px;
+            border-top: 1px solid #d1d5db;
+        }
+
+        &.collapse__item--expanded {
+            .collapse__content {
+                display: block;
+            }
+        }
+    }
+
+
+    &.collapse--borderless {
+        border: 0;
+
+        >.collapse__item {
+            .collapse__content {
+                padding-top: 4px;
+                background-color: transparent;
+                border-top: 0;
+            }
+        }
+    }
 }
 
-.collapse__item {
-    border-bottom: 1px solid #d1d5db;
 
-    .collapse__header {
-        /* Center the content horizontally */
-        align-items: center;
-        display: flex;
 
-        cursor: pointer;
-        padding: 16px;
+.triangle {
+    --triangle-color: #d1d5db;
+    --triangle-size: 0.5rem;
+
+    width: 0;
+    height: 0;
+    border-style: solid;
+    box-sizing: border-box;
+    transition: all 0.3s;
+
+    &.triangle--right {
+        border-color: transparent transparent transparent var(--triangle-color, #d1d5db);
+        border-width: var(--triangle-size, 0.5rem) 0 var(--triangle-size, 0.5rem) var(--triangle-size, 0.5rem);
     }
 
-    .collapse__toggle {
-        margin-right: 12px;
-    }
-
-    .collapse__title {
-        /* Take remaining width */
-        flex: 1;
-    }
-
-    .collapse__content {
-        border-top: 1px solid #d1d5db;
-        padding: 16px;
-    }
-
-    .collapse__item--collapsed .collapse__content {
-        display: none;
-    }
-
-    .collapse__item--expanded .collapse__content {
-        display: block;
+    &.triangle--bottom {
+        border-color: var(--triangle-color, #d1d5db) transparent transparent transparent;
+        border-width: var(--triangle-size, 0.5rem) var(--triangle-size, 0.5rem) 0 var(--triangle-size, 0.5rem);
     }
 }

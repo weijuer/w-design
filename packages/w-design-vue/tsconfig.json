@@ -14,7 +14,12 @@
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "noEmit": true,
-    "types": []
+    "types": [],
+    "baseUrl": "./",
+    "paths": {
+      "Hooks": ["src/hooks"],
+      "Utils": ["src/utils"]
+    }
   },
   "include": ["src", "typings"],
   "references": [

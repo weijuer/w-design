@@ -3,8 +3,8 @@ import App from './App.vue'
 import router from './router'
 
 import 'virtual:svg-icons-register'
-import '@w-design/w-design-vue/index.css'
 import wd from '@w-design/w-design-vue'
+import '@w-design/w-design-vue/index.css'
 
 const app = createApp(App)
 

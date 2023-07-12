@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -20,7 +24,7 @@ importers:
   docs:
     dependencies:
       '@w-design/w-design-vue':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../packages/w-design-vue
     devDependencies:
       vitepress:
@@ -30,10 +34,10 @@ importers:
   examples/web:
     dependencies:
       '@w-design/w-design-icon':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../../packages/w-design-icon
       '@w-design/w-design-vue':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../../packages/w-design-vue
     devDependencies:
       '@vitejs/plugin-legacy':
@@ -134,7 +138,7 @@ importers:
   packages/w-design-vue:
     dependencies:
       '@w-design/w-design-icon':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../w-design-icon
     devDependencies:
       '@vitejs/plugin-vue':
