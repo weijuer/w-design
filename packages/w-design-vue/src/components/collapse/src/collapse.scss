@@ -63,15 +63,26 @@
     height: 0;
     border-style: solid;
     box-sizing: border-box;
-    transition: all 0.3s;
+    transition: all 0.2s;
 
-    &.triangle--right {
+    &.triangle--right1 {
         border-color: transparent transparent transparent var(--triangle-color, #d1d5db);
         border-width: var(--triangle-size, 0.5rem) 0 var(--triangle-size, 0.5rem) var(--triangle-size, 0.5rem);
     }
 
-    &.triangle--bottom {
+    &.triangle--bottom1 {
         border-color: var(--triangle-color, #d1d5db) transparent transparent transparent;
         border-width: var(--triangle-size, 0.5rem) var(--triangle-size, 0.5rem) 0 var(--triangle-size, 0.5rem);
+    }
+
+    border-color: transparent transparent transparent var(--triangle-color, #d1d5db);
+    border-width: var(--triangle-size, 0.5rem) 0 var(--triangle-size, 0.5rem) var(--triangle-size, 0.5rem);
+
+    &.triangle--right {
+        transform: rotate(0deg);
+    }
+
+    &.triangle--bottom {
+        transform: rotate(90deg);
     }
 }
