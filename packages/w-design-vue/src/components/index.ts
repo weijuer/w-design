@@ -1,3 +1,4 @@
+export * from './avatar'
 export * from './collapse'
 export * from './icon'
 export * from './button'

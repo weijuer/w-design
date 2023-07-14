@@ -1,18 +1,15 @@
 <template>
-    <collapse v-model:activeKey="activeKey" @change="changeActivekey" :bordered="true" accordion>
-        <collapse-item name="1" title="This is item header 1">
+    <w-collapse v-model:activeKey="activeKey" @change="changeActivekey" :bordered="true" accordion>
+        <w-collapse-item name="1" title="This is item header 1">
             <p>{{ text }}</p>
-        </collapse-item>
-        <collapse-item name="2" title="This is item header 2">
+        </w-collapse-item>
+        <w-collapse-item name="2" title="This is item header 2">
             <p>{{ text }}</p>
-        </collapse-item>
-        <collapse-item name="3" title="This is item header 3">
-            <template #icon>
-                <icon name="github" />
-            </template>
+        </w-collapse-item>
+        <w-collapse-item name="3" title="This is item header 3">
             <p>{{ text }}</p>
-        </collapse-item>
-    </collapse>
+        </w-collapse-item>
+    </w-collapse>
 </template>
 
 <script setup lang="ts">

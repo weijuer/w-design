@@ -6,7 +6,7 @@ import { version } from '../../package.json'
 import type { App, Plugin } from "vue"
 
 export const installer = (components: Plugin[]) => {
-    const install = (app: App, options: any) => {
+    const install = (app: App) => {
         if (app[INSTALLED_KEY]) return
 
         app[INSTALLED_KEY] = true

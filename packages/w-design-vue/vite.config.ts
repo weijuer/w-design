@@ -42,6 +42,7 @@ export default defineConfig({
     Components({
       dirs: ["src/components"],
       extensions: ["vue"],
+      exclude: ['*/doc/*'],
     }),
     AutoImport({
       imports: ["vue", "vue-router", "pinia"],

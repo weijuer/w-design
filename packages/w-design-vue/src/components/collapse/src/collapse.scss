@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     background-color: #fafafa;
-    /* Border */
     border: 1px solid #d1d5db;
     border-bottom-color: transparent;
     border-radius: var(--border-radius, 4px);
@@ -20,6 +19,7 @@
 
         .collapse__toggle {
             margin-right: 12px;
+            transition: transform .2s ease-in-out;
         }
 
         .collapse__title {
@@ -27,14 +27,13 @@
         }
 
         .collapse__content {
-            display: none;
             padding: 16px;
             border-top: 1px solid #d1d5db;
         }
 
         &.collapse__item--expanded {
-            .collapse__content {
-                display: block;
+            .collapse__toggle {
+                transform: rotate(90deg);
             }
         }
     }
@@ -53,8 +52,6 @@
     }
 }
 
-
-
 .triangle {
     --triangle-color: #d1d5db;
     --triangle-size: 0.5rem;
@@ -62,27 +59,7 @@
     width: 0;
     height: 0;
     border-style: solid;
-    box-sizing: border-box;
-    transition: all 0.2s;
-
-    &.triangle--right1 {
-        border-color: transparent transparent transparent var(--triangle-color, #d1d5db);
-        border-width: var(--triangle-size, 0.5rem) 0 var(--triangle-size, 0.5rem) var(--triangle-size, 0.5rem);
-    }
-
-    &.triangle--bottom1 {
-        border-color: var(--triangle-color, #d1d5db) transparent transparent transparent;
-        border-width: var(--triangle-size, 0.5rem) var(--triangle-size, 0.5rem) 0 var(--triangle-size, 0.5rem);
-    }
-
     border-color: transparent transparent transparent var(--triangle-color, #d1d5db);
     border-width: var(--triangle-size, 0.5rem) 0 var(--triangle-size, 0.5rem) var(--triangle-size, 0.5rem);
-
-    &.triangle--right {
-        transform: rotate(0deg);
-    }
-
-    &.triangle--bottom {
-        transform: rotate(90deg);
-    }
+    box-sizing: border-box;
 }
