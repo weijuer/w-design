@@ -7,7 +7,6 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Accordion: typeof import('./src/components/accordion/src/accordion.vue')['default']
     Aside: typeof import('./src/components/aside/src/aside.vue')['default']
     Avatar: typeof import('./src/components/avatar/src/avatar.vue')['default']
     Breadcrumb: typeof import('./src/components/breadcrumb/src/breadcrumb.vue')['default']

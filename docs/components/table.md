@@ -33,7 +33,6 @@ title: Table 表格
 
 <script setup>
 import { reactive, ref, toRefs } from 'vue';
-import { WTable } from "@w-design/w-design-vue"
 
 // 测试数据
 const Storage = {

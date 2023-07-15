@@ -22,14 +22,29 @@
     transform: scale(0.95);
   }
 
-  @each $theme-name, $theme-value in $themes {
-    &.w-button-#{$theme-name} {
-      color: if($theme-name == 'light', #888, #fff);
+  &.w-button__default {
+    background-color: #fff;
+    border-color: #e0e0e6;
+    border-style: solid;
+
+    &:active,
+    &:hover {
+      color: map-get($themes, "brand");
+      border-color: map-get($themes, "brand");
+    }
+  }
+
+  @each $theme-name,
+  $theme-value in $themes {
+
+    &.w-button__#{$theme-name} {
+      color: if($theme-name =='light', #888, #fff);
       background: $theme-value;
       border-color: $theme-value;
       border-style: solid;
 
-      &:active, &:hover {
+      &:active,
+      &:hover {
         background: darken($theme-value, 10%);
         border-color: darken($theme-value, 10%);
       }

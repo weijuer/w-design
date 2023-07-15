@@ -1,7 +1,6 @@
-import WAside from './aside.vue'
+import Aside from './src/aside.vue'
+import { withInstall } from '../../utils'
 
-WAside.install = (Vue) => {
-  Vue.component(WAside.name, WAside)
-}
+export const WAside = withInstall(Aside)
 
 export default WAside

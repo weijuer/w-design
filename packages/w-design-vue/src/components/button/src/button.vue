@@ -1,16 +1,16 @@
 <template>
   <button ref="_ref" class="w-button" @click="handleClick" :disabled="disabled || loading" :autofocus="autofocus"
     :type="attrType" :class="[
-        type ? 'w-button-' + type : '',
-        size ? 'w-button-' + size : '',
-        {
-          'is-disabled': disabled,
-          'is-loading': loading,
-          'is-plain': plain,
-          'is-round': round,
-          'is-circle': circle
-        }
-      ]">
+      type ? 'w-button__' + type : '',
+      size ? 'w-button__' + size : '',
+      {
+        'is-disabled': disabled,
+        'is-loading': loading,
+        'is-plain': plain,
+        'is-round': round,
+        'is-circle': circle
+      }
+    ]">
     <w-icon class="w-icon-loading w-icon--left" v-if="loading" name="loading"></w-icon>
     <w-icon class="w-icon--left" v-if="icon && !loading" :name="icon"></w-icon>
     <slot></slot>

@@ -3,7 +3,7 @@ import { ExtractPropTypes } from 'vue'
 
 export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
-export type Type = 'default' | 'primary' | 'success' | 'warning' | 'info' | 'danger'
+export type Type = 'default' | 'primary' | 'success' | 'warning' | 'info' | 'danger' | 'brand' | 'foucs'
 
 export type AttrType = 'button' | 'submit' | 'reset'
 

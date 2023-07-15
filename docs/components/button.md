@@ -27,24 +27,29 @@ title: Button 按钮
 
 ## 代码演示
 
-<w-button v-for="theme of state.themes" round :key="theme" :type="theme">{{ theme }}</w-button>
+<demo />
 
 <script setup>
-    import { reactive } from 'vue'
-    import { WButton } from "@w-design/w-design-vue"
-    
-    const state = reactive({
-        themes: [
-            'primary',
-            'success',
-            'warning',
-            'danger',
-            'info',
-            'metal',
-            'dark',
-            'light',
-            'brand',
-            'focus'
-        ]
-    })
+import Demo from '../../packages/w-design-vue/src/components/button/doc/demo1.vue'
 </script>
+
+::: details 查看代码
+```vue
+<template>
+    <w-button v-for="theme of themes" round :key="theme" :type="theme">{{ theme }}</w-button>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const themes = ref([
+    'default',
+    'primary',
+    'success',
+    'warning',
+    'info',
+    'danger'
+])
+</script>
+```
+:::
