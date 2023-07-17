@@ -1,3 +1,10 @@
+:root {
+  --grid-rows: 1;
+  --grid-column: 12;
+}
+
+
+$rows: 1;
 $columns: 12;
 $gap: 15px;
 $breakpoints: (
@@ -10,14 +17,14 @@ $breakpoints: (
 );
 
 @mixin create-selectors($breakpoint: null) {
-  $infix: if($breakpoint ==null, '', '-#{$breakpoint}');
+  $infix: if($breakpoint ==null, '', '__#{$breakpoint}');
 
   @for $i from 1 through $columns {
     .w-col#{$infix}-#{$i} {
       grid-column-end: span $i;
     }
 
-    .w-col-offset#{$infix}-#{$i} {
+    .w-col__offset#{$infix}-#{$i} {
       grid-column-start: $i + 1;
     }
 
@@ -25,7 +32,7 @@ $breakpoints: (
       grid-row-end: span $i;
     }
 
-    .w-row-offset#{$infix}-#{$i} {
+    .w-row__offset#{$infix}-#{$i} {
       grid-row-start: $i + 1;
     }
   }
@@ -33,11 +40,12 @@ $breakpoints: (
 
 .w-grid {
   display: grid;
+  grid-template-rows: repeat($rows, 1fr);
   grid-template-columns: repeat($columns, 1fr);
   row-gap: var(--w-grid-row-gap, 15px);
   column-gap: var(--w-grid-column-gap, 15px);
 
-  .w-grid-item {
+  .w-grid__item {
     grid-column-start: span $columns;
   }
 

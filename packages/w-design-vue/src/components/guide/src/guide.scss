@@ -61,8 +61,6 @@ $positions: top right bottom left;
     position: absolute;
     #{$pos}: 100%;
 
-    @debug index(left right, $position);
-
     @if index(left right, $position) !=null {
         top: 8px;
     }

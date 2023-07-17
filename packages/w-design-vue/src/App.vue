@@ -1,33 +1,11 @@
 <template>
     <div class="container">
-
-
-        <!-- <w-button type="primary" @click="onClick">test</w-button>
-        <w-modal v-model="state.visible" @close="onClose">
-            <template #body>test</template>
-        </w-modal> -->
-
-
-        <!-- <Grid :gutter="20">
-            <Grid-item v-for="(item, index) in 10" :key="'grid_' + index" :data-step-target="'grid_' + index">
-                {{ item }}
-            </Grid-item>
-        </Grid> -->
-
-        <!-- <demo1 /> -->
-
-        <!-- <w-breadcrumb separator="/">
-            <w-breadcrumb-item>Home</w-breadcrumb-item>
-            <w-breadcrumb-item>List</w-breadcrumb-item>
-            <w-breadcrumb-item>Content</w-breadcrumb-item>
-        </w-breadcrumb> -->
-
-        <collapseDemo />
+        <demo />
     </div>
 </template>
 
 <script setup lang="ts">
-import collapseDemo from './components/collapse/doc/demo1.vue'
+import Demo from './components/grid/doc/demo1.vue'
 
 </script>
 

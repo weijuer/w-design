@@ -1,5 +1,5 @@
 import Grid from './src/grid.vue'
-import GridItem from './src/gridItem.vue'
+import GridItem from './src/grid-item.vue'
 import { withInstall } from '../../utils'
 
 export const WGrid = withInstall(Grid)

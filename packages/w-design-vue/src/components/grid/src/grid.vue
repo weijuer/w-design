@@ -11,6 +11,9 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { gridProps } from './interface';
+
+const props = defineProps(gridProps)
 </script>
 
 <style lang="scss" src="./gird.scss" />
