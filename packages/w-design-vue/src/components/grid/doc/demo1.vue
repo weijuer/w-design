@@ -1,26 +1,26 @@
 <template>
     <h4>Three columns</h4>
-    <w-grid>
+    <w-grid class="grid-list">
         <w-grid-item>
-            <div class="rectangle">1</div>
+            <div class="rectangle"></div>
         </w-grid-item>
         <w-grid-item>
-            <div class="rectangle">2</div>
+            <div class="rectangle"></div>
         </w-grid-item>
         <w-grid-item>
-            <div class="rectangle">3</div>
+            <div class="rectangle"></div>
         </w-grid-item>
     </w-grid>
 
-    <w-grid>
+    <w-grid class="grid-list">
         <w-grid-item span="2">
-            <div class="rectangle">1</div>
+            <div class="rectangle"></div>
         </w-grid-item>
         <w-grid-item offset="2">
-            <div class="rectangle">2</div>
+            <div class="rectangle"></div>
         </w-grid-item>
         <w-grid-item offset="2" span="2">
-            <div class="rectangle">3</div>
+            <div class="rectangle"></div>
         </w-grid-item>
     </w-grid>
 </template>
@@ -29,19 +29,28 @@
 </script>
 
 <style lang="scss">
-.rectangle {
-    display: flex;
-    align-items: center;
-    padding-left: .5rem;
-    height: 2rem;
-    background: #d1d5db;
-    border-radius: .25rem;
+.grid-list {
+    counter-reset: grid 0;
 
-    &:before {
-        display: inline-flex;
-        counter-reset: 'rectangle';
-        content: counter('rectangle');
+    .w-grid__item {
+
+        >.rectangle {
+            display: flex;
+            align-items: center;
+            padding-left: .5rem;
+            height: 2rem;
+            background: #d1d5db;
+            border-radius: .25rem;
+
+            &:before {
+                display: inline-flex;
+
+                counter-reset: grid 1;
+                content: counter(grid) ".";
+            }
+        }
     }
+
 }
 </style>
 

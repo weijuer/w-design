@@ -3,7 +3,7 @@
         <div class="collapse__header" @click="toggleTitle">
             <div class="collapse__toggle">
                 <slot name="icon" :expanded="expanded">
-                    <div class="triangle"></div>
+                    <div class="right-arrow"></div>
                 </slot>
             </div>
             <slot name="title">

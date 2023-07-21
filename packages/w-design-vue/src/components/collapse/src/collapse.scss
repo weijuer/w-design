@@ -52,14 +52,15 @@
     }
 }
 
-.triangle {
+.right-arrow {
     --triangle-color: #d1d5db;
     --triangle-size: 0.5rem;
 
     width: 0;
     height: 0;
-    border-style: solid;
-    border-color: transparent transparent transparent var(--triangle-color, #d1d5db);
-    border-width: var(--triangle-size, 0.5rem) 0 var(--triangle-size, 0.5rem) var(--triangle-size, 0.5rem);
+    border-top: var(--triangle-size, 0.5rem) solid transparent;
+    border-bottom: var(--triangle-size, 0.5rem) solid transparent;
+
+    border-left: var(--triangle-size, 0.5rem) solid var(--triangle-color, #d1d5db);
     box-sizing: border-box;
 }
