@@ -10,6 +10,6 @@
         "@w-design/w-design-vue": "workspace:^"
     },
     "devDependencies": {
-        "vitepress": "1.0.0-beta.2"
+        "vitepress": "1.0.0-beta.6"
     }
 }

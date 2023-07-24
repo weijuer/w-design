@@ -37,16 +37,17 @@
         >.rectangle {
             display: flex;
             align-items: center;
-            padding-left: .5rem;
+            justify-content: center;
             height: 2rem;
             background: #d1d5db;
             border-radius: .25rem;
 
             &:before {
                 display: inline-flex;
+                font-weight: 600;
 
-                counter-reset: grid 1;
-                content: counter(grid) ".";
+                counter-increment: grid 1;
+                content: counter(grid);
             }
         }
     }

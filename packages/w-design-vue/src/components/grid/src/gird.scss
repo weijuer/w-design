@@ -1,12 +1,14 @@
+// https://dev.to/codyhouse/flash-grid-learn-css-grid-by-building-a-grid-system-2c4f
+
 :root {
   --grid-rows: 1;
   --grid-column: 12;
+  --w-grid-row-gap: 15px;
 }
 
-
-$rows: 1;
-$columns: 12;
-$gap: 15px;
+$rows: 1 !default;
+$columns: 12 !default;
+$gap: 15px !default;
 $breakpoints: (
   xs: 0,
   sm: 576px,
@@ -14,7 +16,7 @@ $breakpoints: (
   lg: 992px,
   xl: 1200px,
   xxl: 1400px
-);
+) !default;
 
 @mixin create-selectors($breakpoint: null) {
   $infix: if($breakpoint ==null, '', '__#{$breakpoint}');
@@ -38,23 +40,32 @@ $breakpoints: (
   }
 }
 
-.w-grid {
+.w-grid,
+[class*=''] {
   display: grid;
-  grid-template-rows: repeat($rows, 1fr);
-  grid-template-columns: repeat($columns, 1fr);
-  row-gap: var(--w-grid-row-gap, 15px);
-  column-gap: var(--w-grid-column-gap, 15px);
+  gap: var(--w-grid-row-gap, 0);
+}
+
+.w-grid {
+  --w-grid-cols: #{$columns};
+
+  // grid-template-rows: repeat($rows, 1fr);
+  grid-template-columns: repeat(var(--w-grid-cols), 1fr);
 
   .w-grid__item {
-    grid-column-start: span $columns;
+    grid-column-start: span var(--w-grid-cols);
   }
 
   @include create-selectors;
 
-  @each $breakpoint,
-  $width in $breakpoints {
+  @each $breakpoint, $width in $breakpoints {
     @media (min-width: #{$width}) {
       @include create-selectors($breakpoint);
     }
   }
+}
+
+// cols = same size
+.w-grid-auto-cols {
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
 }
