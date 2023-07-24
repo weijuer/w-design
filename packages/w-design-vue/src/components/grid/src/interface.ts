@@ -3,8 +3,8 @@ import { type PropType, type ExtractPropTypes, InjectionKey } from 'vue'
 export type Numeric = string | number
 
 export type GridProvide = {
+    auto: Boolean,
     toggle: (name: Numeric, expanded: boolean) => void;
-    isExpanded: (name: Numeric) => boolean;
 };
 
 export const GIRD_KEY: InjectionKey<GridProvide> = Symbol('grid');
@@ -14,11 +14,7 @@ export const gridProps = {
         type: [String, Number, Array] as PropType<Numeric | Numeric[]>,
         dafault: ''
     },
-    accordion: Boolean,
-    bordered: {
-        type: Boolean,
-        default: true
-    },
+    auto: Boolean,
 }
 
 export const gridItemProps = {

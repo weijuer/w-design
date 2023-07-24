@@ -16,5 +16,5 @@ import { gridItemProps } from './interface'
 
 const props = defineProps(gridItemProps)
 
-const itemClass = computed(() => ({ [`w-col__${props.span}`]: props.span, [`w-col__offset-${props.offset}`]: props.offset }))
+const itemClass = computed(() => ({ [`w-col-${props.span}`]: props.span, [`w-col__offset-${props.offset}`]: props.offset }))
 </script>

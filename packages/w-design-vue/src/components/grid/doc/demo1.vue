@@ -1,31 +1,75 @@
 <template>
-    <h4>Three columns</h4>
-    <w-grid class="grid-list">
-        <w-grid-item>
-            <div class="rectangle"></div>
-        </w-grid-item>
-        <w-grid-item>
-            <div class="rectangle"></div>
-        </w-grid-item>
-        <w-grid-item>
+    <h4>Auto</h4>
+    <w-button type="primary" @click="addCol">+</w-button>
+    <w-button type="primary" @click="removeCol">-</w-button>
+    <w-grid class="grid-list" auto>
+        <w-grid-item v-for="item of gridNums">
             <div class="rectangle"></div>
         </w-grid-item>
     </w-grid>
 
+    <h4>Grid</h4>
     <w-grid class="grid-list">
-        <w-grid-item span="2">
+        <w-grid-item v-for="item in 12" span="1">
             <div class="rectangle"></div>
         </w-grid-item>
-        <w-grid-item offset="2">
+        <w-grid-item v-for="item in 6" span="2">
             <div class="rectangle"></div>
         </w-grid-item>
-        <w-grid-item offset="2" span="2">
+        <w-grid-item v-for="item in 4" span="3">
+            <div class="rectangle"></div>
+        </w-grid-item>
+        <w-grid-item v-for="item in 3" span="4">
+            <div class="rectangle"></div>
+        </w-grid-item>
+        <w-grid-item v-for="item in 2" span="6">
+            <div class="rectangle"></div>
+        </w-grid-item>
+
+        <w-grid-item span="12">
+            <div class="rectangle"></div>
+        </w-grid-item>
+    </w-grid>
+
+    <h4>Offset</h4>
+    <w-grid class="grid-list">
+        <w-grid-item offset="1" span="3">
+            <div class="rectangle"></div>
+        </w-grid-item>
+        <w-grid-item offset="2" span="4">
+            <div class="rectangle"></div>
+        </w-grid-item>
+        <w-grid-item offset="3" span="6">
+            <div class="rectangle"></div>
+        </w-grid-item>
+        <w-grid-item offset="4" span="7">
+            <div class="rectangle"></div>
+        </w-grid-item>
+        <w-grid-item offset="5" span="6">
             <div class="rectangle"></div>
         </w-grid-item>
     </w-grid>
 </template>
   
 <script setup lang="ts">
+import { ref } from 'vue';
+
+const gridNums = ref(3)
+
+const addCol = () => {
+    if (gridNums.value < 12) {
+        gridNums.value++
+    } else {
+        gridNums.value = 12
+    }
+}
+const removeCol = () => {
+    if (gridNums.value > 1) {
+        gridNums.value--
+    } else {
+        gridNums.value = 1
+    }
+}
 </script>
 
 <style lang="scss">
