@@ -9,7 +9,7 @@
 
 <script lang="ts">
 export default {
-    name: "avatar"
+    name: "w-avatar"
 }
 </script>
 
@@ -40,7 +40,7 @@ const avatarStyle = computed(() => {
 })
 
 const avatarClass = computed(() => ({
-    [`avatar__${shape}`]: shape.value,
+    [`avatar__${shape.value}`]: shape.value,
     [`avatar__${props.size}`]: props.size,
 }))
 

@@ -13,6 +13,11 @@ module.exports = [
     link: '/blog/',
     activeMatch: '/blog'
   }
+  // {
+  //   text: '测试',
+  //   link: '/test/',
+  //   activeMatch: '/test'
+  // }
   /* {
     text: '关于我',
     link: '/contact/'

@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Demo from './components/grid/doc/demo1.vue'
+import Demo from './components/badge/doc/demo1.vue'
 
 </script>
 

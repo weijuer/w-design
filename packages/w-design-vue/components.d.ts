@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Aside: typeof import('./src/components/aside/src/aside.vue')['default']
     Avatar: typeof import('./src/components/avatar/src/avatar.vue')['default']
+    Badge: typeof import('./src/components/badge/src/badge.vue')['default']
     Breadcrumb: typeof import('./src/components/breadcrumb/src/breadcrumb.vue')['default']
     BreadcrumbItem: typeof import('./src/components/breadcrumb/src/breadcrumb-item.vue')['default']
     Button: typeof import('./src/components/button/src/button.vue')['default']
@@ -18,7 +19,7 @@ declare module 'vue' {
     CollapseItem: typeof import('./src/components/collapse/src/collapse-item.vue')['default']
     CollapseTransition: typeof import('./src/components/collapse/src/collapse-transition.vue')['default']
     Container: typeof import('./src/components/container/container.vue')['default']
-    Demo: typeof import('./src/components/breadcrumb/doc/demo.vue')['default']
+    Demo: typeof import('./src/components/badge/doc/demo.vue')['default']
     Demo1: typeof import('./src/components/avatar/doc/demo1.vue')['default']
     Demo2: typeof import('./src/components/collapse/doc/demo2.vue')['default']
     Footer: typeof import('./src/components/footer/footer.vue')['default']

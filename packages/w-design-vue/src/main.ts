@@ -2,6 +2,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import '@w-design/w-design-icon'
 
-import W from './index'
+import wd from './index'
 
-createApp(App).use(W).mount('#app')
+createApp(App).use(wd).mount('#app')

@@ -3,9 +3,11 @@
     <w-button type="primary" @click="addCol">+</w-button>
     <w-button type="primary" @click="removeCol">-</w-button>
     <w-grid class="grid-list" auto>
-        <w-grid-item v-for="item of gridNums">
-            <div class="rectangle"></div>
-        </w-grid-item>
+        <transition-group name="fade">
+            <w-grid-item v-for="item of gridNums" :key="'auto_' + item">
+                <div class="rectangle"></div>
+            </w-grid-item>
+        </transition-group>
     </w-grid>
 
     <h4>Grid</h4>
@@ -95,7 +97,27 @@ const removeCol = () => {
             }
         }
     }
+}
 
+
+/* 1. 声明过渡效果 */
+.fade-move,
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+/* 2. 声明进入和离开的状态 */
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+    transform: translate(0, 30px);
+}
+
+/* 3. 确保离开的项目被移除出了布局流
+      以便正确地计算移动时的动画效果。 */
+.fade-leave-active {
+    position: absolute;
 }
 </style>
 
