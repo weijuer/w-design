@@ -10,11 +10,11 @@ export const badgeProps = {
     content: [Number, String],
     status: {
         type: String as PropType<Status>,
-        default: 'primary'
+        default: ''
     },
     color: {
         type: String,
-        default: "#ee0a24"
+        default: ""
     },
     dot: Boolean,
     max: {

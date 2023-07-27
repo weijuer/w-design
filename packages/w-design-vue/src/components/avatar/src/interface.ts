@@ -11,7 +11,7 @@ export const avatarProps = {
     },
     shape: {
         type: String as PropType<Shape>,
-        dafault: 'circle'
+        dafault: 'square'
     },
     size: {
         type: [Number, String] as PropType<Size>,

@@ -1,22 +1,26 @@
 :root {
-    --avatar-border-radius: 50%;
-    --avatar-width: 4rem;
-    --avatar-height: 4rem;
+  --avatar-border-radius: 50%;
+  --avatar-width: 4rem;
+  --avatar-height: 4rem;
 }
 
 .avatar {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--avatar-width);
-    height: var(--avatar-height);
-    line-height: var(--avatar-height);
-    color: #fff;
-    background: rgba(0, 0, 0, 0.25);
-    border-radius: var(--avatar-border-radius, 50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--avatar-width);
+  height: var(--avatar-height);
+  line-height: var(--avatar-height);
+  color: #fff;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
 
-    .avatar__image {
-        height: 50%;
-        width: 50%;
-    }
+  &.avatar__circle {
+    border-radius: var(--avatar-border-radius, 50%);
+  }
+
+  .avatar__image {
+    height: 50%;
+    width: 50%;
+  }
 }

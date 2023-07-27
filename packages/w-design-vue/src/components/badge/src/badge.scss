@@ -2,6 +2,12 @@
 :root {
   --w-badge-padding: 0 4px;
   --w-badge-color: white;
+  --w-badge-dot-size: 8px;
+}
+
+.w-badge__wrapper {
+  position: relative;
+  display: inline-block;
 }
 
 .w-badge {
@@ -16,14 +22,24 @@
   border-radius: 999px;
   font-size: 0.8rem;
   color: var(--w-badge-color);
+  background-color: #ff4d4f;
   box-sizing: border-box;
 
-  &.middle {
-    vertical-align: middle;
+  &.w-badge__dot {
+    padding: 0;
+    min-width: 0;
+    width: var(--w-badge-dot-size);
+    height: var(--w-badge-dot-size);
+    border: 0;
   }
 
-  &.top {
-    vertical-align: top;
+  &.w-badge__top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    transform-origin: 100%;
+    box-shadow: 0 0 0 1px #ffffff;
   }
 
   @each $theme-name, $theme-value in $themes {
