@@ -1,1 +1,0 @@
-import{_ as s,o as a,c as n,e}from"./app.9084bbd7.js";const y=JSON.parse(`{"title":"W Design Vue 's Blog","description":"","frontmatter":{"title":"W Design Vue 's Blog","lang":"en-US"},"headers":[],"relativePath":"index.md"}`),l={name:"index.md"},p=e("",18),o=[p];function r(t,c,i,d,D,u){return a(),n("div",null,o)}const F=s(l,[["render",r]]);export{y as __pageData,F as default};
