@@ -16,10 +16,11 @@
   height: 32px;
   border-radius: 4px;
   cursor: pointer;
-  transition: transform ease-in 0.1s, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  will-change: transform, background-color, border-color, box-shadow;
+  transition: all 0.2s ease-in;
 
   &:not(:disabled):active {
-    transform: scale(0.95);
+    transform: translateY(2px);
   }
 
   &.w-button__default {
@@ -29,16 +30,18 @@
 
     &:active,
     &:hover {
-      color: map-get($themes, "brand");
-      border-color: map-get($themes, "brand");
+      color: map-get($themes, 'brand');
+      border-color: map-get($themes, 'brand');
+    }
+
+    &:focus {
+      box-shadow: inset 0 0 0 #fff, 0 0 0 2px #fff, 0px 0px 0px 4px map-get($themes, 'brand');
     }
   }
 
-  @each $theme-name,
-  $theme-value in $themes {
-
+  @each $theme-name, $theme-value in $themes {
     &.w-button__#{$theme-name} {
-      color: if($theme-name =='light', #888, #fff);
+      color: if($theme-name == 'light', #888, #fff);
       background: $theme-value;
       border-color: $theme-value;
       border-style: solid;
@@ -47,6 +50,16 @@
       &:hover {
         background: darken($theme-value, 10%);
         border-color: darken($theme-value, 10%);
+      }
+
+      &:focus {
+        box-shadow: inset 0 0 0 #fff, 0 0 0 2px #fff, 0px 0px 0px 4px $theme-value;
+      }
+
+      &:focus-visible {
+        outline: 2px solid #91caff;
+        outline-offset: 1px;
+        transition: outline-offset 0s, outline 0s;
       }
     }
   }
