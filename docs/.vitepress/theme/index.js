@@ -4,8 +4,6 @@ import DefaultTheme from 'vitepress/theme'
 import WDesign from '@w-design/w-design-vue'
 import '@w-design/w-design-vue/index.css'
 
-console.log("themes:==>", WDesign)
-
 export default {
   ...DefaultTheme,
   // Layout,

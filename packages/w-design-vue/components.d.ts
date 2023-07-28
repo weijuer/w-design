@@ -19,7 +19,6 @@ declare module 'vue' {
     CollapseItem: typeof import('./src/components/collapse/src/collapse-item.vue')['default']
     CollapseTransition: typeof import('./src/components/collapse/src/collapse-transition.vue')['default']
     Container: typeof import('./src/components/container/container.vue')['default']
-    Demo: typeof import('./src/components/badge/doc/demo.vue')['default']
     Demo1: typeof import('./src/components/avatar/doc/demo1.vue')['default']
     Demo2: typeof import('./src/components/collapse/doc/demo2.vue')['default']
     Footer: typeof import('./src/components/footer/footer.vue')['default']

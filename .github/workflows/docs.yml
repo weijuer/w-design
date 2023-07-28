@@ -1,5 +1,5 @@
 # 当前执行文件名称
-name: docs deploy action
+name: Deploy docs action
 
 # 触发时机
 on:
@@ -29,6 +29,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           pnpm i
+          pnpm build
           pnpm docs:build
       # 发布
       - name: Deploy 🚀
@@ -38,4 +39,5 @@ jobs:
           # 发布到指定分支
           branch: gh-pages
           # 构建成果所在目录,默认位置都是在根目录
-          folder: ./docs/.vitepress/dist
+          folder: docs/.vitepress/dist
+          clean: true
