@@ -9,7 +9,7 @@ import Demo from './components/button/doc/demo1.vue'
 
 </script>
 
-<style>
+<style lang="scss">
 body {
     font-family: -apple-system, Space Grotesk, Arial, ui-sans-serif, system-ui;
     font-size: 1rem;
@@ -19,7 +19,12 @@ body {
     padding: 0;
 }
 
-.container {
+#app {
     padding: 16px;
+}
+
+.container {
+    display: flex;
+    gap: 6px;
 }
 </style>

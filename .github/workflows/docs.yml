@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'docs/**'
 
 jobs:
   build-and-deploy:
@@ -16,14 +18,14 @@ jobs:
       # 获取仓库源码
       - name: Checkout 🛎️
         uses: actions/checkout@v3
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.2
-        with:
-          version: 7
+      # Install pnpm
+      - name: Install pnpm
+        run: corepack enable
+      # Setup node
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18
           cache: pnpm
       # 构建和部署
       - name: Install and Build 🔧
