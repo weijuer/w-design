@@ -18,21 +18,27 @@ jobs:
       # 获取仓库源码
       - name: Checkout 🛎️
         uses: actions/checkout@v3
-      # Install pnpm
-      - name: Install pnpm
-        run: corepack enable
+
       # Setup node
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: pnpm
+
+      # Install pnpm
+      - name: Install pnpm
+        run: corepack enable
+
       # 构建和部署
-      - name: Install and Build 🔧
-        run: |
-          pnpm i
-          pnpm build
-          pnpm docs:build
+      - name: Install deps
+        run: pnpm i --frozen-lockfile
+      - name: Check pnpm-lock.yaml
+        run: git diff --exit-code pnpm-lock.yaml
+      - name: Build w-design-vue
+        run: pnpm build
+      - name: Build docs
+        run: pnpm docs:build
       # 发布
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
