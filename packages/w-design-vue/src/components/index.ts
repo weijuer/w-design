@@ -1,5 +1,15 @@
+// layout
+export * from './aside'
+export * from './layout'
+export * from './container'
+export * from './header'
+export * from './main'
+export * from './footer'
+
+// componenets
 export * from './avatar'
 export * from './collapse'
+export * from './card'
 export * from './icon'
 export * from './button'
 export * from './badge'

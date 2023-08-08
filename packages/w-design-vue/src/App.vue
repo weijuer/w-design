@@ -1,11 +1,11 @@
 <template>
-    <div class="container">
+    <w-container>
         <demo />
-    </div>
+    </w-container>
 </template>
 
 <script setup lang="ts">
-import Demo from './components/button/doc/demo1.vue'
+import Demo from './components/card/demo/demo1.vue'
 
 </script>
 
@@ -54,10 +54,5 @@ body {
 
 #app {
     padding: 16px;
-}
-
-.container {
-    display: flex;
-    gap: 6px;
 }
 </style>

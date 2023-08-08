@@ -1,5 +1,10 @@
 @import '../../_common/var';
 
+:root {
+  --w-button-border-radius: 6px;
+  --w-button-height: 32px;
+}
+
 .w-button {
   display: inline-block;
   position: relative;
@@ -13,8 +18,9 @@
   padding: 0 15px;
   font-size: 14px;
   line-height: 1.5;
-  height: 32px;
-  border-radius: 4px;
+  height: var(--w-button-height, 32px);
+  -webkit-tap-highlight-color: transparent;
+  border-radius: var(--w-button-border-radius, 6px);
   cursor: pointer;
   transition: all 0.2s ease-in;
 
@@ -38,7 +44,7 @@
     transition: 0.45s;
   }
 
-  &.w-button__default {
+  & {
     background-color: #fff;
     border-color: #e0e0e6;
     border-style: solid;
@@ -59,16 +65,28 @@
     }
   }
 
+  &.is-dashed {
+    border-style: dashed;
+  }
+
+  &.is-round {
+    --w-button-border-radius: 16px;
+  }
+
+  &.is-plain {
+    background-color: transparent;
+  }
+
   @each $theme-name, $theme-value in $themes {
     &.w-button__#{$theme-name} {
       color: if($theme-name == 'light', #888, #fff);
-      background: $theme-value;
+      background-color: $theme-value;
       border-color: $theme-value;
       border-style: solid;
 
       &:active,
       &:hover {
-        background: darken($theme-value, 10%);
+        background-color: darken($theme-value, 10%);
         border-color: darken($theme-value, 10%);
       }
 
@@ -80,6 +98,15 @@
       &::after {
         // box-shadow: 0 0 0 8px $theme-value;
         outline: 8px solid $theme-value;
+      }
+
+      &.is-plain {
+        color: $theme-value;
+        background-color: transparent;
+
+        &:active {
+          background-color: lighten($color: #000, $amount: 85);
+        }
       }
     }
   }

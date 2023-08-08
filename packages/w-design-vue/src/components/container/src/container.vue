@@ -31,12 +31,12 @@ const isVertical = computed(() => {
 });
 </script>
 
-<style lang="stylus">
+<style lang="scss">
 .w-container {
-    display: flex;
-    flex: auto;
-    flex-direction: column;
-    min-height: 0;
-    background: #f0f2f5;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  min-height: 0;
+  background: #f0f2f5;
 }
 </style>

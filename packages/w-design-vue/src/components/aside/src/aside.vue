@@ -23,7 +23,7 @@ const props = defineProps({
 const asideWith = computed(() => typeof props.width === 'string' ? props.width : `${props.width}px`)
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .w-aside {
   --w-aside-width: 200px;
 

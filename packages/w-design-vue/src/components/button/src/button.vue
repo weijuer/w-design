@@ -8,6 +8,7 @@
         'is-loading': loading,
         'is-plain': plain,
         'is-round': round,
+        'is-dashed': dashed,
         'is-circle': circle
       }
     ]">

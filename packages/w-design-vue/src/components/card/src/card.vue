@@ -9,11 +9,13 @@
       </div>
     </div>
     <div class="w-card-body">
-      <slot />
+      <slot></slot>
     </div>
-    <div class="w-card-footer" v-if="$slots.footer || footer">
-      <slot name="footer"></slot>
-    </div>
+
+    <slot name="footer">
+      <div class="w-card-footer" v-if="props.footer" v-html="props.footer"></div>
+    </slot>
+
   </div>
 </template>
 
@@ -28,16 +30,16 @@ import { computed } from 'vue';
 
 const props = defineProps({
   type: String,
-  title: { default: () => {}, type: [Object, String] },
-  footer: { default: () => {}, type: [Object, String] },
+  title: { default: () => { }, type: [Object, String] },
+  footer: { default: () => { }, type: [Object, String] },
   desc: String
 });
 
 const cardType = computed(() => (props.type ? `w-card-${props.type}` : ''));
 </script>
 
-<style lang="stylus">
-$theme-color = #2ecc71;
+<style lang="scss">
+$theme-color: #2ecc71;
 
 .w-card {
   display: flex;

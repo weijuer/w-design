@@ -27,6 +27,7 @@ export const buttonProps = {
     disabled: Boolean,
     plain: Boolean,
     autofocus: Boolean,
+    dashed: Boolean,
     round: Boolean,
     circle: Boolean
 } as const

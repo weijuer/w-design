@@ -19,9 +19,10 @@ defineProps({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .w-footer {
   --w-footer-height: 24px;
+
   flex: 0 0 auto;
   padding: 24px 50px;
   height: var(--w-footer-height);
