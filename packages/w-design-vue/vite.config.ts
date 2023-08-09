@@ -39,14 +39,14 @@ export default defineConfig({
     // dts({
     //   tsConfigFilePath: './tsconfig.declaration.json'
     // }),
-    Components({
-      dirs: ["src/components"],
-      extensions: ["vue"],
-      exclude: ['*/doc/*'],
-    }),
-    AutoImport({
-      imports: ["vue", "vue-router", "pinia"],
-    }),
+    // Components({
+    //   dirs: ["src/components"],
+    //   extensions: ["vue"],
+    //   exclude: ['*/demo/*'],
+    // }),
+    // AutoImport({
+    //   imports: ["vue", "vue-router", "pinia"],
+    // }),
     Vue()
   ]
 });

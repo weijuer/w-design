@@ -1,58 +1,56 @@
 <template>
-    <w-container>
-        <demo />
-    </w-container>
+  <w-container>
+    <demo />
+  </w-container>
 </template>
 
 <script setup lang="ts">
-import Demo from './components/card/demo/demo1.vue'
-
+import Demo from './components/checkbox/demo/demo1.vue'
 </script>
 
 <style lang="scss">
 :root {
-    --accent: rgb(134, 179, 0);
-    --bg: rgb(249, 249, 249);
-    --fg: rgb(103, 103, 103);
+  --accent: rgb(134, 179, 0);
+  --bg: rgb(249, 249, 249);
+  --fg: rgb(103, 103, 103);
 }
 
 html,
 body {
-    touch-action: manipulation;
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
+  touch-action: manipulation;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
 }
 
 html {
-    background-color: var(--bg);
-    color: var(--fg);
+  background-color: var(--bg);
+  color: var(--fg);
 }
 
 html {
-    background-color: var(--bg);
-    color: var(--fg);
-    accent-color: var(--accent);
-    overflow: auto;
-    overflow-wrap: break-word;
-    font-family: Hiragino Maru Gothic Pro, BIZ UDGothic, Roboto, HelveticaNeue, Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.35;
-    text-size-adjust: 100%;
-    tab-size: 2;
+  background-color: var(--bg);
+  color: var(--fg);
+  accent-color: var(--accent);
+  overflow: auto;
+  overflow-wrap: break-word;
+  font-family: Hiragino Maru Gothic Pro, BIZ UDGothic, Roboto, HelveticaNeue, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.35;
+  text-size-adjust: 100%;
+  tab-size: 2;
 }
 
 body {
-    // font-family: -apple-system, Space Grotesk, Arial, ui-sans-serif, system-ui;
-    font-family: Hiragino Maru Gothic Pro, BIZ UDGothic, Roboto, HelveticaNeue, Arial, sans-serif;
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.5;
-    margin: 0;
-    padding: 0;
+  font-family: -apple-system, Space Grotesk, Arial, ui-sans-serif, system-ui;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
 }
 
 #app {
-    padding: 16px;
+  padding: 16px;
 }
 </style>

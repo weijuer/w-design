@@ -5,6 +5,7 @@ export * from './container'
 export * from './header'
 export * from './main'
 export * from './footer'
+export * from './guide'
 
 // componenets
 export * from './avatar'
@@ -17,4 +18,6 @@ export * from './modal'
 export * from './grid'
 export * from './breadcrumb'
 export * from './tag'
-export * from './guide'
+
+// form
+export * from './checkbox'
