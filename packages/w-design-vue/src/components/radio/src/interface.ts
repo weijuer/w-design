@@ -20,16 +20,7 @@ export const radioProps = {
         default: undefined
     },
     defaultChecked: Boolean,
-    disabled: Boolean,
-    trueValue: {
-        type: [Boolean, String, Number],
-        default: true,
-    },
-    falseValue: {
-        type: [Boolean, String, Number],
-        default: false,
-    },
-    indeterminate: Boolean
+    disabled: Boolean
 }
 
 export const radioEmits = ['click', 'change', 'update:modelValue']

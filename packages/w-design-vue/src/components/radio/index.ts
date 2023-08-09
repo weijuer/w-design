@@ -1,6 +1,6 @@
-import Checkbox from './src/checkbox.vue'
+import Radio from './src/radio.vue'
 import { withInstall } from '../../utils'
 
-export const WCheckbox = withInstall(Checkbox)
+export const WRadio = withInstall(Radio)
 
-export default WCheckbox
+export default WRadio

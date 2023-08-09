@@ -1,5 +1,5 @@
 <template>
-  <label class="w-radio radio-container">
+  <label class="w-radio">
     <input
       ref="input"
       class="w-radio__input"
@@ -9,12 +9,10 @@
       :autoFocus="autoFocus"
       @change="onChange"
       @click="onClick"
-      :true-value="trueValue"
-      :false-value="falseValue"
       type="radio"
       aria-label="Radio label"
     />
-    <div class="w-radio__control checkmark" aria-hidden="true"></div>
+    <div class="w-radio__marker" aria-hidden="true"></div>
     <slot></slot>
   </label>
 </template>
