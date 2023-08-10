@@ -1,5 +1,6 @@
 :root {
   --w-radio-radius: 50%;
+  --w-radio-size: 10px;
 }
 
 .w-radio {
@@ -17,8 +18,8 @@
     top: 0;
     left: 0;
     opacity: 0;
-    width: 20px;
-    height: 20px;
+    width: var(--w-radio-size);
+    height: var(--w-radio-size);
     cursor: pointer;
 
     &:active ~ .w-radio__marker {
@@ -52,7 +53,9 @@
     width: 20px;
     background-color: #fff;
     border-radius: var(--w-radio-radius);
-    box-shadow: inset 0 0 0 1px currentColor;
+    // box-shadow: inset 0 0 0 1px currentColor;
+    border: 1px solid currentColor;
+    box-sizing: border-box;
 
     &:hover {
       background-color: #eee;
@@ -81,8 +84,8 @@
       opacity: 0;
       left: 50%;
       top: 50%;
-      width: 10px;
-      height: 10px;
+      width: var(--w-radio-size);
+      height: var(--w-radio-size);
       background-color: #fff;
       border-radius: 50%;
       transform: translate(-50%, -50%);

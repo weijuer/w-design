@@ -4,6 +4,9 @@ import { CHECKBOX_KEY, type CheckboxEmits, type CheckboxProps } from './interfac
 
 export const useCheckbox = (props: CheckboxProps, emit: SetupContext<CheckboxEmits>['emit']) => {
 
+    const { checked, defaultChecked } = props;
+    const isChecked = ref(checked ? checked : defaultChecked);
+
     const _ref = ref<HTMLInputElement>()
 
     const onChange = (event: Event) => {
@@ -24,5 +27,5 @@ export const useCheckbox = (props: CheckboxProps, emit: SetupContext<CheckboxEmi
 
     // const checkboxGroupContext: any = inject(CHECKBOX_KEY);
 
-    return { _ref, onChange, onClick }
+    return { _ref, isChecked, onChange, onClick }
 }
