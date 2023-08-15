@@ -40,7 +40,7 @@
     &:focus ~ .w-checkbox__marker {
       &::before {
         opacity: 0.2;
-        transform: translate(-50%, -50%) scale(1);
+        transform: translate(-50%, -50%) scale(1.75);
       }
     }
   }
@@ -68,8 +68,8 @@
     }
 
     &::before {
-      width: 160%;
-      height: 160%;
+      width: 100%;
+      height: 100%;
       top: 50%;
       left: 50%;
       opacity: 0;
@@ -82,10 +82,10 @@
 
     &::after {
       opacity: 0;
-      left: 7px;
-      top: 0px;
-      width: 6px;
-      height: 14px;
+      left: 6px;
+      top: 0;
+      width: 5px;
+      height: 12px;
       border: solid white;
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);

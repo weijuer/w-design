@@ -6,6 +6,7 @@ export * from './header'
 export * from './main'
 export * from './footer'
 export * from './guide'
+export * from './divider'
 
 // componenets
 export * from './avatar'
