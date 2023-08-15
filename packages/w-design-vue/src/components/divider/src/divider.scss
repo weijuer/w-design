@@ -26,14 +26,6 @@
     content: '';
   }
 
-  &::before {
-    margin-right: var(--w-divider-gap);
-  }
-
-  &::after {
-    margin-left: var(--w-divider-gap);
-  }
-
   &.w-divider__dashed {
     &::before,
     &::after {
@@ -46,6 +38,14 @@
   &.w-divider__content-center {
     &::after {
       content: '';
+    }
+
+    &::before {
+      margin-right: var(--w-divider-gap);
+    }
+
+    &::after {
+      margin-left: var(--w-divider-gap);
     }
   }
 

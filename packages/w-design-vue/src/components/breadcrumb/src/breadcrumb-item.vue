@@ -12,8 +12,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { inject, toRefs } from 'vue';
+import { inject, toRefs } from 'vue'
 
-const breadcrumbContext: any = inject('breadcrumb', undefined);
+const breadcrumbContext: any = inject('breadcrumb', undefined)
 const { separator } = toRefs(breadcrumbContext)
 </script>

@@ -9,7 +9,8 @@
   border-radius: 0.42rem;
 
   .w-breadcrumb__item {
-    display: flex;
+    display: inline-flex;
+    align-items: center;
     color: #00000073;
     transition: color 0.3s;
 
