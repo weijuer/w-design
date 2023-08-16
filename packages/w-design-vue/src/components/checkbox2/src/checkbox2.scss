@@ -1,0 +1,56 @@
+:root {
+  --w-checkbox2-border-width: 1px;
+  --w-checkbox2-radius: 4px;
+  --w-checkbox2-size: 20px;
+  --shadow-xs: rgba(20, 21, 26, 0.02) 0px 0px 0px 1px, rgba(20, 21, 26, 0.2) 0px 1px 3px -1px;
+}
+
+.w-checkbox2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-bg-light);
+  width: var(--w-checkbox2-size);
+  height: var(--w-checkbox2-size);
+  border-width: var(--w-checkbox2-border-width);
+  border-radius: var(--w-checkbox2-radius);
+  border-style: solid;
+  border-color: rgba(162, 162, 169, 0.65);
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  transition: 0.2s;
+
+  &__marker {
+    --size: 1em;
+
+    font-size: var(--size);
+    height: 1em;
+    width: 1em;
+    display: inline-block;
+    color: white;
+    font-size: 16px;
+    fill: currentColor;
+    line-height: 1;
+    flex-shrink: 0;
+    max-width: initial;
+
+    path {
+      transition: stroke-dashoffset 0.3s;
+      stroke-dasharray: 18;
+      stroke-dashoffset: 18;
+    }
+  }
+
+  &:active,
+  &__checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+
+    .w-checkbox2__marker {
+      path {
+        stroke-dasharray: 18;
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+}

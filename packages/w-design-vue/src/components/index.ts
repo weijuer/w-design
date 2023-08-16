@@ -22,4 +22,5 @@ export * from './tag'
 
 // form
 export * from './checkbox'
+export * from './checkbox2'
 export * from './radio'

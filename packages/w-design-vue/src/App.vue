@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Demo from './components/radio/demo/demo1.vue'
+import Demo from './components/checkbox2/demo/demo1.vue'
 </script>
 
 <style lang="scss">
