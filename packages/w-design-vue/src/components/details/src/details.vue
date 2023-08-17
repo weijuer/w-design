@@ -2,7 +2,7 @@
   <details class="w-details">
     <summary class="w-details__summary" role="button" :aria-expanded="expanded" @click="onClick">
       <slot name="summary">
-        <span class="w-details_summary-content">
+        <span class="w-details__summary-content">
           <svg class="w-details__summary-icon" aria-hidden="true" viewBox="0 0 12 12">
             <path
               d="M2.783.088A.5.5,0,0,0,2,.5v11a.5.5,0,0,0,.268.442A.49.49,0,0,0,2.5,12a.5.5,0,0,0,.283-.088l8-5.5a.5.5,0,0,0,0-.824Z"

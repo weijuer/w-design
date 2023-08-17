@@ -1,4 +1,5 @@
-export const hasProp = (instance, prop) => {
+
+export const hasProp = (instance: any, prop: any) => {
     const $options = instance.$options || {};
     const propsData = $options.propsData || {};
     return prop in propsData;

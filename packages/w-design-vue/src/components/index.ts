@@ -16,10 +16,10 @@ export * from './card'
 export * from './icon'
 export * from './button'
 export * from './badge'
+export * from './counter'
 export * from './modal'
 export * from './grid'
 export * from './breadcrumb'
-export * from './tag'
 export * from './details'
 
 // form

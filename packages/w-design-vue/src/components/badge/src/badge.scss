@@ -1,8 +1,9 @@
 @import '../../_common/var';
+
 :root {
-  --w-badge-padding: 0 4px;
+  --w-badge-padding: 4px 8px;
   --w-badge-color: white;
-  --w-badge-dot-size: 8px;
+  --w-badge-border-radius: 6px;
 }
 
 .w-badge__wrapper {
@@ -16,35 +17,30 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  min-width: 1rem;
-  height: 1rem;
-  line-height: 1.2;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  color: var(--w-badge-color);
-  background-color: #ff4d4f;
+  min-width: 2rem;
+  line-height: 1;
+  border: 0;
+  border-radius: var(--w-badge-border-radius);
+  color: inherit;
+  background-color: var(--color-contrast-lower);
+  appearance: none;
   box-sizing: border-box;
-
-  &.w-badge__dot {
-    padding: 0;
-    min-width: 0;
-    width: var(--w-badge-dot-size);
-    height: var(--w-badge-dot-size);
-    border: 0;
-  }
-
-  &.w-badge__top-right {
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(50%, -50%);
-    transform-origin: 100%;
-    box-shadow: 0 0 0 1px #ffffff;
-  }
 
   @each $theme-name, $theme-value in $themes {
     &.w-badge__#{$theme-name} {
+      color: var(--color-white);
       background-color: $theme-value;
+
+      &.w-badge__outlined {
+        color: $theme-value;
+        background-color: transparent;
+        border: 1px solid currentColor;
+      }
+    }
+
+    &.w-badge__#{$theme-name}-light {
+      color: var(--color-contrast-higher);
+      background-color: fade-out($color: $theme-value, $amount: 0.65);
     }
   }
 }
