@@ -1,19 +1,33 @@
 <template>
-  <div
-    :class="['w-checkbox2', { 'w-checkbox2__checked': isChecked }, { 'w-checkbox-indeterminate': indeterminate }]"
-    @click="onClick"
-  >
-    <svg class="w-checkbox2__marker" viewBox="0 0 16 16">
-      <path
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M2 8l4 4 8-8"
-      ></path>
-    </svg>
-  </div>
+  <label :class="['w-checkbox2', { 'w-checkbox-indeterminate': indeterminate }]">
+    <input
+      ref="input"
+      class="w-checkbox2__input"
+      :value="modelValue"
+      :checked="isChecked"
+      :disabled="disabled"
+      :autoFocus="autoFocus"
+      @change="onChange"
+      @click="onClick"
+      :true-value="trueValue"
+      :false-value="falseValue"
+      type="checkbox"
+      aria-label="Checkbox label"
+    />
+    <div class="w-checkbox2__marker" aria-hidden="true">
+      <svg class="w-checkbox2__marker-icon" viewBox="0 0 16 16">
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M2 8l4 4 8-8"
+        ></path>
+      </svg>
+    </div>
+    <span class="w-checkbox2__label"><slot></slot></span>
+  </label>
 </template>
 
 <script lang="ts">

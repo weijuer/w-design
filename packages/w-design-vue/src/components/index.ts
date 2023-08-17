@@ -8,6 +8,7 @@ export * from './footer'
 export * from './guide'
 export * from './divider'
 
+
 // componenets
 export * from './avatar'
 export * from './collapse'
@@ -19,6 +20,7 @@ export * from './modal'
 export * from './grid'
 export * from './breadcrumb'
 export * from './tag'
+export * from './details'
 
 // form
 export * from './checkbox'

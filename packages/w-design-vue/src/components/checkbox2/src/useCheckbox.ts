@@ -16,7 +16,6 @@ export const useCheckbox = (props: CheckboxProps, emit: SetupContext<CheckboxEmi
     }
 
     const onClick = (event: MouseEvent) => {
-        isChecked.value = !isChecked.value
         emit('click', event)
     }
 

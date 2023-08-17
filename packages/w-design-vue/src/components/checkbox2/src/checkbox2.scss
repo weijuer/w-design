@@ -6,51 +6,80 @@
 }
 
 .w-checkbox2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--color-bg-light);
-  width: var(--w-checkbox2-size);
-  height: var(--w-checkbox2-size);
-  border-width: var(--w-checkbox2-border-width);
-  border-radius: var(--w-checkbox2-radius);
-  border-style: solid;
-  border-color: rgba(162, 162, 169, 0.65);
-  cursor: pointer;
-  box-shadow: var(--shadow-xs);
-  transition: 0.2s;
+  display: inline-block;
+  position: relative;
+  padding-left: 25px;
+  user-select: none;
 
-  &__marker {
-    --size: 1em;
+  &__input {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+    appearance: none;
 
-    font-size: var(--size);
-    height: 1em;
-    width: 1em;
-    display: inline-block;
-    color: white;
-    font-size: 16px;
-    fill: currentColor;
-    line-height: 1;
-    flex-shrink: 0;
-    max-width: initial;
+    &:active ~ .w-checkbox2__marker {
+      transform: scale(0.8);
+      transition: transform 0.2s;
+    }
 
-    path {
-      transition: stroke-dashoffset 0.3s;
-      stroke-dasharray: 18;
-      stroke-dashoffset: 18;
+    &:focus ~ .w-checkbox2__marker {
+      box-shadow: rgba(72, 39, 236, 0.2) 0 0 0 3px;
+    }
+
+    &:checked ~ .w-checkbox2__marker {
+      color: var(--color-primary);
+      background-color: currentColor;
+
+      .w-checkbox2__marker-icon {
+        path {
+          stroke-dasharray: 18;
+          stroke-dashoffset: 0;
+        }
+      }
     }
   }
 
-  &:active,
-  &__checked {
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
+  &__marker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--w-checkbox2-size);
+    height: var(--w-checkbox2-size);
+    background-color: #fff;
+    border: 2px solid currentColor;
+    border-radius: var(--w-checkbox2-radius);
+    box-sizing: border-box;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+
+    &-icon {
+      display: inline-block;
+      height: 1em;
+      width: 1em;
+      color: white;
+      fill: currentColor;
+      font-size: 1em;
+      line-height: 1;
+      flex-shrink: 0;
+      max-width: initial;
+
+      path {
+        transition: stroke-dashoffset 0.3s;
+        stroke-dasharray: 18;
+        stroke-dashoffset: 18;
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
 
     .w-checkbox2__marker {
-      path {
-        stroke-dasharray: 18;
-        stroke-dashoffset: 0;
-      }
+      color: var(--color-primary);
     }
   }
 }

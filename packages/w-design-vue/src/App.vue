@@ -1,11 +1,11 @@
 <template>
-  <w-container>
+  <w-container class="demo-section">
     <demo />
   </w-container>
 </template>
 
 <script setup lang="ts">
-import Demo from './components/checkbox2/demo/demo1.vue'
+import Demo from './components/details/demo/demo1.vue'
 </script>
 
 <style lang="scss">
@@ -52,5 +52,11 @@ body {
 
 #app {
   padding: 16px;
+
+  .demo-section {
+    padding: 16px;
+    gap: 8px;
+    background-color: transparent;
+  }
 }
 </style>

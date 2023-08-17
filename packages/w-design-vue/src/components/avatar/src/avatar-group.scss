@@ -1,0 +1,13 @@
+@import '../../_common/var';
+
+.w-avatar-group {
+  display: flex;
+
+  .w-avatar {
+    margin-left: -0.25em;
+
+    .w-avatar__figure {
+      box-shadow: 0 0 0 3px var(--color-bg);
+    }
+  }
+}
