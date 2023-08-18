@@ -1,0 +1,66 @@
+@import '../../_common/var';
+
+:root {
+  --progress-bar-height: 8px;
+  --progress-bar-radius: 50em;
+  --w-progress-bar-size: 160px;
+  --w-progress-bar-stroke-width: 6px;
+}
+
+.w-progress {
+  &-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__bg {
+      width: 100%;
+      padding: 0.25rem;
+      border-radius: var(--progress-bar-radius);
+      background-color: rgba(20, 21, 26, 0.1);
+    }
+
+    &__fill {
+      width: 0%;
+      height: var(--progress-bar-height);
+      border-radius: inherit;
+      color: var(--color-primary);
+      background-color: currentColor;
+      transition: background-color 0.3s;
+    }
+
+    &__value {
+      display: inline-block;
+      margin-inline-start: 8px;
+    }
+  }
+
+  &-circle {
+    position: relative;
+
+    svg {
+      display: block;
+      color: var(--color-primary);
+      width: var(--w-progress-bar-size);
+      height: var(--w-progress-bar-size);
+      stroke-width: var(--w-progress-bar-stroke-width);
+    }
+
+    &__bg {
+      stroke: currentColor;
+      opacity: 0.125;
+    }
+
+    &__fill {
+      stroke: currentColor;
+      transition: stroke 0.2s;
+    }
+
+    &__value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
+}

@@ -21,6 +21,7 @@ export * from './modal'
 export * from './grid'
 export * from './breadcrumb'
 export * from './details'
+export * from './progress'
 
 // form
 export * from './checkbox'

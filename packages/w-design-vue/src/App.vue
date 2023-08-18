@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Demo from './components/details/demo/demo1.vue'
+import Demo from './components/progress/demo/demo1.vue'
 </script>
 
 <style lang="scss">
@@ -13,6 +13,8 @@ import Demo from './components/details/demo/demo1.vue'
   --accent: rgb(134, 179, 0);
   --bg: rgb(249, 249, 249);
   --fg: rgb(103, 103, 103);
+  --font-primary: Inter, system-ui, sans-serif;
+  --font-apple: -apple-system, Space Grotesk, Arial, ui-sans-serif, system-ui;
 }
 
 html,
@@ -42,7 +44,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, Space Grotesk, Arial, ui-sans-serif, system-ui;
+  font-family: var(--font-primary);
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
