@@ -40,11 +40,11 @@ const props = defineProps(progressProps)
 const emit = defineEmits(progressEmits)
 
 const slots = useSlots()
-const { onClick } = useProgress(props, emit)
+const { onClick, getDashArray, getDashoffset } = useProgress(props, emit)
 
 const state = reactive({
   percentText: '0%',
-  dasharray: (2 * Math.PI * 44).toFixed(2),
+  dasharray: getDashArray(44),
   dashoffset: 0
 })
 
@@ -52,7 +52,7 @@ watch(
   () => props.percent,
   (percent) => {
     state.percentText = percent + '%'
-    state.dashoffset = ((state.dasharray * (100 - props.percent)) / 100).toFixed(2)
+    state.dashoffset = getDashoffset(state.dasharray, Number(props.percent))
   },
   { immediate: true }
 )
