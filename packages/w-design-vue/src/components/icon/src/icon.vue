@@ -8,11 +8,11 @@
 export default {
   name: 'w-icon',
   inheritAttrs: false
-};
+}
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 const props = defineProps({
   prefix: {
@@ -27,9 +27,9 @@ const props = defineProps({
     type: String,
     default: '#333'
   }
-});
+})
 
-const symbolId = computed(() => `#${props.prefix}-${props.name}`);
+const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 </script>
 
 <style lang="scss">
@@ -40,31 +40,5 @@ const symbolId = computed(() => `#${props.prefix}-${props.name}`);
   vertical-align: middle;
   fill: currentColor;
   overflow: hidden;
-}
-
-.icon-octocat {
-  &:hover {
-    path.octo-arm {
-      animation: octocat-wave 560ms ease-in-out;
-    }
-  }
-}
-
-@keyframes octocat-wave {
-
-  0%,
-  100% {
-    transform: rotate(0);
-  }
-
-  20%,
-  60% {
-    transform: rotate(-25deg);
-  }
-
-  40%,
-  80% {
-    transform: rotate(10deg);
-  }
 }
 </style>

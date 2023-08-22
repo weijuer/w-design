@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Demo from './components/progress/demo/demo1.vue'
+import Demo from './components/icon/demo/demo1.vue'
 </script>
 
 <style lang="scss">

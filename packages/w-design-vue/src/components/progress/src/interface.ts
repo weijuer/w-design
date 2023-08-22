@@ -1,6 +1,6 @@
 import { type PropType, type ExtractPropTypes } from 'vue'
 
-export type Type = 'line' | 'circle' | 'dashboard'
+export type Type = 'bar' | 'circle' | 'dashboard'
 export type Size = number | 'default' | 'small' | 'medium' | 'large'
 
 export const progressProps = {
@@ -14,7 +14,7 @@ export const progressProps = {
     },
     type: {
         type: String as PropType<Type>,
-        default: 'line'
+        default: 'bar'
     }
 }
 
