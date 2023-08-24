@@ -2,7 +2,9 @@
   <section class="badge-section">
     <w-badge>default</w-badge>
     <w-badge v-for="theme of themes" :key="theme" :type="theme">{{ theme }}</w-badge>
+    <w-divider dashed></w-divider>
     <w-badge v-for="theme of themes" :key="theme" :type="theme" light>{{ theme }}</w-badge>
+    <w-divider dashed></w-divider>
     <w-badge v-for="theme of themes" :key="theme" :type="theme" outlined>{{ theme }}</w-badge>
   </section>
 </template>

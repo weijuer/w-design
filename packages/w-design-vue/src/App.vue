@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Demo from './components/icon/demo/demo1.vue'
+import Demo from './components/button/demo/demo1.vue'
 </script>
 
 <style lang="scss">
@@ -37,7 +37,7 @@ html {
   overflow: auto;
   overflow-wrap: break-word;
   font-family: Hiragino Maru Gothic Pro, BIZ UDGothic, Roboto, HelveticaNeue, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.35;
   text-size-adjust: 100%;
   tab-size: 2;
@@ -45,7 +45,7 @@ html {
 
 body {
   font-family: var(--font-primary);
-  font-size: 1rem;
+  font-size: 1em;
   font-weight: 300;
   line-height: 1.5;
   margin: 0;
