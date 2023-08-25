@@ -1,4 +1,5 @@
 @import '../../_common/var';
+@import '../../_common/animate';
 
 :root {
   --w-button-size: 14px;
@@ -107,10 +108,15 @@ $btn-sizes: (
     padding: 0.5em 0.5em;
   }
 
+  &.is-loading {
+    .w-button__loading {
+      animation: spin 1.5s infinite linear;
+    }
+  }
+
   // sizes
   @each $key, $value in $btn-sizes {
     &.w-button__#{$key} {
-      @debug $key, $value;
       --w-button-font-size: #{$value};
     }
   }
@@ -128,6 +134,7 @@ $btn-sizes: (
 
       &:active,
       &:hover {
+        color: if($theme-name == 'light', #888, #fff);
         background-color: darken($theme-value, 10%);
         border-color: darken($theme-value, 10%);
       }

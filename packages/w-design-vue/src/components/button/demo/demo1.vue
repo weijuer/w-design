@@ -29,6 +29,11 @@
       </template>
       {{ capitalizeFirstLetter(icon) }}
     </w-button>
+    <w-divider dashed>Loading</w-divider>
+    <w-button type="primary" loading>Loading</w-button>
+    <w-button size="small" type="primary" loading>Loading</w-button>
+    <w-button type="primary" loading></w-button>
+    <w-button type="primary" round loading></w-button>
   </section>
 </template>
 

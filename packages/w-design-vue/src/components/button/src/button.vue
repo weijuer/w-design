@@ -8,8 +8,8 @@
     :type="attrType"
     :class="buttonClass"
   >
-    <w-icon class="w-icon-loading w-icon--left" v-if="loading" name="loading"></w-icon>
-    <w-icon class="w-icon--left" v-if="icon && !loading" :name="icon"></w-icon>
+    <w-icon class="w-button__loading w-button__icon-left" v-if="loading" name="loading"></w-icon>
+    <w-icon class="w-button__icon-left" v-if="icon && !loading" :name="icon"></w-icon>
     <slot name="icon"></slot>
     <slot></slot>
   </button>
@@ -22,13 +22,14 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useSlots } from 'vue'
 import WIcon from '../../icon'
 import { buttonEmits, buttonProps } from './interface'
 import { useButton } from './useButton'
 
 const props = defineProps(buttonProps)
 const emit = defineEmits(buttonEmits)
+const slots = useSlots()
 
 const buttonClass = computed(() => {
   const { type, icon, size, outlined, disabled, loading, light, round, dashed, circle } = props
@@ -36,9 +37,9 @@ const buttonClass = computed(() => {
   return [
     type ? 'w-button__' + type : '',
     size ? 'w-button__' + size : '',
-    icon ? 'w-button__icon' : '',
+    icon || (loading && !slots.default) ? 'w-button__icon' : '',
     {
-      'is-disabled': disabled,
+      'is-disabled': disabled || loading,
       'is-outlined': outlined,
       'is-loading': loading,
       'is-light': light,

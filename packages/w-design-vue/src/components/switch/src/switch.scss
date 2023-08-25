@@ -1,0 +1,54 @@
+@import '../../_common/var';
+
+:root {
+  --switch-width: 48px;
+  --switch-height: 24px;
+  --switch-padding: 2px;
+  --switch-animation-duration: 0.2s;
+}
+
+.w-switch {
+  position: relative;
+  display: inline-block;
+  width: var(--switch-width);
+  height: var(--switch-height);
+
+  &__input {
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    pointer-events: none;
+    appearance: none;
+
+    &:checked + .w-switch__marker {
+      background-color: var(--color-primary);
+
+      &::before {
+        transform: translateX(24px);
+      }
+    }
+  }
+
+  &__marker {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    border-radius: var(--switch-height);
+    border: 1px solid #d1d5db;
+    background-color: var(--color-bg-darker);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: var(--switch-padding);
+      bottom: var(--switch-padding);
+      width: calc(var(--switch-height) - 6px);
+      height: calc(var(--switch-height) - 6px);
+      background-color: var(--color-white);
+      border-radius: 50%;
+      transition: all var(--switch-animation-duration);
+    }
+  }
+}
