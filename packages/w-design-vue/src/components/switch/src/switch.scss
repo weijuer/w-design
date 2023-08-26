@@ -1,17 +1,29 @@
 @import '../../_common/var';
 
 :root {
-  --switch-width: 48px;
-  --switch-height: 24px;
-  --switch-padding: 2px;
-  --switch-animation-duration: 0.2s;
+  --w-switch-width: 48px;
+  --w-switch-height: 28px;
+  --w-switch-padding: 4px;
+  --w-switch-size: 20px;
+  --w-switch-animation-duration: 0.2s;
 }
+
+$switch-sizes: (
+  small: 0.98em,
+  default: 1em,
+  medium: 1.55em,
+  large: 1.65em
+);
 
 .w-switch {
   position: relative;
-  display: inline-block;
-  width: var(--switch-width);
-  height: var(--switch-height);
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: fit-content;
+  cursor: pointer;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
 
   &__input {
     margin: 0;
@@ -22,33 +34,143 @@
     pointer-events: none;
     appearance: none;
 
-    &:checked + .w-switch__marker {
+    &:checked~.w-switch__marker {
       background-color: var(--color-primary);
 
       &::before {
-        transform: translateX(24px);
+        margin-left: var(--w-switch-size);
       }
+
+      &:active {
+        &::before {
+          margin-left: calc(var(--w-switch-size) - var(--w-switch-padding))
+        }
+      }
+    }
+
+    &:disabled~.w-switch__marker {
+      opacity: var(--w-disabled-opacity);
     }
   }
 
   &__marker {
-    position: absolute;
-    inset: 0;
-    cursor: pointer;
-    border-radius: var(--switch-height);
-    border: 1px solid #d1d5db;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: var(--w-switch-width);
+    height: var(--w-switch-height);
+    margin-right: 0.5rem;
+    padding-left: var(--w-switch-padding);
+    padding-right: var(--w-switch-padding);
+    border-radius: var(--w-border-radius-full);
+    overflow: hidden;
+    box-sizing: border-box;
     background-color: var(--color-bg-darker);
+    transition: background-color var(--w-switch-animation-duration);
 
     &::before {
       content: '';
-      position: absolute;
-      left: var(--switch-padding);
-      bottom: var(--switch-padding);
-      width: calc(var(--switch-height) - 6px);
-      height: calc(var(--switch-height) - 6px);
+      width: var(--w-switch-size);
+      height: var(--w-switch-size);
       background-color: var(--color-white);
-      border-radius: 50%;
-      transition: all var(--switch-animation-duration);
+      border-radius: var(--w-border-radius-full);
+      transition: all var(--w-switch-animation-duration);
     }
+
+    &:active {
+      &::before {
+        width: calc(var(--w-switch-size) + var(--w-switch-padding));
+      }
+    }
+  }
+
+  &__text {
+    user-select: none;
+  }
+
+  // sizes
+  @each $key,
+  $value in $switch-sizes {
+    &.w-switch__#{$key} {
+      --w-switch-size: #{$value};
+      --w-switch-width: #{$value * 2.33};
+      --w-switch-height: #{$value * 1.33};
+    }
+  }
+
+  // colors
+  @each $theme-name,
+  $theme-value in $themes {
+    &.w-switch__#{$theme-name} {
+
+      .w-switch__input {
+        &:checked~.w-switch__marker {
+          background-color: $theme-value;
+        }
+      }
+    }
+  }
+
+
+  // icon
+  &.w-switch__icon {
+    --w-switch-width: 56px;
+    --w-switch-height: 32px;
+    --w-switch-size: 24px;
+
+    .w-switch__marker {
+      &:active {
+        .w-switch__on {
+          transform: scale(0.65);
+        }
+      }
+
+      .w-switch__on {
+        opacity: 0;
+      }
+
+      .w-switch__off {
+        opacity: 1;
+      }
+    }
+
+    .w-switch__input {
+
+      &:checked~.w-switch__marker {
+
+        &:active {
+          .w-switch__off {
+            transform: translateX(6px);
+          }
+        }
+
+        .w-switch__on {
+          opacity: 1;
+        }
+
+        .w-switch__off {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  &__on,
+  &__off {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    font-size: 12px;
+    color: var(--color-contrast-low);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  &__on {
+    left: calc(var(--w-switch-padding) * 2);
+  }
+
+  &__off {
+    right: calc(var(--w-switch-padding) * 2);
   }
 }

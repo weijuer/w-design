@@ -47,7 +47,8 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
-    "@w-design/w-design-icon": "workspace:^"
+    "@w-design/icons": "workspace:^",
+    "@w-design/eslint-config": "workspace:^"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",

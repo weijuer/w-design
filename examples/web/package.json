@@ -1,5 +1,5 @@
 {
-    "name": "@w-design/w-design-vue-example",
+    "name": "@w-design/examples",
     "version": "0.0.11",
     "title": "W Design Vue Example",
     "description": "A simple example for testing w-design-vue.",
@@ -17,7 +17,7 @@
         "vite": "^2.9.0"
     },
     "dependencies": {
-        "@w-design/w-design-icon": "workspace:^",
+        "@w-design/icons": "workspace:^",
         "@w-design/w-design-vue": "workspace:^"
     },
     "devDependencies": {

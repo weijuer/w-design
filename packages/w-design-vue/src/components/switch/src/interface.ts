@@ -7,12 +7,17 @@ export const switchProps = {
     modelValue: Boolean,
     size: {
         type: [Number, String] as PropType<Size>,
-        dafault: 'default'
+        dafault: ''
     },
     type: {
         type: String as PropType<Type>,
-        default: 'default'
+        default: ''
     },
+    checked: {
+        type: Boolean,
+        default: undefined
+    },
+    defaultChecked: Boolean,
     name: String,
     autoFocus: Boolean,
     loading: Boolean,

@@ -17,7 +17,7 @@
 
 <script lang="ts">
 export default {
-  name: 'w-button'
+  name: 'WButton'
 }
 </script>
 

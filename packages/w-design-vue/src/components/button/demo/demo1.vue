@@ -21,9 +21,9 @@
     <w-divider dashed>Sizes</w-divider>
     <w-button v-for="size of sizes" :key="size" :size="size" type="primary">{{ size ? size : 'default' }}</w-button>
     <w-divider dashed>Icon only</w-divider>
-    <w-button v-for="icon of defaultIcons" :icon="icon"></w-button>
+    <w-button v-for="icon of defaultIcons" :icon="icon" :key="icon"></w-button>
     <w-divider dashed>With Icon</w-divider>
-    <w-button v-for="icon of defaultIcons">
+    <w-button v-for="icon of defaultIcons" :key="icon">
       <template #icon>
         <w-icon :name="icon"></w-icon>
       </template>

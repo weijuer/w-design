@@ -8,7 +8,8 @@ export default defineConfig({
     lib: {
       entry: 'src/index.ts',
       formats: ['es', 'umd'],
-      name: 'w-design-icon'
+      name: 'w-design-icon',
+      fileName: 'w-design-icon'
     }
   },
   plugins: [

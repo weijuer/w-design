@@ -1,9 +1,10 @@
-import { ref, SetupContext, watch } from 'vue'
+import { ref, SetupContext } from 'vue'
 import { type SwitchEmits, type SwitchProps } from './interface'
 
 export const useSwitch = (props: SwitchProps, emit: SetupContext<SwitchEmits>['emit']) => {
   const _ref = ref<HTMLInputElement>()
-  const isChecked = ref(props.modelValue)
+  const {modelValue, defaultChecked} = props
+  const isChecked = ref(defaultChecked ? defaultChecked : modelValue)
 
   // watch(isChecked, (isChecked) => {
   //   console.log('watch', isChecked)

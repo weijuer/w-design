@@ -1,5 +1,5 @@
 <template>
-  <label class="w-switch">
+  <label class="w-switch" :class="switchClass">
     <input
       :value="modelValue"
       :checked="isChecked"
@@ -10,24 +10,50 @@
       class="w-switch__input"
       type="checkbox"
     />
-    <div class="w-switch__marker"></div>
+    <div class="w-switch__marker">
+      <div class="w-switch__on">
+        <slot name="on"></slot>
+      </div>
+      <div class="w-switch__off">
+        <slot name="off"></slot>
+      </div>
+    </div>
+    <span class="w-switch__text">
+      <slot></slot>
+    </span>
   </label>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'w-switch'
+  name: 'WSwitch'
 }
 </script>
 
 <script setup lang="ts">
+import { computed, useSlots } from 'vue'
 import { switchProps, switchEmits } from './interface'
 import { useSwitch } from './useSwitch'
 
 const props = defineProps(switchProps)
 const emit = defineEmits(switchEmits)
+const slots = useSlots()
 
-const { _ref, isChecked, onChange } = useSwitch(props, emit)
+const { isChecked, onChange } = useSwitch(props, emit)
+
+const switchClass = computed(() => {
+  const { type, size, disabled, loading } = props
+
+  return [
+    type ? 'w-switch__' + type : '',
+    size ? 'w-switch__' + size : '',
+    slots.on || slots.off ? 'w-switch__icon' : '',
+    {
+      'is-disabled': disabled || loading,
+      'is-loading': loading
+    }
+  ]
+})
 </script>
 
 <style lang="scss" src="./switch.scss" />

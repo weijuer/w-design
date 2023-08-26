@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import Vue from '@vitejs/plugin-vue';
-import Components from "unplugin-vue-components/vite";
-import AutoImport from "unplugin-auto-import/vite";
+// import Components from "unplugin-vue-components/vite";
+// import AutoImport from "unplugin-auto-import/vite";
 // import dts from "vite-plugin-dts";
 
 export default defineConfig({
