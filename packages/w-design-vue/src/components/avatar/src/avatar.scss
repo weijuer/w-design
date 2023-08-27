@@ -6,6 +6,13 @@
   --w-avatar-border-radius: 6px;
 }
 
+$avatar-sizes: (
+  small: 0.65em,
+  default: 1em,
+  medium: 1.25em,
+  large: 1.5em
+);
+
 .w-avatar {
   position: relative;
   display: block;
@@ -14,6 +21,7 @@
   height: var(--w-avatar-height, 1em);
   line-height: var(--w-avatar-height, 1em);
   border-radius: 50%;
+  box-sizing: border-box;
 
   &__figure {
     margin: 0;
@@ -64,17 +72,19 @@
     background-color: var(--color-contrast-medium);
   }
 
-  &.w-avatar__small {
-    font-size: small;
-  }
-  &.w-avatar__medium {
-    font-size: medium;
-  }
-  &.w-avatar__large {
-    font-size: large;
+  // sizes
+  @each $key, $value in $avatar-sizes {
+    &.w-avatar__#{$key} {
+      font-size: #{$value};
+    }
   }
 
   &.w-avatar__square {
     border-radius: var(--w-avatar-border-radius);
+  }
+
+  &.is-bordered {
+    outline: 2px solid #e5e5e5;
+    outline-offset: 2px;
   }
 }

@@ -13,6 +13,7 @@ export const useSwitch = (props: SwitchProps, emit: SetupContext<SwitchEmits>['e
 
   const onChange = (event: Event) => {
     const { checked } = event.target as HTMLInputElement;
+    isChecked.value = checked 
     emit('change', event)
     emit('update:modelValue', checked)
   }

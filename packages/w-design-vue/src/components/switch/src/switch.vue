@@ -11,11 +11,14 @@
       type="checkbox"
     />
     <div class="w-switch__marker">
-      <div class="w-switch__on">
+      <div v-if="slots.on" class="w-switch__on">
         <slot name="on"></slot>
       </div>
-      <div class="w-switch__off">
+      <div v-if="slots.off" class="w-switch__off">
         <slot name="off"></slot>
+      </div>
+      <div v-if="slots['thumb-icon']" class="w-switch__thumb-icon">
+        <slot name="thumb-icon" v-bind="{ isChecked }"></slot>
       </div>
     </div>
     <span class="w-switch__text">
@@ -47,7 +50,7 @@ const switchClass = computed(() => {
   return [
     type ? 'w-switch__' + type : '',
     size ? 'w-switch__' + size : '',
-    slots.on || slots.off ? 'w-switch__icon' : '',
+    slots.on || slots.off || slots['thumb-icon'] ? 'w-switch__icon' : '',
     {
       'is-disabled': disabled || loading,
       'is-loading': loading

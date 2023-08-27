@@ -15,9 +15,11 @@ export const collapseProps = {
         dafault: ''
     },
     accordion: Boolean,
+    shadowed: Boolean,
+    splitted: Boolean,
     bordered: {
         type: Boolean,
-        default: true
+        default: false
     },
 }
 

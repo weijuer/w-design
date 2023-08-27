@@ -18,19 +18,55 @@
     <w-switch v-for="theme of themes" :key="theme" :type="theme" default-checked>{{ theme }}</w-switch>
   </section>
 
+  <w-divider dashed>With Thumb Icon</w-divider>
+  <section class="space">
+    <w-switch default-checked type="success">
+      <template #thumb-icon="{ isChecked }">
+        <w-icon :name="isChecked ? 'sun' : 'moon'"></w-icon>
+      </template>
+      Dark mode
+    </w-switch>
+
+    <w-switch default-checked type="info">
+      <template #thumb-icon="{ isChecked }">
+        {{ isChecked ? '开' : '关' }}
+      </template>
+      Dark mode
+    </w-switch>
+
+    <w-switch default-checked type="focus">
+      <template #thumb-icon="{ isChecked }">
+        {{ isChecked ? '🌞' : '🌚' }}
+      </template>
+    </w-switch>
+
+    <w-switch default-checked type="brand">
+      <template #thumb-icon="{ isChecked }">
+        {{ isChecked ? '🌈' : '💥' }}
+      </template>
+    </w-switch>
+  </section>
+
   <w-divider dashed>With Icons</w-divider>
-  <section>
-    <w-switch default-checked>
+  <section class="space">
+    <w-switch default-checked type="success">
       <template #on>
         <w-icon name="sun"></w-icon>
       </template>
       <template #off>
         <w-icon name="moon"></w-icon>
       </template>
+      Dark mode
     </w-switch>
-    <w-switch default-checked>
-      <template #on>ON</template>
-      <template #off>OFF</template>
+
+    <w-switch default-checked type="info">
+      <template #on>开</template>
+      <template #off>关</template>
+    </w-switch>
+
+    <w-switch default-checked type="focus">
+      <template #on>🌞</template>
+      <template #off>🌚</template>
     </w-switch>
   </section>
 </template>

@@ -25,7 +25,7 @@
 
 <script lang="ts">
 export default {
-  name: 'w-avatar'
+  name: 'WAvatar'
 }
 </script>
 
@@ -57,16 +57,25 @@ const avatarStyle = computed(() => {
   }
 })
 
-const avatarClass = computed(() => ({
-  'w-avatar__square': props.square,
-  'w-avatar__with-status': props.status,
-  [`w-avatar__${props.size}`]: typeof props.size === 'string'
-}))
+const avatarClass = computed(() => {
+  const { status, square, size, bordered } = props
 
-const statusComputedStyle = computed(() => ({
-  ...props.statusStyle,
-  backgroundColor: props.statusColor
-}))
+  return [
+    square ? 'w-avatar__square' : '',
+    status ? 'w-avatar__with-status' : '',
+    size && typeof size === 'string' ? 'w-avatar__' + size : '',
+    {
+      'is-bordered': bordered
+    }
+  ]
+})
+
+const statusComputedStyle = computed(() =>
+  // ...props.statusStyle,
+  Object.assign({}, props.statusStyle, {
+    backgroundColor: props.statusColor
+  })
+)
 </script>
 
 <style lang="scss" src="./avatar.scss" />

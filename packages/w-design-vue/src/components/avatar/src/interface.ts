@@ -13,6 +13,7 @@ export const avatarProps = {
     },
     square: Boolean,
     status: Boolean,
+    bordered: Boolean,
     statusColor: String,
     statusStyle: Object,
     alt: String,

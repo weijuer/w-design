@@ -1,26 +1,39 @@
 <template>
-    <div ref="_ref" class="collapse" :class="{ 'collapse--borderless': !props.bordered }">
-        <slot></slot>
-    </div>
+  <div ref="_ref" class="w-collapse" :class="collapseClass">
+    <slot></slot>
+  </div>
 </template>
 
 <script lang="ts">
 export default {
-    name: "collapse"
+  name: 'Collapse'
 }
 </script>
 
 <script setup lang="ts">
-import { collapseEmits, collapseProps } from './interface';
+import { computed } from 'vue'
+import { collapseEmits, collapseProps } from './interface'
 import { useCollapse } from './useCollapse'
 
-const props = defineProps(collapseProps);
+const props = defineProps(collapseProps)
 const emit = defineEmits(collapseEmits)
 
 const { _ref } = useCollapse(props, emit)
 
+const collapseClass = computed(() => {
+  const { bordered, splitted, shadowed } = props
+
+  return [
+    {
+      'is-bordered': bordered,
+      'is-splitted': splitted,
+      'is-shadowed': shadowed
+    }
+  ]
+})
+
 defineExpose({
-    ref: _ref
+  ref: _ref
 })
 </script>
 
