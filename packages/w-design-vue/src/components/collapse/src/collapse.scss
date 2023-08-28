@@ -1,6 +1,8 @@
+@import '../../_common/var';
+
 :root {
   --w-collapse-padding: 1rem;
-  --w-collapse-border-radius: 6px;
+  --w-radius-medium: 12px;
   --triangle-color: #d1d5db;
   --triangle-size: 0.5rem;
 }
@@ -9,7 +11,7 @@
   margin: 0;
   padding: 0;
   background-color: #fafafa;
-  border-radius: var(--w-collapse-border-radius, 6px);
+  border-radius: var(--w-radius-medium, 12px);
   box-sizing: border-box;
 
   .w-collapse__item {
@@ -72,6 +74,26 @@
     > .w-collapse__item {
       padding-left: var(--w-collapse-padding);
       padding-right: var(--w-collapse-padding);
+
+      .w-collapse__content {
+        padding-top: 4px;
+        background-color: transparent;
+      }
+    }
+  }
+
+  &.is-splitted {
+    display: flex;
+    flex-direction: column;
+
+    > .w-collapse__item {
+      padding-left: var(--w-collapse-padding);
+      padding-right: var(--w-collapse-padding);
+      border: 0;
+      border-radius: var(--w-radius-medium);
+      box-shadow:
+        0 0 1px 0px #a4a4a4,
+        0 0 10px 4px #d1d5db;
 
       .w-collapse__content {
         padding-top: 4px;

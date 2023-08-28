@@ -36,7 +36,13 @@ html {
   accent-color: var(--accent);
   overflow: auto;
   overflow-wrap: break-word;
-  font-family: Hiragino Maru Gothic Pro, BIZ UDGothic, Roboto, HelveticaNeue, Arial, sans-serif;
+  font-family:
+    Hiragino Maru Gothic Pro,
+    BIZ UDGothic,
+    Roboto,
+    HelveticaNeue,
+    Arial,
+    sans-serif;
   font-size: 16px;
   line-height: 1.35;
   text-size-adjust: 100%;

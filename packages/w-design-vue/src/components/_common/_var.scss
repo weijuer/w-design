@@ -27,8 +27,12 @@
   --color-contrast-higher: hsl(230, 13%, 9%);
 
   // appearance
-  --w-disabled-opacity: .5;
-  --w-border-radius-full: 9999px;
+  --w-disabled-opacity: 0.5;
+  --w-radius-tiny: 4px;
+  --w-radius-small: 8px;
+  --w-radius-medium: 12px;
+  --w-radius-large: 14px;
+  --w-radius-full: 9999px;
 }
 
 // Themes

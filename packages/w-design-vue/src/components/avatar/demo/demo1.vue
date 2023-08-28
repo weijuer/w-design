@@ -40,6 +40,10 @@
     <w-avatar></w-avatar>
     <w-avatar></w-avatar>
   </w-avatar-group>
+
+  <w-divider dashed>Image</w-divider>
+  <w-avatar size="large" src="https://i.pravatar.cc/300?u=a042581f4e29026704d"></w-avatar>
+  <w-avatar size="large" square bordered src="https://i.pravatar.cc/300?u=a04258114e29026302d"></w-avatar>
 </template>
 
 <script setup lang="ts">

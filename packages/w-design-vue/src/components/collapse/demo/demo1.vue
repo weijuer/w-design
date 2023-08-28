@@ -39,8 +39,18 @@
     </collapse-item>
   </collapse>
 
+  <w-divider dashed>Splitted</w-divider>
+  <collapse v-model:activeKey="state.activeKey4" splitted>
+    <collapse-item name="1" title="This is item header 1">
+      <p>{{ text }}</p>
+    </collapse-item>
+    <collapse-item name="2" title="This is item header 2">
+      <p>{{ text }}</p>
+    </collapse-item>
+  </collapse>
+
   <w-divider dashed>Custom Indicator</w-divider>
-  <collapse v-model:activeKey="state.activeKey4">
+  <collapse v-model:activeKey="state.activeKey5">
     <collapse-item name="1" title="This is item header 1">
       <template #icon="{ expanded }">
         <w-icon :name="expanded ? 'sun' : 'moon'" />

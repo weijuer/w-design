@@ -9,7 +9,7 @@
 }
 
 $switch-sizes: (
-  small: 0.98em,
+  small: 0.985em,
   default: 1em,
   medium: 1.55em,
   large: 1.65em
@@ -58,11 +58,12 @@ $switch-sizes: (
     display: inline-flex;
     align-items: center;
     width: var(--w-switch-width);
+    min-width: cal(var(--w-switch-width) + 4px);
     height: var(--w-switch-height);
     margin-right: 0.5rem;
     padding-left: var(--w-switch-padding);
     padding-right: var(--w-switch-padding);
-    border-radius: var(--w-border-radius-full);
+    border-radius: var(--w-radius-full);
     overflow: hidden;
     box-sizing: border-box;
     background-color: var(--color-bg-darker);
@@ -73,7 +74,7 @@ $switch-sizes: (
       width: var(--w-switch-size);
       height: var(--w-switch-size);
       background-color: var(--color-white);
-      border-radius: var(--w-border-radius-full);
+      border-radius: var(--w-radius-full);
       transition: all var(--w-switch-animation-duration);
     }
 
