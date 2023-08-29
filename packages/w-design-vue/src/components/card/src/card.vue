@@ -1,87 +1,47 @@
 <template>
-  <div class="w-card" :class="[cardType]">
-    <div class="w-card-header">
-      <h3 class="w-card-title" v-if="$slots.title || title">
+  <div class="w-card" :class="cardClass">
+    <header v-if="$slots.title || title" class="w-card__header">
+      <h3 class="w-card__title" v-if="$slots.title || title">
         <slot name="title">{{ title }}</slot>
       </h3>
-      <div class="w-card-desc" v-if="$slots.desc || desc" @click="descHandler">
-        <slot name="desc">{{ desc }}</slot>
+      <div class="w-card__extra" v-if="$slots.extra || extra" @click="descHandler">
+        <slot name="extra">{{ extra }}</slot>
       </div>
-    </div>
-    <div class="w-card-body">
+    </header>
+    <div class="w-card__body">
       <slot></slot>
     </div>
 
     <slot name="footer">
-      <div class="w-card-footer" v-if="props.footer" v-html="props.footer"></div>
+      <footer class="w-card__footer" v-if="props.footer" v-html="props.footer"></footer>
     </slot>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'w-card'
-};
+  name: 'WCard'
+}
 </script>
 
 <script setup>
-import { computed } from 'vue';
+import { computed } from 'vue'
+import { previewProps } from './interface'
+const props = defineProps(previewProps)
 
-const props = defineProps({
-  type: String,
-  title: { default: () => { }, type: [Object, String] },
-  footer: { default: () => { }, type: [Object, String] },
-  desc: String
-});
+const cardClass = computed(() => {
+  const { type, size, bordered, loading, hoverable } = props
 
-const cardType = computed(() => (props.type ? `w-card-${props.type}` : ''));
+  return [
+    type ? 'w-card__' + type : '',
+    size ? 'w-card__' + size : '',
+    {
+      'is-loading': loading,
+      'is-hoverable': hoverable,
+      'is-bordered': bordered
+    }
+  ]
+})
 </script>
 
-<style lang="scss">
-$theme-color: #2ecc71;
-
-.w-card {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  margin: 0;
-  padding: 1rem;
-  box-shadow: 0 0 13px 0 rgba(82, 63, 105, 0.05);
-  background-color: #fff;
-  border-radius: 10px;
-
-  &.w-card-sticky {
-    position: sticky;
-  }
-
-  &:after {
-    content: '';
-    display: block;
-    filter: blur(1px);
-  }
-
-  .w-card-header {
-    padding: 0.5rem 0 1rem 0;
-    margin-bottom: 0.5rem;
-
-    .w-card-title {
-      display: flex;
-      font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: 0;
-      color: #595d6e;
-    }
-
-    .w-card-desc {
-      display: inline-block;
-      margin-top: 0.2rem;
-      color: #74788d;
-    }
-  }
-
-  .w-card-body {
-    color: #575962;
-  }
-}
-</style>
+<style lang="scss" src="./card.scss"></style>

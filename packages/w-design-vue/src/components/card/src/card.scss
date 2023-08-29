@@ -1,0 +1,43 @@
+.w-card {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  margin: 0;
+  padding: 1rem;
+  box-shadow: 0 0 13px 0 rgba(82, 63, 105, 0.05);
+  background-color: #fff;
+  border-radius: 10px;
+
+  &.w-card-sticky {
+    position: sticky;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    filter: blur(1px);
+  }
+
+  &__header {
+    padding: 0.5rem 0 1rem 0;
+    margin-bottom: 0.5rem;
+
+    .w-card__title {
+      display: flex;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0;
+      color: #595d6e;
+    }
+
+    .w-card__extra {
+      display: inline-block;
+      margin-top: 0.2rem;
+      color: #74788d;
+    }
+  }
+
+  &__body {
+    color: #575962;
+  }
+}

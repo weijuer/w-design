@@ -28,3 +28,6 @@ export * from './checkbox'
 export * from './checkbox2'
 export * from './radio'
 export * from './switch'
+
+// plugins
+export * from './preview'

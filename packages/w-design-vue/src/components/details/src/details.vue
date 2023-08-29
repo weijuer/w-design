@@ -20,19 +20,17 @@
 
 <script lang="ts">
 export default {
-  name: 'w-details'
+  name: 'WDetails'
 }
 </script>
 
 <script setup lang="ts">
-import { computed, useSlots } from 'vue'
 import { detailsProps, detailsEmits } from './interface'
 import { useDetails } from './useDetails'
 
 const props = defineProps(detailsProps)
 const emit = defineEmits(detailsEmits)
 
-const slots = useSlots()
 const { expanded, onClick } = useDetails(props, emit)
 </script>
 
