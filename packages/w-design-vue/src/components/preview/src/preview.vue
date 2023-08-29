@@ -1,18 +1,18 @@
 <template>
   <div class="w-preview">
     <div class="w-preview__render" role="render">
-      <slot name="render"></slot>
+      <slot></slot>
     </div>
     <div class="w-preview__meta">
       <div class="w-preview__meta-title">{{ title }}</div>
       <div class="w-preview__meta-desc">
-        <slot></slot>
+        {{ desc }}
       </div>
-      <div class="w-preview__meta-actions">
+      <div v-if="$slots.code" class="w-preview__meta-actions">
         <w-button icon="delete" @click="onClick"></w-button>
       </div>
     </div>
-    <div class="w-preview__code" :aria-hidden="!expanded">
+    <div v-if="$slots.code" class="w-preview__code" :aria-hidden="!expanded">
       <slot name="code"></slot>
     </div>
   </div>

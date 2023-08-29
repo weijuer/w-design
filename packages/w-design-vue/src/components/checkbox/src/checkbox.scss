@@ -1,7 +1,17 @@
+@import '../../_common/var';
+
 :root {
   --w-checkbox-radius: 4px;
   --w-checkbox-size: 20px;
+  --w-checkbox-checked-color: var(--color-primary);
 }
+
+$btn-sizes: (
+  small: 0.8,
+  default: 1,
+  medium: 1.15,
+  large: 1.3
+);
 
 .w-checkbox {
   display: inline-block;
@@ -19,13 +29,13 @@
     pointer-events: none;
     appearance: none;
 
-    &:active ~ .w-checkbox__marker {
+    &:not(:disabled):active ~ .w-checkbox__marker {
       transform: scale(0.8);
       transition: transform 0.2s;
     }
 
     &:checked ~ .w-checkbox__marker {
-      color: var(--color-primary);
+      color: var(--w-checkbox-checked-color);
       background-color: currentColor;
 
       &::after {
@@ -59,7 +69,7 @@
       box-shadow 0.2s;
 
     &:hover {
-      color: var(--color-primary);
+      color: var(--w-checkbox-checked-color);
     }
 
     &::before,
@@ -91,6 +101,43 @@
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
       transition: all 0.3s;
+    }
+  }
+
+  // sizes
+  @each $key, $value in $btn-sizes {
+    &.w-checkbox__#{$key} {
+      .w-checkbox__marker {
+        transform: scale(#{$value});
+      }
+    }
+  }
+
+  // themes
+  @each $theme-name, $theme-value in $themes {
+    &.w-checkbox__#{$theme-name} {
+      --w-checkbox-checked-color: #{$theme-value};
+    }
+  }
+
+  &.is-disabled {
+    opacity: var(--w-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  &.is-indeterminate {
+    .w-checkbox__marker {
+      --w-checkbox-checked-color: #cbcbcb;
+
+      &::before,
+      &::after {
+        opacity: 1;
+      }
+
+      &::after {
+        border-width: 0 2px 0 0;
+        transform: rotate(90deg);
+      }
     }
   }
 }

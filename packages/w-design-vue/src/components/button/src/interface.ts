@@ -1,5 +1,4 @@
-import type { PropType } from 'vue'
-import { ExtractPropTypes } from 'vue'
+import {type  PropType, ExtractPropTypes } from 'vue'
 
 export type Size = 'tiny' | 'small' | 'medium' | 'large'
 

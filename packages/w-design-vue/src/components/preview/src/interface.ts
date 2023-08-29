@@ -8,6 +8,7 @@ export const previewProps = {
         dafault: ''
     },
     title: String,
+    desc: String,
     status: Boolean,
 }
 

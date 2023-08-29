@@ -1,9 +1,9 @@
 @import '../../_common/var';
 
 :root {
-  --w-avatar-width: 2em;
-  --w-avatar-height: 2em;
-  --w-avatar-border-radius: 6px;
+  --w-preview-divider-color: #dadada;
+  --w-preview-divider-gap: 1em;
+  --w-preview-divider-style: dashed;
 }
 
 .w-preview {
@@ -17,28 +17,38 @@
   transition: all 0.2s;
 
   &__render {
-    padding: 42px 24px 50px;
+    padding: 30px 24px;
     color: inherit;
-    background-color: var(--color-bg);
-    border-bottom: 1px solid var(--w-border-color-default);
   }
 
   &__meta {
     position: relative;
-    background-color: var(--color-bg);
 
     &-title {
-      position: absolute;
-      top: -14px;
-      margin-left: 16px;
-      padding: 1px 8px;
+      display: flex;
+      align-items: center;
+      gap: var(--w-preview-divider-gap);
+      height: 1px;
       color: #777;
-      background-color: var(--color-bg);
-      transition: background-color 0.4s;
+
+      &::after,
+      &::before {
+        content: '';
+        height: 1px;
+        flex-grow: 1;
+        border-color: var(--w-preview-divider-color);
+        border-style: var(--w-preview-divider-style);
+        border-width: 1px 0 0;
+        box-sizing: border-box;
+      }
+
+      &::before {
+        max-width: 2em;
+      }
     }
 
     &-desc {
-      padding: 18px 24px 12px;
+      padding: 18px 24px;
     }
 
     &-actions {
