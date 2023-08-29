@@ -11,6 +11,7 @@
       @click="onClick"
       :true-value="trueValue"
       :false-value="falseValue"
+      :indeterminate="isIndeterminate"
       type="checkbox"
       aria-label="Checkbox label"
     />
@@ -34,17 +35,17 @@ import { useCheckbox } from './useCheckbox'
 const props = defineProps(checkboxProps)
 const emit = defineEmits(checkboxEmits)
 
+const { _ref, isChecked, isIndeterminate, onChange, onClick } = useCheckbox(props, emit)
+
 const checkboxClass = computed(() => {
-  const { type, size, disabled, indeterminate } = props
+  const { type, size, disabled } = props
 
   return [
     type ? 'w-checkbox__' + type : '',
     size ? 'w-checkbox__' + size : '',
-    { 'is-indeterminate': indeterminate, 'is-disabled': disabled }
+    { 'is-indeterminate': isIndeterminate.value, 'is-disabled': disabled }
   ]
 })
-
-const { _ref, isChecked, onChange, onClick } = useCheckbox(props, emit)
 
 defineExpose({
   _ref

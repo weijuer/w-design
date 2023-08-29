@@ -44,6 +44,18 @@ $btn-sizes: (
       }
     }
 
+    &:indeterminate ~ .w-checkbox__marker {
+      color: var(--w-checkbox-checked-color);
+      background-color: currentColor;
+
+      &::after {
+        display: block;
+        opacity: 1;
+        border-width: 0 2px 0 0;
+        transform: rotate(90deg);
+      }
+    }
+
     &:focus ~ .w-checkbox__marker {
       &::before {
         opacity: 0.2;
@@ -128,16 +140,6 @@ $btn-sizes: (
   &.is-indeterminate {
     .w-checkbox__marker {
       --w-checkbox-checked-color: #cbcbcb;
-
-      &::before,
-      &::after {
-        opacity: 1;
-      }
-
-      &::after {
-        border-width: 0 2px 0 0;
-        transform: rotate(90deg);
-      }
     }
   }
 }
