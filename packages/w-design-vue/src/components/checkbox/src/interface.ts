@@ -41,7 +41,32 @@ export const checkboxProps = {
     indeterminate: Boolean
 }
 
+export interface Option {
+    label: string,
+    value: string,
+    disabled?: boolean,
+    indeterminate?: boolean,
+    onChange?: (checked: boolean) => void
+}
+
+export const checkboxGroupProps = {
+    modelValue: {
+        type: [String, Number, Array] as PropType<string[] | Option[]>,
+        default: false
+    },
+    name: String,
+    disabled: Boolean,
+    options: {
+        type: [String, Array] as PropType<string[] | Option[]>,
+        dafault: []
+    }
+}
+
 export const checkboxEmits = ['click', 'change', 'update:modelValue']
+export const checkboxGroupEmits = ['click', 'change', 'update:modelValue']
 
 export type CheckboxProps = ExtractPropTypes<typeof checkboxProps>
 export type CheckboxEmits = typeof checkboxEmits
+
+export type CheckboxGroupProps = ExtractPropTypes<typeof checkboxGroupProps>
+export type CheckboxGroupEmits = typeof checkboxGroupEmits

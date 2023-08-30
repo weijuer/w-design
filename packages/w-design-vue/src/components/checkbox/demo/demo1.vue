@@ -25,25 +25,64 @@
   </w-preview>
 
   <w-preview title="Indeterminate" desc="半勾选">
-    <w-checkbox indeterminate>Option</w-checkbox>
+    <section class="space-inline">
+      <w-checkbox :indeterminate="state.indeterminate">Option</w-checkbox>
+      <w-button @click="toggleCheckbox">toggle</w-button>
+    </section>
+  </w-preview>
+
+  <w-preview title="Group" desc="组">
+    <section class="space-inline">
+      <w-checkbox :indeterminate="state.indeterminate" @change="onCheckAllChange">All</w-checkbox>
+      <!-- <w-divider></w-divider> -->
+      <w-checkbox-group v-model="state.checkedList" :options="plainOptions"></w-checkbox-group>
+    </section>
   </w-preview>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive, watch } from 'vue'
 
 const checked = ref(false)
 const themes = ref(['primary', 'success', 'warning', 'info', 'danger', 'brand', 'focus'])
 const sizes = ref(['small', '', 'medium', 'large'])
 
+const plainOptions = ['Apple', 'Pear', 'Orange']
+
+const state = reactive({
+  indeterminate: false,
+  checkAll: false,
+  checkedList: ['Apple', 'Orange']
+})
+
 const onChange = (e) => {
   console.log(e)
+}
+
+const onCheckAllChange = (e) => {
+  Object.assign(state, {
+    checkedList: e.target.checked ? plainOptions : [],
+    indeterminate: false
+  })
+}
+
+watch(
+  () => state.checkedList,
+  (val) => {
+    state.indeterminate = !!val.length && val.length < plainOptions.length
+    state.checkAll = val.length === plainOptions.length
+  }
+)
+
+const toggleCheckbox = () => {
+  state.indeterminate = !state.indeterminate
 }
 </script>
 
 <style scoped lang="scss">
 .space-inline {
   display: flex;
+  align-items: center;
   gap: 1em;
 }
 </style>

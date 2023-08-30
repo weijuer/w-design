@@ -45,6 +45,7 @@ $btn-sizes: (
     }
 
     &:indeterminate ~ .w-checkbox__marker {
+      --w-checkbox-checked-color: #cbcbcb;
       color: var(--w-checkbox-checked-color);
       background-color: currentColor;
 
@@ -135,11 +136,5 @@ $btn-sizes: (
   &.is-disabled {
     opacity: var(--w-disabled-opacity);
     cursor: not-allowed;
-  }
-
-  &.is-indeterminate {
-    .w-checkbox__marker {
-      --w-checkbox-checked-color: #cbcbcb;
-    }
   }
 }

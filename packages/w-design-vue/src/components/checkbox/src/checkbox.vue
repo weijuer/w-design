@@ -40,11 +40,7 @@ const { _ref, isChecked, isIndeterminate, onChange, onClick } = useCheckbox(prop
 const checkboxClass = computed(() => {
   const { type, size, disabled } = props
 
-  return [
-    type ? 'w-checkbox__' + type : '',
-    size ? 'w-checkbox__' + size : '',
-    { 'is-indeterminate': isIndeterminate.value, 'is-disabled': disabled }
-  ]
+  return [type ? 'w-checkbox__' + type : '', size ? 'w-checkbox__' + size : '', { 'is-disabled': disabled }]
 })
 
 defineExpose({
