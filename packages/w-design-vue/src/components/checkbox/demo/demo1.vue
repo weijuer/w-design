@@ -26,15 +26,16 @@
 
   <w-preview title="Indeterminate" desc="半勾选">
     <section class="space-inline">
-      <w-checkbox :indeterminate="state.indeterminate">Option</w-checkbox>
-      <w-button @click="toggleCheckbox">toggle</w-button>
+      <w-checkbox :indeterminate="state.indeterminate1">Option</w-checkbox>
+      <w-button @click="state.indeterminate1 = !state.indeterminate1">toggle</w-button>
     </section>
   </w-preview>
 
   <w-preview title="Group" desc="组">
     <section class="space-inline">
-      <w-checkbox :indeterminate="state.indeterminate" @change="onCheckAllChange">All</w-checkbox>
-      <!-- <w-divider></w-divider> -->
+      <w-checkbox v-model="state.checkAll" :indeterminate="state.indeterminate" @change="onCheckAllChange">
+        All
+      </w-checkbox>
       <w-checkbox-group v-model="state.checkedList" :options="plainOptions"></w-checkbox-group>
     </section>
   </w-preview>
@@ -50,6 +51,7 @@ const sizes = ref(['small', '', 'medium', 'large'])
 const plainOptions = ['Apple', 'Pear', 'Orange']
 
 const state = reactive({
+  indeterminate1: true,
   indeterminate: false,
   checkAll: false,
   checkedList: ['Apple', 'Orange']
@@ -71,12 +73,9 @@ watch(
   (val) => {
     state.indeterminate = !!val.length && val.length < plainOptions.length
     state.checkAll = val.length === plainOptions.length
-  }
+  },
+  { immediate: true }
 )
-
-const toggleCheckbox = () => {
-  state.indeterminate = !state.indeterminate
-}
 </script>
 
 <style scoped lang="scss">

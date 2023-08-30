@@ -1,24 +1,52 @@
-import { ref, SetupContext } from 'vue'
-import { type CheckboxGroupEmits, type CheckboxGroupProps } from './interface'
+import { computed, provide, ref, SetupContext } from 'vue'
+import { CHECKBOXGROUP_KEY, Option, type CheckboxGroupEmits, type CheckboxGroupProps } from './interface'
 
 export const useCheckboxGroup = (props: CheckboxGroupProps, emit: SetupContext<CheckboxGroupEmits>['emit']) => {
-
-
     const _ref = ref<HTMLInputElement>()
 
-    const onChange = (event: Event) => {
-        const { checked, value } = event.target as HTMLInputElement
+    const { name, disabled } = props
+
+    const toggleOption = (option: Option) => {
+        const { value } = option
         const { modelValue } = props
-        const checkedValue = checked ? (<string[]>modelValue).push(value) : (<string[]>modelValue).filter((option: string) => value !== option);
-        emit('change', checkedValue)
+
+        const checkedValue = (<string[]>modelValue).indexOf(value) === -1
+            ? (<string[]>modelValue).push(value) && modelValue.slice()
+            : (<string[]>modelValue).filter((option: string) => value !== option)
+
         emit('update:modelValue', checkedValue)
+        emit('change', checkedValue)
     }
 
     const onClick = (event: MouseEvent) => {
         emit('click', event)
     }
 
-    // const checkboxGroupContext: any = inject(CHECKBOX_KEY);
+    const computedOptions = computed(() => {
+        return props.options!.map((option) => {
+            if (typeof option === 'string' || typeof option === 'number') {
+                return {
+                    label: option,
+                    value: option
+                }
+            }
 
-    return { _ref, onChange, onClick }
+            return option
+        })
+    })
+
+    const isChecked = (value: string) => {
+        const { modelValue } = props
+        return (<string[]>modelValue).some((option) => option === value)
+    }
+
+    const checkboxGroupClass = computed(() => {
+        const { disabled } = props
+
+        return [{ 'is-disabled': disabled }]
+    })
+
+    provide(CHECKBOXGROUP_KEY, { name, disabled, toggleOption });
+
+    return { _ref, isChecked, computedOptions, checkboxGroupClass, toggleOption, onClick }
 }

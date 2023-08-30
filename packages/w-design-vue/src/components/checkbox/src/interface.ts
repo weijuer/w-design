@@ -2,12 +2,21 @@ import { type PropType, ExtractPropTypes, InjectionKey } from 'vue'
 
 export type Numeric = string | number
 
-export type CheckboxProvide = {
-    auto: boolean,
-    toggle: (name: Numeric, expanded: boolean) => void;
+export interface Option {
+    label: string,
+    value: string,
+    disabled?: boolean,
+    indeterminate?: boolean,
+    onChange?: (checked: boolean) => void
+}
+
+export type CheckboxGroupProvide = {
+    name?: string,
+    disabled: boolean,
+    toggleOption: (option: Option) => void;
 };
 
-export const CHECKBOX_KEY: InjectionKey<CheckboxProvide> = Symbol('checkbox');
+export const CHECKBOXGROUP_KEY: InjectionKey<CheckboxGroupProvide> = Symbol('checkboxgroup');
 
 export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
@@ -39,14 +48,6 @@ export const checkboxProps = {
         default: false,
     },
     indeterminate: Boolean
-}
-
-export interface Option {
-    label: string,
-    value: string,
-    disabled?: boolean,
-    indeterminate?: boolean,
-    onChange?: (checked: boolean) => void
 }
 
 export const checkboxGroupProps = {

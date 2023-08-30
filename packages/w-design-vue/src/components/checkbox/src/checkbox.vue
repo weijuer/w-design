@@ -11,7 +11,7 @@
       @click="onClick"
       :true-value="trueValue"
       :false-value="falseValue"
-      :indeterminate="isIndeterminate"
+      :indeterminate="indeterminate"
       type="checkbox"
       aria-label="Checkbox label"
     />
@@ -28,23 +28,18 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { checkboxEmits, checkboxProps } from './interface'
 import { useCheckbox } from './useCheckbox'
 
 const props = defineProps(checkboxProps)
 const emit = defineEmits(checkboxEmits)
 
-const { _ref, isChecked, isIndeterminate, onChange, onClick } = useCheckbox(props, emit)
-
-const checkboxClass = computed(() => {
-  const { type, size, disabled } = props
-
-  return [type ? 'w-checkbox__' + type : '', size ? 'w-checkbox__' + size : '', { 'is-disabled': disabled }]
-})
+const { _ref, checkboxClass, isChecked, focus, blur, onChange, onClick } = useCheckbox(props, emit)
 
 defineExpose({
-  _ref
+  _ref,
+  focus,
+  blur
 })
 </script>
 
