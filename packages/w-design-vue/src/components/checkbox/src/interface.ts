@@ -22,8 +22,10 @@ export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
 export type Type = 'default' | 'primary' | 'success' | 'warning' | 'info' | 'danger' | 'brand' | 'foucs'
 
+export type Orientation = 'vertical' | 'horizontal'
+
 export const checkboxProps = {
-    modelValue: {
+    value: {
         type: [Boolean, String, Number],
         default: false
     },
@@ -31,14 +33,6 @@ export const checkboxProps = {
         type: String as PropType<Type>,
         dafault: 'default'
     },
-    size: String as PropType<Size>,
-    checked: {
-        type: Boolean,
-        default: undefined
-    },
-    autoFocus: Boolean,
-    defaultChecked: Boolean,
-    disabled: Boolean,
     trueValue: {
         type: [Boolean, String, Number],
         default: true,
@@ -47,20 +41,29 @@ export const checkboxProps = {
         type: [Boolean, String, Number],
         default: false,
     },
+    modelValue: Boolean,
+    size: String as PropType<Size>,
+    autoFocus: Boolean,
+    defaultChecked: Boolean,
+    disabled: Boolean,
     indeterminate: Boolean
 }
 
 export const checkboxGroupProps = {
     modelValue: {
-        type: [String, Number, Array] as PropType<string[] | Option[]>,
+        type: [String, Number, Array] as PropType<string[]>,
         default: false
     },
-    name: String,
-    disabled: Boolean,
+    orientation: {
+        type: String as PropType<Orientation>,
+        default: 'vertical'
+    },
     options: {
         type: [String, Array] as PropType<string[] | Option[]>,
         dafault: []
-    }
+    },
+    name: String,
+    disabled: Boolean,
 }
 
 export const checkboxEmits = ['click', 'change', 'update:modelValue']

@@ -1,4 +1,12 @@
 .w-checkbox__group {
   display: flex;
   gap: 1em;
+
+  &.w-checkbox__group-vertical {
+    flex-direction: column;
+  }
+
+  &.w-checkbox__group-horizontal {
+    flex-direction: row;
+  }
 }

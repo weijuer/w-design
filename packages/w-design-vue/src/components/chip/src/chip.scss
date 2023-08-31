@@ -1,0 +1,46 @@
+@import '../../_common/var';
+
+:root {
+  --w-chip-padding: 4px 8px;
+  --w-chip-color: white;
+  --w-chip-border-radius: 6px;
+}
+
+.w-chip__wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.w-chip {
+  margin: 0;
+  padding: var(--w-chip-padding);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 2rem;
+  line-height: 1;
+  border: 0;
+  border-radius: var(--w-chip-border-radius);
+  color: inherit;
+  background-color: var(--color-contrast-lower);
+  appearance: none;
+  box-sizing: border-box;
+
+  @each $theme-name, $theme-value in $themes {
+    &.w-chip__#{$theme-name} {
+      color: var(--color-white);
+      background-color: $theme-value;
+
+      &.w-chip__outlined {
+        color: $theme-value;
+        background-color: transparent;
+        border: 1px solid currentColor;
+      }
+    }
+
+    &.w-chip__#{$theme-name}-light {
+      color: var(--color-contrast-higher);
+      background-color: fade-out($color: $theme-value, $amount: 0.65);
+    }
+  }
+}

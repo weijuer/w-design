@@ -39,7 +39,6 @@ $btn-sizes: (
       background-color: currentColor;
 
       &::after {
-        display: block;
         opacity: 1;
       }
     }
@@ -50,7 +49,6 @@ $btn-sizes: (
       background-color: currentColor;
 
       &::after {
-        display: block;
         opacity: 1;
         border-width: 0 2px 0 0;
         transform: rotate(90deg);
@@ -113,7 +111,7 @@ $btn-sizes: (
       border: solid white;
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
-      transition: all 0.3s;
+      transition: all 0.2s;
     }
   }
 

@@ -1,0 +1,32 @@
+@import '../../_common/var';
+:root {
+  --w-space-padding: 0 4px;
+  --w-space-color: white;
+  --w-space-gap: 8px;
+}
+
+$aligns: (
+  start: flex-start,
+  center: center,
+  end: flex-end,
+  baseline: baseline
+);
+
+.w-space {
+  display: inline-flex;
+  gap: var(--w-space-gap);
+
+  &.w-space__vertical {
+    flex-direction: column;
+  }
+
+  &.is-fill {
+    display: flex;
+  }
+
+  @each $key, $val in $aligns {
+    &.w-space__#{$key} {
+      align-items: #{$val};
+    }
+  }
+}

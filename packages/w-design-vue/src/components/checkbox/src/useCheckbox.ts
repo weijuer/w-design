@@ -2,8 +2,8 @@ import { computed, onMounted, ref, SetupContext, watch } from 'vue'
 import { type CheckboxEmits, type CheckboxProps } from './interface'
 
 export const useCheckbox = (props: CheckboxProps, emit: SetupContext<CheckboxEmits>['emit']) => {
-  const { checked, defaultChecked, indeterminate } = props
-  const isChecked = ref(checked ? checked : defaultChecked)
+  const { modelValue, defaultChecked, indeterminate } = props
+  const isChecked = ref(modelValue ? modelValue : defaultChecked)
   const isIndeterminate = ref(indeterminate)
 
   const _ref = ref<HTMLInputElement>()
@@ -21,9 +21,7 @@ export const useCheckbox = (props: CheckboxProps, emit: SetupContext<CheckboxEmi
       return
     }
 
-    console.log('onChange', checked, props.checked)
-
-    if (props.checked === undefined) {
+    if (props.modelValue === undefined) {
       isChecked.value = checked
     }
 
@@ -59,13 +57,12 @@ export const useCheckbox = (props: CheckboxProps, emit: SetupContext<CheckboxEmi
     { immediate: true }
   )
 
-  //   watch(
-  //     () => props.modelValue,
-  //     (modelValue) => {
-  //       isChecked.value = modelValue as boolean
-  //     },
-  //     { immediate: true }
-  //   )
+  watch(
+    () => props.modelValue,
+    (modelValue) => {
+      isChecked.value = modelValue!
+    }
+  )
 
   // const checkboxGroupContext: any = inject(CHECKBOX_KEY);
 

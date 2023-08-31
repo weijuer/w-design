@@ -7,7 +7,7 @@ export * from './main'
 export * from './footer'
 export * from './guide'
 export * from './divider'
-
+export * from './space'
 
 // componenets
 export * from './avatar'
@@ -15,8 +15,8 @@ export * from './collapse'
 export * from './card'
 export * from './icon'
 export * from './button'
+export * from './chip'
 export * from './badge'
-export * from './counter'
 export * from './modal'
 export * from './grid'
 export * from './breadcrumb'

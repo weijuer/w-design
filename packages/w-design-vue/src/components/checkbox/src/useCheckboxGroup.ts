@@ -10,9 +10,9 @@ export const useCheckboxGroup = (props: CheckboxGroupProps, emit: SetupContext<C
         const { value } = option
         const { modelValue } = props
 
-        const checkedValue = (<string[]>modelValue).indexOf(value) === -1
-            ? (<string[]>modelValue).push(value) && modelValue.slice()
-            : (<string[]>modelValue).filter((option: string) => value !== option)
+        const checkedValue = (modelValue).indexOf(value) === -1
+            ? (modelValue).push(value) && modelValue.slice()
+            : (modelValue).filter((option) => value !== option)
 
         emit('update:modelValue', checkedValue)
         emit('change', checkedValue)
@@ -37,13 +37,13 @@ export const useCheckboxGroup = (props: CheckboxGroupProps, emit: SetupContext<C
 
     const isChecked = (value: string) => {
         const { modelValue } = props
-        return (<string[]>modelValue).some((option) => option === value)
+        return (modelValue).some((option) => option === value)
     }
 
     const checkboxGroupClass = computed(() => {
-        const { disabled } = props
+        const { orientation, disabled } = props
 
-        return [{ 'is-disabled': disabled }]
+        return [orientation ? 'w-checkbox__group-' + orientation : '', { 'is-disabled': disabled }]
     })
 
     provide(CHECKBOXGROUP_KEY, { name, disabled, toggleOption });

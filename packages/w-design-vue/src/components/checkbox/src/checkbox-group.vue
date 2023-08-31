@@ -1,13 +1,20 @@
 <template>
-  <div ref="_fef" class="w-checkbox__group" :class="checkboxGroupClass">
+  <div
+    ref="_fef"
+    class="w-checkbox__group"
+    :class="checkboxGroupClass"
+    role="presentation"
+    :data-orientation="orientation"
+  >
     <slot>
       <w-checkbox
         v-for="option in computedOptions"
         :key="option.label"
-        :checked="isChecked(option.value)"
-        :model-value="option.value"
+        :model-value="isChecked(option.value)"
+        :value="option.value"
         :name="name"
         @change="toggleOption(option)"
+        :disabled="disabled"
       >
         {{ option.label }}
       </w-checkbox>

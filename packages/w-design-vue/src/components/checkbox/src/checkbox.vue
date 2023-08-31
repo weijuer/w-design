@@ -3,7 +3,7 @@
     <input
       ref="input"
       class="w-checkbox__input"
-      :value="modelValue"
+      :value="value"
       :checked="isChecked"
       :disabled="disabled"
       :autoFocus="autoFocus"
