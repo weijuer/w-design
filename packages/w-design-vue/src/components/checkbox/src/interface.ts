@@ -16,13 +16,11 @@ export type CheckboxGroupProvide = {
     toggleOption: (option: Option) => void;
 };
 
-export const CHECKBOXGROUP_KEY: InjectionKey<CheckboxGroupProvide> = Symbol('checkboxgroup');
+export const CHECKBOXGROUP_KEY: InjectionKey<CheckboxGroupProvide> = Symbol('checkboxGroup');
 
-export type Size = 'tiny' | 'small' | 'medium' | 'large'
-
-export type Type = 'default' | 'primary' | 'success' | 'warning' | 'info' | 'danger' | 'brand' | 'foucs'
-
+export type Size = 'small' | 'medium' | 'large'
 export type Orientation = 'vertical' | 'horizontal'
+export type Type = 'default' | 'primary' | 'success' | 'warning' | 'info' | 'danger' | 'brand' | 'foucs'
 
 export const checkboxProps = {
     value: {

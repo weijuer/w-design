@@ -1,0 +1,12 @@
+.w-radio__group {
+  display: flex;
+  gap: 1em;
+
+  &.w-radio__group-vertical {
+    flex-direction: column;
+  }
+
+  &.w-radio__group-horizontal {
+    flex-direction: row;
+  }
+}

@@ -14,6 +14,8 @@ $aligns: (
 
 .w-space {
   display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: var(--w-space-gap);
 
   &.w-space__vertical {
@@ -22,6 +24,11 @@ $aligns: (
 
   &.is-fill {
     display: flex;
+    align-items: normal;
+  }
+
+  &.is-wrap {
+    flex-wrap: wrap;
   }
 
   @each $key, $val in $aligns {

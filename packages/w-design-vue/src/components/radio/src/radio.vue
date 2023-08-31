@@ -1,10 +1,10 @@
 <template>
-  <label class="w-radio">
+  <label class="w-radio" :class="radioClass">
     <input
       ref="input"
       class="w-radio__input"
-      :value="modelValue"
-      :checked="checked"
+      :value="value"
+      :checked="isChecked"
       :disabled="disabled"
       :autoFocus="autoFocus"
       @change="onChange"
@@ -13,13 +13,13 @@
       aria-label="Radio label"
     />
     <div class="w-radio__marker" aria-hidden="true"></div>
-    <slot></slot>
+    <span class="w-radio__label"><slot></slot></span>
   </label>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'w-radio'
+  name: 'WRadio'
 }
 </script>
 
@@ -30,7 +30,9 @@ import { useRadio } from './useRadio'
 const props = defineProps(radioProps)
 const emit = defineEmits(radioEmits)
 
-const { onChange, onClick } = useRadio(props, emit)
+const { _ref, isChecked, radioClass, onChange, onClick, focus, blur } = useRadio(props, emit)
+
+defineExpose({ _ref, focus, blur })
 </script>
 
 <style lang="scss" src="./radio.scss" />

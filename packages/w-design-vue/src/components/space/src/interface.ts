@@ -2,7 +2,7 @@ import { type PropType, type ExtractPropTypes } from 'vue'
 
 export type Numeric = string | number
 
-export type Size = 'tiny' | 'small' | 'medium' | 'large'
+export type Size = 'small' | 'medium' | 'large'
 
 export type Orientation = 'vertical' | 'horizontal'
 
@@ -16,7 +16,7 @@ export const spaceProps = {
     size: [String, Number, Array] as PropType<Numeric | Numeric[]>,
     align: String as PropType<Align>,
     wrap: Boolean,
-    fill: Boolean,
+    fill: Boolean
 }
 
 export type SpaceProps = ExtractPropTypes<typeof spaceProps>
