@@ -2,6 +2,8 @@ import { type PropType, ExtractPropTypes, InjectionKey } from 'vue'
 
 export type Numeric = string | number
 
+export const unknownProp = null as unknown as PropType<unknown[]>;
+
 export interface Option {
     label: string,
     value: string,
@@ -11,9 +13,8 @@ export interface Option {
 }
 
 export type CheckboxGroupProvide = {
-    name?: string,
-    disabled: boolean,
-    toggleOption: (option: Option) => void;
+    props: CheckboxGroupProps,
+    updateValue: (option: Option) => void;
 };
 
 export const CHECKBOXGROUP_KEY: InjectionKey<CheckboxGroupProvide> = Symbol('checkboxGroup');
@@ -49,8 +50,7 @@ export const checkboxProps = {
 
 export const checkboxGroupProps = {
     modelValue: {
-        type: [String, Number, Array] as PropType<string[]>,
-        default: false
+        type: unknownProp,
     },
     orientation: {
         type: String as PropType<Orientation>,

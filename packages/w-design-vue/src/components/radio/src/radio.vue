@@ -5,8 +5,9 @@
       class="w-radio__input"
       :value="value"
       :checked="isChecked"
-      :disabled="disabled"
+      :disabled="isDisabled"
       :autoFocus="autoFocus"
+      :name="computedName"
       @change="onChange"
       @click="onClick"
       type="radio"
@@ -30,7 +31,7 @@ import { useRadio } from './useRadio'
 const props = defineProps(radioProps)
 const emit = defineEmits(radioEmits)
 
-const { _ref, isChecked, radioClass, onChange, onClick, focus, blur } = useRadio(props, emit)
+const { _ref, isDisabled, isChecked, computedName, radioClass, onChange, onClick, focus, blur } = useRadio(props, emit)
 
 defineExpose({ _ref, focus, blur })
 </script>

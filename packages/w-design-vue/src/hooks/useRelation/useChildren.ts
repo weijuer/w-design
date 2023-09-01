@@ -73,7 +73,7 @@ export function sortChildren(
 }
 
 export function useChildren<
-    Child extends ComponentPublicInstance = ComponentPublicInstance<{}, any>,
+    Child extends ComponentPublicInstance = ComponentPublicInstance<unknown, any>,
     ProvideValue = never
 >(key: InjectionKey<ProvideValue>) {
     const publicChildren: Child[] = reactive([])

@@ -5,7 +5,7 @@
       class="w-checkbox__input"
       :value="value"
       :checked="isChecked"
-      :disabled="disabled"
+      :disabled="isDisabled"
       :autoFocus="autoFocus"
       @change="onChange"
       @click="onClick"
@@ -34,13 +34,9 @@ import { useCheckbox } from './useCheckbox'
 const props = defineProps(checkboxProps)
 const emit = defineEmits(checkboxEmits)
 
-const { _ref, checkboxClass, isChecked, focus, blur, onChange, onClick } = useCheckbox(props, emit)
+const { _ref, checkboxClass, isChecked, isDisabled, focus, blur, onChange, onClick } = useCheckbox(props, emit)
 
-defineExpose({
-  _ref,
-  focus,
-  blur
-})
+defineExpose({ _ref, focus, blur })
 </script>
 
 <style lang="scss" src="./checkbox.scss" />

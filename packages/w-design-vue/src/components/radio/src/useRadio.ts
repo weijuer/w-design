@@ -1,31 +1,54 @@
-import { computed, onMounted, ref, SetupContext, watch } from 'vue'
-import { type RadioEmits, type RadioProps } from './interface'
+import { computed, inject, onMounted, ref, SetupContext } from 'vue'
+import { RADIOGROUP_KEY, type RadioEmits, type RadioProps } from './interface'
 
 export const useRadio = (props: RadioProps, emit: SetupContext<RadioEmits>['emit']) => {
-    const { modelValue, defaultChecked } = props
-    const isChecked = ref(modelValue ? modelValue : defaultChecked)
-
     const _ref = ref<HTMLInputElement>()
+    const radioGroupContext: any = inject(RADIOGROUP_KEY, null);
 
-    const radioClass = computed(() => {
-        const { type, size, disabled } = props
+    const isChecked = computed(() => {
+        const { value, modelValue, defaultChecked } = props
+        if (radioGroupContext) {
+            return value === radioGroupContext.props.modelValue
+        }
 
-        return [type ? 'w-radio__' + type : '', size ? 'w-radio__' + size : '', { 'is-disabled': disabled }]
+        return defaultChecked ? defaultChecked : modelValue;
     })
 
-    const onChange = (event: Event) => {
+    const isDisabled = computed(() => {
         const { disabled } = props
-        const { checked } = event.target as HTMLInputElement
-        if (disabled) {
+        if (radioGroupContext) {
+            return radioGroupContext.props.disabled || disabled
+        }
+
+        return disabled
+    })
+
+    const computedName = computed(() => {
+        const { name } = props
+        if (radioGroupContext) {
+            return radioGroupContext.props.name || name
+        }
+
+        return name
+    })
+
+    const radioClass = computed(() => {
+        const { type, size } = props
+        return [type ? 'w-radio__' + type : '', size ? 'w-radio__' + size : '', { 'is-disabled': isDisabled.value }]
+    })
+
+    const onChange = () => {
+        const { value } = props
+
+        if (isDisabled.value) {
             return
         }
 
-        if (props.modelValue === undefined) {
-            isChecked.value = checked
+        if (radioGroupContext) {
+            radioGroupContext.updateValue(value)
+        } else {
+            emit('update:modelValue', value)
         }
-
-        emit('update:modelValue', checked)
-        emit('change', event)
     }
 
     const onClick = (event: MouseEvent) => {
@@ -46,19 +69,12 @@ export const useRadio = (props: RadioProps, emit: SetupContext<RadioEmits>['emit
         }
     })
 
-    watch(
-        () => props.modelValue,
-        (modelValue) => {
-            isChecked.value = modelValue!
-        }
-    )
-
-    // const radioGroupContext: any = inject(CHECKBOX_KEY);
-
     return {
         _ref,
-        isChecked,
         radioClass,
+        isDisabled,
+        isChecked,
+        computedName,
         onChange,
         onClick,
         focus,

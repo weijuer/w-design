@@ -1,28 +1,41 @@
-import { computed, onMounted, ref, SetupContext, watch } from 'vue'
-import { type CheckboxEmits, type CheckboxProps } from './interface'
+import { computed, inject, onMounted, ref, SetupContext, watch } from 'vue'
+import { CHECKBOXGROUP_KEY, type CheckboxEmits, type CheckboxProps } from './interface'
 
 export const useCheckbox = (props: CheckboxProps, emit: SetupContext<CheckboxEmits>['emit']) => {
-  const { modelValue, defaultChecked, indeterminate } = props
-  const isChecked = ref(modelValue ? modelValue : defaultChecked)
+  const _ref = ref<HTMLInputElement>()
+  const checkboxGroupContext: any = inject(CHECKBOXGROUP_KEY, null);
+
+  const { indeterminate } = props
   const isIndeterminate = ref(indeterminate)
 
-  const _ref = ref<HTMLInputElement>()
+  const isChecked = computed(() => {
+    const { value, modelValue, defaultChecked } = props
+    if (checkboxGroupContext) {
+      return checkboxGroupContext.props.modelValue.includes(value)
+    }
+
+    return defaultChecked ? defaultChecked : modelValue;
+  })
+
+  const isDisabled = computed(() => {
+    const { disabled } = props
+    if (checkboxGroupContext) {
+      return checkboxGroupContext.props.disabled || disabled
+    }
+
+    return disabled
+  })
 
   const checkboxClass = computed(() => {
-    const { type, size, disabled } = props
+    const { type, size } = props
 
-    return [type ? 'w-checkbox__' + type : '', size ? 'w-checkbox__' + size : '', { 'is-disabled': disabled }]
+    return [type ? 'w-checkbox__' + type : '', size ? 'w-checkbox__' + size : '', { 'is-disabled': isDisabled.value }]
   })
 
   const onChange = (event: Event) => {
-    const { disabled } = props
     const { checked } = event.target as HTMLInputElement
-    if (disabled) {
+    if (isDisabled.value) {
       return
-    }
-
-    if (props.modelValue === undefined) {
-      isChecked.value = checked
     }
 
     emit('update:modelValue', checked)
@@ -57,19 +70,11 @@ export const useCheckbox = (props: CheckboxProps, emit: SetupContext<CheckboxEmi
     { immediate: true }
   )
 
-  watch(
-    () => props.modelValue,
-    (modelValue) => {
-      isChecked.value = modelValue!
-    }
-  )
-
-  // const checkboxGroupContext: any = inject(CHECKBOX_KEY);
-
   return {
     _ref,
     checkboxClass,
     isChecked,
+    isDisabled,
     isIndeterminate,
     focus,
     blur,

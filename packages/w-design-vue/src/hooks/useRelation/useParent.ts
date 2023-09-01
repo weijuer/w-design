@@ -3,7 +3,6 @@ import {
     ref,
     inject,
     computed,
-    onUnmounted,
     InjectionKey,
     getCurrentInstance,
     ComponentPublicInstance,
@@ -22,7 +21,7 @@ export function useParent<T>(key: InjectionKey<ParentProvide<T>>) {
 
     if (parent) {
         const instance = getCurrentInstance()!;
-        const { link, unlink, internalChildren } = parent;
+        const { internalChildren } = parent;
 
         // TODO: 
         // link(instance);

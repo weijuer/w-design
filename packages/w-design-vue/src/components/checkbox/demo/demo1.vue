@@ -55,7 +55,7 @@
     </section>
   </w-preview>
 
-  <w-preview title="Group (horizontal)" desc="水平组">
+  <w-preview title="Group (horizontal)" desc="水平组A">
     <section class="space-inline">
       <w-checkbox
         v-model="state.checkAll"
@@ -65,6 +65,7 @@
       >
         All
       </w-checkbox>
+
       <w-checkbox-group
         v-model="state.checkedList"
         :options="plainOptions"
@@ -79,7 +80,7 @@
     </section>
   </w-preview>
 
-  <w-preview title="Group (horizontal)" desc="水平组">
+  <w-preview title="Group (horizontal)" desc="水平组B">
     <section class="space-inline">
       <w-checkbox
         v-model="state.checkAll"
@@ -90,15 +91,10 @@
         All
       </w-checkbox>
 
-      <w-checkbox-group
-        v-model="state.checkedList"
-        @change="onGroupChange"
-        orientation="horizontal"
-        :disabled="disabled"
-      >
-        <w-checkbox :disabled="disabled"> Apple </w-checkbox>
-        <w-checkbox :disabled="disabled"> Pear </w-checkbox>
-        <w-checkbox :disabled="disabled"> Orange </w-checkbox>
+      <w-checkbox-group v-model="state.checkedList" orientation="horizontal" :disabled="disabled">
+        <template v-for="option in plainOptions" :key="option">
+          <w-checkbox :value="option"> {{ option }}</w-checkbox>
+        </template>
       </w-checkbox-group>
 
       <w-button type="primary" size="small" @click="toggleDisable">
@@ -113,8 +109,8 @@ import { ref, computed, reactive } from 'vue'
 
 const checked = ref(false)
 const disabled = ref(false)
-const themes = ref(['primary', 'success', 'warning', 'info', 'danger', 'brand', 'focus'])
-const sizes = ref(['small', '', 'medium', 'large'])
+const themes = ['primary', 'success', 'warning', 'info', 'danger', 'brand', 'focus']
+const sizes = ['small', '', 'medium', 'large']
 
 const plainOptions = ['Apple', 'Pear', 'Orange']
 

@@ -7,7 +7,7 @@
         :model-value="isChecked(option.value)"
         :value="option.value"
         :name="name"
-        @change="toggleOption(option)"
+        @change="updateValue(option.value)"
         :disabled="disabled"
       >
         {{ option.label }}
@@ -31,7 +31,7 @@ import { useRadioGroup } from './useRadioGroup'
 const props = defineProps(radioGroupProps)
 const emit = defineEmits(radioGroupEmits)
 
-const { _ref, radioGroupClass, computedOptions, isChecked, toggleOption } = useRadioGroup(props, emit)
+const { _ref, radioGroupClass, computedOptions, isChecked, updateValue } = useRadioGroup(props, emit)
 
 defineExpose({ _ref })
 </script>

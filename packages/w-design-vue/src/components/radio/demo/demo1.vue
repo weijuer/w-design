@@ -24,7 +24,7 @@
     </w-space>
   </w-preview>
 
-  <w-preview title="Controlled" desc="受控复选框">
+  <w-preview title="Controlled" desc="受控">
     <w-space orientation="vertical">
       <w-radio v-model="checked" :disabled="disabled">{{ label }}</w-radio>
 
@@ -41,19 +41,21 @@
 
   <w-preview title="Group (vertical)" desc="垂直组">
     <w-space orientation="vertical">
-      <w-radio-group v-model="state.checkedList" :options="plainOptions" @change="onGroupChange"></w-radio-group>
+      <w-radio-group v-model="state.checked" :options="plainOptions" :disabled="disabled"></w-radio-group>
+
+      <w-button type="primary" size="small" @click="toggleDisable">
+        {{ !disabled ? 'Disable' : 'Enable' }}
+      </w-button>
     </w-space>
   </w-preview>
 
   <w-preview title="Group (horizontal)" desc="水平组">
     <w-space>
-      <w-radio-group
-        v-model="state.checkedList"
-        :options="plainOptions"
-        @change="onGroupChange"
-        orientation="horizontal"
-        :disabled="disabled"
-      ></w-radio-group>
+      <w-radio-group v-model="state.checked" orientation="horizontal" :disabled="disabled">
+        <template v-for="option in plainOptions" :key="option">
+          <w-radio :value="option"> {{ option }}</w-radio>
+        </template>
+      </w-radio-group>
 
       <w-button type="primary" size="small" @click="toggleDisable">
         {{ !disabled ? 'Disable' : 'Enable' }}
@@ -67,16 +69,12 @@ import { ref, computed, reactive } from 'vue'
 
 const checked = ref(false)
 const disabled = ref(false)
-const themes = ref(['primary', 'success', 'warning', 'info', 'danger', 'brand', 'focus'])
-const sizes = ref(['small', '', 'medium', 'large'])
-
+const themes = ['primary', 'success', 'warning', 'info', 'danger', 'brand', 'focus']
+const sizes = ['small', '', 'medium', 'large']
 const plainOptions = ['Apple', 'Pear', 'Orange']
 
 const state = reactive({
-  indeterminate1: true,
-  indeterminate: true,
-  checkAll: false,
-  checkedList: ['Apple', 'Orange']
+  checked: 'Apple'
 })
 
 const toggleChecked = () => {
@@ -90,11 +88,6 @@ const toggleDisable = () => {
 const label = computed(() => {
   return `${checked.value ? 'Checked' : 'Unchecked'}-${disabled.value ? 'Disabled' : 'Enabled'}`
 })
-
-const onGroupChange = (val) => {
-  state.checkAll = val.length === plainOptions.length
-  state.indeterminate = val.length > 0 && val.length < plainOptions.length
-}
 </script>
 
 <style scoped lang="scss"></style>

@@ -13,7 +13,7 @@
         :model-value="isChecked(option.value)"
         :value="option.value"
         :name="name"
-        @change="toggleOption(option)"
+        @change="updateValue(option.value)"
         :disabled="disabled"
       >
         {{ option.label }}
@@ -37,11 +37,9 @@ import { useCheckboxGroup } from './useCheckboxGroup'
 const props = defineProps(checkboxGroupProps)
 const emit = defineEmits(checkboxGroupEmits)
 
-const { _ref, checkboxGroupClass, computedOptions, isChecked, toggleOption } = useCheckboxGroup(props, emit)
+const { _ref, checkboxGroupClass, computedOptions, isChecked, updateValue } = useCheckboxGroup(props, emit)
 
-defineExpose({
-  _ref
-})
+defineExpose({ _ref })
 </script>
 
 <style lang="scss" src="./checkbox-group.scss" />

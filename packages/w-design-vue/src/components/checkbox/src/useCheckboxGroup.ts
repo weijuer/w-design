@@ -1,18 +1,21 @@
 import { computed, provide, ref, SetupContext } from 'vue'
-import { CHECKBOXGROUP_KEY, Option, type CheckboxGroupEmits, type CheckboxGroupProps } from './interface'
+import { CHECKBOXGROUP_KEY, type CheckboxGroupEmits, type CheckboxGroupProps } from './interface'
 
 export const useCheckboxGroup = (props: CheckboxGroupProps, emit: SetupContext<CheckboxGroupEmits>['emit']) => {
     const _ref = ref<HTMLInputElement>()
 
-    const { name, disabled } = props
+    const checkboxGroupClass = computed(() => {
+        const { orientation, disabled } = props
 
-    const toggleOption = (option: Option) => {
-        const { value } = option
+        return [orientation ? 'w-checkbox__group-' + orientation : '', { 'is-disabled': disabled }]
+    })
+
+    const updateValue = (value: unknown) => {
         const { modelValue } = props
 
-        const checkedValue = (modelValue).indexOf(value) === -1
-            ? (modelValue).push(value) && modelValue.slice()
-            : (modelValue).filter((option) => value !== option)
+        const checkedValue = (modelValue!).indexOf(value) === -1
+            ? (modelValue!).push(value) && modelValue!.slice()
+            : (modelValue!).filter((option) => value !== option)
 
         emit('update:modelValue', checkedValue)
         emit('change', checkedValue)
@@ -37,16 +40,10 @@ export const useCheckboxGroup = (props: CheckboxGroupProps, emit: SetupContext<C
 
     const isChecked = (value: string) => {
         const { modelValue } = props
-        return (modelValue).some((option) => option === value)
+        return (modelValue!).some((option) => option === value)
     }
 
-    const checkboxGroupClass = computed(() => {
-        const { orientation, disabled } = props
+    provide(CHECKBOXGROUP_KEY, { props, updateValue });
 
-        return [orientation ? 'w-checkbox__group-' + orientation : '', { 'is-disabled': disabled }]
-    })
-
-    provide(CHECKBOXGROUP_KEY, { name, disabled, toggleOption });
-
-    return { _ref, isChecked, computedOptions, checkboxGroupClass, toggleOption, onClick }
+    return { _ref, computedOptions, checkboxGroupClass, isChecked, updateValue, onClick }
 }

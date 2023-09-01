@@ -11,9 +11,8 @@ export interface Option {
 }
 
 export type RadioProvide = {
-    name?: string,
-    disabled: boolean,
-    toggleOption: (option: Option) => void;
+    props: RadioGroupProps
+    updateValue: (value: unknown) => void;
 };
 
 export const RADIOGROUP_KEY: InjectionKey<RadioProvide> = Symbol('radioGroup');
@@ -31,6 +30,7 @@ export const radioProps = {
         type: String as PropType<Type>,
         dafault: 'default'
     },
+    name: String,
     size: String as PropType<Size>,
     modelValue: Boolean,
     autoFocus: Boolean,
