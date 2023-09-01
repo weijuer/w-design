@@ -1,37 +1,63 @@
 @import '../../_common/var';
 
 :root {
-  --w-chip-padding: 4px 8px;
+  --w-chip-padding: 0.25rem;
   --w-chip-color: white;
-  --w-chip-border-radius: 6px;
 }
 
-.w-chip__wrapper {
-  position: relative;
-  display: inline-block;
-}
+$chip-sizes: (
+  small: 0,
+  medium: 0.25rem,
+  large: 0.5rem
+);
 
 .w-chip {
   margin: 0;
-  padding: var(--w-chip-padding);
+  padding-left: var(--w-chip-padding);
+  padding-right: var(--w-chip-padding);
   display: inline-flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   min-width: 2rem;
-  line-height: 1;
+  max-width: fit-content;
+  height: 1.75rem;
+  line-height: 1.25rem;
+  font-size: var(--w-font-size-small);
   border: 0;
-  border-radius: var(--w-chip-border-radius);
-  color: inherit;
+  border-radius: var(--w-radius-full);
+  color: var(--color-contrast-higher);
   background-color: var(--color-contrast-lower);
   appearance: none;
   box-sizing: border-box;
 
+  &__text {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  // sizes
+  @each $key, $value in $chip-sizes {
+    &.w-chip__#{$key} {
+      height: #{1.5rem + $value};
+
+      @if $key == 'large' {
+        font-size: var(--w-font-size-medium);
+      }
+
+      .w-chip__text {
+        padding-left: #{0.25rem + $value};
+        padding-right: #{0.25rem + $value};
+      }
+    }
+  }
+
+  // themes
   @each $theme-name, $theme-value in $themes {
     &.w-chip__#{$theme-name} {
       color: var(--color-white);
       background-color: $theme-value;
 
-      &.w-chip__outlined {
+      &.is-outlined {
         color: $theme-value;
         background-color: transparent;
         border: 1px solid currentColor;
@@ -42,5 +68,10 @@
       color: var(--color-contrast-higher);
       background-color: fade-out($color: $theme-value, $amount: 0.65);
     }
+  }
+
+  &.is-disabled {
+    opacity: var(--w-disabled-opacity);
+    pointer-events: none;
   }
 }

@@ -33,13 +33,18 @@ export const useCheckbox = (props: CheckboxProps, emit: SetupContext<CheckboxEmi
   })
 
   const onChange = (event: Event) => {
+    const { value } = props
     const { checked } = event.target as HTMLInputElement
     if (isDisabled.value) {
       return
     }
 
-    emit('update:modelValue', checked)
-    emit('change', event)
+    if (checkboxGroupContext) {
+      checkboxGroupContext.updateValue(value)
+    } else {
+      emit('update:modelValue', checked)
+      emit('change', event)
+    }
   }
 
   const onClick = (event: MouseEvent) => {

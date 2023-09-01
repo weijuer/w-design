@@ -68,6 +68,7 @@ $checkbox-sizes: (
     left: 0;
     height: var(--w-checkbox-size);
     width: var(--w-checkbox-size);
+    color: #c8c8c8;
     background-color: #fff;
     border-radius: var(--w-checkbox-radius);
     // box-shadow: inset 0 0 0 1px currentColor;
@@ -75,12 +76,9 @@ $checkbox-sizes: (
     box-sizing: border-box;
     transition:
       background-color 0.2s,
+      border-color 0.2s,
       transform 0.2s,
       box-shadow 0.2s;
-
-    &:hover {
-      color: var(--w-checkbox-checked-color);
-    }
 
     &::before,
     &::after {
@@ -111,6 +109,14 @@ $checkbox-sizes: (
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
       transition: all 0.2s;
+    }
+  }
+
+  &:hover {
+    .w-checkbox__input {
+      &:not(:checked) ~ .w-checkbox__marker {
+        color: var(--w-checkbox-checked-color);
+      }
     }
   }
 

@@ -60,6 +60,8 @@
       <w-button type="primary" size="small" @click="toggleDisable">
         {{ !disabled ? 'Disable' : 'Enable' }}
       </w-button>
+
+      <p>Selected: {{ state.checked }}</p>
     </w-space>
   </w-preview>
 </template>

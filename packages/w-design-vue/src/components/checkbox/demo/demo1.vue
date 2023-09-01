@@ -46,7 +46,7 @@
     </section>
   </w-preview>
 
-  <w-preview title="Group (vertical)" desc="垂直组">
+  <w-preview title="Group (vertical) with options" desc="垂直组">
     <section class="space-vertical">
       <w-checkbox v-model="state.checkAll" :indeterminate="state.indeterminate" @change="onCheckAllChange">
         All
@@ -55,7 +55,7 @@
     </section>
   </w-preview>
 
-  <w-preview title="Group (horizontal)" desc="水平组A">
+  <w-preview title="Group (horizontal) without options" desc="水平组">
     <section class="space-inline">
       <w-checkbox
         v-model="state.checkAll"
@@ -68,30 +68,10 @@
 
       <w-checkbox-group
         v-model="state.checkedList"
-        :options="plainOptions"
-        @change="onGroupChange"
         orientation="horizontal"
         :disabled="disabled"
-      ></w-checkbox-group>
-
-      <w-button type="primary" size="small" @click="toggleDisable">
-        {{ !disabled ? 'Disable' : 'Enable' }}
-      </w-button>
-    </section>
-  </w-preview>
-
-  <w-preview title="Group (horizontal)" desc="水平组B">
-    <section class="space-inline">
-      <w-checkbox
-        v-model="state.checkAll"
-        :indeterminate="state.indeterminate"
-        @change="onCheckAllChange"
-        :disabled="disabled"
+        @change="onGroupChange"
       >
-        All
-      </w-checkbox>
-
-      <w-checkbox-group v-model="state.checkedList" orientation="horizontal" :disabled="disabled">
         <template v-for="option in plainOptions" :key="option">
           <w-checkbox :value="option"> {{ option }}</w-checkbox>
         </template>
@@ -100,6 +80,8 @@
       <w-button type="primary" size="small" @click="toggleDisable">
         {{ !disabled ? 'Disable' : 'Enable' }}
       </w-button>
+
+      <p>Selected: {{ state.checkedList }}</p>
     </section>
   </w-preview>
 </template>

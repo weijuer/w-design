@@ -54,15 +54,25 @@ This project is heavily inspired by the following awesome projects.
 # 🧪 Developing
 
 - [x] aside 侧边栏
+- [x] avatar 侧边栏
 - [x] badge 标记
 - [x] bredcrumb 面包屑
 - [x] button 按钮
 - [x] card 卡片
-- [ ] checkbox 多选框
+- [x] checkbox 多选框
+- [x] checkbox2 多选框2
+- [x] chip 多选框2
+- [x] collapse 多选框2
 - [x] container 布局容器
+- [x] details 原生details
+- [x] divider 分割线
 - [x] footer 布局底部
+- [x] grid 网格布局
+- [x] guide 向导
 - [x] header 布局头部
 - [x] icon 图标
+- [x] layout 布局layout
+- [x] main 布局main
 
 # License
 

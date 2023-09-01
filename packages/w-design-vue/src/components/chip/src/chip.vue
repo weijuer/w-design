@@ -1,6 +1,8 @@
 <template>
   <span class="w-chip" :class="chipClass" :style="chipStyle">
-    <slot></slot>
+    <span class="w-chip__text">
+      <slot></slot>
+    </span>
   </span>
 </template>
 
@@ -17,9 +19,13 @@ import { chipProps } from './interface'
 const props = defineProps(chipProps)
 
 const chipClass = computed(() => {
-  const { type, outlined, light } = props
+  const { size, type, outlined, light, disabled } = props
 
-  return { [`w-chip__${type}${light ? '-light' : ''}`]: type, 'w-chip__outlined': outlined }
+  return [
+    size ? 'w-chip__' + size : '',
+    type ? `w-chip__${type}${light ? '-light' : ''}` : '',
+    { 'is-outlined': outlined, 'is-disabled': disabled }
+  ]
 })
 
 const chipStyle = computed(() => ({
