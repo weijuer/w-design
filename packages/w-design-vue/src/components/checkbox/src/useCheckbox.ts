@@ -1,20 +1,22 @@
-import { computed, inject, onMounted, ref, SetupContext, watch } from 'vue'
+import { computed, inject, onMounted, ref, SetupContext, useSlots, watch } from 'vue'
 import { CHECKBOXGROUP_KEY, type CheckboxEmits, type CheckboxProps } from './interface'
 
 export const useCheckbox = (props: CheckboxProps, emit: SetupContext<CheckboxEmits>['emit']) => {
   const _ref = ref<HTMLInputElement>()
-  const checkboxGroupContext: any = inject(CHECKBOXGROUP_KEY, null);
+  const checkboxGroupContext: any = inject(CHECKBOXGROUP_KEY, null)
+  const slots = useSlots()
 
   const { indeterminate } = props
   const isIndeterminate = ref(indeterminate)
 
   const isChecked = computed(() => {
     const { value, modelValue, defaultChecked } = props
+
     if (checkboxGroupContext) {
       return checkboxGroupContext.props.modelValue.includes(value)
     }
 
-    return defaultChecked ? defaultChecked : modelValue;
+    return defaultChecked ? defaultChecked : modelValue
   })
 
   const isDisabled = computed(() => {
@@ -27,9 +29,14 @@ export const useCheckbox = (props: CheckboxProps, emit: SetupContext<CheckboxEmi
   })
 
   const checkboxClass = computed(() => {
-    const { type, size } = props
+    const { type, size, animate } = props
 
-    return [type ? 'w-checkbox__' + type : '', size ? 'w-checkbox__' + size : '', { 'is-disabled': isDisabled.value }]
+    return [
+      type ? 'w-checkbox__' + type : '',
+      size ? 'w-checkbox__' + size : '',
+      slots.icon ? 'w-checkbox__icon' : '',
+      { 'is-disabled': isDisabled.value, 'is-animate': animate }
+    ]
   })
 
   const onChange = (event: Event) => {

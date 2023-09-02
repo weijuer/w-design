@@ -3,6 +3,10 @@
     <w-checkbox>Option</w-checkbox>
   </w-preview>
 
+  <w-preview title="Animate" desc="动画">
+    <w-checkbox animate>Animate</w-checkbox>
+  </w-preview>
+
   <w-preview title="Disabled" desc="禁用">
     <section class="space-inline">
       <w-checkbox disabled>Option</w-checkbox>
@@ -44,6 +48,22 @@
       <w-checkbox :indeterminate="state.indeterminate1">Option</w-checkbox>
       <w-button @click="state.indeterminate1 = !state.indeterminate1" type="primary" size="small">toggle</w-button>
     </section>
+  </w-preview>
+
+  <w-preview title="Icon" desc="icon">
+    <w-space>
+      <w-checkbox v-model="checked">
+        <template #icon="{ isChecked }">
+          <w-icon :name="isChecked ? 'plus' : 'minus'"></w-icon>
+        </template>
+      </w-checkbox>
+
+      <w-checkbox v-model="checked">
+        <template #icon="{ isChecked }">
+          <w-icon :name="isChecked ? 'sun' : 'moon'"></w-icon>
+        </template>
+      </w-checkbox>
+    </w-space>
   </w-preview>
 
   <w-preview title="Group (vertical) with options" desc="垂直组">

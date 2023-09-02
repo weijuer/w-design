@@ -26,13 +26,30 @@ $chip-sizes: (
   border: 0;
   border-radius: var(--w-radius-full);
   color: var(--color-contrast-higher);
-  background-color: var(--color-contrast-lower);
+  background-color: rgb(212, 212, 216);
   appearance: none;
   box-sizing: border-box;
 
   &__text {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    appearance: none;
+    user-select: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.6;
+    }
   }
 
   // sizes
@@ -62,12 +79,22 @@ $chip-sizes: (
         background-color: transparent;
         border: 1px solid currentColor;
       }
-    }
 
-    &.w-chip__#{$theme-name}-light {
-      color: var(--color-contrast-higher);
-      background-color: fade-out($color: $theme-value, $amount: 0.65);
+      &.is-flat {
+        color: var(--color-contrast-higher);
+        background-color: fade-out($color: $theme-value, $amount: 0.6);
+      }
     }
+  }
+
+  &.is-flat {
+    color: var(--color-contrast-higher);
+    background-color: rgba(212, 212, 216, 0.4);
+  }
+
+  &.is-outlined {
+    background-color: transparent;
+    border: 1px solid currentColor;
   }
 
   &.is-disabled {

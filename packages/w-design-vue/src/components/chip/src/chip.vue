@@ -1,7 +1,12 @@
 <template>
   <span class="w-chip" :class="chipClass" :style="chipStyle">
+    <slot name="start"></slot>
     <span class="w-chip__text">
       <slot></slot>
+    </span>
+    <slot name="end"></slot>
+    <span v-if="closeable" class="w-chip__btn" role="button" @click="onClose">
+      <w-icon name="delete"></w-icon>
     </span>
   </span>
 </template>
@@ -13,24 +18,14 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { chipProps } from './interface'
+import WIcon from '../../icon'
+import { chipProps, chipEmits } from './interface'
+import { useChip } from './useChip'
 
 const props = defineProps(chipProps)
+const emit = defineEmits(chipEmits)
 
-const chipClass = computed(() => {
-  const { size, type, outlined, light, disabled } = props
-
-  return [
-    size ? 'w-chip__' + size : '',
-    type ? `w-chip__${type}${light ? '-light' : ''}` : '',
-    { 'is-outlined': outlined, 'is-disabled': disabled }
-  ]
-})
-
-const chipStyle = computed(() => ({
-  backgroundColor: props.type ? '' : props.color
-}))
+const { chipClass, chipStyle, onClose } = useChip(props, emit)
 </script>
 
 <style src="./chip.scss" lang="scss"></style>

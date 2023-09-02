@@ -45,6 +45,7 @@ export const checkboxProps = {
     autoFocus: Boolean,
     defaultChecked: Boolean,
     disabled: Boolean,
+    animate: Boolean,
     indeterminate: Boolean
 }
 

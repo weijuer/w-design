@@ -10,7 +10,7 @@ import Demo from './components/chip/demo/demo1.vue'
 
 <style lang="scss">
 :root {
-  --accent: rgb(134, 179, 0);
+  --accent: rgb(115, 0, 255);
   --bg: rgb(249, 249, 249);
   --fg: rgb(103, 103, 103);
   --font-primary: Inter, system-ui, sans-serif;

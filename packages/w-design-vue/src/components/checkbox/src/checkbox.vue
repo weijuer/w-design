@@ -15,7 +15,20 @@
       type="checkbox"
       aria-label="Checkbox label"
     />
-    <div class="w-checkbox__marker" aria-hidden="true"></div>
+    <div class="w-checkbox__marker" aria-hidden="true">
+      <slot name="icon" v-bind="{ isChecked }">
+        <svg class="w-checkbox__marker-icon" viewBox="0 0 16 16">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M2 8l4 4 8-8"
+          ></path>
+        </svg>
+      </slot>
+    </div>
     <span class="w-checkbox__label"><slot></slot></span>
   </label>
 </template>

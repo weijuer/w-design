@@ -63,6 +63,9 @@ $checkbox-sizes: (
   }
 
   &__marker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     top: 2px;
     left: 0;
@@ -79,6 +82,24 @@ $checkbox-sizes: (
       border-color 0.2s,
       transform 0.2s,
       box-shadow 0.2s;
+
+    &-icon {
+      display: inline-block;
+      height: 1em;
+      width: 1em;
+      color: white;
+      fill: currentColor;
+      font-size: 1em;
+      line-height: 1;
+      flex-shrink: 0;
+      max-width: initial;
+
+      path {
+        transition: stroke-dashoffset 0.3s;
+        stroke-dasharray: 18;
+        stroke-dashoffset: 18;
+      }
+    }
 
     &::before,
     &::after {
@@ -139,5 +160,28 @@ $checkbox-sizes: (
   &.is-disabled {
     opacity: var(--w-disabled-opacity);
     cursor: not-allowed;
+  }
+
+  &.w-checkbox__icon,
+  &.is-animate {
+    .w-checkbox__input {
+      &:checked ~ .w-checkbox__marker {
+        &::before,
+        &::after {
+          opacity: 0;
+        }
+
+        svg {
+          color: var(--color-white);
+        }
+
+        .w-checkbox__marker-icon {
+          path {
+            stroke-dasharray: 18;
+            stroke-dashoffset: 0;
+          }
+        }
+      }
+    }
   }
 }

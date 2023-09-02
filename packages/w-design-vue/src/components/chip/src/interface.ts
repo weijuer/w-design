@@ -15,8 +15,12 @@ export const chipProps = {
     },
     size: String as PropType<Size>,
     outlined: Boolean,
-    light: Boolean,
+    flat: Boolean,
     disabled: Boolean,
+    closeable: Boolean,
 }
 
+export const chipEmits = ['close']
+
 export type ChipProps = ExtractPropTypes<typeof chipProps>
+export type ChipEmits = typeof chipEmits
