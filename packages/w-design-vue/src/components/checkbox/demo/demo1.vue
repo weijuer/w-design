@@ -52,13 +52,13 @@
 
   <w-preview title="Icon" desc="icon">
     <w-space>
-      <w-checkbox v-model="checked">
+      <w-checkbox v-model="state.checked1">
         <template #icon="{ isChecked }">
           <w-icon :name="isChecked ? 'plus' : 'minus'"></w-icon>
         </template>
       </w-checkbox>
 
-      <w-checkbox v-model="checked">
+      <w-checkbox v-model="state.checked2">
         <template #icon="{ isChecked }">
           <w-icon :name="isChecked ? 'sun' : 'moon'"></w-icon>
         </template>
@@ -117,6 +117,8 @@ const sizes = ['small', '', 'medium', 'large']
 const plainOptions = ['Apple', 'Pear', 'Orange']
 
 const state = reactive({
+  checked1: false,
+  checked2: false,
   indeterminate1: true,
   indeterminate: true,
   checkAll: false,

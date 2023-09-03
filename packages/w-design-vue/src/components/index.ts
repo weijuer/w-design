@@ -22,6 +22,7 @@ export * from './grid'
 export * from './breadcrumb'
 export * from './details'
 export * from './progress'
+export * from './image'
 
 // form
 export * from './checkbox'
