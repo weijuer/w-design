@@ -27,6 +27,14 @@ $image-sizes: (
       opacity 0.3s ease;
   }
 
+  &.is-rounded {
+    border-radius: var(--w-radius-full);
+
+    .w-image__img {
+      height: 100%;
+    }
+  }
+
   &.is-blurred {
     filter: drop-shadow(0 0 10px black);
   }

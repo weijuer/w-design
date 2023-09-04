@@ -8,10 +8,19 @@
     ></w-image>
   </w-preview>
 
+  <w-preview title="Rounded" desc="Rounded">
+    <w-image
+      :width="200"
+      alt="Blured"
+      rounded
+      src="https://cdn.pixabay.com/photo/2017/10/23/02/19/beach-2879929_1280.jpg"
+    ></w-image>
+  </w-preview>
+
   <w-preview title="Blured" desc="Blured">
     <w-image
       :width="300"
-      alt="Default"
+      alt="Blured"
       blurred
       src="https://cdn.pixabay.com/photo/2017/10/23/02/19/beach-2879929_1280.jpg"
     ></w-image>
@@ -20,15 +29,54 @@
   <w-preview title="Zoomed" desc="Zoomed">
     <w-image
       :width="300"
-      alt="Default"
+      alt="Zoomed"
       zoomed
-      src-set="https://cdn.pixabay.com/photo/2018/09/06/19/23/outlook-3659088_960_720.jpg 1x, https://cdn.pixabay.com/photo/2018/09/06/19/23/outlook-3659088_1280.jpg 2x"
       src="https://cdn.pixabay.com/photo/2018/09/06/19/23/outlook-3659088_1280.jpg"
     ></w-image>
+  </w-preview>
+
+  <w-preview title="Object-fit" desc="Object-fit">
+    <w-space>
+      <w-image
+        :width="300"
+        alt="Loading"
+        :object-fit="objectFit"
+        src="https://cdn.pixabay.com/photo/2018/09/06/19/23/outlook-3659088_1280.jpg"
+      ></w-image>
+
+      <w-radio-group v-model="objectFit" :options="objectFitOpts"></w-radio-group>
+    </w-space>
+  </w-preview>
+
+  <w-preview title="Loading" desc="Loading">
+    <w-space>
+      <w-image
+        :width="300"
+        alt="Loading"
+        :loading="loading"
+        @load="onLoad"
+        @error="onError"
+        src="https://cdn.pixabay.com/photo/2018/09/06/19/23/outlook-3659088_1280.jpg"
+      ></w-image>
+
+      <w-radio-group v-model="loading" :options="loadingOpts"></w-radio-group>
+    </w-space>
   </w-preview>
 </template>
 
 <script setup>
-// const themes = ['primary', 'success', 'warning', 'info', 'danger', 'brand', 'focus']
-// const sizes = ['small', 'medium', 'large']
+import { ref } from 'vue'
+
+const loadingOpts = ['eager', 'lazy']
+const objectFitOpts = ['none', 'contain', 'cover', 'fill', 'scale-down']
+const loading = ref('eager')
+const objectFit = ref('none')
+
+const onLoad = (e) => {
+  console.log(e)
+}
+
+const onError = (e) => {
+  console.log(e)
+}
 </script>

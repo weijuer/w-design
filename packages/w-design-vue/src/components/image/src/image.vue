@@ -1,6 +1,6 @@
 <template>
   <div class="w-image" :class="imageClass" :style="imageStyle">
-    <img class="w-image__img" :srcset="srcSet" :src="src" :alt="alt" />
+    <img class="w-image__img" :style="imgStyle" :loading="loading" :srcset="srcSet" :src="src" :alt="alt" role="img" />
   </div>
 </template>
 
@@ -18,7 +18,7 @@ import { useImage } from './useImage'
 const props = defineProps(imageProps)
 const emit = defineEmits(imageEmits)
 
-const { imageClass, imageStyle } = useImage(props, emit)
+const { imageClass, imageStyle, imgStyle } = useImage(props, emit)
 </script>
 
 <style src="./image.scss" lang="scss"></style>
