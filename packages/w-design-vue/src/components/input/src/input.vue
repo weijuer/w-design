@@ -1,6 +1,10 @@
 <template>
   <div class="w-input" :class="inputClass" :style="inputStyle">
-    <input class="w-input__input" :style="imgStyle" :loading="loading" :srcset="srcSet" :src="src" :alt="alt" />
+    <div class="w-input__wrapper">
+      <slot name="start"></slot>
+      <input class="w-input__input" :style="imgStyle" :loading="loading" :srcset="srcSet" :src="src" :alt="alt" />
+      <slot name="end"></slot>
+    </div>
   </div>
 </template>
 

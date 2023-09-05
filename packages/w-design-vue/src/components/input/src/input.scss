@@ -12,20 +12,36 @@ $input-sizes: (
   large: 0.5rem
 );
 
+.form-control {
+  background: var(--color-bg-dark);
+  padding: var(--space-2xs) var(--space-xs);
+  font-size: 1em;
+  line-height: 1.2;
+  border: 2px solid var(--color-contrast-lower);
+  border-radius: var(--w-radius-small);
+  box-sizing: border-box;
+  transition: 0.2s;
+
+  &:focus,
+  &:focus-within {
+    background: var(--color-bg);
+    border: 2px solid var(--color-primary);
+    outline: none;
+  }
+}
+
+.w-input__wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
 .w-input {
   position: relative;
-  border-radius: var(--w-input-radius);
-  overflow: hidden;
+  @extend .form-control;
 
   &__input {
-    display: block;
     width: 100%;
     height: 100%;
-    background: var(--color-bg-dark);
-    border-radius: inherit;
-    transition:
-      transform 0.3s ease,
-      opacity 0.3s ease;
 
     &:placeholder-shown {
       background-color: var(--color-bg-dark);
@@ -42,15 +58,5 @@ $input-sizes: (
 
   &.is-blurred {
     filter: drop-shadow(0 0 10px black);
-  }
-
-  &.is-zoomed {
-    .w-input__img {
-      object-fit: cover;
-
-      &:hover {
-        transform: scale(1.25);
-      }
-    }
   }
 }
