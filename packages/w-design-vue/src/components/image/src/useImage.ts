@@ -1,6 +1,6 @@
 import { SetupContext, computed, nextTick, onMounted, ref, watch } from 'vue'
 import { type ImageEmits, type ImageProps } from './interface'
-import { normalizedStyle } from '../../_utils'
+import { addUnit } from '../../_utils'
 
 export const useImage = (props: ImageProps, emit: SetupContext<ImageEmits>['emit']) => {
     const error = ref(false);
@@ -22,12 +22,12 @@ export const useImage = (props: ImageProps, emit: SetupContext<ImageEmits>['emit
     })
 
     const imageStyle = computed(() => {
-        const { width, height, rounded } = props
+        const { width, height, radius, rounded } = props
 
         return {
-            'max-width': width && normalizedStyle(width),
-            'height': rounded ? width && normalizedStyle(width) : '',
-            'max-height': height && normalizedStyle(height),
+            'width': addUnit(width),
+            'height': addUnit(rounded ? width : height),
+            'border-radius': addUnit(radius),
         }
     })
 
@@ -72,7 +72,7 @@ export const useImage = (props: ImageProps, emit: SetupContext<ImageEmits>['emit
 
     onMounted(() => {
         nextTick(() => {
-            if (_ref.value?.complete && !props.loading) {
+            if (_ref.value?.complete && props.loading) {
                 triggerLoad();
             }
         });

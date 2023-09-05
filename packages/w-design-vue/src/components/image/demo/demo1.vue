@@ -39,12 +39,15 @@
     <w-space>
       <w-image
         :width="300"
+        :height="400"
         alt="Loading"
         :object-fit="objectFit"
+        :object-position="objectPosition"
         src="https://cdn.pixabay.com/photo/2018/09/06/19/23/outlook-3659088_1280.jpg"
       ></w-image>
 
       <w-radio-group v-model="objectFit" :options="objectFitOpts"></w-radio-group>
+      <w-radio-group v-model="objectPosition" :options="objectPositionOpts"></w-radio-group>
     </w-space>
   </w-preview>
 
@@ -69,8 +72,10 @@ import { ref } from 'vue'
 
 const loadingOpts = ['eager', 'lazy']
 const objectFitOpts = ['none', 'contain', 'cover', 'fill', 'scale-down']
+const objectPositionOpts = ['center', 'top', 'right', 'bottom', 'left']
 const loading = ref('eager')
 const objectFit = ref('none')
+const objectPosition = ref('center')
 
 const onLoad = (e) => {
   console.log(e)
