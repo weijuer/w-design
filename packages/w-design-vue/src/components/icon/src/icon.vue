@@ -6,7 +6,7 @@
 
 <script lang="ts">
 export default {
-  name: 'w-icon',
+  name: 'WIcon',
   inheritAttrs: false
 }
 </script>
@@ -34,9 +34,10 @@ const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 
 <style lang="scss">
 .w-icon {
-  width: 1rem;
-  height: 1rem;
+  width: 1em;
+  height: 1em;
   max-width: 100%;
+  pointer-events: none;
   fill: currentColor;
   overflow: hidden;
 }

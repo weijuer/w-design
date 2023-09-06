@@ -10,29 +10,31 @@ export const inputProps = {
         type: String as PropType<Type>,
         default: ''
     },
-    objectFit: {
-        type: String as PropType<InputFit>,
-        default: 'fit'
-    },
-    objectPosition: {
-        type: String as PropType<InputPosition>,
-        default: 'center'
-    },
-    loading: {
-        type: String as PropType<InputLoading>,
-        default: 'eager'
+    modelValue: {
+        type: [Number, String] as PropType<Numeric>,
+        default: ''
     },
     size: String as PropType<Size>,
-    src: String,
-    alt: String,
-    srcSet: String,
-    fallbackSrc: String,
-    width: [Number, String] as PropType<Numeric>,
-    height: [Number, String] as PropType<Numeric>,
-    radius: [Number, String] as PropType<Numeric>,
-    rounded: Boolean,
-    blurred: Boolean,
-    zoomed: Boolean,
+    label: String,
+    name: String,
+    placeholder: String,
+    autocomplete: String,
+    autocapitalize: String,
+    autocorrect: String,
+    bordered: Boolean,
+    autofocus: Boolean,
+    spellcheck: {
+        type: Boolean,
+        default: null,
+    },
+    disabled: {
+        type: Boolean,
+        default: null,
+    },
+    readonly: {
+        type: Boolean,
+        default: null,
+    },
 }
 
 export const inputEmits = ['load', 'error']

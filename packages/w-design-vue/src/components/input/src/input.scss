@@ -30,22 +30,70 @@ $input-sizes: (
   }
 }
 
-.w-input__wrapper {
-  display: inline-flex;
-  align-items: center;
-}
-
 .w-input {
   position: relative;
-  @extend .form-control;
+  display: inline-flex;
+  align-items: center;
+
+  .end-content,
+  .start-content {
+    display: inline-flex;
+    position: absolute;
+    top: 6px;
+  }
+
+  .start-content {
+    left: 6px;
+  }
+
+  .end-content {
+    right: 6px;
+  }
+
+  svg {
+    font-size: 1.5rem;
+  }
 
   &__input {
     width: 100%;
     height: 100%;
+    @extend .form-control;
+    appearance: none;
 
     &:placeholder-shown {
       background-color: var(--color-bg-dark);
+
+      + .float-label {
+        clip: rect(1px, 1px, 1px, 1px);
+        clip-path: inset(50%);
+        transform: translateY(-25%);
+      }
     }
+
+    &:focus,
+    &:focus-within {
+      ~ span {
+        color: var(--color-primary);
+      }
+    }
+  }
+
+  .float-label {
+    background: var(--color-bg);
+    padding: var(--space-4xs) var(--space-3xs);
+    border-radius: var(--radius-md);
+    line-height: 1;
+    font-size: var(--text-sm);
+    color: var(--color-contrast-low);
+    position: absolute;
+    top: 0;
+    left: calc(var(--space-sm) - var(--space-3xs));
+    transform: translateY(-50%);
+    transition:
+      transform 0.2s ease-out,
+      color 0.2s;
+    clip: auto;
+    clip-path: none;
   }
 
   &.is-rounded {

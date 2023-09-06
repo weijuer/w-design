@@ -1,10 +1,13 @@
 <template>
-  <div class="w-input" :class="inputClass" :style="inputStyle">
-    <div class="w-input__wrapper">
+  <div class="w-input" :class="inputClass">
+    <span class="start-content">
       <slot name="start"></slot>
-      <input class="w-input__input" :style="imgStyle" :loading="loading" :srcset="srcSet" :src="src" :alt="alt" />
+    </span>
+    <input class="w-input__input" v-bind="inputAttrs" />
+    <label v-if="label" class="float-label">{{ label }}</label>
+    <span class="end-content">
       <slot name="end"></slot>
-    </div>
+    </span>
   </div>
 </template>
 
@@ -22,7 +25,7 @@ import { useInput } from './useInput'
 const props = defineProps(inputProps)
 const emit = defineEmits(inputEmits)
 
-const { inputClass, inputStyle, imgStyle } = useInput(props, emit)
+const { inputClass, inputAttrs } = useInput(props, emit)
 </script>
 
 <style src="./input.scss" lang="scss"></style>

@@ -1,13 +1,13 @@
 <template>
   <w-preview title="Default" desc="Default">
     <w-space>
-      <w-input></w-input>
+      <w-input label="Name" placeholder="Name"></w-input>
     </w-space>
   </w-preview>
 
   <w-preview title="Rounded" desc="Rounded">
     <w-space>
-      <w-input>
+      <w-input label="Name" placeholder="Name">
         <template #start>
           <w-icon name="sun"></w-icon>
         </template>

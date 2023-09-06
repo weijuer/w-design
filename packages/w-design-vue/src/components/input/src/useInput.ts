@@ -1,6 +1,6 @@
 import { SetupContext, computed, nextTick, onMounted, ref, watch } from 'vue'
 import { type InputEmits, type InputProps } from './interface'
-import { addUnit } from '../../_utils'
+// import { addUnit } from '../../_utils'
 
 export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit']) => {
     const error = ref(false);
@@ -8,35 +8,32 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
     const _ref = ref<HTMLInputElement>()
 
     const inputClass = computed(() => {
-        const { size, type, rounded, blurred, zoomed } = props
+        const { size, type, bordered, disabled, readonly } = props
 
         return [
             size ? 'w-input__' + size : '',
             type ? 'w-input__' + type : '',
             {
-                'is-rounded': rounded,
-                'is-blurred': blurred,
-                'is-zoomed': zoomed
+                'is-bordered': bordered,
+                'is-disabled': disabled,
+                'is-readonly': readonly
             }
         ]
     })
 
-    const inputStyle = computed(() => {
-        const { width, height, radius, rounded } = props
+    const inputAttrs = computed(() => {
+        const { name, disabled, readonly, autofocus, placeholder, autocomplete, autocapitalize, autocorrect } = props
 
         return {
-            'width': addUnit(width),
-            'height': addUnit(rounded ? width : height),
-            'border-radius': addUnit(radius),
-        }
-    })
-
-    const imgStyle = computed(() => {
-        const { objectFit, objectPosition } = props
-
-        return {
-            'object-fit': objectFit,
-            'object-position': objectPosition,
+            ref: _ref,
+            name,
+            disabled,
+            readonly,
+            autofocus,
+            placeholder,
+            autocomplete,
+            autocapitalize,
+            autocorrect
         }
     })
 
@@ -55,7 +52,7 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
 
 
     watch(
-        () => props.src,
+        () => props.modelValue,
         () => {
             error.value = false;
             loading.value = true;
@@ -68,5 +65,5 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
         });
     });
 
-    return { _ref, inputClass, inputStyle, imgStyle, onLoad, onError }
+    return { _ref, inputClass, inputAttrs, onLoad, onError }
 }
