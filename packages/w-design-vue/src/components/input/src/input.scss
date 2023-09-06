@@ -1,7 +1,7 @@
 @import '../../_common/var';
 
 :root {
-  --w-input-padding: 0.25rem;
+  --w-input-padding: 1.85em;
   --w-input-color: white;
   --w-input-radius: 14px;
 }
@@ -22,6 +22,12 @@ $input-sizes: (
   box-sizing: border-box;
   transition: 0.2s;
 
+  &[readonly],
+  &:disabled {
+    opacity: var(--w-disabled-opacity);
+    cursor: not-allowed;
+  }
+
   &:focus,
   &:focus-within {
     background: var(--color-bg);
@@ -35,23 +41,33 @@ $input-sizes: (
   display: inline-flex;
   align-items: center;
 
-  .end-content,
-  .start-content {
+  .end,
+  .start {
     display: inline-flex;
     position: absolute;
     top: 6px;
   }
 
-  .start-content {
+  .start {
     left: 6px;
   }
 
-  .end-content {
+  .end {
     right: 6px;
   }
 
   svg {
     font-size: 1.5rem;
+    position: absolute;
+    top: 6px;
+
+    &:first-of-type {
+      left: 6px;
+    }
+
+    &:last-of-type {
+      right: 6px;
+    }
   }
 
   &__input {
@@ -72,7 +88,7 @@ $input-sizes: (
 
     &:focus,
     &:focus-within {
-      ~ span {
+      ~ svg {
         color: var(--color-primary);
       }
     }
@@ -94,6 +110,22 @@ $input-sizes: (
       color 0.2s;
     clip: auto;
     clip-path: none;
+  }
+
+  &.w-input__start {
+    .w-input__input {
+      padding-left: var(--w-input-padding);
+    }
+  }
+
+  &.w-input__end {
+    .w-input__input {
+      padding-right: var(--w-input-padding);
+    }
+
+    svg {
+      left: auto;
+    }
   }
 
   &.is-rounded {

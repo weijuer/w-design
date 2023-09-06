@@ -5,8 +5,32 @@
     </w-space>
   </w-preview>
 
-  <w-preview title="Rounded" desc="Rounded">
+  <w-preview title="Disabled" desc="Disabled">
     <w-space>
+      <w-input label="Name" placeholder="Name" disabled></w-input>
+    </w-space>
+  </w-preview>
+
+  <w-preview title="Readonly" desc="Readonly">
+    <w-space>
+      <w-input label="Name" placeholder="Name" readonly></w-input>
+    </w-space>
+  </w-preview>
+
+  <w-preview title="Icon" desc="Icon">
+    <w-space>
+      <w-input label="Name" placeholder="Name">
+        <template #start>
+          <w-icon name="sun"></w-icon>
+        </template>
+      </w-input>
+
+      <w-input label="Name" placeholder="Name">
+        <template #end>
+          <w-icon name="moon"></w-icon>
+        </template>
+      </w-input>
+
       <w-input label="Name" placeholder="Name">
         <template #start>
           <w-icon name="sun"></w-icon>

@@ -1,13 +1,9 @@
 <template>
   <div class="w-input" :class="inputClass">
-    <span class="start-content">
-      <slot name="start"></slot>
-    </span>
+    <slot name="start"></slot>
     <input class="w-input__input" v-bind="inputAttrs" />
     <label v-if="label" class="float-label">{{ label }}</label>
-    <span class="end-content">
-      <slot name="end"></slot>
-    </span>
+    <slot name="end"></slot>
   </div>
 </template>
 

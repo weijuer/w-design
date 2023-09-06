@@ -1,4 +1,4 @@
-import { SetupContext, computed, nextTick, onMounted, ref, watch } from 'vue'
+import { SetupContext, computed, getCurrentInstance, nextTick, onMounted, ref, watch } from 'vue'
 import { type InputEmits, type InputProps } from './interface'
 // import { addUnit } from '../../_utils'
 
@@ -6,13 +6,17 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
     const error = ref(false);
     const loading = ref(true);
     const _ref = ref<HTMLInputElement>()
+    const instance = getCurrentInstance()
 
     const inputClass = computed(() => {
         const { size, type, bordered, disabled, readonly } = props
+        const { slots: { start, end } } = instance!
 
         return [
             size ? 'w-input__' + size : '',
             type ? 'w-input__' + type : '',
+            start ? 'w-input__start' : '',
+            end ? 'w-input__end' : '',
             {
                 'is-bordered': bordered,
                 'is-disabled': disabled,
