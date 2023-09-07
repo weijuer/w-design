@@ -66,7 +66,7 @@
 
   <w-preview title="Zoomed" desc="Zoomed">
     <w-space>
-      <w-input></w-input>
+      <w-input clearable @clear="() => console.log('input cleared')"></w-input>
     </w-space>
   </w-preview>
 

@@ -1,13 +1,38 @@
 import { type PropType, type ExtractPropTypes } from 'vue'
-import { type Numeric, Size, Type } from '../../_utils/typings'
+import { type Numeric, Size } from '../../_utils/typings'
 
-export type InputLoading = 'eager' | 'lazy'
-export type InputFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
-export type InputPosition = 'center' | 'top' | 'right' | 'bottom' | 'left';
+export type InputType =
+    | 'tel'
+    | 'url'
+    | 'date'
+    | 'file'
+    | 'text'
+    | 'time'
+    | 'week'
+    | 'color'
+    | 'digit'
+    | 'email'
+    | 'image'
+    | 'month'
+    | 'radio'
+    | 'range'
+    | 'reset'
+    | 'button'
+    | 'hidden'
+    | 'number'
+    | 'search'
+    | 'submit'
+    | 'checkbox'
+    | 'password'
+    | 'textarea'
+    | 'datetime-local'
+
+export type InputFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
+export type InputPosition = 'center' | 'top' | 'right' | 'bottom' | 'left'
 
 export const inputProps = {
     type: {
-        type: String as PropType<Type>,
+        type: String as PropType<InputType>,
         default: ''
     },
     modelValue: {
@@ -20,6 +45,18 @@ export const inputProps = {
     errorMessage: {
         type: [String, Object]
     },
+    spellcheck: {
+        type: Boolean,
+        default: null
+    },
+    disabled: {
+        type: Boolean,
+        default: null
+    },
+    readonly: {
+        type: Boolean,
+        default: null
+    },
     size: String as PropType<Size>,
     label: String,
     name: String,
@@ -29,21 +66,22 @@ export const inputProps = {
     autocorrect: String,
     bordered: Boolean,
     autofocus: Boolean,
-    spellcheck: {
-        type: Boolean,
-        default: null,
-    },
-    disabled: {
-        type: Boolean,
-        default: null,
-    },
-    readonly: {
-        type: Boolean,
-        default: null,
-    },
+    clearable: Boolean,
+
 }
 
-export const inputEmits = ['load', 'error']
+export const inputEmits = [
+    'blur',
+    'focus',
+    'clear',
+    'keypress',
+    'clickInput',
+    'endValidate',
+    'startValidate',
+    'clickLeftIcon',
+    'clickRightIcon',
+    'update:modelValue'
+]
 
 export type InputProps = ExtractPropTypes<typeof inputProps>
 export type InputEmits = typeof inputEmits

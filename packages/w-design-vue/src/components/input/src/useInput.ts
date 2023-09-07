@@ -41,6 +41,15 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
         }
     })
 
+    const blur = () => _ref.value?.blur();
+    const focus = () => _ref.value?.focus();
+
+    const onClear = (event: Event) => {
+        event.preventDefault()
+        emit('update:modelValue', '');
+        emit('clear', event);
+    };
+
     const onLoad = (event: Event) => {
         if (loading.value) {
             loading.value = false;
@@ -69,5 +78,5 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
         });
     });
 
-    return { _ref, inputClass, inputAttrs, onLoad, onError }
+    return { _ref, inputClass, inputAttrs, blur, focus, onClear, onLoad, onError }
 }
