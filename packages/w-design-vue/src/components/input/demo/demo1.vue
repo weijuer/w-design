@@ -42,9 +42,25 @@
     </w-space>
   </w-preview>
 
-  <w-preview title="Blured" desc="Blured">
+  <w-preview title="description" desc="description">
     <w-space>
-      <w-input></w-input>
+      <w-input label="name" description="description message" placeholder="please enter name"></w-input>
+      <w-input label="name" placeholder="please enter name">
+        <template #description>
+          <div class="extra">description message from slots</div>
+        </template>
+      </w-input>
+    </w-space>
+  </w-preview>
+
+  <w-preview title="errorMessage" desc="errorMessage">
+    <w-space>
+      <w-input label="name" error-message="error message" placeholder="please enter name"></w-input>
+      <w-input label="name" placeholder="please enter name">
+        <template #error-message>
+          <div class="extra">error message from slots</div>
+        </template>
+      </w-input>
     </w-space>
   </w-preview>
 

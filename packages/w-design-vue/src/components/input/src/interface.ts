@@ -14,6 +14,12 @@ export const inputProps = {
         type: [Number, String] as PropType<Numeric>,
         default: ''
     },
+    description: {
+        type: [String, Object]
+    },
+    errorMessage: {
+        type: [String, Object]
+    },
     size: String as PropType<Size>,
     label: String,
     name: String,

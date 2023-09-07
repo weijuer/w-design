@@ -112,6 +112,22 @@ $input-sizes: (
     clip-path: none;
   }
 
+  &__helper-wrapper {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    padding-top: 0.25rem;
+
+    .description,
+    .error-message {
+      font-size: var(--w-font-size-tiny);
+      line-height: var(--w-line-height-tiny);
+    }
+
+    .error-message {
+      color: var(--color-danger);
+    }
+  }
+
   &.w-input__start {
     .w-input__input {
       padding-left: var(--w-input-padding);

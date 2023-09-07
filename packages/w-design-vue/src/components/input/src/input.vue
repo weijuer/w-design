@@ -1,9 +1,20 @@
 <template>
-  <div class="w-input" :class="inputClass">
-    <slot name="start"></slot>
-    <input class="w-input__input" v-bind="inputAttrs" />
-    <label v-if="label" class="float-label">{{ label }}</label>
-    <slot name="end"></slot>
+  <div class="w-input__wrapper">
+    <div class="w-input" :class="inputClass">
+      <slot name="start"></slot>
+      <input class="w-input__input" v-bind="inputAttrs" />
+      <label v-if="label" class="float-label">{{ label }}</label>
+      <slot name="end"></slot>
+    </div>
+
+    <div class="w-input__helper-wrapper">
+      <div class="description">
+        <slot name="description">{{ description }}</slot>
+      </div>
+      <div class="error-message">
+        <slot name="error-message">{{ errorMessage }}</slot>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -25,4 +36,3 @@ const { inputClass, inputAttrs } = useInput(props, emit)
 </script>
 
 <style src="./input.scss" lang="scss"></style>
-./useInput
