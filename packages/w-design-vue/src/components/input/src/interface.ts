@@ -58,6 +58,7 @@ export const inputProps = {
         default: null
     },
     size: String as PropType<Size>,
+    defaultValue: String,
     label: String,
     name: String,
     placeholder: String,

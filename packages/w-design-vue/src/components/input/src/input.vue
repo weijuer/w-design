@@ -1,16 +1,21 @@
 <template>
-  <div class="w-input__wrapper">
-    <div class="w-input" :class="inputClass">
-      <slot name="start"></slot>
-      <input class="w-input__input" v-bind="inputAttrs" />
-      <label v-if="label" class="float-label">{{ label }}</label>
-      <slot name="end"></slot>
-      <span v-if="clearable" class="w-input__btn" role="button" @click="onClear">
-        <w-icon name="delete"></w-icon>
-      </span>
+  <div class="w-input__group">
+    <div class="w-input__main-wrapper">
+      <div class="w-input" :class="inputClass">
+        <slot name="start"></slot>
+        <input class="w-input__input" v-bind="inputAttrs" />
+        <label v-if="label" class="float-label">{{ label }}</label>
+        <slot name="end"></slot>
+        <span v-if="clearable" class="w-input__btn" role="button" @click="onClear">
+          <w-icon name="delete"></w-icon>
+        </span>
+      </div>
     </div>
 
-    <div class="w-input__helper-wrapper">
+    <div
+      v-if="$slots.description || description || $slots.errorMessage || errorMessage"
+      class="w-input__helper-wrapper"
+    >
       <div class="description">
         <slot name="description">{{ description }}</slot>
       </div>

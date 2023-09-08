@@ -1,0 +1,25 @@
+@import './var';
+
+.form-control {
+  background: var(--color-bg-dark);
+  padding: var(--space-2xs) var(--space-xs);
+  font-size: 1em;
+  line-height: 1.2;
+  border: 2px solid var(--color-contrast-lower);
+  border-radius: var(--w-radius-small);
+  box-sizing: border-box;
+  transition: 0.2s;
+
+  &[readonly],
+  &:disabled {
+    opacity: var(--w-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  &:focus,
+  &:focus-within {
+    background: var(--color-bg);
+    border: 2px solid var(--color-primary);
+    outline: none;
+  }
+}

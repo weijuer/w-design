@@ -1,4 +1,4 @@
-@import '../../_common/var';
+@import '../../_common/index';
 
 :root {
   --w-input-padding: 1.85em;
@@ -12,62 +12,21 @@ $input-sizes: (
   large: 0.5rem
 );
 
-.form-control {
-  background: var(--color-bg-dark);
-  padding: var(--space-2xs) var(--space-xs);
-  font-size: 1em;
-  line-height: 1.2;
-  border: 2px solid var(--color-contrast-lower);
-  border-radius: var(--w-radius-small);
-  box-sizing: border-box;
-  transition: 0.2s;
+.w-input__group {
+  display: flex;
+  flex-direction: column;
 
-  &[readonly],
-  &:disabled {
-    opacity: var(--w-disabled-opacity);
-    cursor: not-allowed;
-  }
-
-  &:focus,
-  &:focus-within {
-    background: var(--color-bg);
-    border: 2px solid var(--color-primary);
-    outline: none;
+  .w-input__main-wrapper {
+    display: inline-flex;
+    align-items: center;
   }
 }
 
 .w-input {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-
-  .end,
-  .start {
-    display: inline-flex;
-    position: absolute;
-    top: 6px;
-  }
-
-  .start {
-    left: 6px;
-  }
-
-  .end {
-    right: 6px;
-  }
 
   svg {
     font-size: 1.5rem;
-    position: absolute;
-    top: 6px;
-
-    &:first-of-type {
-      left: 6px;
-    }
-
-    &:last-of-type {
-      right: 6px;
-    }
   }
 
   &__input {
@@ -145,31 +104,9 @@ $input-sizes: (
     }
   }
 
-  &.w-input__start {
+  &.is-disabled {
     .w-input__input {
-      padding-left: var(--w-input-padding);
-    }
-  }
-
-  &.w-input__end {
-    .w-input__input {
-      padding-right: var(--w-input-padding);
-    }
-
-    svg {
-      left: auto;
-    }
-  }
-
-  &.is-rounded {
-    border-radius: var(--w-radius-full);
-
-    .w-input__img {
       height: 100%;
     }
-  }
-
-  &.is-blurred {
-    filter: drop-shadow(0 0 10px black);
   }
 }

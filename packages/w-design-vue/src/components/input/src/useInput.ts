@@ -3,8 +3,8 @@ import { type InputEmits, type InputProps } from './interface'
 // import { addUnit } from '../../_utils'
 
 export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit']) => {
-    const error = ref(false);
-    const loading = ref(true);
+
+    const inputValue = ref(props.defaultValue ? props.defaultValue : props.modelValue);
     const _ref = ref<HTMLInputElement>()
     const instance = getCurrentInstance()
 
@@ -31,6 +31,7 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
         return {
             ref: _ref,
             name,
+            value: inputValue.value,
             disabled,
             readonly,
             autofocus,
@@ -46,29 +47,17 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
 
     const onClear = (event: Event) => {
         event.preventDefault()
+        inputValue.value = ''
         emit('update:modelValue', '');
         emit('clear', event);
     };
 
-    const onLoad = (event: Event) => {
-        if (loading.value) {
-            loading.value = false;
-            emit('load', event);
-        }
-    }
-
-    const onError = (event?: Event) => {
-        error.value = true;
-        loading.value = false;
-        emit('error', event);
-    }
 
 
     watch(
         () => props.modelValue,
         () => {
-            error.value = false;
-            loading.value = true;
+
         },
     );
 
@@ -78,5 +67,5 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
         });
     });
 
-    return { _ref, inputClass, inputAttrs, blur, focus, onClear, onLoad, onError }
+    return { _ref, inputClass, inputAttrs, blur, focus, onClear }
 }

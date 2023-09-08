@@ -64,21 +64,9 @@
     </w-space>
   </w-preview>
 
-  <w-preview title="Zoomed" desc="Zoomed">
+  <w-preview title="Clearable" desc="Clearable">
     <w-space>
-      <w-input clearable @clear="() => console.log('input cleared')"></w-input>
-    </w-space>
-  </w-preview>
-
-  <w-preview title="Object-fit" desc="Object-fit">
-    <w-space>
-      <w-input></w-input>
-    </w-space>
-  </w-preview>
-
-  <w-preview title="Loading" desc="Loading">
-    <w-space>
-      <w-input></w-input>
+      <w-input default-value="default Value" clearable @clear="() => console.log('input cleared')"></w-input>
     </w-space>
   </w-preview>
 </template>
