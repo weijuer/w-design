@@ -2,8 +2,9 @@
 
 .form-control {
   background: var(--color-bg-dark);
-  padding: var(--space-2xs) var(--space-xs);
+  padding: 0 var(--space-xs);
   font-size: 1em;
+  height: 2.5rem;
   line-height: 1.2;
   border: 2px solid var(--color-contrast-lower);
   border-radius: var(--w-radius-small);

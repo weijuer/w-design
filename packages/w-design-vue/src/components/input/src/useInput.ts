@@ -38,9 +38,23 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
             placeholder,
             autocomplete,
             autocapitalize,
-            autocorrect
+            autocorrect,
+            onInput
         }
     })
+
+    const updateValue = (value: string) => {
+        if (value !== props.modelValue) {
+            inputValue.value = value
+            emit('update:modelValue', value);
+        }
+    }
+
+    const onInput = (event: Event) => {
+        if (!(event as KeyboardEvent).isComposing) {
+            updateValue((event.target as HTMLInputElement).value);
+        }
+    };
 
     const blur = () => _ref.value?.blur();
     const focus = () => _ref.value?.focus();
@@ -56,8 +70,8 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
 
     watch(
         () => props.modelValue,
-        () => {
-
+        (modelValue) => {
+            inputValue.value = modelValue
         },
     );
 

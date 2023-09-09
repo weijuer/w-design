@@ -13,7 +13,7 @@
     </div>
 
     <div
-      v-if="$slots.description || description || $slots.errorMessage || errorMessage"
+      v-if="$slots.description || description || $slots['error-message'] || errorMessage"
       class="w-input__helper-wrapper"
     >
       <div class="description">
