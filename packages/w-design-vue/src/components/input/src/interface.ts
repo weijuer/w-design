@@ -27,7 +27,7 @@ export type InputType =
     | 'textarea'
     | 'datetime-local'
 
-export type InputFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
+export type ValidityState = 'valid' | 'invalid'
 export type InputPosition = 'center' | 'top' | 'right' | 'bottom' | 'left'
 
 export const inputProps = {
@@ -57,6 +57,10 @@ export const inputProps = {
         type: Boolean,
         default: null
     },
+    validityState: {
+        type: String as PropType<ValidityState>,
+        default: ''
+    },
     size: String as PropType<Size>,
     defaultValue: String,
     label: String,
@@ -65,10 +69,10 @@ export const inputProps = {
     autocomplete: String,
     autocapitalize: String,
     autocorrect: String,
+    required: Boolean,
     bordered: Boolean,
     autofocus: Boolean,
     clearable: Boolean,
-
 }
 
 export const inputEmits = [

@@ -1,15 +1,19 @@
-import { SetupContext, computed, getCurrentInstance, nextTick, onMounted, ref, watch } from 'vue'
+import { SetupContext, computed, getCurrentInstance, nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { type InputEmits, type InputProps } from './interface'
 // import { addUnit } from '../../_utils'
 
 export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit']) => {
 
-    const inputValue = ref(props.defaultValue ? props.defaultValue : props.modelValue);
     const _ref = ref<HTMLInputElement>()
+
     const instance = getCurrentInstance()
+    const inputValue = ref(props.defaultValue ? props.defaultValue : props.modelValue);
+    const state = reactive({
+        inputValidityState: props.validityState ? props.validityState : 'valid'
+    });
 
     const inputClass = computed(() => {
-        const { size, type, bordered, disabled, readonly } = props
+        const { size, type, bordered, required, disabled, readonly } = props
         const { slots: { start, end } } = instance!
 
         return [
@@ -19,8 +23,10 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
             end ? 'w-input__end' : '',
             {
                 'is-bordered': bordered,
+                'is-required': required,
                 'is-disabled': disabled,
-                'is-readonly': readonly
+                'is-readonly': readonly,
+                'is-invalid': state.inputValidityState === 'invalid',
             }
         ]
     })
@@ -43,6 +49,11 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
         }
     })
 
+    const isClearBtn = computed(() => {
+        const { clearable } = props
+        return clearable && !!inputValue.value
+    })
+
     const updateValue = (value: string) => {
         if (value !== props.modelValue) {
             inputValue.value = value
@@ -61,9 +72,11 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
 
     const onClear = (event: Event) => {
         event.preventDefault()
-        inputValue.value = ''
-        emit('update:modelValue', '');
-        emit('clear', event);
+        if (isClearBtn.value) {
+            inputValue.value = ''
+            emit('update:modelValue', '');
+            emit('clear', event);
+        }
     };
 
 
@@ -81,5 +94,5 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
         });
     });
 
-    return { _ref, inputClass, inputAttrs, blur, focus, onClear }
+    return { _ref, inputClass, inputAttrs, isClearBtn, blur, focus, onClear }
 }

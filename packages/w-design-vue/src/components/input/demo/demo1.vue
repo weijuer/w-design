@@ -11,6 +11,12 @@
     </w-space>
   </w-preview>
 
+  <w-preview title="Required" desc="Required">
+    <w-space>
+      <w-input label="Name" placeholder="Name" required></w-input>
+    </w-space>
+  </w-preview>
+
   <w-preview title="Readonly" desc="Readonly">
     <w-space>
       <w-input label="Name" placeholder="Name" readonly></w-input>
@@ -55,8 +61,13 @@
 
   <w-preview title="errorMessage" desc="errorMessage">
     <w-space>
-      <w-input label="name" error-message="error message" placeholder="please enter name"></w-input>
-      <w-input label="name" placeholder="please enter name">
+      <w-input
+        label="name"
+        validity-state="invalid"
+        error-message="error message"
+        placeholder="please enter name"
+      ></w-input>
+      <w-input label="name" validity-state="invalid" placeholder="please enter name">
         <template #error-message>
           <div class="extra">error message from slots</div>
         </template>
@@ -69,10 +80,19 @@
       <w-input default-value="default Value" clearable @clear="() => console.log('input cleared')"></w-input>
     </w-space>
   </w-preview>
+
+  <w-preview title="Controlled" desc="Controlled">
+    <w-space orientation="vertical" align="start">
+      <w-input v-model="value"></w-input>
+      <p>Input value: {{ value }}</p>
+    </w-space>
+  </w-preview>
 </template>
 
 <script setup>
-// import { ref } from 'vue'
+import { ref } from 'vue'
+
+const value = ref('Controlled')
 
 // const loadingOpts = ['eager', 'lazy']
 // const objectFitOpts = ['none', 'contain', 'cover', 'fill', 'scale-down']

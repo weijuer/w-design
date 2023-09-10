@@ -6,7 +6,7 @@
         <input class="w-input__input" v-bind="inputAttrs" />
         <label v-if="label" class="float-label">{{ label }}</label>
         <slot name="end"></slot>
-        <span v-if="clearable" class="w-input__btn" role="button" @click="onClear">
+        <span v-if="clearable" :class="['w-input__btn', { active: isClearBtn }]" role="button" @click="onClear">
           <w-icon name="delete"></w-icon>
         </span>
       </div>
@@ -41,7 +41,7 @@ import { useInput } from './useInput'
 const props = defineProps(inputProps)
 const emit = defineEmits(inputEmits)
 
-const { inputClass, inputAttrs, onClear } = useInput(props, emit)
+const { inputClass, inputAttrs, isClearBtn, onClear } = useInput(props, emit)
 </script>
 
 <style src="./input.scss" lang="scss"></style>
