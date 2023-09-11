@@ -13,12 +13,12 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
     });
 
     const inputClass = computed(() => {
-        const { size, type, bordered, required, disabled, readonly } = props
+        const { size, theme, bordered, required, disabled, readonly } = props
         const { slots: { start, end } } = instance!
 
         return [
             size ? 'w-input__' + size : '',
-            type ? 'w-input__' + type : '',
+            theme ? 'w-input__' + theme : '',
             start ? 'w-input__start' : '',
             end ? 'w-input__end' : '',
             {

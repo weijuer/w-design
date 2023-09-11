@@ -8,8 +8,8 @@
 
 $input-sizes: (
   small: 0,
-  medium: 0.25rem,
-  large: 0.5rem
+  medium: 0.5rem,
+  large: 1rem
 );
 
 .w-input__group {
@@ -27,11 +27,11 @@ $input-sizes: (
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  // background: var(--color-bg);
   @extend .form-control;
 
   svg {
     font-size: 1.25rem;
+    flex: none;
     // position: absolute;
 
     // &:first-child {
@@ -104,13 +104,14 @@ $input-sizes: (
   .float-label {
     background: var(--color-bg);
     padding: var(--space-4xs) var(--space-3xs);
-    border-radius: var(--radius-md);
+    border-radius: var(--w-radius-tiny);
     line-height: 1;
-    font-size: var(--text-sm);
+    font-size: var(--w-font-size-small);
     color: var(--color-contrast-low);
     position: absolute;
     top: 0;
     left: calc(var(--space-sm) - var(--space-3xs));
+    text-transform: capitalize;
     transform: translateY(-50%) scale(0.85);
     transition:
       transform 0.2s ease-out,
@@ -135,6 +136,41 @@ $input-sizes: (
     }
   }
 
+  // sizes
+  @each $key, $value in $input-sizes {
+    &.w-input__#{$key} {
+      height: #{2.5rem + $value};
+
+      @if $key == 'large' {
+        font-size: var(--w-font-size-large);
+      }
+    }
+  }
+
+  // themes
+  @each $theme-name, $theme-value in $themes {
+    &.w-input__#{$theme-name} {
+      color: $theme-value;
+      border-color: fade-out($color: $theme-value, $amount: 0.65);
+      background-color: fade-out($color: $theme-value, $amount: 0.65);
+
+      &:focus-within {
+        border-color: $theme-value;
+      }
+
+      .float-label {
+        color: var(--color-white);
+        background-color: fade-out($color: $theme-value, $amount: 0.25);
+      }
+
+      .w-input__input {
+        &::-webkit-input-placeholder {
+          color: $theme-value;
+        }
+      }
+    }
+  }
+
   &.is-readonly,
   &.is-disabled {
     .w-input__input {
@@ -144,7 +180,14 @@ $input-sizes: (
   }
 
   &.is-invalid {
+    color: var(--color-danger);
     background: var(--color-bg);
     border-color: var(--color-danger);
+
+    .w-input__input {
+      &::-webkit-input-placeholder {
+        color: var(--color-danger);
+      }
+    }
   }
 }

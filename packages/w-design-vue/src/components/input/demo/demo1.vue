@@ -23,6 +23,24 @@
     </w-space>
   </w-preview>
 
+  <w-preview title="Sizes" desc="Sizes">
+    <w-space>
+      <w-input v-for="size of sizes" :key="size" :size="size" :label="size" :placeholder="size"></w-input>
+    </w-space>
+  </w-preview>
+
+  <w-preview title="Themes" desc="Themes">
+    <w-space>
+      <w-input
+        v-for="theme of themes"
+        :key="theme"
+        :theme="theme"
+        :label="theme"
+        :placeholder="theme ? theme : 'default'"
+      ></w-input>
+    </w-space>
+  </w-preview>
+
   <w-preview title="Icon" desc="Icon">
     <w-space>
       <w-input label="Name" placeholder="Name">
@@ -93,6 +111,8 @@
 import { ref } from 'vue'
 
 const value = ref('Controlled')
+const themes = ['', 'primary', 'success', 'warning', 'info', 'danger']
+const sizes = ['small', 'medium', 'large']
 
 // const loadingOpts = ['eager', 'lazy']
 // const objectFitOpts = ['none', 'contain', 'cover', 'fill', 'scale-down']

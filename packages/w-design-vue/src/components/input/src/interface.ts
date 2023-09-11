@@ -1,5 +1,5 @@
 import { type PropType, type ExtractPropTypes } from 'vue'
-import { type Numeric, Size } from '../../_utils/typings'
+import { type Numeric, Size, Type } from '../../_utils'
 
 export type InputType =
     | 'tel'
@@ -59,6 +59,10 @@ export const inputProps = {
     },
     validityState: {
         type: String as PropType<ValidityState>,
+        default: ''
+    },
+    theme: {
+        type: String as PropType<Type>,
         default: ''
     },
     size: String as PropType<Size>,
