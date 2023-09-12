@@ -85,6 +85,7 @@
   &.is-splitted {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 
     > .w-collapse__item {
       padding-left: var(--w-collapse-padding);
