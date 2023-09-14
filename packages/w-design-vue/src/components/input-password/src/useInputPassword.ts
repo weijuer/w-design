@@ -10,5 +10,8 @@ export const useInputPassword = () => {
         visible.value = !visible.value
     };
 
-    return { _ref, visible, onToggle }
+    const onMousedown = (e: MouseEvent) => e.preventDefault()
+    const onMouseup = (e: MouseEvent) => e.preventDefault()
+
+    return { _ref, visible, onToggle, onMousedown, onMouseup }
 }

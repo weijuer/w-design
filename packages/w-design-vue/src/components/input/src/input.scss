@@ -27,10 +27,11 @@ $input-sizes: (
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
+  height: 2.5rem;
   @extend .form-control;
 
   svg {
-    font-size: 1.25rem;
+    font-size: 1.65rem;
     flex: none;
     // position: absolute;
 

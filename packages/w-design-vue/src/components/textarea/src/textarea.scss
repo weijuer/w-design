@@ -1,0 +1,83 @@
+@import '../../_common/index';
+
+:root {
+  --w-textarea-padding: 1.85em;
+  --w-textarea-color: white;
+  --w-textarea-radius: 14px;
+}
+
+.w-textarea {
+  position: relative;
+
+  &__textarea {
+    @extend .form-control;
+
+    &:placeholder-shown {
+      + .float-label {
+        clip: rect(1px, 1px, 1px, 1px);
+        clip-path: inset(50%);
+        transform: translateY(-25%);
+      }
+    }
+  }
+
+  .float-label {
+    background: var(--color-bg);
+    padding: var(--space-4xs) var(--space-3xs);
+    border-radius: var(--w-radius-tiny);
+    line-height: 1;
+    font-size: var(--w-font-size-small);
+    color: var(--color-contrast-low);
+    position: absolute;
+    top: 0;
+    left: calc(var(--space-sm) - var(--space-3xs));
+    text-transform: capitalize;
+    transform: translateY(-50%) scale(0.85);
+    transition:
+      transform 0.2s ease-out,
+      color 0.2s;
+    clip: auto;
+    clip-path: none;
+  }
+
+  &__helper {
+    text-align: right;
+    font-size: small;
+    margin-top: var(--space-3xs);
+  }
+
+  &__btn {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    appearance: none;
+    user-select: none;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+
+    &.active {
+      cursor: pointer;
+      opacity: 1;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &:active {
+        opacity: 0.6;
+      }
+    }
+
+    &:not(:disabled):focus,
+    &:not(:disabled):focus-visible {
+      outline: none;
+    }
+  }
+}
