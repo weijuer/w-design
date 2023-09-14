@@ -1,5 +1,5 @@
 <template>
-  <svg class="w-icon" v-bind="$attrs" aria-hidden="true">
+  <svg class="w-icon" v-bind="$attrs" aria-hidden="true" @click="emit('click')">
     <use :xlink:href="symbolId"></use>
   </svg>
 </template>
@@ -28,6 +28,8 @@ const props = defineProps({
     default: '#333'
   }
 })
+
+const emit = defineEmits(['click'])
 
 const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 </script>

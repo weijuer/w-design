@@ -42,7 +42,7 @@ import { ref } from 'vue'
 
 const themes = ref(['primary', 'success', 'warning', 'info', 'danger', 'brand', 'focus'])
 const sizes = ref(['tiny', 'small', '', 'medium', 'large'])
-const defaultIcons = ref(['delete', 'error', 'file', 'loading', 'upload', 'github'])
+const defaultIcons = ref(['delete-outlined', 'error', 'file', 'loading', 'upload', 'github'])
 
 const capitalizeFirstLetter = (word) => word.replace(/(^\w)/, (match) => match.toUpperCase())
 </script>

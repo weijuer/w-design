@@ -29,6 +29,8 @@ export * from './checkbox'
 export * from './radio'
 export * from './switch'
 export * from './input'
+export * from './input-search'
+export * from './input-password'
 
 // plugins
 export * from './preview'

@@ -1,4 +1,4 @@
-import { SetupContext, computed, getCurrentInstance, nextTick, onMounted, reactive, ref, watch } from 'vue'
+import { SetupContext, computed, getCurrentInstance, reactive, ref, useSlots, watch } from 'vue'
 import { type InputEmits, type InputProps } from './interface'
 // import { addUnit } from '../../_utils'
 
@@ -7,6 +7,7 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
     const _ref = ref<HTMLInputElement>()
 
     const instance = getCurrentInstance()
+    const slots = useSlots()
     const inputValue = ref(props.defaultValue ? props.defaultValue : props.modelValue);
     const state = reactive({
         inputValidityState: props.validityState ? props.validityState : 'valid'
@@ -32,11 +33,12 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
     })
 
     const inputAttrs = computed(() => {
-        const { name, disabled, readonly, autofocus, placeholder, autocomplete, autocapitalize, autocorrect } = props
+        const { name, type, disabled, readonly, autofocus, placeholder, autocomplete, autocapitalize, autocorrect } = props
 
         return {
             ref: _ref,
             name,
+            type,
             value: inputValue.value,
             disabled,
             readonly,
@@ -52,6 +54,13 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
     const isClearBtn = computed(() => {
         const { clearable } = props
         return clearable && !!inputValue.value
+    })
+
+    const isHelper = computed(() => {
+        const { description: descSlot, 'error-message': errorSlot } = slots
+        const { description, errorMessage } = props
+
+        return description || descSlot || errorMessage || errorSlot
     })
 
     const updateValue = (value: string) => {
@@ -79,8 +88,6 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
         }
     };
 
-
-
     watch(
         () => props.modelValue,
         (modelValue) => {
@@ -88,11 +95,5 @@ export const useInput = (props: InputProps, emit: SetupContext<InputEmits>['emit
         },
     );
 
-    onMounted(() => {
-        nextTick(() => {
-
-        });
-    });
-
-    return { _ref, inputClass, inputAttrs, isClearBtn, blur, focus, onClear }
+    return { _ref, inputClass, inputAttrs, inputValue, isHelper, isClearBtn, blur, focus, onClear }
 }
