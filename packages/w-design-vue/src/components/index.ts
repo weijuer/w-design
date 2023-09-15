@@ -31,6 +31,7 @@ export * from './switch'
 export * from './input'
 export * from './input-search'
 export * from './input-password'
+export * from './input-number'
 export * from './textarea'
 
 // plugins
