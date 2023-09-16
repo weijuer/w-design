@@ -1,5 +1,5 @@
 import { type PropType, type ExtractPropTypes } from 'vue'
-import { Size, Type } from '../../_utils'
+import { Numeric, Size, Type } from '../../_utils'
 
 export type InputType =
     | 'tel'
@@ -36,7 +36,7 @@ export const inputProps = {
         default: ''
     },
     modelValue: {
-        type: String,
+        type: [Number, String] as PropType<Numeric>,
         default: ''
     },
     description: {
@@ -66,7 +66,7 @@ export const inputProps = {
         default: ''
     },
     size: String as PropType<Size>,
-    defaultValue: String,
+    defaultValue: [Number, String] as PropType<Numeric>,
     label: String,
     name: String,
     maxlength: [Number, String],

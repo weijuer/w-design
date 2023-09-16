@@ -1,28 +1,49 @@
 <template>
-  <w-input ref="_ref" class="w-input-number" v-bind="$attrs" type="number">
-    <template #end>
-      <div class="w-input-number__btns">
-        <w-button
-          size="tiny"
-          icon="arrow-up"
-          class="w-input-number__btn"
-          @click="onToggle"
-          @mouseup="onMouseup"
-          @mousedown="onMousedown"
-        >
-        </w-button>
-        <w-button
-          size="tiny"
-          icon="arrow-down"
-          class="w-input-number__btn"
-          @click="onToggle"
-          @mouseup="onMouseup"
-          @mousedown="onMousedown"
-        >
-        </w-button>
-      </div>
+  <div class="w-input-number" :class="inputNumberClass">
+    <input class="w-input-number__input" v-bind="inputNumberAttrs" />
+    <template v-if="splitted">
+      <w-button
+        icon="minus"
+        class="w-input-number__btn w-input-number__btn-minus"
+        round
+        :disabled="isDecreaseBtnDisabled"
+        @click="onDecrease"
+        @mouseup="onMouseup"
+        @mousedown="onMousedown"
+      >
+      </w-button>
+      <w-button
+        icon="plus"
+        class="w-input-number__btn w-input-number__btn-plus"
+        round
+        :disabled="isIncreaseBtnDisabled"
+        @click="onIncrease"
+        @mouseup="onMouseup"
+        @mousedown="onMousedown"
+      >
+      </w-button>
     </template>
-  </w-input>
+    <div v-else class="w-input-number__btns">
+      <w-button
+        icon="arrow-up"
+        class="w-input-number__btn"
+        :disabled="isIncreaseBtnDisabled"
+        @click="onIncrease"
+        @mouseup="onMouseup"
+        @mousedown="onMousedown"
+      >
+      </w-button>
+      <w-button
+        icon="arrow-down"
+        class="w-input-number__btn"
+        :disabled="isDecreaseBtnDisabled"
+        @click="onDecrease"
+        @mouseup="onMouseup"
+        @mousedown="onMousedown"
+      >
+      </w-button>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -33,14 +54,23 @@ export default {
 </script>
 
 <script setup lang="ts">
-import WInput from '../../input'
 import WButton from '../../button'
-import { inputNumberProps } from './interface'
+import { inputNumberEmits, inputNumberProps } from './interface'
 import { useInputNumber } from './useInputNumber'
 
-defineProps(inputNumberProps)
+const props = defineProps(inputNumberProps)
+const emit = defineEmits(inputNumberEmits)
 
-const { _ref, onToggle, onMousedown, onMouseup } = useInputNumber()
+const {
+  inputNumberClass,
+  inputNumberAttrs,
+  isIncreaseBtnDisabled,
+  isDecreaseBtnDisabled,
+  onIncrease,
+  onDecrease,
+  onMousedown,
+  onMouseup
+} = useInputNumber(props, emit)
 </script>
 
 <style src="./input-number.scss" lang="scss"></style>

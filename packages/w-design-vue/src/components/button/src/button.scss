@@ -49,13 +49,13 @@ $btn-sizes: (
     border-style: solid;
 
     &:not(:disabled):hover {
-      color: map-get($themes, 'brand');
-      border-color: map-get($themes, 'brand');
+      color: map-get($themes, 'primary');
+      border-color: map-get($themes, 'primary');
     }
 
     &:not(:disabled):focus,
     &:not(:disabled):focus-visible {
-      outline: 2px solid map-get($themes, 'brand');
+      outline: 2px solid map-get($themes, 'primary');
       outline-offset: 2px;
     }
 
