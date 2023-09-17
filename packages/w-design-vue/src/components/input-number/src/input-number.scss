@@ -1,6 +1,7 @@
 @import '../../_common/index';
 
 :root {
+  --w-input-number-width: 7em;
   --w-input-number-btn-width: 1.75em;
   --w-input-number-btn-gap: 4px;
 }
@@ -23,7 +24,8 @@
   }
 
   &__input {
-    min-width: 120px;
+    min-width: var(--w-input-number-width);
+    width: var(--w-input-number-width);
     padding-right: calc(var(--w-input-number-btn-width) + var(--w-input-number-btn-gap));
     @extend .form-control;
   }

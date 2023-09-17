@@ -6,15 +6,20 @@ export const inputNumberProps = {
     ...inputProps,
     min: {
         type: [String, Number] as PropType<Numeric>,
-        default: 0
+        default: undefined
     },
     max: {
         type: [String, Number] as PropType<Numeric>,
-        default: 10
+        default: undefined
     },
     step: {
         type: [String, Number] as PropType<Numeric>,
         default: 1
+    },
+    disableInput: Boolean,
+    controls: {
+        type: Boolean,
+        default: true
     },
     splitted: Boolean
 }

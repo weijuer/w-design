@@ -23,7 +23,7 @@
       >
       </w-button>
     </template>
-    <div v-else class="w-input-number__btns">
+    <div v-if="controls && !splitted" class="w-input-number__btns">
       <w-button
         icon="arrow-up"
         class="w-input-number__btn"

@@ -21,8 +21,9 @@ export const useInputNumber = (props: InputNumberProps, emit: SetupContext<Input
             name,
             min,
             max,
-            step,
+            step = 1,
             disabled,
+            disableInput,
             readonly,
             autofocus,
             placeholder,
@@ -37,7 +38,7 @@ export const useInputNumber = (props: InputNumberProps, emit: SetupContext<Input
             type: 'number',
             value: inputValue.value,
             disabled,
-            readonly,
+            readonly: readonly ? readonly : disableInput,
             autofocus,
             placeholder,
             autocomplete,
@@ -46,20 +47,21 @@ export const useInputNumber = (props: InputNumberProps, emit: SetupContext<Input
             min,
             max,
             step,
+            onInput,
             onKeydown: onPressEnter
         }
     })
 
     const isIncreaseBtnDisabled = computed(() => {
-        const { max } = props
+        const { disabled, max = Infinity } = props
 
-        return inputValue.value >= max
+        return disabled ? disabled : inputValue.value >= max
     })
 
     const isDecreaseBtnDisabled = computed(() => {
-        const { min } = props
+        const { disabled, min = 1 } = props
 
-        return inputValue.value <= min
+        return disabled ? disabled : inputValue.value <= min
     })
 
     const onPressEnter = (event: KeyboardEvent) => {
@@ -75,11 +77,17 @@ export const useInputNumber = (props: InputNumberProps, emit: SetupContext<Input
         }
     }
 
+    const onInput = (event: Event) => {
+        if (!(event as KeyboardEvent).isComposing) {
+            updateValue((event.target as HTMLInputElement).value);
+        }
+    };
+
     const blur = () => _ref.value?.blur()
     const focus = () => _ref.value?.focus()
 
     const onIncrease = () => {
-        const { step, max } = props
+        const { step, max = Infinity } = props
 
         if (inputValue.value < max) {
             inputValue.value = Number(inputValue.value) + Number(step)
@@ -91,7 +99,7 @@ export const useInputNumber = (props: InputNumberProps, emit: SetupContext<Input
     }
 
     const onDecrease = () => {
-        const { step, min } = props
+        const { step, min = 1 } = props
 
         if (inputValue.value > min) {
             inputValue.value = Number(inputValue.value) - Number(step)
