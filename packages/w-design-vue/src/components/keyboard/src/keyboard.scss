@@ -1,0 +1,18 @@
+.w-keyboard {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0.25rem 0.5rem;
+  line-height: 1.25rem;
+  font-size: 0.875rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  color: rgba(0, 0, 0, 0.7);
+  box-shadow:
+    #d1d5db 0px -4px 0px inset,
+    rgba(0, 0, 0, 0.4) 0px 1px 1px;
+
+  abbr {
+    text-decoration-line: none;
+  }
+}
