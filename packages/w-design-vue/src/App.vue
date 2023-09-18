@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Demo from './components/menu/demo/demo1.vue'
+import Demo from './components/modal/demo/demo1.vue'
 </script>
 
 <style lang="scss">
@@ -68,3 +68,4 @@ body {
   }
 }
 </style>
+./components/kbd/demo/demo1.vue

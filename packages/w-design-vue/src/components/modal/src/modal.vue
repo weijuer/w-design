@@ -4,20 +4,20 @@
       <div v-if="props.modelValue" class="modal-mask">
         <div class="modal-wrapper">
           <div class="modal-container">
-            <div class="modal-header">
-              <slot name="header"></slot>
-            </div>
+            <slot name="header">
+              <header class="modal-header"></header>
+            </slot>
 
             <div class="modal-body">
               <slot name="body"></slot>
             </div>
 
-            <div class="modal-footer">
-              <slot name="footer">
+            <slot name="footer">
+              <footer class="modal-footer">
                 <w-button type="primary" @click="$emit('close')">Comfirm</w-button>
                 <w-button type="default" @click="$emit('close')">Cancel</w-button>
-              </slot>
-            </div>
+              </footer>
+            </slot>
           </div>
         </div>
       </div>
@@ -26,24 +26,18 @@
 </template>
 
 <script lang="ts" setup>
-import {WButton} from '../../button'
+import { WButton } from '../../button'
+import { modalEmits, modalProps } from './interface'
+import { useModal } from './useModal'
+
+const props = defineProps(modalProps)
+const emit = defineEmits(modalEmits)
+
+useModal(props, emit)
 
 defineOptions({
-  name: 'w-modal'
+  name: 'WModal'
 })
-
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false
-  },
-  to: {
-    type: String,
-    default: 'body'
-  }
-});
-
-const emit = defineEmits(['close', 'update:modelValue']);
 </script>
 
 <style src="./modal.scss" lang="scss" scoped />

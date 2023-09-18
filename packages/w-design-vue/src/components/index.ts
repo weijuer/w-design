@@ -23,6 +23,7 @@ export * from './breadcrumb'
 export * from './details'
 export * from './progress'
 export * from './image'
+export * from './keyboard'
 
 // form
 export * from './checkbox'
