@@ -7,10 +7,11 @@ export const useModal = (props: ModalProps, emit: SetupContext<ModalEmits>['emit
     // const inputValue = ref(props.defaultValue ? props.defaultValue : props.modelValue)
 
     const modalClass = computed(() => {
-        const { type, centered } = props
+        const { type, backdrop, centered } = props
 
         return [
             type ? 'w-modal__' + type : '',
+            backdrop ? 'w-modal__' + backdrop : '',
             {
                 'is-centered': centered
             }

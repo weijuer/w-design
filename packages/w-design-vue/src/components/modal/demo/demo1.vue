@@ -28,16 +28,34 @@
       </w-modal>
     </w-space>
   </w-preview>
+
+  <w-preview title="With Form" desc="With Form">
+    <w-space>
+      <w-button type="primary" @click="state.visible2 = true">open</w-button>
+      <w-modal title="Title" v-model="state.visible2" :backdrop="state.backdrop">
+        <p>backdrop test</p>
+      </w-modal>
+      <w-space>
+        <w-radio-group v-model="state.backdrop" :options="backdropOpts" orientation="horizontal"></w-radio-group>
+      </w-space>
+    </w-space>
+  </w-preview>
 </template>
 
 <script setup>
 import { ref, reactive } from 'vue'
 
+const backdropOpts = ['transparent', 'opaque', 'blur']
 const visible = ref(false)
-const onOk = (e) => console.log('onOk', e)
+const onOk = (e) => {
+  console.log('onOk', e)
+  visible.value = false
+}
 const onCancel = (e) => console.log('onCancel', e)
 
 const state = reactive({
-  visible1: false
+  visible1: false,
+  visible2: false,
+  backdrop: ''
 })
 </script>
