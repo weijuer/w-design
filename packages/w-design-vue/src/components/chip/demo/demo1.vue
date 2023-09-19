@@ -68,7 +68,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const themes = ['primary', 'success', 'warning', 'info', 'danger', 'brand', 'focus']
+const themes = ['primary', 'success', 'warning', 'info', 'danger']
 const initialFruits = ['Apple', 'Banana', 'Cherry', 'Watermelon', 'Orange']
 const sizes = ['small', 'medium', 'large']
 

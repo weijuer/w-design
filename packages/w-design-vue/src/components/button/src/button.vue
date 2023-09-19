@@ -22,35 +22,14 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, useSlots } from 'vue'
 import WIcon from '../../icon'
 import { buttonEmits, buttonProps } from './interface'
 import { useButton } from './useButton'
 
 const props = defineProps(buttonProps)
 const emit = defineEmits(buttonEmits)
-const slots = useSlots()
 
-const buttonClass = computed(() => {
-  const { type, icon, size, outlined, disabled, loading, light, round, dashed, circle } = props
-
-  return [
-    type ? 'w-button__' + type : '',
-    size ? 'w-button__' + size : '',
-    icon || (loading && !slots.default) ? 'w-button__icon' : '',
-    {
-      'is-disabled': disabled || loading,
-      'is-outlined': outlined,
-      'is-loading': loading,
-      'is-light': light,
-      'is-round': round,
-      'is-dashed': dashed,
-      'is-circle': circle
-    }
-  ]
-})
-
-const { _ref, handleClick } = useButton(props, emit)
+const { _ref, buttonClass, handleClick } = useButton(props, emit)
 
 defineExpose({
   ref: _ref

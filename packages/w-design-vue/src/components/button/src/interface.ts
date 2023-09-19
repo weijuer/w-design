@@ -1,8 +1,5 @@
-import {type  PropType, ExtractPropTypes } from 'vue'
-
-export type Size = 'tiny' | 'small' | 'medium' | 'large'
-
-export type Type = 'default' | 'primary' | 'success' | 'warning' | 'info' | 'danger' | 'brand' | 'foucs'
+import { type PropType, ExtractPropTypes } from 'vue'
+import { Size, Type } from 'src/components/_utils'
 
 export type AttrType = 'button' | 'submit' | 'reset'
 
@@ -21,6 +18,7 @@ export const buttonProps = {
         default: 'button'
     },
     flashed: Boolean,
+    ringed: Boolean,
     outlined: Boolean,
     block: Boolean,
     loading: Boolean,

@@ -1,34 +1,37 @@
 @import '../../_common/index';
 
+:root {
+  --w-modal-max-width: 32rem;
+}
+
 .w-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 9999;
+  overflow-x: auto;
+  perspective: 800px;
+  transition: opacity 0.3s;
 
   .w-modal__overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
   }
 
   .w-modal__content {
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: auto;
-    min-width: 50%;
-    max-width: calc(100% - 32px);
+    position: relative;
+    width: calc(100% - 2 * var(--space-md));
+    max-width: var(--w-modal-max-width, calc(100% - 32px));
+    max-height: calc(100% - 7.5rem);
     background-color: #fff;
     border-radius: var(--w-radius-large);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
 
     .w-modal__header {
       padding: 16px 20px;
@@ -49,7 +52,6 @@
 
     .w-modal__body {
       padding: 24px;
-      font-size: 14px;
       line-height: 1.5;
       word-wrap: break-word;
       max-height: calc(100vh - 200px);
@@ -60,8 +62,7 @@
       padding: 10px 16px;
       text-align: right;
       background: transparent;
-      // border-top: 1px solid #e8e8e8;
-      border-radius: 0 0 4px 4px;
+      border-radius: 0 0 var(--w-radius-large) var(--w-radius-large);
 
       .w-button ~ .w-button {
         margin-left: 10px;
@@ -87,61 +88,14 @@
       }
     }
   }
-
-  &.active {
-    display: block;
-  }
 }
 
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: table;
-  transition: opacity 0.3s ease;
-}
-
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-
-  .modal-container {
-    width: 300px;
-    margin: 0px auto;
-    padding: 20px 30px;
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-    transition: all 0.3s ease;
-  }
-
-  .modal-header h3 {
-    margin-top: 0;
-    color: #42b983;
-  }
-
-  .modal-body {
-    margin: 20px 0;
-  }
-
-  .modal-default-button {
-    float: right;
-  }
-}
-
-.modal-enter-from {
-  opacity: 0;
-}
-
+.modal-enter-from,
 .modal-leave-to {
   opacity: 0;
 }
 
-.modal-enter-from .modal-container,
-.modal-leave-to .modal-container {
-  transform: scale(1.1);
+.modal-enter-from .w-modal__content,
+.modal-leave-to .w-modal__content {
+  transform: translateY(10%);
 }

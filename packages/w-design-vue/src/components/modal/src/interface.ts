@@ -35,7 +35,7 @@ export const modalProps = {
         default: true
     },
     okType: {
-        type: String,
+        type: String as PropType<Type>,
         default: 'primary'
     },
     cancelText: {

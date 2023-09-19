@@ -75,7 +75,7 @@
 import { ref } from 'vue'
 
 const sizes = ref(['small', '', 'medium', 'large'])
-const themes = ref(['primary', 'success', 'warning', 'info', 'danger', 'brand', 'focus'])
+const themes = ref(['primary', 'success', 'warning', 'info', 'danger'])
 </script>
 
 <style lang="scss">

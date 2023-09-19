@@ -50,7 +50,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const themes = ref(['primary', 'success', 'warning', 'info', 'danger', 'brand', 'focus'])
+const themes = ref(['primary', 'success', 'warning', 'info', 'danger'])
 const aligns = ref(['start', 'center', 'end', 'baseline'])
 const align = ref('center')
 </script>
