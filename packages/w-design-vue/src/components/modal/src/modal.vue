@@ -1,8 +1,16 @@
 <template>
   <Teleport :to="props.to">
     <Transition name="modal">
-      <div v-if="props.modelValue" class="w-modal" :class="modalClass" :style="modalStyle">
-        <div class="w-modal__overlay"></div>
+      <div
+        v-if="props.modelValue"
+        class="w-modal"
+        ref="_ref"
+        :class="modalClass"
+        :style="modalStyle"
+        :data-open="modelValue"
+        :data-dismissable="dismissable"
+      >
+        <div class="w-modal__overlay" :class="overlayClass" @click="onOverlayClick"></div>
         <div class="w-modal__content" :style="bodyStyle">
           <w-button
             v-if="closable"
@@ -47,7 +55,7 @@ defineOptions({
 const props = defineProps(modalProps)
 const emit = defineEmits(modalEmits)
 
-const { modalClass, modalStyle, onOk, onCancel } = useModal(props, emit)
+const { _ref, modalClass, overlayClass, modalStyle, onOk, onCancel, onOverlayClick } = useModal(props, emit)
 </script>
 
 <style src="./modal.scss" lang="scss" />

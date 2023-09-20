@@ -3,7 +3,17 @@
 :root {
   --w-modal-max-width: 32rem;
   --w-modal-backdrop-blur: blur(12px);
+  --w-modal-scale-enter: 1;
 }
+
+$placements: (
+  auto: center,
+  top: flex-start,
+  bottom: flex-end,
+  center: center,
+  top-center: center,
+  bottom-center: center
+);
 
 .w-modal {
   position: fixed;
@@ -14,18 +24,26 @@
   z-index: 9999;
   overflow-x: auto;
   perspective: 800px;
-  transition: opacity 0.3s;
 
   .w-modal__overlay {
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+
+    &-blur {
+      backdrop-filter: var(--w-modal-backdrop-blur);
+    }
+
+    &-transparent {
+      background-color: transparent;
+    }
   }
 
   .w-modal__content {
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
+    margin: 0.25rem;
     position: relative;
     width: calc(100% - 2 * var(--space-md));
     max-width: var(--w-modal-max-width, calc(100% - 32px));
@@ -91,25 +109,23 @@
     }
   }
 
-  &__blur {
-    .w-modal__overlay {
-      backdrop-filter: var(--w-modal-backdrop-blur);
-    }
-  }
-
-  &__transparent {
-    .w-modal__overlay {
-      background-color: transparent;
+  // placements
+  @each $key, $val in $placements {
+    &.w-modal__#{$key} {
+      align-items: #{$val};
     }
   }
 }
 
-.modal-enter-from,
+.modal-enter-from {
+  opacity: 0;
+}
+
 .modal-leave-to {
   opacity: 0;
 }
 
 .modal-enter-from .w-modal__content,
 .modal-leave-to .w-modal__content {
-  transform: translateY(10%);
+  transform: scale(103%);
 }
