@@ -22,9 +22,9 @@ export const modalProps = {
     },
     placement: {
         type: String as PropType<ModalPlacement>,
-        default: 'center',
+        default: '',
         validator(value: string) {
-            return ['auto', 'top', 'bottom', 'center', 'top-center', 'bottom-center'].includes(value);
+            return ['', 'auto', 'top', 'bottom', 'center', 'top-center', 'bottom-center'].includes(value);
         }
     },
     backdrop: {
@@ -62,6 +62,7 @@ export const modalProps = {
     bodyStyle: Object,
     footer: Object,
     centered: Boolean,
+    bordered: Boolean,
     destroyOnClose: Boolean,
     confirmLoading: Boolean,
 }

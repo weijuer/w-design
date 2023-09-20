@@ -33,6 +33,23 @@
     </w-space>
   </w-preview>
 
+  <w-preview title="Bordered" desc="Bordered">
+    <w-space>
+      <w-button type="primary" @click="state.bordered = true">open</w-button>
+      <w-modal title="Title" v-model="state.bordered" :dismissable="false" bordered>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit venenatis.
+          Pellentesque sit amet hendrerit risus, sed porttitor quam. Lorem ipsum dolor sit amet, consectetur adipiscing
+          elit. Nullam pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed
+          porttitor quam. Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit dolor adipisicing.
+          Mollit dolor eiusmod sunt ex incididunt cillum quis. Velit duis sit officia eiusmod Lorem aliqua enim laboris
+          do dolor eiusmod. Et mollit incididunt nisi consectetur esse laborum eiusmod pariatur proident Lorem eiusmod
+          et. Culpa deserunt nostrud ad veniam.
+        </p>
+      </w-modal>
+    </w-space>
+  </w-preview>
+
   <w-preview title="With Form" desc="With Form">
     <w-space>
       <w-button type="primary" @click="state.visible2 = true">open</w-button>
@@ -91,6 +108,7 @@ const onCancel = (e) => console.log('onCancel', e)
 const state = reactive({
   visible1: false,
   visible2: false,
+  bordered: false,
   transparent: false,
   opaque: false,
   blur: false,

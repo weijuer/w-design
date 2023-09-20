@@ -22,7 +22,7 @@
           ></w-button>
           <slot name="header">
             <header class="w-modal__header">
-              <div class="w-modal__title">{{ title }}</div>
+              {{ title }}
             </header>
           </slot>
 

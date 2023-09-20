@@ -2,7 +2,7 @@
 
 :root {
   --w-modal-max-width: 32rem;
-  --w-modal-backdrop-blur: blur(12px);
+  --w-modal-backdrop-blur: blur(4px);
   --w-modal-scale-enter: 1;
 }
 
@@ -28,8 +28,9 @@ $placements: (
   .w-modal__overlay {
     position: absolute;
     inset: 0;
+    opacity: 1;
     background-color: rgba(0, 0, 0, 0.3);
-    transition: all 0.3s;
+    transition: opacity 0.3s;
 
     &-blur {
       backdrop-filter: var(--w-modal-backdrop-blur);
@@ -51,42 +52,41 @@ $placements: (
     background-color: #fff;
     border-radius: var(--w-radius-large);
     box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
+    will-change: transform;
+    transition: transform 0.3s;
 
     .w-modal__header {
-      padding: 16px 20px;
+      padding: 1rem 1.5rem;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .w-modal__title {
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 22px;
-      }
-
-      > * {
-        flex: 1;
-      }
+      flex-direction: column;
+      flex: 0 1 auto;
+      gap: 0.25rem;
+      font-weight: 600;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
     }
 
     .w-modal__body {
-      padding: 24px;
+      padding: 1rem 1.5rem;
       line-height: 1.5;
       word-wrap: break-word;
       max-height: calc(100vh - 200px);
       overflow-y: auto;
+
+      &::before,
+      &::after {
+        content: '';
+        display: flex;
+        background-image: linear-gradient();
+      }
     }
 
     .w-modal__footer {
-      padding: 10px 16px;
-      text-align: right;
-      background: transparent;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
       border-radius: 0 0 var(--w-radius-large) var(--w-radius-large);
-
-      .w-button ~ .w-button {
-        margin-left: 10px;
-      }
     }
 
     .w-modal__close-btn {
@@ -94,18 +94,29 @@ $placements: (
       padding: 0;
       border: 0;
       position: absolute;
-      top: 4px;
-      right: 4px;
-      font-size: 24px;
-      font-style: normal;
-      line-height: 54px;
-      text-align: center;
-      text-transform: none;
-      text-rendering: auto;
+      top: 0.25rem;
+      right: 0.25rem;
+      font-size: 1.65rem;
 
       &:hover {
         color: red;
       }
+    }
+  }
+
+  &.is-centered {
+    align-items: center;
+  }
+
+  &.is-bordered {
+    --w-modal-border: 1px solid #f3f2f3;
+
+    .w-modal__header {
+      border-bottom: var(--w-modal-border);
+    }
+
+    .w-modal__footer {
+      border-top: var(--w-modal-border);
     }
   }
 
@@ -117,15 +128,30 @@ $placements: (
   }
 }
 
+@media (min-width: 640px) {
+  .w-modal {
+    .w-modal__content {
+      margin: 4rem 1.5rem;
+    }
+  }
+}
+
 .modal-enter-from {
-  opacity: 0;
+  .w-modal__overlay {
+    opacity: 0;
+  }
+
+  .w-modal__content {
+    transform: scale(103%);
+  }
 }
 
 .modal-leave-to {
-  opacity: 0;
-}
+  .w-modal__overlay {
+    opacity: 0;
+  }
 
-.modal-enter-from .w-modal__content,
-.modal-leave-to .w-modal__content {
-  transform: scale(103%);
+  .w-modal__content {
+    transform: scale(103%);
+  }
 }
