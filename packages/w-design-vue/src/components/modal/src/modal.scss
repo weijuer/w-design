@@ -24,22 +24,8 @@ $placements: (
   z-index: 9999;
   overflow-x: auto;
   perspective: 800px;
-
-  .w-modal__overlay {
-    position: absolute;
-    inset: 0;
-    opacity: 1;
-    background-color: rgba(0, 0, 0, 0.3);
-    transition: opacity 0.3s;
-
-    &-blur {
-      backdrop-filter: var(--w-modal-backdrop-blur);
-    }
-
-    &-transparent {
-      background-color: transparent;
-    }
-  }
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s;
 
   .w-modal__content {
     display: flex;
@@ -104,6 +90,14 @@ $placements: (
     }
   }
 
+  &__overlay-blur {
+    backdrop-filter: var(--w-modal-backdrop-blur);
+  }
+
+  &__overlay-transparent {
+    background-color: transparent;
+  }
+
   &.is-centered {
     align-items: center;
   }
@@ -137,21 +131,17 @@ $placements: (
 }
 
 .modal-enter-from {
-  .w-modal__overlay {
-    opacity: 0;
-  }
+  opacity: 0;
 
   .w-modal__content {
-    transform: scale(103%);
+    transform: scale(1.05);
   }
 }
 
 .modal-leave-to {
-  .w-modal__overlay {
-    opacity: 0;
-  }
+  opacity: 0;
 
   .w-modal__content {
-    transform: scale(103%);
+    transform: scale(1.05);
   }
 }

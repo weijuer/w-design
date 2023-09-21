@@ -94,13 +94,17 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, getCurrentInstance } from 'vue'
 
 const backdropOpts = ['transparent', 'opaque', 'blur']
 const placementOpts = ['auto', 'top', 'bottom', 'center', 'top-center', 'bottom-center']
+
 const visible = ref(false)
+const { proxy } = getCurrentInstance()
+
 const onOk = (e) => {
   console.log('onOk', e)
+  proxy.$log('onOK', e)
   visible.value = false
 }
 const onCancel = (e) => console.log('onCancel', e)

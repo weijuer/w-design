@@ -9,8 +9,8 @@
         :style="modalStyle"
         :data-open="modelValue"
         :data-dismissable="dismissable"
+        @click="onOverlayClick"
       >
-        <div class="w-modal__overlay" :class="overlayClass" @click="onOverlayClick"></div>
         <div class="w-modal__content" :style="bodyStyle">
           <w-button
             v-if="closable"
@@ -55,7 +55,7 @@ defineOptions({
 const props = defineProps(modalProps)
 const emit = defineEmits(modalEmits)
 
-const { _ref, modalClass, overlayClass, modalStyle, onOk, onCancel, onOverlayClick } = useModal(props, emit)
+const { _ref, modalClass, modalStyle, onOk, onCancel, onOverlayClick } = useModal(props, emit)
 </script>
 
 <style src="./modal.scss" lang="scss" />

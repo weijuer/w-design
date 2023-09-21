@@ -7,23 +7,16 @@ export const useModal = (props: ModalProps, emit: SetupContext<ModalEmits>['emit
     const _ref = ref<HTMLElement>()
 
     const modalClass = computed(() => {
-        const { type, placement, centered, bordered } = props
+        const { type, backdrop, placement, centered, bordered } = props
 
         return [
             type ? 'w-modal__' + type : '',
             placement ? 'w-modal__' + placement : '',
+            backdrop && backdrop != 'opaque' ? 'w-modal__overlay-' + backdrop : '',
             {
                 'is-centered': centered,
                 'is-bordered': bordered,
             }
-        ]
-    })
-
-    const overlayClass = computed(() => {
-        const { backdrop } = props
-
-        return [
-            backdrop ? 'w-modal__overlay-' + backdrop : ''
         ]
     })
 
@@ -71,7 +64,6 @@ export const useModal = (props: ModalProps, emit: SetupContext<ModalEmits>['emit
     return {
         _ref,
         modalClass,
-        overlayClass,
         modalStyle,
         onOk,
         onCancel,
