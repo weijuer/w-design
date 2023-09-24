@@ -27,7 +27,8 @@
           </slot>
 
           <div class="w-modal__body">
-            <slot></slot>
+            <Content v-if="typeof content === 'function'" :render="content"></Content>
+            <slot v-else>{{ content }}</slot>
           </div>
 
           <slot name="footer">
@@ -46,6 +47,7 @@
 import { WButton } from '../../button'
 import { modalEmits, modalProps } from './interface'
 import { useModal } from './useModal'
+import Content from './content'
 
 defineOptions({
   name: 'WModal',

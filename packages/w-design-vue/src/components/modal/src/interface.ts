@@ -58,7 +58,13 @@ export const modalProps = {
         type: Boolean,
         default: true
     },
+    content: {
+        type: [Function, String],
+        default: () => { }
+    },
     width: [String, Number],
+    onOk: Function as PropType<(e: MouseEvent) => void>,
+    onCancel: Function as PropType<(e: MouseEvent) => void>,
     bodyStyle: Object,
     footer: Object,
     centered: Boolean,

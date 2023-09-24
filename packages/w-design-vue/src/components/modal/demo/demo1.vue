@@ -91,6 +91,12 @@
       </template>
     </w-radio-group>
   </w-preview>
+
+  <w-preview title="Confirm" desc="Confirm">
+    <w-space>
+      <w-button type="primary" @click="info">info</w-button>
+    </w-space>
+  </w-preview>
 </template>
 
 <script setup>
@@ -119,4 +125,14 @@ const state = reactive({
   placement: 'auto',
   placementVisible: false
 })
+
+const info = () => {
+  proxy.$info({
+    title: 'This is a warning message',
+    content: 'some messages...some messages...',
+    ok(data) {
+      console.log(data)
+    }
+  })
+}
 </script>
