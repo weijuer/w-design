@@ -1,0 +1,60 @@
+@import '../../_common/index';
+
+.w-alert {
+  padding: var(--space-sm);
+  font-size: var(--text-sm);
+  background-color: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.2);
+  border-radius: var(--w-radius-medium);
+  color: var(--color-contrast-higher);
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+
+  &.active {
+    position: static;
+    clip: auto;
+    clip-path: none;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+
+    &-text {
+      font-weight: 700;
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    margin-right: var(--space-2xs);
+    font-size: 24px;
+    border-radius: var(--w-radius-large);
+    background-color: fade-out($color: map-get($themes, 'primary'), $amount: 0.75);
+    color: fade-out($color: map-get($themes, 'primary'), $amount: 0.35);
+  }
+
+  &__description {
+    margin-top: var(--space-3xs);
+    line-height: 1.4;
+    opacity: 0.6;
+  }
+
+  // themes
+  @each $key, $val in $themes {
+    &.w-alert__#{$key} {
+      background-color: fade-out($color: $val, $amount: 0.85);
+
+      .w-alert__icon {
+        background-color: fade-out($color: $val, $amount: 0.75);
+        color: fade-out($color: $val, $amount: 0.25);
+      }
+    }
+  }
+}
