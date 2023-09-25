@@ -28,7 +28,7 @@ export const buttonProps = {
     dashed: Boolean,
     round: Boolean,
     circle: Boolean
-} as const
+}
 
 export const buttonEmits = {
     click: (evt: MouseEvent) => evt instanceof MouseEvent

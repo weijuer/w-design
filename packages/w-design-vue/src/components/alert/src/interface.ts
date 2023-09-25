@@ -6,9 +6,9 @@ export const alertProps = {
         type: String as PropType<Type>,
         default: ''
     },
+    description: [String, Object],
     className: String,
     title: String,
-    description: String,
     closable: Boolean,
 }
 

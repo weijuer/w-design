@@ -1,21 +1,22 @@
 <template>
-  <div class="w-alert" :class="alertClass">
-    <div class="w-alert__header">
-      <div class="w-alert__title">
-        <div class="w-alert__icon">
-          <slot name="icon">
-            <w-icon :name="alertIconName"></w-icon>
-          </slot>
+  <transition name="fade-out">
+    <div class="w-alert" :class="alertClass">
+      <div class="w-alert__header">
+        <div class="w-alert__title">
+          <div class="w-alert__icon">
+            <slot name="icon">
+              <w-icon :name="alertIconName"></w-icon>
+            </slot>
+          </div>
+          <div class="w-alert__title-text">{{ title }}</div>
         </div>
-        <div class="w-alert__title-text">{{ title }}</div>
+        <w-button v-if="closable" @click="onClose" class="w-alert__close-btn" icon="close-outlined"></w-button>
       </div>
-      <w-button v-if="closable" @click="onClose" class="w-alert__close-btn" icon="delete-filled"></w-button>
+      <div class="w-alert__description">
+        <slot name="description">{{ description }}</slot>
+      </div>
     </div>
-    <div class="w-alert__description">
-      <div class="w-alert__icon"></div>
-      <slot>{{ description }}</slot>
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -25,6 +26,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import WButton from '../../button'
+import WIcon from '../../icon'
 import { alertEmits, alertProps } from './interface'
 import { useAlert } from './useAlert'
 

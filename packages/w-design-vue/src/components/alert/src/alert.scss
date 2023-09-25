@@ -41,9 +41,16 @@
   }
 
   &__description {
+    padding-left: 32px;
     margin-top: var(--space-3xs);
     line-height: 1.4;
     opacity: 0.6;
+  }
+
+  .w-alert__close-btn {
+    font-size: 1.75rem;
+    background-color: transparent;
+    border: 0;
   }
 
   // themes

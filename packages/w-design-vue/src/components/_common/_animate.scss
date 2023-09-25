@@ -3,3 +3,8 @@
     transform: rotate(1turn);
   }
 }
+
+.fade-out-enter,
+.fade-out-to {
+  opacity: 0;
+}
