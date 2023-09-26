@@ -1,0 +1,34 @@
+@import '../../_common/index';
+
+.w-pagination {
+  &__list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    > li {
+      display: inline-flex;
+    }
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-xs) calc(1.355 * var(--space-xs));
+    height: 100%;
+    line-height: 1;
+    white-space: nowrap;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--color-contrast-high);
+    will-change: transform;
+    transition: 0.2s;
+  }
+
+  // themes
+  @each $key, $val in $themes {
+    &.w-pagination__#{$key} {
+      background-color: fade-out($color: $val, $amount: 0.85);
+    }
+  }
+}

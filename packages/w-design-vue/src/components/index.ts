@@ -25,6 +25,7 @@ export * from './progress'
 export * from './image'
 export * from './keyboard'
 export * from './alert'
+export * from './pagination'
 
 // form
 export * from './checkbox'
