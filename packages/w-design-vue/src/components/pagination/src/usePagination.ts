@@ -1,9 +1,10 @@
-import { SetupContext, computed, ref } from 'vue'
+import { SetupContext, computed, ref, watch } from 'vue'
 import { PaginationEmits, PaginationProps } from './interface'
 
 export const usePagination = (props: PaginationProps, emit: SetupContext<PaginationEmits>['emit']) => {
-
-    const isActive = ref(true)
+    const { current, defaultCurrent, pageSize, defaultPageSize } = props
+    const _current = ref(current ? current : defaultCurrent)
+    const _pageSize = ref(pageSize ? pageSize : defaultPageSize)
 
     const paginationClass = computed(() => {
         const { className, type, disabled } = props
@@ -12,36 +13,45 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
             className,
             type ? 'w-pagination__' + type : '',
             {
-                'active': isActive.value,
                 'is-disabled': disabled
             }
         ]
     })
 
-    const paginationIconName = computed(() => {
-        const { type } = props
-
-        switch (type) {
-            case 'default':
-            case 'primary':
-            case 'info':
-                return 'info-outlined'
-            case 'success':
-                return 'check-outlined'
-            case 'warning':
-            case 'danger':
-                return 'exclamation-outlined'
-        }
+    const pages = computed(() => {
+        const { total } = props
+        return Math.ceil(total / _pageSize.value);
     })
 
-    const onClose = () => {
-        isActive.value = false
-        emit('close')
+    const isActive = (page: number) => page === _current.value
+    const isNext = (page: number) => props.total - page > 0
+    const isPrev = (page: number) => props.total - page < 0
+
+    const onChange = (page: number, event: Event) => {
+        event.preventDefault();
+        emit('update:current', page)
+        emit('change', page, _pageSize.value)
     }
+
+    const onPageSizeChange = () => {
+        emit('page-size-change')
+    }
+
+    watch(
+        () => props.current,
+        (current) => {
+            _current.value = current!
+        }
+    )
 
     return {
         paginationClass,
-        paginationIconName,
-        onClose
+        pages,
+        _current,
+        isActive,
+        isNext,
+        isPrev,
+        onChange,
+        onPageSizeChange
     }
 }

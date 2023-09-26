@@ -2,24 +2,25 @@
   <nav class="w-pagination" aria-label="Pagination" :class="paginationClass">
     <ol class="w-pagination__list">
       <li>
-        <w-button>
-          <template #left-icon>
-            <w-icon name="arrow-left"></w-icon>
-          </template>
-          Prev
-        </w-button>
+        <a href="#0" class="w-pagination__item" aria-label="Go to page">
+          <w-icon name="arrow-left"></w-icon>
+        </a>
+      </li>
+      <li v-for="page of pages" :key="page">
+        <a
+          href="#0"
+          :class="['w-pagination__item', { 'w-pagination__item-selected': isActive(page) }]"
+          :aria-label="'Go to page ' + page"
+          @click="onChange(page, $event)"
+        >
+          {{ page }}
+        </a>
+        <!-- <span class="w-pagination__item w-pagination__item-ellipsis">...</span> -->
       </li>
       <li>
-        <a href="#0" class="w-pagination__item" aria-label="Go to page"></a>
-        <span class="w-pagination__item w-pagination__item-ellipsis">...</span>
-      </li>
-      <li>
-        <w-button>
-          <template #right-icon>
-            <w-icon name="arrow-right"></w-icon>
-          </template>
-          Next
-        </w-button>
+        <a href="#0" class="w-pagination__item" aria-label="Go to page">
+          <w-icon name="arrow-right"></w-icon>
+        </a>
       </li>
     </ol>
   </nav>
@@ -32,7 +33,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import WButton from '../../button'
+// import WButton from '../../button'
 // import WIcon from '../../icon'
 import { paginationEmits, paginationProps } from './interface'
 import { usePagination } from './usePagination'
@@ -40,7 +41,7 @@ import { usePagination } from './usePagination'
 const props = defineProps(paginationProps)
 const emit = defineEmits(paginationEmits)
 
-const { paginationClass } = usePagination(props, emit)
+const { paginationClass, pages, isActive, onChange } = usePagination(props, emit)
 </script>
 
 <style src="./pagination.scss" lang="scss" />

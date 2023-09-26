@@ -2,9 +2,13 @@
 
 .w-pagination {
   &__list {
+    --row-gap: var(--space-3xs);
+    --column-gap: var(--space-3xs);
+
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    gap: var(--row-gap) var(--column-gap);
 
     > li {
       display: inline-flex;
@@ -18,17 +22,39 @@
     height: 100%;
     line-height: 1;
     white-space: nowrap;
-    border-radius: var(--radius-md);
+    border-radius: var(--w-radius-medium);
     text-decoration: none;
     color: var(--color-contrast-high);
     will-change: transform;
     transition: 0.2s;
+
+    &:active {
+      transform: translateY(2px);
+    }
+
+    &:hover {
+      background-color: rgba(20, 21, 26, 0.1);
+    }
+
+    &-selected {
+      color: var(--color-bg);
+      background-color: var(--color-contrast-higher);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  &__btn {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
   }
 
   // themes
   @each $key, $val in $themes {
     &.w-pagination__#{$key} {
-      background-color: fade-out($color: $val, $amount: 0.85);
+      .w-pagination__item-selected {
+        background-color: $val;
+      }
     }
   }
 }
