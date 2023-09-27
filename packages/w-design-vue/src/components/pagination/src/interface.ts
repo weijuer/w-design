@@ -7,6 +7,13 @@ export enum PaginationItemType {
     DOT = 'dot',
 }
 
+export type PaginationItem = {
+    type: string,
+    text: Numeric,
+    number: number,
+    active?: boolean
+}
+
 export const paginationProps = {
     type: {
         type: String as PropType<Type>,
@@ -26,6 +33,14 @@ export const paginationProps = {
         type: Number,
         default: 0
     },
+    pageCount: {
+        type: Number,
+        default: 0
+    },
+    showPageSize: {
+        type: Number,
+        default: 5
+    },
     pageSizeOptions: {
         type: Array as PropType<Numeric[]>,
         default: [10, 20, 30]
@@ -35,6 +50,8 @@ export const paginationProps = {
     className: String,
     title: String,
     renderItem: Function,
+    simple: Boolean,
+    ellipses: Boolean,
     disabled: Boolean,
     closable: Boolean,
 }

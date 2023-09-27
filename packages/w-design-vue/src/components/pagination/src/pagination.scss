@@ -1,5 +1,15 @@
 @import '../../_common/index';
 
+:root {
+  --w-pagination-size: 2.25rem;
+}
+
+$sizes: (
+  small: -0.25,
+  medium: 0,
+  large: 0.25
+);
+
 .w-pagination {
   &__list {
     --row-gap: var(--space-3xs);
@@ -18,15 +28,16 @@
   &__item {
     display: inline-flex;
     align-items: center;
-    padding: var(--space-xs) calc(1.355 * var(--space-xs));
-    height: 100%;
-    line-height: 1;
-    white-space: nowrap;
-    border-radius: var(--w-radius-medium);
+    justify-content: center;
+    width: var(--w-pagination-size);
+    height: var(--w-pagination-size);
     text-decoration: none;
+    border-radius: var(--w-radius-medium);
     color: var(--color-contrast-high);
+    user-select: none;
+    cursor: pointer;
     will-change: transform;
-    transition: 0.2s;
+    transition: transform 0.2s;
 
     &:active {
       transform: translateY(2px);
@@ -36,10 +47,26 @@
       background-color: rgba(20, 21, 26, 0.1);
     }
 
-    &-selected {
+    &.w-pagination__item-selected {
       color: var(--color-bg);
       background-color: var(--color-contrast-higher);
       box-shadow: var(--shadow-sm);
+    }
+
+    &.w-pagination__item-disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  &__jumper {
+    display: flex;
+    align-items: center;
+
+    .w-input {
+      width: 3rem;
+      height: 2.25rem;
+      margin-right: var(--space-xs);
     }
   }
 
@@ -47,6 +74,13 @@
     padding: 0;
     border: 0;
     background-color: transparent;
+  }
+
+  // sizes
+  @each $key, $val in $sizes {
+    &.w-pagination__#{$key} {
+      --w-pagination-size: #{$val + 2.25rem};
+    }
   }
 
   // themes
