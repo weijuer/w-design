@@ -45,11 +45,18 @@ export const paginationProps = {
         type: Array as PropType<Numeric[]>,
         default: [10, 20, 30]
     },
+    renderItem: {
+        type: Function,
+        default: () => { }
+    },
+    showControls: {
+        type: Boolean,
+        default: true
+    },
     current: Number,
     pageSize: Number,
     className: String,
     title: String,
-    renderItem: Function,
     simple: Boolean,
     ellipses: Boolean,
     disabled: Boolean,

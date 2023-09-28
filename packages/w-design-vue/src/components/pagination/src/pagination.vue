@@ -1,7 +1,7 @@
 <template>
   <nav class="w-pagination" aria-label="Pagination" :class="paginationClass">
     <ol class="w-pagination__list">
-      <li>
+      <li v-if="showControls">
         <a
           :class="['w-pagination__item', { 'w-pagination__item-disabled': disabled || isFirst }]"
           @click="onPrev"
@@ -15,7 +15,7 @@
         <li>
           <span class="w-pagination__jumper">
             <w-input v-model="_current"></w-input>
-            <em>/ 50</em>
+            <em>/ {{ pages.length }}</em>
           </span>
         </li>
       </template>
@@ -33,10 +33,10 @@
           >
             {{ text }}
           </a>
-          <span v-else class="w-pagination__item w-pagination__item-ellipsis">...</span>
+          <span v-else class="w-pagination__item w-pagination__item-ellipsis">•••</span>
         </li>
       </template>
-      <li>
+      <li v-if="showControls">
         <a
           :class="['w-pagination__item', { 'w-pagination__item-disabled': disabled || isLast }]"
           @click="onNext"

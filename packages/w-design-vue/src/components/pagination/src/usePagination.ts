@@ -38,6 +38,8 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
             start = Math.max(current - Math.floor(showPageSize / 2), 1);
             end = start + showPageSize - 1;
 
+            console.log(start, end)
+
             if (end > pageCount) {
                 end = pageCount;
                 start = end - showPageSize + 1;
@@ -51,13 +53,14 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
         }
 
         if (ellipses && isMaxSized && showPageSize > 0) {
+
             if (start > 1) {
-                const prevPages = { type: 'dot', number: start - 1, text: '...', active: false };
+                const prevPages = { type: 'dot', number: start - 1, text: '•••', active: false };
                 pages.unshift(prevPages);
             }
 
             if (end < pageCount) {
-                const nextPages = { type: 'dot', number: end + 1, text: '...', active: false };
+                const nextPages = { type: 'dot', number: end + 1, text: '•••', active: false };
                 pages.push(nextPages);
             }
         }
@@ -67,6 +70,8 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
         const endItem = { type: 'number', number: pageCount, text: pageCount, active: pageCount === current }
         pages.unshift(startItem)
         pages.push(endItem)
+
+        console.log(pages)
 
         return pages
     })
