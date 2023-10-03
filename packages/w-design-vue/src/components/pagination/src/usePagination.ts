@@ -119,6 +119,7 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
         paginationClass,
         pages,
         _current,
+        totalPage,
         isFirst,
         isLast,
         isNext,

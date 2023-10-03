@@ -14,8 +14,8 @@
       <template v-if="simple">
         <li>
           <span class="w-pagination__jumper">
-            <w-input v-model="_current"></w-input>
-            <em>/ {{ pages.length }}</em>
+            <w-input-number v-model="_current" :controls="false" :min="1" :max="totalPage"></w-input-number>
+            <em>/ {{ totalPage }}</em>
           </span>
         </li>
       </template>
@@ -64,7 +64,10 @@ import { usePagination } from './usePagination'
 const props = defineProps(paginationProps)
 const emit = defineEmits(paginationEmits)
 
-const { paginationClass, _current, pages, isFirst, isLast, onPrev, onNext, onChange } = usePagination(props, emit)
+const { paginationClass, _current, totalPage, pages, isFirst, isLast, onPrev, onNext, onChange } = usePagination(
+  props,
+  emit
+)
 </script>
 
 <style src="./pagination.scss" lang="scss" />

@@ -10,9 +10,9 @@
   >
     <w-icon class="w-button__loading w-button__icon-left" v-if="loading" name="loading"></w-icon>
     <w-icon class="w-button__icon-left" v-if="icon && !loading" :name="icon"></w-icon>
-    <slot name="left-icon"></slot>
+    <slot name="start"></slot>
     <slot></slot>
-    <slot name="right-icon"></slot>
+    <slot name="end"></slot>
   </button>
 </template>
 

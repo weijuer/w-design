@@ -1,0 +1,75 @@
+@import '../../_common/index';
+
+:root {
+  --w-select-size: 2.25rem;
+  --w-select-dropdown-gap: 4px;
+}
+
+$sizes: (
+  small: -0.25,
+  medium: 0,
+  large: 0.25
+);
+
+.w-select {
+  position: relative;
+  display: inline-block;
+
+  &__dropdown {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    min-width: 200px;
+    max-height: 16rem;
+    // max-height: 1px;
+    background-color: var(--color-bg-light);
+    // box-shadow: var(--inner-glow), var(--shadow-md);
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.15);
+    padding: var(--space-3xs) 0;
+    border-radius: var(--w-radius-medium);
+    z-index: var(--w-index-popover, 5);
+    margin-top: var(--w-select-dropdown-gap);
+    margin-bottom: var(--w-select-dropdown-gap);
+    overflow: auto;
+    font-size: 1rem;
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      visibility 0s 0.2s,
+      opacity 0.2s;
+
+    &[aria-expanded='true'] {
+      visibility: visible;
+      opacity: 1;
+      transition:
+        visibility 0s,
+        opacity 0.2s;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &:not(:last-of-type) {
+      border-bottom: 1px solid rgba(20, 21, 26, 0.1);
+    }
+  }
+
+  // sizes
+  @each $key, $val in $sizes {
+    &.w-select__#{$key} {
+      --w-select-size: #{$val + 2.25rem};
+    }
+  }
+
+  // themes
+  @each $key, $val in $themes {
+    &.w-select__#{$key} {
+      .w-select__item-selected {
+        background-color: $val;
+      }
+    }
+  }
+}

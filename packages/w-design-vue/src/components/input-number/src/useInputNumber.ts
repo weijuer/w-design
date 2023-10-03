@@ -1,4 +1,4 @@
-import { SetupContext, computed, ref } from 'vue'
+import { SetupContext, computed, ref, watch } from 'vue'
 import { type InputNumberProps, InputNumberEmits } from './interface'
 import { type Numeric } from '../../_utils'
 
@@ -112,6 +112,13 @@ export const useInputNumber = (props: InputNumberProps, emit: SetupContext<Input
 
     const onMousedown = (e: MouseEvent) => e.preventDefault()
     const onMouseup = (e: MouseEvent) => e.preventDefault()
+
+    watch(
+        () => props.modelValue,
+        (modelValue) => {
+            inputValue.value = modelValue
+        },
+    );
 
     return {
         _ref,

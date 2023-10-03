@@ -36,6 +36,7 @@ export * from './input-search'
 export * from './input-password'
 export * from './input-number'
 export * from './textarea'
+export * from './select'
 
 // plugins
 export * from './preview'

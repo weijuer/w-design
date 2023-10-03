@@ -63,7 +63,7 @@
   <w-preview title="With Icon" desc="With Icon">
     <w-space>
       <w-button v-for="icon of defaultIcons" :key="icon">
-        <template #left-icon>
+        <template #start>
           <w-icon :name="icon"></w-icon>
         </template>
         {{ capitalizeFirstLetter(icon) }}

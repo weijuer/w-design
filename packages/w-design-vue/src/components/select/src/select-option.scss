@@ -1,0 +1,59 @@
+@import '../../_common/index';
+
+.w-select__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2xs) var(--space-sm);
+  color: var(--color-contrast-high);
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &.w-select__item-option {
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: rgba(20, 21, 26, 0.075);
+    }
+
+    &.is-selected {
+      .w-select__item-marker {
+        path {
+          stroke-dasharray: 18;
+          stroke-dashoffset: 0;
+        }
+      }
+    }
+
+    &.is-disabled {
+      cursor: not-allowed;
+      opacity: var(--w-disabled-opacity);
+    }
+  }
+
+  &.w-select__item-optgroup {
+    font-size: 0.8125rem;
+    color: var(--color-contrast-medium);
+  }
+
+  &-marker {
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    fill: currentColor;
+    font-size: 1em;
+    line-height: 1;
+    flex-shrink: 0;
+    max-width: initial;
+
+    path {
+      transition: stroke-dashoffset 0.3s;
+      stroke-dasharray: 18;
+      stroke-dashoffset: 18;
+    }
+  }
+}
