@@ -12,16 +12,23 @@ export const useSelect = (props: SelectProps, emit: SetupContext<SelectEmits>['e
     const isExpanded = ref(false)
 
     const selectClass = computed(() => {
-        const { className, size, type, disabled } = props
+        const { className, size, type, loading, disabled } = props
 
         return [
             className,
             type ? 'w-select__' + type : '',
             size ? 'w-select__' + size : '',
             {
-                'is-disabled': disabled
+                'is-loading': loading,
+                'is-disabled': disabled || loading,
             }
         ]
+    })
+
+    const isDisabled = computed(() => {
+        const { disabled, loading } = props
+
+        return disabled || loading
     })
 
     const formatOption = (options: Numeric[] = []): Option[] => {
@@ -69,25 +76,34 @@ export const useSelect = (props: SelectProps, emit: SetupContext<SelectEmits>['e
     })
 
     const selectedText = computed(() => {
-        const { multiple } = props
+        const { multiple, placeholder } = props
+        if (!inputValue.value || (<Numeric[]>inputValue.value).length === 0) {
+            return placeholder
+        }
 
         return multiple ? (inputValue.value as Numeric[]).join(',') : inputValue.value
     })
 
     const updateValue = (value: Numeric) => {
         const { modelValue = [], multiple } = props
+
         let checkedValue
         // multiple
         if (multiple) {
-            checkedValue = (modelValue as Numeric[]).includes(value)
-                ? (modelValue as Numeric[]).filter((option) => value !== option)
-                : (modelValue as Numeric[]).push(value) && (modelValue as Numeric[]).slice()
+            const checkedList = <Numeric[]>modelValue
+            checkedValue = checkedList.includes(value)
+                ? checkedList.filter((option) => value !== option)
+                : checkedList.push(value) && checkedList.slice()
         } else {
-            checkedValue = value
+            checkedValue = <Numeric>modelValue !== value ? value : ''
         }
 
         emit('update:modelValue', checkedValue)
         emit('change', checkedValue)
+
+        if (!multiple) {
+            isExpanded.value = false
+        }
     }
 
 
@@ -129,6 +145,7 @@ export const useSelect = (props: SelectProps, emit: SetupContext<SelectEmits>['e
         optionList,
         selectedText,
         isOptGroup,
+        isDisabled,
         isExpanded,
         updateValue,
         isSelected,

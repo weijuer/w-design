@@ -16,6 +16,7 @@ export default defineConfig({
       Widgets: resolve('src/components/widgets'),
       Assets: resolve('src/assets'),
       Hooks: resolve('src/hooks'),
+      Mocks: resolve('src/mocks'),
       Utils: resolve('src/utils')
     },
     dedupe: ['vue']

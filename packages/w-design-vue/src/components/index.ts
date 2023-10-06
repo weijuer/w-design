@@ -26,6 +26,7 @@ export * from './image'
 export * from './keyboard'
 export * from './alert'
 export * from './pagination'
+export * from './scroll-shadow'
 
 // form
 export * from './checkbox'

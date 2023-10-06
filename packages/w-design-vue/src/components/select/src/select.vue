@@ -1,9 +1,10 @@
 <template>
   <div ref="_ref" class="w-select" aria-label="Select" :class="selectClass">
-    <w-button readonly :disabled="disabled" @click="onToggle">
+    <w-button readonly :disabled="isDisabled" @click="onToggle">
       {{ selectedText }}
       <template #end>
-        <w-icon name="arrow-down"></w-icon>
+        <w-icon class="w-select__loading" v-if="loading" name="loading"></w-icon>
+        <w-icon v-else name="arrow-down"></w-icon>
       </template>
     </w-button>
     <div class="w-select__dropdown" :aria-expanded="isExpanded">
@@ -63,6 +64,7 @@ const {
   selectClass,
   isOptGroup,
   isExpanded,
+  isDisabled,
   selectedText,
   optionList,
   optionGroupList,

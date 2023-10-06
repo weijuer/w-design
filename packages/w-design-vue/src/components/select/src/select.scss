@@ -32,6 +32,7 @@ $sizes: (
     margin-bottom: var(--w-select-dropdown-gap);
     overflow: auto;
     font-size: 1rem;
+
     visibility: hidden;
     opacity: 0;
     transition:
@@ -45,6 +46,31 @@ $sizes: (
         visibility 0s,
         opacity 0.2s;
     }
+
+    &::before,
+    &::after {
+      --scroll-shadow-size: 48px;
+
+      display: flex;
+      content: '';
+
+      -webkit-mask-image: linear-gradient(
+        #000,
+        #000,
+        transparent 0,
+        #000 var(--scroll-shadow-size),
+        #000 calc(100% - var(--scroll-shadow-size)),
+        transparent
+      );
+      mask-image: linear-gradient(
+        #000,
+        #000,
+        transparent 0,
+        #000 var(--scroll-shadow-size),
+        #000 calc(100% - var(--scroll-shadow-size)),
+        transparent
+      );
+    }
   }
 
   &__list {
@@ -54,6 +80,12 @@ $sizes: (
 
     &:not(:last-of-type) {
       border-bottom: 1px solid rgba(20, 21, 26, 0.1);
+    }
+  }
+
+  &.is-loading {
+    .w-select__loading {
+      animation: spin 1.5s infinite linear;
     }
   }
 

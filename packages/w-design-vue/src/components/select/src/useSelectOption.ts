@@ -6,8 +6,6 @@ export const useSelectOption = (props: SelectOptionProps, emit: SetupContext<Sel
 
     const selectContext: any = inject(SELECT_KEY, null)
 
-    console.log('useSelectOption', selectContext)
-
     const selectOptionClass = computed(() => {
 
         return [
