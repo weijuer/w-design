@@ -24,4 +24,13 @@
     #000 calc(100% - var(--scroll-shadow-size)),
     transparent
   );
+
+  &.is-scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }

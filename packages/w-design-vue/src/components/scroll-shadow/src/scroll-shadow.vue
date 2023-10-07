@@ -1,5 +1,5 @@
 <template>
-  <div class="w-scroll-shadow" aria-label="ScrollShadow" :class="scrollShadowClass">
+  <div class="w-scroll-shadow" aria-label="ScrollShadow" v-bind="scrollbarAttrs">
     <slot></slot>
   </div>
 </template>
@@ -16,7 +16,7 @@ import { useScrollShadow } from './useScrollShadow'
 
 const props = defineProps(scrollShadowProps)
 
-const { scrollShadowClass } = useScrollShadow(props)
+const { scrollbarAttrs } = useScrollShadow(props)
 </script>
 
 <style src="./scroll-shadow.scss" lang="scss" />

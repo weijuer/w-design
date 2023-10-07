@@ -4,7 +4,7 @@ import { type Orientation } from 'src/components/_utils'
 export const scrollShadowProps = {
     size: {
         type: Number,
-        default: 0
+        default: 40
     },
     offset: {
         type: Number,
