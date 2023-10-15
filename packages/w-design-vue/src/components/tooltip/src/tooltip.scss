@@ -1,0 +1,98 @@
+@import '../../_common/index';
+
+:root {
+  --w-tooltip-size: 2.25rem;
+}
+
+$sizes: (
+  small: -0.25,
+  medium: 0,
+  large: 0.25
+);
+
+[data-v-target] {
+  cursor: help;
+}
+
+.w-tooltip {
+  margin: 0 16px;
+  position: absolute;
+  z-index: 10000;
+  visibility: hidden;
+  opacity: 0;
+  // transition: all 0.3s;
+
+  &[data-triggered] {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &-content {
+    padding: 8px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 6px;
+    color: #fff;
+    background: #383838;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    background: 0 0;
+    border: 6px solid transparent;
+    transition: 0.3s ease;
+    z-index: 10001;
+  }
+
+  &-top {
+    &:before {
+      top: 100%;
+      left: 50%;
+      border-top-color: #383838;
+      transform: translateX(-50%);
+    }
+  }
+
+  &-top-left {
+    &:before {
+      top: 100%;
+      left: 14px;
+      border-top-color: #383838;
+    }
+  }
+
+  &-top-right {
+    &:before {
+      top: 100%;
+      right: 14px;
+      border-top-color: #383838;
+    }
+  }
+
+  &-bottom {
+    &:before {
+      bottom: 100%;
+      left: 50%;
+      border-bottom-color: #383838;
+      transform: translateX(-50%);
+    }
+  }
+
+  &-bottom-left {
+    &:before {
+      bottom: 100%;
+      left: 14px;
+      border-bottom-color: #383838;
+    }
+  }
+
+  &-bottom-right {
+    &:before {
+      bottom: 100%;
+      right: 14px;
+      border-bottom-color: #383838;
+    }
+  }
+}
