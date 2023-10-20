@@ -43,6 +43,10 @@
   --space-3xl: clamp(9.25rem, calc(4.75rem + 9.375vw), 12.25rem);
   --space-4xl: clamp(15rem, calc(7.5rem + 15.625vw), 20rem);
 
+  // box-shadow
+  --w-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.02), 0px 2px 10px 0px rgba(0, 0, 0, 0.06),
+    0px 0px 1px 0px rgba(0, 0, 0, 0.3);
+
   // radius
   --w-radius-tiny: 4px;
   --w-radius-small: 8px;

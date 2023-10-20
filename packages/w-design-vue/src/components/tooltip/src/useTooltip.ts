@@ -1,10 +1,11 @@
-import { SetupContext, computed, onMounted, onUnmounted, reactive, ref, useSlots } from 'vue'
+import { SetupContext, computed, nextTick, onBeforeUnmount, reactive, ref } from 'vue'
 import { TooltipEmits, TooltipProps } from './interface'
 import { useEventListener } from 'Hooks'
 
 export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>['emit']) => {
-    const popperRef = ref<HTMLElement>()
-    const targetRef = ref<HTMLElement>()
+    const targetWrapperRef = ref<HTMLSpanElement>()
+    const popperRef = ref<HTMLDivElement>()
+    // const targetRef = ref<HTMLElement>()
 
     const visible = ref(false)
     const state = reactive({
@@ -13,12 +14,15 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
     })
 
     const tooltipClass = computed(() => {
-        const { className, type, placement } = props
+        const { className, type, placement, arrowed } = props
 
         return [
             className,
             type ? 'w-tooltip__' + type : '',
-            placement ? 'w-tooltip__' + placement : ''
+            placement ? 'w-tooltip__' + placement : '',
+            {
+                'is-arrowed': arrowed
+            }
         ]
     })
 
@@ -26,110 +30,121 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         return {
             top: state.top + 'px',
             left: state.left + 'px'
-        };
-    })
-
-    const target = computed(() => {
-        const slots = useSlots()
-        return slots.default ? slots.default()[0] : targetRef.value
-    })
-
-    const popper = computed(() => popperRef.value)
-
-    const init = () => {
-        // 绑定属性
-        // target.value?.setAttribute('data-v-target', '');
-        // target移形换影
-        // popper.value?.parentNode?.insertBefore(target.value, popper.value.nextSibling);
-        // popper移形换影
-        // document.body.appendChild(popper.value!);
-        // 绑定事件
-        initEvents()
-    }
-
-    const initEvents = () => {
-        const { trigger } = props
-        // 监听target事件
-        // useEventListener(target.value, trigger, handleTrigger);
-        useEventListener(window, 'resize', updateTarget);
-        useEventListener(window, 'scroll', updateTarget);
-
-        // 
-        if (trigger === 'mouseenter') {
-            // useEventListener(target.value, 'mouseleave', handleUnTrigger);
-        } else {
-            useEventListener(document, 'click', handleDocumentClick);
         }
-    }
+    })
 
     const handleTrigger = () => {
         const { trigger } = props
 
-        updateTarget();
-        visible.value = trigger === 'click' ? !visible.value : true;
+        visible.value = trigger === 'click' ? !visible.value : true
+
+        nextTick(() => {
+            updateTarget()
+        })
     }
 
     const handleUnTrigger = () => {
-        visible.value = false;
+        visible.value = false
     }
 
     const updateTarget = () => {
         // 角标大小
-        const triangleSize = 6;
+        const triangleSize = 6
         // 外部偏移量-防止贴边
-        const marginOffset = 16;
+        const marginOffset = 16
         // 角标偏移量
-        let triangleOffset = 14;
+        let triangleOffset = 14
         // 角标中心点位置
-        let triangleCenter = 0;
+        let triangleCenter = 0
         // target长度边界处理
-        let leftPosFix = 0;
+        let leftPosFix = 0
         const { placement } = props
-        const { offsetWidth: popperWidth, offsetHeight: popperHeight } = popper.value!
-        const { top, left, width, height } = target.value!.getBoundingClientRect()
+        const { offsetWidth: popperWidth, offsetHeight: popperHeight } = popperRef.value!
+        const { top, left, width, height } = targetWrapperRef.value!.getBoundingClientRect()
+
+        const [dir, sub] = placement.split('-');
+        console.log('updateTarget', dir, sub)
 
         // veritcal
-        if (placement.startsWith('top')) {
+        if (dir === 'top') {
+            // top
             state.top = top + window.scrollY - popperHeight - triangleSize * 2
-        } else if (placement.startsWith('bottom')) {
+        } else if (dir === 'bottom') {
+            // bottom
             state.top = top + window.scrollY + height + triangleSize * 2
+        } else if (['left', 'right'].includes(dir)) {
+            // left or right
+            if (sub === 'start') {
+                state.top = top + window.scrollY + height * 0.5
+            } else if (sub === 'end') {
+                state.top = top + window.scrollY + height * 0.5
+            } else {
+                state.top = top + window.scrollY + height * 0.5
+            }
         }
 
         // horizontal
-        if (placement.endsWith('left')) {
+        if (sub === 'start') {
+            // start
             leftPosFix = width * 0.5 <= triangleOffset ? width * 0.5 : triangleOffset
             triangleCenter = left - marginOffset - triangleOffset - triangleSize
 
             state.left = window.scrollX + triangleCenter + leftPosFix
-        } else if (placement.endsWith('right')) {
+        } else if (sub === 'end') {
+            // end
             leftPosFix = width * 0.5 <= triangleOffset ? width * 0.5 : width - triangleOffset
             triangleCenter = left - marginOffset - popperWidth + triangleOffset + triangleSize
 
             state.left = window.scrollX + triangleCenter + leftPosFix
-        } else {
+        } else if (!sub) {
             // center
             triangleOffset = popperWidth * 0.5
             triangleCenter = left - marginOffset - triangleOffset
 
             state.left = window.scrollX + triangleCenter + width * 0.5
         }
+
+        // left
     }
 
     const handleDocumentClick = (e: Event) => {
-        const _target = target.value;
-        const popper = popperRef.value;
+        const targetWrapper = targetWrapperRef.value
+        const popper = popperRef.value
 
-        if (!_target || _target.contains(e.target) || !popper || popper.contains(e.target)) {
-            return;
+        if (
+            !targetWrapper ||
+            targetWrapper.contains(e.target as HTMLElement) ||
+            !popper ||
+            popper.contains(e.target as HTMLElement)
+        ) {
+            return
         }
 
-        visible.value = false;
+        visible.value = false
     }
 
     const destory = () => {
-        if (popper.value) {
-            visible.value = false;
-            document.body.removeChild(popper.value);
+        const popper = popperRef.value
+
+        if (popper) {
+            visible.value = false
+            document.body.removeChild(popper)
+        }
+    }
+
+    const initEvents = () => {
+        const { trigger } = props
+
+        // 监听target事件
+        useEventListener(targetWrapperRef, trigger === 'hover' ? 'mouseenter' : trigger, handleTrigger)
+        useEventListener(window, 'resize', updateTarget)
+        useEventListener(window, 'scroll', updateTarget)
+
+        //
+        if (trigger === 'hover') {
+            useEventListener(targetWrapperRef, 'mouseleave', handleUnTrigger)
+        } else {
+            useEventListener(document, 'click', handleDocumentClick)
         }
     }
 
@@ -142,15 +157,15 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         emit('change', visible.value)
     }
 
-    onMounted(() => {
-        init()
-    })
-
-    onUnmounted(() => {
+    onBeforeUnmount(() => {
         destory()
     })
 
+    initEvents()
+
     return {
+        targetWrapperRef,
+        popperRef,
         tooltipClass,
         tooltipStyle,
         visible,

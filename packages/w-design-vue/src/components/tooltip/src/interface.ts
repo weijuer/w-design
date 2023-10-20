@@ -1,33 +1,43 @@
 import { PropType, type ExtractPropTypes } from 'vue'
 import { Type } from 'src/components/_utils'
 
+export type Trigger = 'hover' | 'click'
+
 export const tooltipProps = {
     type: {
         type: String as PropType<Type>,
     },
     trigger: {
-        type: String,
+        type: String as PropType<Trigger>,
         validate(value: string) {
-            return !['mouseenter', 'click'].includes(value);
+            return !['hover', 'click'].includes(value);
         },
-        default: 'mouseenter'
+        default: 'hover'
     },
     placement: {
         type: String,
         validate(value: string) {
             return ![
-                'top-left',
+                'top-start',
                 'top',
-                'top-right',
-                'bottom-left',
+                'top-end',
+                'bottom-start',
                 'bottom',
-                'bottom-right'
+                'bottom-end',
+                'left-start',
+                'left',
+                'left-end',
+                'right-start',
+                'right',
+                'right-end'
             ].includes(value);
         },
-        default: 'top-left'
+        default: 'top-start'
     },
     content: [String, Object],
-    className: String
+    className: String,
+    color: String,
+    arrowed: Boolean
 }
 
 export const tooltipEmits = ['change', 'close']

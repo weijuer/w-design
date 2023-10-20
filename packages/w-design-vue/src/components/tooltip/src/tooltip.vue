@@ -1,13 +1,23 @@
 <template>
-  <slot ref="targetRef">
-    <w-icon name="info" />
-  </slot>
+  <span ref="targetWrapperRef" class="w-tooltip__target-wrapper">
+    <slot ref="targetRef"></slot>
+  </span>
   <teleport to="body">
-    <div class="w-tooltip" ref="popperRef" :class="tooltipClass" :style="tooltipStyle" :data-triggered="visible">
-      <slot name="content">
-        <div class="w-tooltip__content">{{ content }}</div>
-      </slot>
-    </div>
+    <transition name="fade-out">
+      <div
+        class="w-tooltip"
+        ref="popperRef"
+        :class="tooltipClass"
+        :style="tooltipStyle"
+        :data-placement="placement"
+        :data-open="visible"
+        role="tooltip"
+      >
+        <slot name="content">
+          <div class="w-tooltip__content">{{ content }}</div>
+        </slot>
+      </div>
+    </transition>
   </teleport>
 </template>
 
@@ -18,14 +28,13 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import WIcon from '../../icon'
 import { tooltipEmits, tooltipProps } from './interface'
 import { useTooltip } from './useTooltip'
 
 const props = defineProps(tooltipProps)
 const emit = defineEmits(tooltipEmits)
 
-const { tooltipClass, tooltipStyle, visible } = useTooltip(props, emit)
+const { targetWrapperRef, popperRef, tooltipClass, tooltipStyle, visible } = useTooltip(props, emit)
 </script>
 
 <style src="./tooltip.scss" lang="scss" />

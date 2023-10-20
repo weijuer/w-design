@@ -4,11 +4,12 @@ import { addUnit } from '../../_utils'
 
 export const useSpace = (props: SpaceProps) => {
     const spaceClass = computed(() => {
-        const { orientation, size, align, wrap, fill } = props
+        const { orientation, size, align, justify, wrap, fill } = props
 
         return [
             orientation && orientation === 'vertical' ? 'w-space__' + orientation : '',
-            align ? 'w-space__' + align : '',
+            align ? 'w-space__align-' + align : '',
+            justify ? 'w-space__justify-' + justify : '',
             size && typeof size === 'string' ? 'w-space__' + size : '',
             {
                 'is-wrap': wrap,

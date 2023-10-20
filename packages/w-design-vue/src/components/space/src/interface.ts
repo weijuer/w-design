@@ -8,6 +8,8 @@ export type Orientation = 'vertical' | 'horizontal'
 
 export type Align = 'start' | 'end' | 'center' | 'baseline'
 
+export type Justify = 'start' | 'end' | 'center' | 'space-around' | 'space-between' | 'space-evenly'
+
 export const spaceProps = {
     orientation: {
         type: String as PropType<Orientation>,
@@ -15,6 +17,7 @@ export const spaceProps = {
     },
     size: [String, Number, Array] as PropType<Numeric | Numeric[]>,
     align: String as PropType<Align>,
+    justify: String as PropType<Justify>,
     wrap: Boolean,
     fill: Boolean
 }

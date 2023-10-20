@@ -1,7 +1,11 @@
+@use 'sass:string';
+@use 'sass:list';
+
 @import '../../_common/index';
 
 :root {
   --w-tooltip-size: 2.25rem;
+  --w-tooltip-color: white;
 }
 
 $sizes: (
@@ -9,6 +13,60 @@ $sizes: (
   medium: 0,
   large: 0.25
 );
+
+$placements: top, top-start, top-end, bottom, bottom-start, bottom-end, left, left-start, left-end, right, right-start,
+  right-end;
+
+@function slicePlacement($string, $type: 'start', $divider: '-') {
+  @return string.split($string, $start: 0, $end: -at);
+}
+
+@mixin arrow($placement: top-start) {
+  $splitedString: string.split($placement, '-');
+  $vertical: top, bottom;
+  $horizontal: left, right;
+  $dir: nth($splitedString, 1);
+  $sub: if(length($splitedString) > 1, nth($splitedString, 2), null);
+
+  // @debug $dir, $sub;
+
+  // A.direction
+  @if $dir != null {
+    #{$dir}: 100%;
+    border-#{$dir}-color: var(--w-tooltip-color);
+  }
+
+  // B.sub-direction
+  @if $sub != null {
+    // vertical
+    @if list.index($vertical, $dir) {
+      @debug $dir, $sub;
+      @if $sub == start {
+        left: 14px;
+      } @else {
+        right: 14px;
+      }
+    }
+
+    // horizontal
+    @if list.index($horizontal, $dir) {
+      @if $sub == start {
+        top: 14px;
+      } @else {
+        bottom: 14px;
+      }
+    }
+  } @else {
+    // horizontal
+    @if list.index($horizontal, $dir) {
+      top: 50%;
+      transform: translateY(-50%);
+    } @else if list.index($vertical, $dir) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
 
 [data-v-target] {
   cursor: help;
@@ -18,81 +76,59 @@ $sizes: (
   margin: 0 16px;
   position: absolute;
   z-index: 10000;
-  visibility: hidden;
   opacity: 0;
-  // transition: all 0.3s;
 
-  &[data-triggered] {
-    visibility: visible;
+  &[data-open='true'] {
     opacity: 1;
     transform: scale(1);
+    transform-origin: 50% 100% 0px;
   }
 
-  &-content {
-    padding: 8px 10px;
-    font-size: 12px;
-    line-height: 1.5;
-    border-radius: 6px;
-    color: #fff;
-    background: #383838;
+  &__content {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0.25rem 1rem;
+    font-size: var(--w-font-size-small);
+    line-height: var(--w-line-height-small);
+    border-radius: var(--w-radius-small);
+    background-color: var(--color-white);
+    box-shadow: var(--w-shadow);
   }
 
-  &:before {
-    content: '';
-    position: absolute;
-    background: 0 0;
-    border: 6px solid transparent;
-    transition: 0.3s ease;
-    z-index: 10001;
-  }
+  // colors
+  @each $theme-name, $theme-value in $themes {
+    &.w-tooltip__#{$theme-name} {
+      &.is-arrowed {
+        --w-tooltip-color: var(--color-#{$theme-name});
+      }
 
-  &-top {
-    &:before {
-      top: 100%;
-      left: 50%;
-      border-top-color: #383838;
-      transform: translateX(-50%);
+      .w-tooltip__content {
+        background-color: $theme-value;
+        color: #fff;
+      }
     }
   }
 
-  &-top-left {
+  &.is-arrowed {
     &:before {
-      top: 100%;
-      left: 14px;
-      border-top-color: #383838;
+      content: '';
+      position: absolute;
+      background: 0 0;
+      border: 6px solid transparent;
+      transition: 0.3s ease;
+      filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0.6));
+      z-index: 10001;
     }
-  }
 
-  &-top-right {
-    &:before {
-      top: 100%;
-      right: 14px;
-      border-top-color: #383838;
-    }
-  }
-
-  &-bottom {
-    &:before {
-      bottom: 100%;
-      left: 50%;
-      border-bottom-color: #383838;
-      transform: translateX(-50%);
-    }
-  }
-
-  &-bottom-left {
-    &:before {
-      bottom: 100%;
-      left: 14px;
-      border-bottom-color: #383838;
-    }
-  }
-
-  &-bottom-right {
-    &:before {
-      bottom: 100%;
-      right: 14px;
-      border-bottom-color: #383838;
+    // placements
+    @each $p in $placements {
+      &.w-tooltip__#{$p} {
+        &:before {
+          @include arrow($p);
+        }
+      }
     }
   }
 }

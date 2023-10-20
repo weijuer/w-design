@@ -1,5 +1,8 @@
 import { type Numeric } from "./typings";
 
+export const isString = (val: unknown): val is any =>
+    val !== null && typeof val === 'string';
+
 export const isObject = (val: unknown): val is Record<any, any> =>
     val !== null && typeof val === 'object';
 
