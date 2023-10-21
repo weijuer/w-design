@@ -6,6 +6,7 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
     const targetWrapperRef = ref<HTMLSpanElement>()
     const popperRef = ref<HTMLDivElement>()
     // const targetRef = ref<HTMLElement>()
+    const placementInner = ref(props.placement ? props.placement : 'top')
 
     const visible = ref(false)
     const state = reactive({
@@ -14,12 +15,12 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
     })
 
     const tooltipClass = computed(() => {
-        const { className, type, placement, arrowed } = props
+        const { className, type, arrowed } = props
 
         return [
             className,
             type ? 'w-tooltip__' + type : '',
-            placement ? 'w-tooltip__' + placement : '',
+            placementInner.value ? 'w-tooltip__' + placementInner.value : '',
             {
                 'is-arrowed': arrowed
             }
@@ -47,64 +48,73 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         visible.value = false
     }
 
-    const updateTarget = () => {
-        // 角标大小
+    const updateVertical = (dir: string, sub: string | undefined) => {
         const triangleSize = 6
-        // 外部偏移量-防止贴边
-        const marginOffset = 16
-        // 角标偏移量
-        let triangleOffset = 14
-        // 角标中心点位置
-        let triangleCenter = 0
-        // target长度边界处理
-        let leftPosFix = 0
-        const { placement } = props
         const { offsetWidth: popperWidth, offsetHeight: popperHeight } = popperRef.value!
         const { top, left, width, height } = targetWrapperRef.value!.getBoundingClientRect()
 
-        const [dir, sub] = placement.split('-');
-        console.log('updateTarget', dir, sub)
-
         // veritcal
         if (dir === 'top') {
-            // top
             state.top = top + window.scrollY - popperHeight - triangleSize * 2
+            state.left = left + window.scrollX + Math.abs(width - popperWidth) * 0.5
         } else if (dir === 'bottom') {
-            // bottom
             state.top = top + window.scrollY + height + triangleSize * 2
-        } else if (['left', 'right'].includes(dir)) {
-            // left or right
+            state.left = left + window.scrollX + Math.abs(width - popperWidth) * 0.5
+        }
+
+        // start-end
+        if (['top', 'bottom'].includes(dir)) {
             if (sub === 'start') {
-                state.top = top + window.scrollY + height * 0.5
+                state.left = left + window.scrollX
             } else if (sub === 'end') {
-                state.top = top + window.scrollY + height * 0.5
-            } else {
-                state.top = top + window.scrollY + height * 0.5
+                state.left = left + window.scrollX + width - popperWidth
             }
         }
+    }
+
+    const updateHorizontal = (dir: string, sub: string | undefined) => {
+        const triangleSize = 6
+        const { offsetWidth: popperWidth, offsetHeight: popperHeight } = popperRef.value!
+        const { top, left, width, height } = targetWrapperRef.value!.getBoundingClientRect()
 
         // horizontal
-        if (sub === 'start') {
-            // start
-            leftPosFix = width * 0.5 <= triangleOffset ? width * 0.5 : triangleOffset
-            triangleCenter = left - marginOffset - triangleOffset - triangleSize
-
-            state.left = window.scrollX + triangleCenter + leftPosFix
-        } else if (sub === 'end') {
-            // end
-            leftPosFix = width * 0.5 <= triangleOffset ? width * 0.5 : width - triangleOffset
-            triangleCenter = left - marginOffset - popperWidth + triangleOffset + triangleSize
-
-            state.left = window.scrollX + triangleCenter + leftPosFix
-        } else if (!sub) {
-            // center
-            triangleOffset = popperWidth * 0.5
-            triangleCenter = left - marginOffset - triangleOffset
-
-            state.left = window.scrollX + triangleCenter + width * 0.5
+        if (dir === 'left') {
+            state.top = top + window.scrollY + Math.abs(popperHeight - height) * 0.5
+            state.left = window.scrollX + left - popperWidth - triangleSize * 2
+        } else if (dir === 'right') {
+            state.top = top + window.scrollY + Math.abs(popperHeight - height) * 0.5
+            state.left = window.scrollX + left + width + triangleSize * 2
         }
 
-        // left
+        // start-end
+        if (['top', 'bottom'].includes(dir)) {
+            if (sub === 'start') {
+                state.top = top + window.scrollY
+            } else if (sub === 'end') {
+                state.top = top + window.scrollY + height - popperHeight
+            }
+        }
+    }
+
+    const updateTarget = () => {
+        const [dir, sub] = placementInner.value.split('-');
+
+        if (['top', 'bottom'].includes(dir)) {
+            updateVertical(dir, sub)
+        } else {
+            updateHorizontal(dir, sub)
+        }
+
+        console.log('pos', state.left, state.top)
+
+        // overflow
+        if (state.left < 0) {
+            placementInner.value = 'right'
+            updateHorizontal('right', sub)
+        } else if (state.top < 0) {
+            placementInner.value = 'bottom'
+            updateVertical('bottom', sub)
+        }
     }
 
     const handleDocumentClick = (e: Event) => {

@@ -51,9 +51,9 @@ $placements: top, top-start, top-end, bottom, bottom-start, bottom-end, left, le
     // horizontal
     @if list.index($horizontal, $dir) {
       @if $sub == start {
-        top: 14px;
-      } @else {
         bottom: 14px;
+      } @else {
+        top: 14px;
       }
     }
   } @else {
@@ -73,7 +73,7 @@ $placements: top, top-start, top-end, bottom, bottom-start, bottom-end, left, le
 }
 
 .w-tooltip {
-  margin: 0 16px;
+  // margin: 0 16px;
   position: absolute;
   z-index: 10000;
   opacity: 0;
@@ -89,7 +89,7 @@ $placements: top, top-start, top-end, bottom, bottom-start, bottom-end, left, le
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 0.25rem 1rem;
+    padding: 0.35rem 1rem;
     font-size: var(--w-font-size-small);
     line-height: var(--w-line-height-small);
     border-radius: var(--w-radius-small);

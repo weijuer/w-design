@@ -42,7 +42,7 @@
         </w-tooltip>
       </w-space>
 
-      <w-space fill justify="space-between">
+      <w-space fill justify="space-evenly">
         <w-space class="start" orientation="vertical" align="start">
           <w-tooltip
             v-for="placement of placements.slice(3, 6)"
