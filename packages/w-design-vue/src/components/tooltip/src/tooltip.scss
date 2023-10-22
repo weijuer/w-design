@@ -6,6 +6,7 @@
 :root {
   --w-tooltip-size: 2.25rem;
   --w-tooltip-color: white;
+  --w-tooltip-delay: 0.2s;
 }
 
 $sizes: (
@@ -73,15 +74,16 @@ $placements: top, top-start, top-end, bottom, bottom-start, bottom-end, left, le
 }
 
 .w-tooltip {
-  // margin: 0 16px;
   position: absolute;
   z-index: 10000;
   opacity: 0;
+  transition: opacity 0.2s;
 
   &[data-open='true'] {
     opacity: 1;
     transform: scale(1);
     transform-origin: 50% 100% 0px;
+    transition: opacity 0.2s;
   }
 
   &__content {
@@ -117,7 +119,7 @@ $placements: top, top-start, top-end, bottom, bottom-start, bottom-end, left, le
       position: absolute;
       background: 0 0;
       border: 6px solid transparent;
-      transition: 0.3s ease;
+      transition: opacity 0.2s;
       filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0.6));
       z-index: 10001;
     }

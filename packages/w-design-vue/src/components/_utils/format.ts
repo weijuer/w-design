@@ -1,9 +1,9 @@
 import { isDef, isNumeric } from './func'
 import { Numeric } from './typings'
 
-export function addUnit(value?: Numeric): string | undefined {
+export function addUnit(value?: Numeric, unit: string = 'px'): string | undefined {
     if (isDef(value)) {
-        return isNumeric(value) ? `${value}px` : String(value)
+        return isNumeric(value) ? `${value}${unit}` : String(value)
     }
     return undefined
 }

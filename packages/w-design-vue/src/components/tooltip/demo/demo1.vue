@@ -27,6 +27,20 @@
     </w-space>
   </w-preview>
 
+  <w-preview title="Controlled" desc="Controlled">
+    <w-space orientation="vertical">
+      <w-tooltip :default-open="true" content="I am a controlled tooltip">
+        <w-button type="default">Hover me</w-button>
+      </w-tooltip>
+
+      <w-tooltip v-model="visible" content="I am a controlled tooltip">
+        <w-button type="default">Hover me</w-button>
+      </w-tooltip>
+
+      <p>open: {{ visible }}</p>
+    </w-space>
+  </w-preview>
+
   <w-preview class="placements-demo" title="Placements" desc="Placements">
     <w-space orientation="vertical" fill align="center">
       <w-space>
@@ -87,6 +101,8 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+const visible = ref(false)
 const themes = ['primary', 'success', 'warning', 'info', 'danger']
 const placements = [
   'top-start',
@@ -108,6 +124,7 @@ const placements = [
 .placements-demo {
   .w-button {
     width: 8rem;
+    height: 4rem;
   }
 }
 </style>

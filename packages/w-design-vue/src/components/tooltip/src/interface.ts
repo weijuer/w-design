@@ -1,5 +1,5 @@
 import { PropType, type ExtractPropTypes } from 'vue'
-import { Type } from 'src/components/_utils'
+import { Numeric, Type } from 'src/components/_utils'
 
 export type Trigger = 'hover' | 'click'
 
@@ -34,13 +34,23 @@ export const tooltipProps = {
         },
         default: 'top-start'
     },
+    openDelay: {
+        type: [String, Number] as PropType<Numeric>,
+        default: 0
+    },
+    closeDelay: {
+        type: [String, Number] as PropType<Numeric>,
+        default: 200
+    },
     content: [String, Object],
+    modelValue: Boolean,
+    defaultOpen: Boolean,
     className: String,
     color: String,
     arrowed: Boolean
 }
 
-export const tooltipEmits = ['change', 'close']
+export const tooltipEmits = ['update:modelValue', 'change', 'close']
 
 export type TooltipProps = ExtractPropTypes<typeof tooltipProps>
 export type TooltipEmits = typeof tooltipEmits

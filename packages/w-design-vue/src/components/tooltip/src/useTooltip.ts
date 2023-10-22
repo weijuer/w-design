@@ -1,14 +1,16 @@
 import { SetupContext, computed, nextTick, onBeforeUnmount, reactive, ref } from 'vue'
 import { TooltipEmits, TooltipProps } from './interface'
 import { useEventListener } from 'Hooks'
+import { addUnit } from '../../_utils'
 
 export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>['emit']) => {
     const targetWrapperRef = ref<HTMLSpanElement>()
     const popperRef = ref<HTMLDivElement>()
     // const targetRef = ref<HTMLElement>()
-    const placementInner = ref(props.placement ? props.placement : 'top')
+    const { modelValue, defaultOpen, placement } = props
+    const visible = ref(defaultOpen ? defaultOpen : modelValue)
+    const placementInner = ref(placement ? placement : 'top')
 
-    const visible = ref(false)
     const state = reactive({
         top: 0,
         left: 0
@@ -28,9 +30,12 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
     })
 
     const tooltipStyle = computed(() => {
+        const { openDelay, closeDelay } = props
+
         return {
             top: state.top + 'px',
-            left: state.left + 'px'
+            left: state.left + 'px',
+            transitionDelay: visible.value ? addUnit(openDelay, 'ms') : addUnit(closeDelay, 'ms')
         }
     })
 
@@ -40,12 +45,14 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         visible.value = trigger === 'click' ? !visible.value : true
 
         nextTick(() => {
+            onChange()
             updateTarget()
         })
     }
 
     const handleUnTrigger = () => {
         visible.value = false
+        onChange()
     }
 
     const updateVertical = (dir: string, sub: string | undefined) => {
@@ -63,12 +70,10 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         }
 
         // start-end
-        if (['top', 'bottom'].includes(dir)) {
-            if (sub === 'start') {
-                state.left = left + window.scrollX
-            } else if (sub === 'end') {
-                state.left = left + window.scrollX + width - popperWidth
-            }
+        if (sub === 'start') {
+            state.left = left + window.scrollX
+        } else if (sub === 'end') {
+            state.left = left + window.scrollX + width - popperWidth
         }
     }
 
@@ -87,12 +92,10 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         }
 
         // start-end
-        if (['top', 'bottom'].includes(dir)) {
-            if (sub === 'start') {
-                state.top = top + window.scrollY
-            } else if (sub === 'end') {
-                state.top = top + window.scrollY + height - popperHeight
-            }
+        if (sub === 'start') {
+            state.top = top + window.scrollY
+        } else if (sub === 'end') {
+            state.top = top + window.scrollY + height - popperHeight
         }
     }
 
@@ -104,8 +107,6 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         } else {
             updateHorizontal(dir, sub)
         }
-
-        console.log('pos', state.left, state.top)
 
         // overflow
         if (state.left < 0) {
@@ -162,8 +163,8 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         emit('close')
     }
 
-    const onChange = (event: Event) => {
-        event.preventDefault()
+    const onChange = () => {
+        emit('update:modelValue', visible.value)
         emit('change', visible.value)
     }
 
