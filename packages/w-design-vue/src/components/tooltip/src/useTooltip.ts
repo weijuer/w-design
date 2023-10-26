@@ -1,6 +1,6 @@
 import { SetupContext, computed, nextTick, onBeforeUnmount, reactive, ref } from 'vue'
 import { TooltipEmits, TooltipProps } from './interface'
-import { useEventListener } from 'Hooks'
+import { useEventListener, useDebounceFn } from 'Hooks'
 import { addUnit } from '../../_utils'
 
 export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>['emit']) => {
@@ -39,20 +39,43 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         }
     })
 
-    const handleTrigger = () => {
-        const { trigger } = props
+    const checkOverflow = (dir: string, sub: string) => {
+        const triangleSize = 6
+        const { offsetWidth: popperWidth, offsetHeight: popperHeight } = popperRef.value!
+        const { top, left, width, height } = targetWrapperRef.value!.getBoundingClientRect()
 
-        visible.value = trigger === 'click' ? !visible.value : true
+        // overflow
+        const minBoundary = 0
+        const maxRightBoundary = window.innerWidth
+        const maxBottomBoundary = window.innerHeight
+        const targetTop = top
+        const popperOffsetTop = -(popperHeight + triangleSize * 2)
+        const popperOffsetBottom = popperHeight + height + triangleSize * 2
+        const targetLeft = left
+        const popperOffsetLeft = -(popperWidth + triangleSize * 2)
+        const popperOffsetRight = popperWidth + width + triangleSize * 2
 
-        nextTick(() => {
-            onChange()
-            updateTarget()
-        })
-    }
+        // horizontal
+        if (['left', 'right'].includes(dir)) {
+            if (targetLeft + popperOffsetLeft < minBoundary) {
+                dir = 'right'
+            } else if (targetLeft + popperOffsetRight > maxRightBoundary) {
+                dir = 'left'
+            }
+            placementInner.value = sub ? dir + '-' + sub : dir
+            updateHorizontal(dir, sub)
+        }
 
-    const handleUnTrigger = () => {
-        visible.value = false
-        onChange()
+        // vertical
+        if (['top', 'bottom'].includes(dir)) {
+            if (targetTop + popperOffsetTop < minBoundary) {
+                dir = 'bottom'
+            } else if (targetTop + popperOffsetBottom > maxBottomBoundary) {
+                dir = 'top'
+            }
+            placementInner.value = sub ? dir + '-' + sub : dir
+            updateVertical(dir, sub)
+        }
     }
 
     const updateVertical = (dir: string, sub: string | undefined) => {
@@ -60,12 +83,16 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         const { offsetWidth: popperWidth, offsetHeight: popperHeight } = popperRef.value!
         const { top, left, width, height } = targetWrapperRef.value!.getBoundingClientRect()
 
-        // veritcal
+        const targetTop = top + window.scrollY
+        const popperOffsetTop = -(popperHeight + triangleSize * 2)
+        const popperOffsetBottom = height + triangleSize * 2
+
+        // vertical
         if (dir === 'top') {
-            state.top = top + window.scrollY - popperHeight - triangleSize * 2
+            state.top = targetTop + popperOffsetTop
             state.left = left + window.scrollX + Math.abs(width - popperWidth) * 0.5
         } else if (dir === 'bottom') {
-            state.top = top + window.scrollY + height + triangleSize * 2
+            state.top = targetTop + popperOffsetBottom
             state.left = left + window.scrollX + Math.abs(width - popperWidth) * 0.5
         }
 
@@ -82,13 +109,17 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         const { offsetWidth: popperWidth, offsetHeight: popperHeight } = popperRef.value!
         const { top, left, width, height } = targetWrapperRef.value!.getBoundingClientRect()
 
+        const targetLeft = left + window.scrollX
+        const popperOffsetLeft = -(popperWidth + triangleSize * 2)
+        const popperOffsetRight = width + triangleSize * 2
+
         // horizontal
         if (dir === 'left') {
+            state.left = targetLeft + popperOffsetLeft
             state.top = top + window.scrollY + Math.abs(popperHeight - height) * 0.5
-            state.left = window.scrollX + left - popperWidth - triangleSize * 2
         } else if (dir === 'right') {
+            state.left = targetLeft + popperOffsetRight
             state.top = top + window.scrollY + Math.abs(popperHeight - height) * 0.5
-            state.left = window.scrollX + left + width + triangleSize * 2
         }
 
         // start-end
@@ -108,14 +139,7 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
             updateHorizontal(dir, sub)
         }
 
-        // overflow
-        if (state.left < 0) {
-            placementInner.value = 'right'
-            updateHorizontal('right', sub)
-        } else if (state.top < 0) {
-            placementInner.value = 'bottom'
-            updateVertical('bottom', sub)
-        }
+        checkOverflow(dir, sub)
     }
 
     const handleDocumentClick = (e: Event) => {
@@ -143,13 +167,38 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         }
     }
 
+    const reset = () => {
+        placementInner.value = props.placement
+        state.top = 0
+        state.left = 0
+    }
+
+    const handleTrigger = () => {
+        const { trigger } = props
+        visible.value = trigger === 'click' ? !visible.value : true
+
+        nextTick(() => {
+            reset()
+            updateTarget()
+            onChange()
+        })
+    }
+
+    const handleUnTrigger = () => {
+        visible.value = false
+        onChange()
+        onClose()
+    }
+
+    const debouncedUpdateTarget = useDebounceFn(updateTarget, 500)
+
     const initEvents = () => {
         const { trigger } = props
 
         // 监听target事件
         useEventListener(targetWrapperRef, trigger === 'hover' ? 'mouseenter' : trigger, handleTrigger)
-        useEventListener(window, 'resize', updateTarget)
-        useEventListener(window, 'scroll', updateTarget)
+        useEventListener(window, 'resize', debouncedUpdateTarget)
+        useEventListener(window, 'scroll', debouncedUpdateTarget)
 
         //
         if (trigger === 'hover') {
@@ -180,6 +229,7 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         tooltipClass,
         tooltipStyle,
         visible,
+        reset,
         onClose,
         onChange
     }

@@ -1,3 +1,6 @@
 export * from './useRelation'
 export * from './useRect'
 export * from './useEventListener'
+export * from './useDebounceFn'
+export * from './useThrottleFn'
+export * from './useHover'

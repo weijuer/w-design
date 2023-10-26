@@ -27,6 +27,14 @@
     </w-space>
   </w-preview>
 
+  <w-preview title="Trigger" desc="Trigger">
+    <w-space orientation="vertical">
+      <w-tooltip trigger="click" content="I am a tooltip">
+        <w-button type="default">Click me</w-button>
+      </w-tooltip>
+    </w-space>
+  </w-preview>
+
   <w-preview title="Controlled" desc="Controlled">
     <w-space orientation="vertical">
       <w-tooltip :default-open="true" content="I am a controlled tooltip">
@@ -38,6 +46,32 @@
       </w-tooltip>
 
       <p>open: {{ visible }}</p>
+    </w-space>
+  </w-preview>
+
+  <w-preview title="With Delay" desc="With Delay">
+    <w-space>
+      <w-tooltip content="Tooltip 1" :open-delay="1000">
+        <w-button type="danger">Delay Open (1000ms)</w-button>
+      </w-tooltip>
+
+      <w-tooltip content="Tooltip 2" :close-delay="2000">
+        <w-button type="danger">Delay Close (2000ms)</w-button>
+      </w-tooltip>
+    </w-space>
+  </w-preview>
+
+  <w-preview title="Custom Content" desc="Custom Content">
+    <w-space>
+      <w-tooltip>
+        <template #content>
+          <div class="demo-content-container">
+            <div class="title">Cunstom content</div>
+            <div class="sub-title">This is a custom tooltip content</div>
+          </div>
+        </template>
+        <w-button type="info">Hover me</w-button>
+      </w-tooltip>
     </w-space>
   </w-preview>
 
@@ -121,6 +155,15 @@ const placements = [
 </script>
 
 <style scoped lang="scss">
+.demo-content-container {
+  .title {
+    font-weight: 700;
+  }
+  .sub-title {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+}
 .placements-demo {
   .w-button {
     width: 8rem;

@@ -13,9 +13,11 @@
         :data-open="visible"
         role="tooltip"
       >
-        <slot name="content">
-          <div class="w-tooltip__content">{{ content }}</div>
-        </slot>
+        <div class="w-tooltip__content">
+          <slot name="content">
+            {{ content }}
+          </slot>
+        </div>
       </div>
     </transition>
   </teleport>

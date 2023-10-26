@@ -77,13 +77,19 @@ $placements: top, top-start, top-end, bottom, bottom-start, bottom-end, left, le
   position: absolute;
   z-index: 10000;
   opacity: 0;
-  transition: opacity 0.2s;
+  visibility: hidden;
+  transition:
+    opacity 0.2s,
+    visibility 0.2s;
 
   &[data-open='true'] {
     opacity: 1;
+    visibility: visible;
     transform: scale(1);
     transform-origin: 50% 100% 0px;
-    transition: opacity 0.2s;
+    transition:
+      opacity 0.2s,
+      visibility 0.2s;
   }
 
   &__content {
