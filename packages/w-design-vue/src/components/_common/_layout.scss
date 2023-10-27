@@ -188,3 +188,9 @@ svg {
   background-color: var(--color-bg, #fff);
   color: var(--color-contrast-high, #313135);
 }
+
+[data-hidden],
+[hidden],
+.hidden {
+  display: none;
+}

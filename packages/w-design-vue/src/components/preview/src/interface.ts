@@ -1,4 +1,4 @@
-import { type PropType, type ExtractPropTypes } from 'vue'
+import { type PropType, type ExtractPropTypes, Slot } from 'vue'
 
 export type Size = number | 'default' | 'small' | 'medium' | 'large'
 
@@ -8,7 +8,7 @@ export const previewProps = {
         dafault: ''
     },
     title: String,
-    desc: String,
+    desc: [String, Object] as PropType<string | Slot>,
     status: Boolean,
 }
 

@@ -6,7 +6,9 @@
     <div class="w-preview__meta">
       <div class="w-preview__meta-title">{{ title }}</div>
       <div class="w-preview__meta-desc">
-        {{ desc }}
+        <slot name="desc">
+          {{ desc }}
+        </slot>
       </div>
       <div v-if="$slots.code" class="w-preview__meta-actions">
         <w-button icon="delete" @click="onClick"></w-button>

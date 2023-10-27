@@ -41,7 +41,12 @@
 
   <w-preview title="Group (vertical)" desc="垂直组">
     <w-space orientation="vertical">
-      <w-radio-group v-model="state.checked" :options="plainOptions" :disabled="disabled"></w-radio-group>
+      <w-radio-group
+        label="Fruits (vertical)"
+        v-model="state.checked"
+        :options="plainOptions"
+        :disabled="disabled"
+      ></w-radio-group>
 
       <w-button type="primary" size="small" @click="toggleDisable">
         {{ !disabled ? 'Disable' : 'Enable' }}
@@ -50,8 +55,8 @@
   </w-preview>
 
   <w-preview title="Group (horizontal)" desc="水平组">
-    <w-space>
-      <w-radio-group v-model="state.checked" orientation="horizontal" :disabled="disabled">
+    <w-space orientation="vertical">
+      <w-radio-group label="Fruits (horizontal)" v-model="state.checked" orientation="horizontal" :disabled="disabled">
         <template v-for="option in plainOptions" :key="option">
           <w-radio :value="option"> {{ option }}</w-radio>
         </template>

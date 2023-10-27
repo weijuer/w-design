@@ -28,6 +28,7 @@ export * from './alert'
 export * from './pagination'
 export * from './scroll-shadow'
 export * from './tooltip'
+export * from './table'
 
 // form
 export * from './checkbox'

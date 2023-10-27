@@ -1,18 +1,21 @@
 <template>
-  <div ref="_fef" class="w-radio__group" :class="radioGroupClass" role="presentation" :data-orientation="orientation">
-    <slot>
-      <w-radio
-        v-for="option in computedOptions"
-        :key="option.label"
-        :model-value="isChecked(option.value)"
-        :value="option.value"
-        :name="name"
-        @change="updateValue(option.value)"
-        :disabled="disabled"
-      >
-        {{ option.label }}
-      </w-radio>
-    </slot>
+  <div class="w-radio__group-wrapper">
+    <span class="w-radio__group-label">{{ label }}</span>
+    <div ref="_fef" class="w-radio__group" :class="radioGroupClass" role="presentation" :data-orientation="orientation">
+      <slot>
+        <w-radio
+          v-for="option in computedOptions"
+          :key="option.label"
+          :model-value="isChecked(option.value)"
+          :value="option.value"
+          :name="name"
+          @change="updateValue(option.value)"
+          :disabled="disabled"
+        >
+          {{ option.label }}
+        </w-radio>
+      </slot>
+    </div>
   </div>
 </template>
 

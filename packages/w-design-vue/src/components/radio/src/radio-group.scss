@@ -1,9 +1,22 @@
+.w-radio__group-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .w-radio__group {
   display: flex;
-  gap: 1em;
+  gap: 0.5rem;
+
+  &-label {
+    position: relative;
+    color: #71717a;
+  }
 
   &.w-radio__group-vertical {
     flex-direction: column;
+    flex-wrap: wrap;
   }
 
   &.w-radio__group-horizontal {

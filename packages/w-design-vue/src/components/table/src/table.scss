@@ -1,0 +1,115 @@
+@use 'sass:string';
+@use 'sass:list';
+
+@import '../../_common/index';
+
+:root {
+  --w-table-size: 2.25rem;
+  --w-table-color: white;
+  --w-table-delay: 0.2s;
+}
+
+$sizes: (
+  small: -0.25,
+  medium: 0,
+  large: 0.25
+);
+
+.w-table-wrapper {
+  position: relative;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  border-radius: var(--w-radius-large);
+  box-shadow: var(--w-shadow);
+}
+
+.w-table {
+  min-width: 100%;
+  width: 100%;
+  height: auto;
+  table-layout: auto;
+  text-indent: 0;
+  border-color: inherit;
+  border-collapse: collapse;
+
+  .w-table__thead {
+    tr {
+      &:first-child {
+        border-radius: 0.5rem;
+      }
+
+      th {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        height: 2.5rem;
+        line-height: var(--w-line-height-tiny);
+        font-size: var(--w-font-size-tiny);
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        vertical-align: middle;
+        background-color: #e1e1e1;
+
+        &:first-child {
+          border-top-left-radius: 0.5rem;
+          border-bottom-left-radius: 0.5rem;
+        }
+
+        &:last-child {
+          border-top-right-radius: 0.5rem;
+          border-bottom-right-radius: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .w-table__tbody {
+    tr {
+      td {
+        position: relative;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        height: 2.5rem;
+        line-height: var(--w-line-height-small);
+        font-size: var(--w-font-size-small);
+        font-weight: 400;
+        text-align: left;
+        white-space: normal;
+        vertical-align: middle;
+
+        &:first-child {
+          border-top-left-radius: 0.5rem;
+          border-bottom-left-radius: 0.5rem;
+        }
+
+        &:last-child {
+          border-top-right-radius: 0.5rem;
+          border-bottom-right-radius: 0.5rem;
+        }
+
+        &.empty-content {
+          height: 10rem;
+          text-align: center;
+          vertical-align: middle;
+          color: var(--color-contrast-low);
+        }
+      }
+    }
+  }
+
+  &.is-striped {
+    .w-table__tbody {
+      tr:nth-child(even) {
+        td {
+          background-color: #f5f4f5;
+        }
+      }
+    }
+  }
+}

@@ -51,6 +51,7 @@ export const radioGroupProps = {
         dafault: []
     },
     name: String,
+    label: String,
     disabled: Boolean,
 }
 

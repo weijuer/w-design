@@ -16,7 +16,9 @@ export const spaceProps = {
         default: 'horizontal'
     },
     size: [String, Number, Array] as PropType<Numeric | Numeric[]>,
-    align: String as PropType<Align>,
+    align: {
+        type: String as PropType<Align>,
+    },
     justify: String as PropType<Justify>,
     wrap: Boolean,
     fill: Boolean
