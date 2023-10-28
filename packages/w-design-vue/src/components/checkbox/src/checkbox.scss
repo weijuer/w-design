@@ -13,9 +13,10 @@ $checkbox-sizes: (
 );
 
 .w-checkbox {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  max-width: fit-content;
   position: relative;
-  padding-left: 25px;
   z-index: 1;
   cursor: pointer;
   user-select: none;
@@ -66,9 +67,9 @@ $checkbox-sizes: (
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 2px;
-    left: 0;
+    position: relative;
+    inset: 0;
+    margin-right: 0.5rem;
     height: var(--w-checkbox-size);
     width: var(--w-checkbox-size);
     color: #c8c8c8;

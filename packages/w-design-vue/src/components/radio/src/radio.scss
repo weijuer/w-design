@@ -13,9 +13,10 @@ $radio-sizes: (
 );
 
 .w-radio {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  max-width: fit-content;
   position: relative;
-  padding-left: 25px;
   z-index: 1;
   cursor: pointer;
   user-select: none;
@@ -55,9 +56,9 @@ $radio-sizes: (
   }
 
   &__marker {
-    position: absolute;
-    top: 2px;
-    left: 0;
+    position: relative;
+    inset: 0;
+    margin-right: 0.5rem;
     height: 20px;
     width: 20px;
     color: #c8c8c8;

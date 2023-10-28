@@ -6,7 +6,7 @@
     </span>
     <slot name="end"></slot>
     <span v-if="closeable" class="w-chip__btn" role="button" @click="onClose">
-      <w-icon name="delete"></w-icon>
+      <w-icon name="delete-filled"></w-icon>
     </span>
   </span>
 </template>

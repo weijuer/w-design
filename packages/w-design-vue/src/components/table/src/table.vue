@@ -4,10 +4,30 @@
       <slot>
         <thead class="w-table__thead" :class="{ hidden: hideHeader }" role="rowheader">
           <tr role="row">
+            <th v-if="isRowSelection">
+              <w-checkbox
+                ref="itemSelectAll"
+                :type="type"
+                :model-value="isRowSelectedAll()"
+                :indeterminate="getCheckAllStatus() === 'part'"
+                @change="onSelectAll"
+              />
+              <div v-if="rowSelection.selections" class="w-row-selection">
+                <div class="w-dropdown-btn">
+                  <i class="fa fa-chevron-down"></i>
+                  <ul class="w-dropdown-menu">
+                    <li v-for="(selection, index) of rowSelection.selections" :key="'selection' + index">
+                      <a href="javascript:;" @click="selection.onSelect">{{ selection.text }}</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </th>
             <th v-for="column in columns" :key="column.key" :class="column.sticky ? 'sticky' : null">
               {{ column.label }}
             </th>
           </tr>
+          <tr tabindex="-1" aria-hidden="true" class="w-table__thead-empty"></tr>
         </thead>
 
         <tbody class="w-table__tbody" role="rowgroup">
@@ -17,7 +37,24 @@
             </td>
           </tr>
           <template v-else>
-            <tr :key="row[rowKey]" v-for="(row, index) in rows" role="row">
+            <tr
+              :class="['w-table__row', { 'is-selected': isRowSelected(row[rowKey]) }]"
+              :aria-selected="isRowSelected(row[rowKey])"
+              :data-selected="isRowSelected(row[rowKey])"
+              v-for="(row, index) in rows"
+              :key="row[rowKey]"
+              @click="onClick(row[rowKey])"
+              role="row"
+            >
+              <td v-if="isRowSelection">
+                <w-checkbox
+                  :type="type"
+                  :value="row[rowKey]"
+                  :model-value="isRowSelected(row[rowKey])"
+                  @click.stop="null"
+                  @change="onSelect(row, $event)"
+                />
+              </td>
               <td
                 :key="column.name"
                 v-for="column in columns"
@@ -60,14 +97,27 @@ export default {
 </script>
 
 <script lang="ts" setup>
-// import WCheckbox from '../../checkbox'
+import WCheckbox from '../../checkbox'
 import { tableEmits, tableProps } from './interface'
 import { useTable } from './useTable'
 
 const props = defineProps(tableProps)
 const emit = defineEmits(tableEmits)
 
-const { tableRef, tableClass, tableStyle, colspan, getRowIndex } = useTable(props, emit)
+const {
+  tableRef,
+  tableClass,
+  tableStyle,
+  colspan,
+  isRowSelection,
+  getRowIndex,
+  isRowSelected,
+  isRowSelectedAll,
+  getCheckAllStatus,
+  onSelectAll,
+  onSelect,
+  onClick
+} = useTable(props, emit)
 </script>
 
 <style src="./table.scss" lang="scss" />

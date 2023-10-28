@@ -8,46 +8,46 @@
   </w-preview>
 
   <w-preview title="Disabled" desc="禁用">
-    <section class="space-inline">
+    <w-space>
       <w-checkbox disabled>Option</w-checkbox>
       <w-checkbox default-checked disabled>Option</w-checkbox>
-    </section>
+    </w-space>
   </w-preview>
 
   <w-preview title="Sizes" desc="尺寸">
-    <section class="space-inline">
+    <w-space>
       <w-checkbox v-for="size of sizes" :key="size" :size="size" default-checked>
         {{ size ? size : 'default' }}
       </w-checkbox>
-    </section>
+    </w-space>
   </w-preview>
 
   <w-preview title="Themes" desc="颜色">
-    <section class="space-inline">
+    <w-space>
       <w-checkbox v-for="theme of themes" :key="theme" :size="theme" default-checked>{{ theme }}</w-checkbox>
-    </section>
+    </w-space>
   </w-preview>
 
   <w-preview title="Controlled" desc="受控复选框">
-    <section class="space-vertical">
+    <w-space>
       <w-checkbox v-model="checked" :disabled="disabled">{{ label }}</w-checkbox>
 
-      <section class="space-inline">
+      <w-space>
         <w-button type="primary" size="small" @click="toggleChecked">
           {{ !checked ? 'Check' : 'Uncheck' }}
         </w-button>
         <w-button type="primary" size="small" @click="toggleDisable">
           {{ !disabled ? 'Disable' : 'Enable' }}
         </w-button>
-      </section>
-    </section>
+      </w-space>
+    </w-space>
   </w-preview>
 
   <w-preview title="Indeterminate" desc="半勾选">
-    <section class="space-inline">
+    <w-space>
       <w-checkbox :indeterminate="state.indeterminate1">Option</w-checkbox>
       <w-button @click="state.indeterminate1 = !state.indeterminate1" type="primary" size="small">toggle</w-button>
-    </section>
+    </w-space>
   </w-preview>
 
   <w-preview title="Icon" desc="icon">
@@ -67,16 +67,22 @@
   </w-preview>
 
   <w-preview title="Group (vertical) with options" desc="垂直组">
-    <section class="space-vertical">
+    <w-space orientation="vertical">
       <w-checkbox v-model="state.checkAll" :indeterminate="state.indeterminate" @change="onCheckAllChange">
         All
       </w-checkbox>
-      <w-checkbox-group v-model="state.checkedList" :options="plainOptions" @change="onGroupChange"></w-checkbox-group>
-    </section>
+
+      <w-checkbox-group
+        label="Fruits (vertical)"
+        v-model="state.checkedList"
+        :options="plainOptions"
+        @change="onGroupChange"
+      ></w-checkbox-group>
+    </w-space>
   </w-preview>
 
   <w-preview title="Group (horizontal) without options" desc="水平组">
-    <section class="space-inline">
+    <w-space orientation="vertical">
       <w-checkbox
         v-model="state.checkAll"
         :indeterminate="state.indeterminate"
@@ -87,6 +93,7 @@
       </w-checkbox>
 
       <w-checkbox-group
+        label="Fruits (horizontal)"
         v-model="state.checkedList"
         orientation="horizontal"
         :disabled="disabled"
@@ -102,7 +109,7 @@
       </w-button>
 
       <p>Selected: {{ state.checkedList }}</p>
-    </section>
+    </w-space>
   </w-preview>
 </template>
 
@@ -111,7 +118,7 @@ import { ref, computed, reactive } from 'vue'
 
 const checked = ref(false)
 const disabled = ref(false)
-const themes = ['primary', 'success', 'warning', 'info', 'danger']
+const themes = ['default', 'primary', 'success', 'warning', 'info', 'danger']
 const sizes = ['small', '', 'medium', 'large']
 
 const plainOptions = ['Apple', 'Pear', 'Orange']

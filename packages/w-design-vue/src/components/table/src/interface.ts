@@ -1,5 +1,5 @@
 import { PropType, type ExtractPropTypes } from 'vue'
-import { Type } from 'src/components/_utils'
+import { Numeric, Type } from 'src/components/_utils'
 
 export type Trigger = 'hover' | 'click'
 export type SelectMode = 'single' | 'multiple'
@@ -41,11 +41,11 @@ export const tableProps = {
         type: [String, Object],
         default: 'No rows to display.'
     },
-    selectioMode: {
+    selectionMode: {
         type: String as PropType<SelectMode>,
     },
     defaultSelectedKeys: {
-        type: Array
+        type: Array as PropType<Numeric[]>
     },
     className: String,
     color: String,
@@ -55,7 +55,7 @@ export const tableProps = {
     bordered: Boolean
 }
 
-export const tableEmits = ['change', 'expand', 'resizeColumn']
+export const tableEmits = ['change', 'expand', 'resizeColumn', 'select']
 
 export type TableProps = ExtractPropTypes<typeof tableProps>
 export type TableEmits = typeof tableEmits

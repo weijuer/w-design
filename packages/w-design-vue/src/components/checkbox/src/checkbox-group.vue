@@ -1,24 +1,27 @@
 <template>
-  <div
-    ref="_fef"
-    class="w-checkbox__group"
-    :class="checkboxGroupClass"
-    role="presentation"
-    :data-orientation="orientation"
-  >
-    <slot>
-      <w-checkbox
-        v-for="option in computedOptions"
-        :key="option.label"
-        :model-value="isChecked(option.value)"
-        :value="option.value"
-        :name="name"
-        @change="updateValue(option.value)"
-        :disabled="disabled"
-      >
-        {{ option.label }}
-      </w-checkbox>
-    </slot>
+  <div class="w-checkbox__group-wrapper">
+    <span class="w-checkbox__group-label">{{ label }}</span>
+    <div
+      ref="_fef"
+      class="w-checkbox__group"
+      :class="checkboxGroupClass"
+      role="presentation"
+      :data-orientation="orientation"
+    >
+      <slot>
+        <w-checkbox
+          v-for="option in computedOptions"
+          :key="option.label"
+          :model-value="isChecked(option.value)"
+          :value="option.value"
+          :name="name"
+          @change="updateValue(option.value)"
+          :disabled="disabled"
+        >
+          {{ option.label }}
+        </w-checkbox>
+      </slot>
+    </div>
   </div>
 </template>
 

@@ -40,6 +40,8 @@ $chip-sizes: (
     align-items: center;
     appearance: none;
     user-select: none;
+    font-size: var(--w-font-size-large);
+    line-height: var(--w-line-height-large);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 
@@ -81,15 +83,15 @@ $chip-sizes: (
       }
 
       &.is-flat {
-        color: var(--color-contrast-higher);
-        background-color: fade-out($color: $theme-value, $amount: 0.6);
+        color: $theme-value;
+        background-color: rgba($theme-value, 0.2);
       }
     }
   }
 
   &.is-flat {
     color: var(--color-contrast-higher);
-    background-color: rgba(212, 212, 216, 0.4);
+    background-color: rgba(212, 212, 216, 0.2);
   }
 
   &.is-outlined {

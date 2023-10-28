@@ -36,26 +36,47 @@
     </template>
     <w-space fill>
       <w-table
-        :type="selectedColor"
+        :type="state.simpleColor"
         selection-mode="single"
         :default-selected-keys="['2']"
         :columns="columns"
         :rows="rows"
       ></w-table>
-      <w-radio-group
-        label="Selection color"
-        orientation="horizontal"
-        v-model="selectedColor"
-        :options="colors"
-      ></w-radio-group>
+      <w-radio-group label="Selection color" orientation="horizontal" v-model="state.simpleColor">
+        <w-radio v-for="color in colors" :key="color" :type="state.simpleColor" :value="color">{{ color }}</w-radio>
+      </w-radio-group>
+    </w-space>
+  </w-preview>
+
+  <w-preview title="Multiple Row Selection">
+    <template #desc>
+      You can also select multiple rows by using the selectionMode="multiple" prop. Use defaultSelectedKeys to provide a
+      default set of selected rows.
+    </template>
+    <w-space fill>
+      <w-table
+        :type="state.multipleColor"
+        selection-mode="multiple"
+        :default-selected-keys="['2', '3']"
+        :columns="columns"
+        :rows="rows"
+      ></w-table>
+
+      <w-radio-group label="Selection color" orientation="horizontal" v-model="state.multipleColor">
+        <w-radio v-for="color in colors" :key="color" :type="state.multipleColor" :value="color">{{ color }}</w-radio>
+      </w-radio-group>
     </w-space>
   </w-preview>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { reactive } from 'vue'
 
-const selectedColor = ref('default')
+const state = reactive({
+  simpleColor: 'default',
+  multipleColor: 'default'
+})
+
 const colors = ['default', 'primary', 'success', 'warning', 'info', 'danger']
 const rows = [
   {

@@ -62,6 +62,7 @@ export const checkboxGroupProps = {
         dafault: []
     },
     name: String,
+    label: String,
     disabled: Boolean,
 }
 

@@ -38,10 +38,6 @@ $sizes: (
 
   .w-table__thead {
     tr {
-      &:first-child {
-        border-radius: 0.5rem;
-      }
-
       th {
         padding-left: 0.75rem;
         padding-right: 0.75rem;
@@ -64,6 +60,14 @@ $sizes: (
           border-bottom-right-radius: 0.5rem;
         }
       }
+
+      &.w-table__thead-empty {
+        display: block;
+        width: 1px;
+        height: 1px;
+        margin-left: 0.25rem;
+        margin-top: 0.25rem;
+      }
     }
   }
 
@@ -83,21 +87,81 @@ $sizes: (
         white-space: normal;
         vertical-align: middle;
 
-        &:first-child {
-          border-top-left-radius: 0.5rem;
-          border-bottom-left-radius: 0.5rem;
-        }
-
-        &:last-child {
-          border-top-right-radius: 0.5rem;
-          border-bottom-right-radius: 0.5rem;
-        }
-
         &.empty-content {
           height: 10rem;
           text-align: center;
           vertical-align: middle;
           color: var(--color-contrast-low);
+        }
+      }
+
+      &:first-child {
+        td {
+          &:first-child {
+            border-top-left-radius: 0.5rem;
+          }
+
+          &:last-child {
+            border-top-right-radius: 0.5rem;
+          }
+        }
+      }
+
+      &:last-child {
+        td {
+          &:first-child {
+            border-bottom-left-radius: 0.5rem;
+          }
+
+          &:last-child {
+            border-bottom-right-radius: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  &__selection-single {
+    .w-table__tbody {
+      tr {
+        td {
+          &:first-child {
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+          }
+
+          &:last-child {
+            border-top-right-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  // themes
+  @each $theme-name, $theme-value in $themes {
+    @if $theme-name == 'default' {
+      .w-table__tbody {
+        tr {
+          &.is-selected {
+            cursor: default;
+            background-color: rgba($theme-value, 0.2);
+          }
+        }
+      }
+    } @else {
+      &.w-table__#{$theme-name} {
+        .w-table__tbody {
+          tr {
+            &.is-selected {
+              td {
+                cursor: default;
+                color: $theme-value;
+                background-color: rgba($theme-value, 0.2);
+              }
+            }
+          }
         }
       }
     }

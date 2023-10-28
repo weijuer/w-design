@@ -18,18 +18,12 @@ $sizes: (
 $placements: top, top-start, top-end, bottom, bottom-start, bottom-end, left, left-start, left-end, right, right-start,
   right-end;
 
-@function slicePlacement($string, $type: 'start', $divider: '-') {
-  @return string.split($string, $start: 0, $end: -at);
-}
-
 @mixin arrow($placement: top-start) {
   $splitedString: string.split($placement, '-');
   $vertical: top, bottom;
   $horizontal: left, right;
   $dir: nth($splitedString, 1);
   $sub: if(length($splitedString) > 1, nth($splitedString, 2), null);
-
-  // @debug $dir, $sub;
 
   // A.direction
   @if $dir != null {
@@ -41,7 +35,6 @@ $placements: top, top-start, top-end, bottom, bottom-start, bottom-end, left, le
   @if $sub != null {
     // vertical
     @if list.index($vertical, $dir) {
-      @debug $dir, $sub;
       @if $sub == start {
         left: 14px;
       } @else {

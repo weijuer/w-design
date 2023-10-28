@@ -6,6 +6,7 @@
   --border-radius: 4px;
 
   // themes
+  --color-default: #d4d4d8;
   --color-primary: #4827ec;
   --color-success: #52c41a;
   --color-warning: #faad14;
@@ -75,6 +76,7 @@
 // Themes
 // ============================================================
 $themes: (
+  default: #d4d4d8,
   primary: #4827ec,
   success: #52c41a,
   warning: #faad14,

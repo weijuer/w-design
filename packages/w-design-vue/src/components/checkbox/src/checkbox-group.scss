@@ -1,9 +1,22 @@
+.w-checkbox__group-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .w-checkbox__group {
   display: flex;
-  gap: 1em;
+  gap: 0.5rem;
+
+  &-label {
+    position: relative;
+    color: #71717a;
+  }
 
   &.w-checkbox__group-vertical {
     flex-direction: column;
+    flex-wrap: wrap;
   }
 
   &.w-checkbox__group-horizontal {

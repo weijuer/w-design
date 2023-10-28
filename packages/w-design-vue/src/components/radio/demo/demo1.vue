@@ -76,7 +76,7 @@ import { ref, computed, reactive } from 'vue'
 
 const checked = ref(false)
 const disabled = ref(false)
-const themes = ['primary', 'success', 'warning', 'info', 'danger']
+const themes = ['default', 'primary', 'success', 'warning', 'info', 'danger']
 const sizes = ['small', '', 'medium', 'large']
 const plainOptions = ['Apple', 'Pear', 'Orange']
 
