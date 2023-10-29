@@ -7,6 +7,7 @@
             <th v-if="isRowSelection">
               <w-checkbox
                 ref="itemSelectAll"
+                animate
                 :type="type"
                 :model-value="isRowSelectedAll()"
                 :indeterminate="getCheckAllStatus() === 'part'"
@@ -43,15 +44,15 @@
               :data-selected="isRowSelected(row[rowKey])"
               v-for="(row, index) in rows"
               :key="row[rowKey]"
-              @click="onClick(row[rowKey])"
+              @click.self="onSelect(row, $event)"
               role="row"
             >
               <td v-if="isRowSelection">
                 <w-checkbox
                   :type="type"
+                  animate
                   :value="row[rowKey]"
                   :model-value="isRowSelected(row[rowKey])"
-                  @click.stop="null"
                   @change="onSelect(row, $event)"
                 />
               </td>
@@ -115,8 +116,7 @@ const {
   isRowSelectedAll,
   getCheckAllStatus,
   onSelectAll,
-  onSelect,
-  onClick
+  onSelect
 } = useTable(props, emit)
 </script>
 

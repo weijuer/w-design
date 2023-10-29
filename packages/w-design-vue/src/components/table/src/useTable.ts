@@ -136,42 +136,38 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
 
     const onSelect = (row: any, event: MouseEvent) => {
         console.log('onSelect', row)
-        const { rowKey } = props
-        const { checked, disabled } = event.target as HTMLInputElement;
+        const { rowKey, selectionMode } = props
+        const { disabled } = event.target as HTMLInputElement;
 
         if (disabled) {
             return;
         }
 
-        if (checked) {
-            selectedRows.value.push(row);
-            selectedKeys.value.push(row[rowKey]);
-        } else {
-            selectedRows.value = selectedRows.value.filter((item: any) => item !== row);
-            selectedKeys.value = selectedKeys.value.filter((item) => item !== row[rowKey]);
-        }
-
-        emit('select', selectedKeys.value)
-    }
-
-    const onClick = (rowKey: Numeric) => {
-        const { selectionMode } = props
+        console.log('onSeletc', disabled)
 
         const copiedSelectedKeys = selectedKeys.value.slice()
         if (selectionMode === 'single') {
-            if (copiedSelectedKeys.includes(rowKey)) {
+            if (copiedSelectedKeys.includes(row[rowKey])) {
                 selectedKeys.value = []
             } else {
-                selectedKeys.value = [rowKey]
+                selectedKeys.value = [row[rowKey]]
             }
         } else {
-            if (copiedSelectedKeys.includes(rowKey)) {
-                selectedKeys.value = copiedSelectedKeys.filter((key: Numeric) => rowKey != key)
+            if (copiedSelectedKeys.includes(row[rowKey])) {
+                selectedKeys.value = copiedSelectedKeys.filter((key: Numeric) => row[rowKey] != key)
             } else {
-                copiedSelectedKeys.push(rowKey)
+                copiedSelectedKeys.push(row[rowKey])
                 selectedKeys.value = copiedSelectedKeys
             }
         }
+
+        // if (checked) {
+        //     selectedRows.value.push(row);
+        //     selectedKeys.value.push(row[rowKey]);
+        // } else {
+        //     selectedRows.value = selectedRows.value.filter((item: any) => item !== row);
+        //     selectedKeys.value = selectedKeys.value.filter((item) => item !== row[rowKey]);
+        // }
 
         emit('select', selectedKeys.value)
     }
@@ -194,7 +190,6 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
         getCheckAllStatus,
         onSelectAll,
         onSelect,
-        onClick,
         onChange
     }
 }

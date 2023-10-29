@@ -67,6 +67,23 @@
       </w-radio-group>
     </w-space>
   </w-preview>
+
+  <w-preview title="Controlled Selection">
+    <template #desc>
+      To programmatically control row selection, use the selectedKeys prop paired with the onSelect callback. The key
+      prop from the selected rows will be passed into the callback when the row is pressed, allowing you to update state
+      accordingly.
+    </template>
+    <w-space fill>
+      <w-table
+        selection-mode="multiple"
+        :selected-keys="state.selectedKeys1"
+        @select="onSelect"
+        :columns="columns"
+        :rows="rows"
+      ></w-table>
+    </w-space>
+  </w-preview>
 </template>
 
 <script setup>
@@ -74,7 +91,8 @@ import { reactive } from 'vue'
 
 const state = reactive({
   simpleColor: 'default',
-  multipleColor: 'default'
+  multipleColor: 'default',
+  selectedKeys1: ['2']
 })
 
 const colors = ['default', 'primary', 'success', 'warning', 'info', 'danger']
@@ -119,6 +137,10 @@ const columns = [
     label: 'STATUS'
   }
 ]
+
+const onSelect = (selectedKeys) => {
+  state.selectedKeys1 = selectedKeys
+}
 </script>
 
 <style scoped lang="scss">

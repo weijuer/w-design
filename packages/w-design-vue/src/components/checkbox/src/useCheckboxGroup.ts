@@ -21,10 +21,6 @@ export const useCheckboxGroup = (props: CheckboxGroupProps, emit: SetupContext<C
         emit('change', checkedValue)
     }
 
-    const onClick = (event: MouseEvent) => {
-        emit('click', event)
-    }
-
     const computedOptions = computed(() => {
         return props.options!.map((option) => {
             if (typeof option === 'string' || typeof option === 'number') {
@@ -45,5 +41,5 @@ export const useCheckboxGroup = (props: CheckboxGroupProps, emit: SetupContext<C
 
     provide(CHECKBOXGROUP_KEY, { props, updateValue });
 
-    return { _ref, computedOptions, checkboxGroupClass, isChecked, updateValue, onClick }
+    return { _ref, computedOptions, checkboxGroupClass, isChecked, updateValue }
 }

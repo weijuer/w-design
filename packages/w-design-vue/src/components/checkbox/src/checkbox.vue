@@ -8,7 +8,6 @@
       :disabled="isDisabled"
       :autoFocus="autoFocus"
       @change="onChange"
-      @click="onClick"
       :true-value="trueValue"
       :false-value="falseValue"
       :indeterminate="indeterminate"
@@ -47,7 +46,7 @@ import { useCheckbox } from './useCheckbox'
 const props = defineProps(checkboxProps)
 const emit = defineEmits(checkboxEmits)
 
-const { _ref, checkboxClass, isChecked, isDisabled, focus, blur, onChange, onClick } = useCheckbox(props, emit)
+const { _ref, checkboxClass, isChecked, isDisabled, focus, blur, onChange } = useCheckbox(props, emit)
 
 defineExpose({ _ref, focus, blur })
 </script>

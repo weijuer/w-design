@@ -54,10 +54,6 @@ export const useCheckbox = (props: CheckboxProps, emit: SetupContext<CheckboxEmi
     }
   }
 
-  const onClick = (event: MouseEvent) => {
-    emit('click', event)
-  }
-
   const focus = () => {
     _ref.value?.focus()
   }
@@ -90,7 +86,6 @@ export const useCheckbox = (props: CheckboxProps, emit: SetupContext<CheckboxEmi
     isIndeterminate,
     focus,
     blur,
-    onChange,
-    onClick
+    onChange
   }
 }
