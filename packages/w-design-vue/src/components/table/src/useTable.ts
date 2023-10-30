@@ -135,41 +135,40 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
     }
 
     const onSelect = (row: any, event: MouseEvent) => {
-        console.log('onSelect', row)
         const { rowKey, selectionMode } = props
         const { disabled } = event.target as HTMLInputElement;
 
-        if (disabled) {
-            return;
+        // hacker for checkbox
+        if (event.type === 'click' && (event.target as HTMLElement).nodeName != 'TD') {
+            return
         }
 
-        console.log('onSeletc', disabled)
+        if (disabled) {
+            return
+        }
 
         const copiedSelectedKeys = selectedKeys.value.slice()
         if (selectionMode === 'single') {
             if (copiedSelectedKeys.includes(row[rowKey])) {
                 selectedKeys.value = []
+                selectedRows.value = []
             } else {
                 selectedKeys.value = [row[rowKey]]
+                selectedRows.value = [row]
             }
         } else {
             if (copiedSelectedKeys.includes(row[rowKey])) {
                 selectedKeys.value = copiedSelectedKeys.filter((key: Numeric) => row[rowKey] != key)
+                selectedRows.value = selectedRows.value.filter((item: any) => item[rowKey] != row[rowKey])
             } else {
-                copiedSelectedKeys.push(row[rowKey])
-                selectedKeys.value = copiedSelectedKeys
+                selectedKeys.value.push(row[rowKey])
+                selectedRows.value.push(row);
             }
         }
 
-        // if (checked) {
-        //     selectedRows.value.push(row);
-        //     selectedKeys.value.push(row[rowKey]);
-        // } else {
-        //     selectedRows.value = selectedRows.value.filter((item: any) => item !== row);
-        //     selectedKeys.value = selectedKeys.value.filter((item) => item !== row[rowKey]);
-        // }
+        console.log('onSeletc', selectedKeys, selectedRows)
 
-        emit('select', selectedKeys.value)
+        emit('select', selectedKeys.value, selectedRows.value)
     }
 
     const onChange = () => {

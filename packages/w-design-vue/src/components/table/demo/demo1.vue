@@ -43,7 +43,7 @@
         :rows="rows"
       ></w-table>
       <w-radio-group label="Selection color" orientation="horizontal" v-model="state.simpleColor">
-        <w-radio v-for="color in colors" :key="color" :type="state.simpleColor" :value="color">{{ color }}</w-radio>
+        <w-radio v-for="color in colors" :key="color" :type="color" :value="color">{{ color }}</w-radio>
       </w-radio-group>
     </w-space>
   </w-preview>
@@ -63,7 +63,7 @@
       ></w-table>
 
       <w-radio-group label="Selection color" orientation="horizontal" v-model="state.multipleColor">
-        <w-radio v-for="color in colors" :key="color" :type="state.multipleColor" :value="color">{{ color }}</w-radio>
+        <w-radio v-for="color in colors" :key="color" :type="color" :value="color">{{ color }}</w-radio>
       </w-radio-group>
     </w-space>
   </w-preview>
@@ -139,6 +139,7 @@ const columns = [
 ]
 
 const onSelect = (selectedKeys) => {
+  console.log('onSelected', selectedKeys)
   state.selectedKeys1 = selectedKeys
 }
 </script>

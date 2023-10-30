@@ -44,7 +44,7 @@
               :data-selected="isRowSelected(row[rowKey])"
               v-for="(row, index) in rows"
               :key="row[rowKey]"
-              @click.self="onSelect(row, $event)"
+              @click="onSelect(row, $event)"
               role="row"
             >
               <td v-if="isRowSelection">
@@ -79,6 +79,7 @@
             </tr>
           </template>
         </tbody>
+
         <tfoot class="w-table-tfoot" v-if="$slots.tfoot">
           <tr>
             <td :colspan="colspan">

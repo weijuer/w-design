@@ -139,6 +139,17 @@ $sizes: (
     }
   }
 
+  &__selection-single,
+  &__selection-multiple {
+    .w-table__tbody {
+      tr:hover {
+        td {
+          background-color: #f5f4f5;
+        }
+      }
+    }
+  }
+
   // themes
   @each $theme-name, $theme-value in $themes {
     @if $theme-name == 'default' {

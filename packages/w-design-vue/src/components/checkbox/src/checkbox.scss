@@ -78,6 +78,7 @@ $checkbox-sizes: (
     // box-shadow: inset 0 0 0 1px currentColor;
     border: 2px solid currentColor;
     box-sizing: border-box;
+    pointer-events: none;
     transition:
       background-color 0.2s,
       border-color 0.2s,
