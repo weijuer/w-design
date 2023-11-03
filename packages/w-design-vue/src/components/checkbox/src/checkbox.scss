@@ -72,6 +72,7 @@ $checkbox-sizes: (
     margin-right: 0.5rem;
     height: var(--w-checkbox-size);
     width: var(--w-checkbox-size);
+    font-size: 1rem;
     color: #c8c8c8;
     background-color: #fff;
     border-radius: var(--w-checkbox-radius);
@@ -119,7 +120,7 @@ $checkbox-sizes: (
       background-color: currentColor;
       transform: translate(-50%, -50%) scale(0);
       will-change: transform;
-      transition: transform 0.2s;
+      transition: transform 0.3s;
     }
 
     &::after {
@@ -131,7 +132,7 @@ $checkbox-sizes: (
       border: solid white;
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
-      transition: all 0.2s;
+      transition: transform 0.3s;
     }
   }
 

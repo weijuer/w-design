@@ -1,6 +1,6 @@
 <template>
   <div class="w-table-wrapper">
-    <table ref="tableRef" class="w-table" :class="tableClass" :style="tableStyle">
+    <table ref="tableRef" class="w-table" :class="tableClass">
       <slot>
         <thead class="w-table__thead" :class="{ hidden: hideHeader }" role="rowheader">
           <tr role="row">
@@ -10,7 +10,7 @@
                 animate
                 :type="type"
                 :model-value="isRowSelectedAll()"
-                :indeterminate="getCheckAllStatus() === 'part'"
+                :indeterminate="getIndeterminate"
                 @change="onSelectAll"
               />
               <div v-if="rowSelection.selections" class="w-row-selection">
@@ -39,21 +39,26 @@
           </tr>
           <template v-else>
             <tr
-              :class="['w-table__row', { 'is-selected': isRowSelected(row[rowKey]) }]"
+              :class="[
+                'w-table__row',
+                { 'is-row-selected': isRowSelected(row[rowKey]), 'is-row-disabled': row.disabled }
+              ]"
               :aria-selected="isRowSelected(row[rowKey])"
               :data-selected="isRowSelected(row[rowKey])"
-              v-for="(row, index) in rows"
+              v-for="(row, index) in dataSource"
               :key="row[rowKey]"
-              @click="onSelect(row, $event)"
+              @click="onSelect(row)"
               role="row"
             >
-              <td v-if="isRowSelection">
+              <td v-if="isRowSelection" role="gridcell">
                 <w-checkbox
                   :type="type"
                   animate
                   :value="row[rowKey]"
                   :model-value="isRowSelected(row[rowKey])"
-                  @change="onSelect(row, $event)"
+                  :disabled="row.disabled"
+                  @click.stop="null"
+                  @change="onSelect(row)"
                 />
               </td>
               <td
@@ -61,6 +66,7 @@
                 v-for="column in columns"
                 :title="column.ellipsis ? row[column.name] : null"
                 :class="{ sticky: column.sticky, 'w-normal-cell': column.with }"
+                role="gridcell"
               >
                 <slot
                   v-if="column.scopedSlot"
@@ -80,15 +86,22 @@
           </template>
         </tbody>
 
-        <tfoot class="w-table-tfoot" v-if="$slots.tfoot">
-          <tr>
-            <td :colspan="colspan">
+        <tfoot class="w-table-tfoot" v-if="$slots.tfoot" role="rowgroup">
+          <tr role="row">
+            <td :colspan="colspan" role="gridcell">
               <slot name="tfoot"></slot>
             </td>
           </tr>
         </tfoot>
       </slot>
     </table>
+
+    <w-pagination
+      v-if="pagination"
+      v-bind="{ ...pagination }"
+      @page-size-change="onPageSizeChange"
+      @change="onPageChange"
+    />
   </div>
 </template>
 
@@ -100,6 +113,7 @@ export default {
 
 <script lang="ts" setup>
 import WCheckbox from '../../checkbox'
+import WPagination from '../../pagination'
 import { tableEmits, tableProps } from './interface'
 import { useTable } from './useTable'
 
@@ -109,15 +123,17 @@ const emit = defineEmits(tableEmits)
 const {
   tableRef,
   tableClass,
-  tableStyle,
+  dataSource,
   colspan,
   isRowSelection,
+  getIndeterminate,
   getRowIndex,
   isRowSelected,
   isRowSelectedAll,
-  getCheckAllStatus,
   onSelectAll,
-  onSelect
+  onSelect,
+  onPageSizeChange,
+  onPageChange
 } = useTable(props, emit)
 </script>
 

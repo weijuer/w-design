@@ -22,10 +22,46 @@
     </w-space>
   </w-preview>
 
+  <w-preview title="Custom Cells">
+    <template #desc>
+      You can render any component inside the table cell. In the example below, we are rendering different components
+      according to the key of the column.
+    </template>
+    <w-space fill>
+      <w-table row-key="id" :columns="customColumns" :rows="users">
+        <template #name="{ row }">
+          <w-avatar :src="row.avatar"></w-avatar>
+          {{ row.email }}
+        </template>
+
+        <template #role="{ row }">
+          <span>{{ row.role }}</span>
+          <br />
+          <span>{{ row.team }}</span>
+        </template>
+
+        <template #status="{ row }">
+          <w-chip flat :type="statusColorMap[row.status]">{{ row.status }}</w-chip>
+        </template>
+
+        <template #actions="{ row }">
+          <w-button @click="viewUser(row)">View</w-button>
+        </template>
+      </w-table>
+    </w-space>
+  </w-preview>
+
   <w-preview title="Striped Rows">
     <template #desc> You can use the isStriped prop to render striped rows. </template>
     <w-space fill>
       <w-table striped :columns="columns" :rows="rows"></w-table>
+    </w-space>
+  </w-preview>
+
+  <w-preview title="Bordered Rows">
+    <template #desc> You can use the isStriped prop to render striped rows. </template>
+    <w-space fill>
+      <w-table bordered :columns="columns" :rows="rows"></w-table>
     </w-space>
   </w-preview>
 
@@ -84,16 +120,39 @@
       ></w-table>
     </w-space>
   </w-preview>
+
+  <w-preview title="Disabled Rows">
+    <template #desc>
+      You can disable rows by using the disabledKeys prop. This will prevent rows from being selectable as shown in the
+      example below.
+    </template>
+    <w-space fill>
+      <w-table
+        type="primary"
+        selection-mode="multiple"
+        :disabled-keys="['2', '3']"
+        :columns="columns"
+        :rows="rows"
+      ></w-table>
+    </w-space>
+  </w-preview>
 </template>
 
 <script setup>
 import { reactive } from 'vue'
+import { columns as customColumns, users } from './data'
 
 const state = reactive({
   simpleColor: 'default',
   multipleColor: 'default',
   selectedKeys1: ['2']
 })
+
+const statusColorMap = {
+  active: 'success',
+  paused: 'danger',
+  vacation: 'warning'
+}
 
 const colors = ['default', 'primary', 'success', 'warning', 'info', 'danger']
 const rows = [
@@ -138,8 +197,8 @@ const columns = [
   }
 ]
 
-const onSelect = (selectedKeys) => {
-  console.log('onSelected', selectedKeys)
+const onSelect = (selectedKeys, selectedRows) => {
+  console.log('onSelected', selectedKeys, selectedRows)
   state.selectedKeys1 = selectedKeys
 }
 </script>

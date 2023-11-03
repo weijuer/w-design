@@ -1,5 +1,5 @@
 <template>
-  <label class="w-checkbox" :class="checkboxClass">
+  <label class="w-checkbox" :class="checkboxClass" @click="onClick">
     <input
       ref="input"
       class="w-checkbox__input"
@@ -8,7 +8,6 @@
       :disabled="isDisabled"
       :autoFocus="autoFocus"
       @change="onChange"
-      @click="onClick"
       :true-value="trueValue"
       :false-value="falseValue"
       :indeterminate="indeterminate"
@@ -23,7 +22,7 @@
             stroke="currentColor"
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2"
+            stroke-width="1.5"
             d="M2 8l4 4 8-8"
           ></path>
         </svg>

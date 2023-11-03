@@ -118,6 +118,14 @@ $sizes: (
           }
         }
       }
+
+      &.is-row-disabled {
+        td {
+          cursor: not-allowed;
+          color: var(--color-contrast-low);
+          opacity: 0.5;
+        }
+      }
     }
   }
 
@@ -139,23 +147,12 @@ $sizes: (
     }
   }
 
-  &__selection-single,
-  &__selection-multiple {
-    .w-table__tbody {
-      tr:hover {
-        td {
-          background-color: #f5f4f5;
-        }
-      }
-    }
-  }
-
   // themes
   @each $theme-name, $theme-value in $themes {
     @if $theme-name == 'default' {
       .w-table__tbody {
         tr {
-          &.is-selected {
+          &.is-row-selected {
             cursor: default;
             background-color: rgba($theme-value, 0.2);
           }
@@ -165,7 +162,7 @@ $sizes: (
       &.w-table__#{$theme-name} {
         .w-table__tbody {
           tr {
-            &.is-selected {
+            &.is-row-selected {
               td {
                 cursor: default;
                 color: $theme-value;
@@ -173,6 +170,36 @@ $sizes: (
               }
             }
           }
+        }
+      }
+    }
+  }
+
+  &.is-bordered {
+    .w-table__thead {
+      tr {
+        &:first-child {
+          box-shadow: 0 2px 0 var(--color-contrast-lower);
+        }
+
+        th {
+          background-color: transparent;
+        }
+      }
+    }
+    .w-table__tbody {
+      box-shadow: 0 2px 0 var(--color-contrast-lower);
+      tr:not(:last-child) {
+        border-bottom: 1px solid var(--color-contrast-lower);
+      }
+    }
+  }
+
+  &.is-hoverable {
+    .w-table__tbody {
+      tr:hover {
+        td {
+          background-color: #f5f4f5;
         }
       }
     }

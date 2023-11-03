@@ -1,4 +1,4 @@
-import { SetupContext, computed, reactive, ref } from 'vue'
+import { SetupContext, computed, ref, watch } from 'vue'
 import { TableEmits, TableProps } from './interface'
 import { Numeric } from 'src/components/_utils'
 // import { useEventListener, useDebounceFn } from 'Hooks'
@@ -6,14 +6,10 @@ import { Numeric } from 'src/components/_utils'
 
 export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit']) => {
     const tableRef = ref<HTMLTableElement>()
-    const { defaultSelectedKeys } = props
-    const selectedKeys = ref(defaultSelectedKeys ? defaultSelectedKeys : [])
+    const { defaultSelectedKeys, selectedKeys = [], hoverable, selectionMode } = props
+    const selectedRowKeys = ref<Numeric[]>(defaultSelectedKeys ? defaultSelectedKeys : selectedKeys)
     const selectedRows = ref<any>([])
-
-    const state = reactive({
-        top: 0,
-        left: 0
-    })
+    const isHoverable = ref(hoverable ? hoverable : selectionMode)
 
     const tableClass = computed(() => {
         const { className, type, selectionMode, striped, bordered } = props
@@ -24,25 +20,23 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
             selectionMode ? 'w-table__selection-' + selectionMode : '',
             {
                 'is-striped': striped,
-                'is-bordered': bordered
+                'is-bordered': bordered,
+                'is-hoverable': isHoverable.value
             }
         ]
     })
 
-    const tableStyle = computed(() => {
-        return {
-            top: state.top + 'px',
-            left: state.left + 'px',
-        }
+    const dataSource = computed(() => {
+        const { rowKey, rows = [], disabledKeys = [] } = props
+
+        const copiedRows = [...rows]
+        return copiedRows.map(row => {
+            const disabled = disabledKeys.includes(row[rowKey])
+            return { ...row, disabled }
+        })
     })
 
-    // input类型
-    const inputType = computed(() => {
-        const { rowSelection } = props
-
-        return rowSelection?.type ? rowSelection.type : 'checkbox';
-    })
-
+    // 是否支持选择
     const isRowSelection = computed(() => {
         const { selectionMode, rowSelection, pagination } = props
         return selectionMode === 'multiple' || rowSelection && pagination.totalCount > 0;
@@ -50,50 +44,40 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
 
     // colspan值
     const colspan = computed(() => {
-        const { columns } = props
+        const { columns = [] } = props
 
-        return isRowSelection.value ? columns!.length + 1 : columns!.length;
+        return isRowSelection.value ? columns.length + 1 : columns.length;
+    })
+
+    // 全选不确定状态
+    const getIndeterminate = computed(() => {
+        if (selectedRowKeys.value.length === 0) {
+            return false;
+        }
+        const checkbleDataSource = getCheckbleDataSource();
+        return checkbleDataSource.length != selectedRowKeys.value.length
     })
 
     const getCheckbleDataSource = () => {
         const {
             rows = [],
-            rowSelection: { getCheckboxProps }
+            rowKey,
+            disabledKeys = [],
         } = props;
 
-        if (getCheckboxProps) {
+        if (disabledKeys.length > 0) {
             return rows.filter((row: any) => {
-                const { disabled } = getCheckboxProps(row);
-                return !disabled;
+                return !disabledKeys.includes(row[rowKey]);
             });
         } else {
             return rows;
         }
     }
-    const getCheckAllStatus = () => {
-        const { rowKey } = props;
 
-        const selectedRowKeys = selectedKeys.value;
-
-        if (selectedRowKeys.length === 0) {
-            return 'none';
-        }
-
-        const checkbleDataSource = getCheckbleDataSource();
-        const isAllChecked = checkbleDataSource.every((row: any) =>
-            selectedRowKeys.includes(row[rowKey])
-        );
-        const isPartChecked = checkbleDataSource.some((row: any) =>
-            selectedRowKeys.includes(row[rowKey])
-        );
-
-        if (isAllChecked) {
-            return 'all';
-        }
-
-        if (isPartChecked) {
-            return 'part';
-        }
+    const getSelectedRows = () => {
+        const { rows = [], rowKey } = props
+        const selectedKeys = selectedRowKeys.value
+        return rows.filter((row) => selectedKeys.includes(row[rowKey]))
     }
 
     const getRowIndex = (index: number) => {
@@ -103,92 +87,100 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
     }
 
     const isRowSelected = (rowKey: string) => {
-        return selectedKeys.value.includes(rowKey)
+        return selectedRowKeys.value.includes(rowKey)
     }
 
     const isRowSelectedAll = () => {
         const { rowKey } = props;
-        const selectedRowKeys = selectedKeys.value;
 
         const checkbleDataSource = getCheckbleDataSource();
         const isAllChecked = checkbleDataSource.every((row: any) =>
-            selectedRowKeys.includes(row[rowKey])
+            selectedRowKeys.value.includes(row[rowKey])
         );
 
-        return selectedRowKeys.length !== 0 && isAllChecked;
+        return selectedRowKeys.value.length !== 0 && isAllChecked;
     }
 
-    const onSelectAll = (e: MouseEvent) => {
-        const { checked } = e.target as HTMLInputElement;
+    const onSelectAll = (event: MouseEvent) => {
+        const { checked } = event.target as HTMLInputElement;
         const { rowKey } = props;
 
         const checkbleDataSource = getCheckbleDataSource();
 
         // 全选
         if (checked) {
-            selectedKeys.value = checkbleDataSource.map((row) => row[rowKey]);
+            selectedRowKeys.value = checkbleDataSource.map((row) => row[rowKey]);
         } else {
-            selectedKeys.value = [];
+            selectedRowKeys.value = [];
         }
 
-        emit('select', selectedKeys.value)
+        emit('select', selectedRowKeys.value)
     }
 
-    const onSelect = (row: any, event: MouseEvent) => {
-        const { rowKey, selectionMode } = props
-        const { disabled } = event.target as HTMLInputElement;
+    const onSelect = (row: any) => {
+        const { rowKey, selectionMode, disabledKeys = [] } = props
 
-        // hacker for checkbox
-        if (event.type === 'click' && (event.target as HTMLElement).nodeName != 'TD') {
+        const disabled = disabledKeys.includes(row[rowKey])
+
+        if (disabled || !selectionMode) {
             return
         }
 
-        if (disabled) {
-            return
-        }
-
-        const copiedSelectedKeys = selectedKeys.value.slice()
+        const copiedSelectedKeys = [...selectedRowKeys.value]
         if (selectionMode === 'single') {
             if (copiedSelectedKeys.includes(row[rowKey])) {
-                selectedKeys.value = []
+                selectedRowKeys.value = []
                 selectedRows.value = []
             } else {
-                selectedKeys.value = [row[rowKey]]
+                selectedRowKeys.value = [row[rowKey]]
                 selectedRows.value = [row]
             }
         } else {
             if (copiedSelectedKeys.includes(row[rowKey])) {
-                selectedKeys.value = copiedSelectedKeys.filter((key: Numeric) => row[rowKey] != key)
+                selectedRowKeys.value = copiedSelectedKeys.filter((key: Numeric) => row[rowKey] != key)
                 selectedRows.value = selectedRows.value.filter((item: any) => item[rowKey] != row[rowKey])
             } else {
-                selectedKeys.value.push(row[rowKey])
+                selectedRowKeys.value.push(row[rowKey])
                 selectedRows.value.push(row);
             }
         }
 
-        console.log('onSeletc', selectedKeys, selectedRows)
-
-        emit('select', selectedKeys.value, selectedRows.value)
+        emit('select', selectedRowKeys.value, selectedRows.value)
     }
+
+    const onPageSizeChange = () => {
+
+    }
+
+    const onPageChange = () => { }
 
     const onChange = () => {
         const { pagination } = props
         emit('change', pagination)
     }
 
+    watch(
+        [() => props.selectedKeys, () => defaultSelectedKeys],
+        () => {
+            selectedRows.value = getSelectedRows()
+        },
+        { immediate: true }
+    )
+
     return {
         tableRef,
         tableClass,
-        tableStyle,
-        inputType,
+        dataSource,
         colspan,
         isRowSelection,
+        getIndeterminate,
         getRowIndex,
         isRowSelected,
         isRowSelectedAll,
-        getCheckAllStatus,
         onSelectAll,
         onSelect,
+        onPageSizeChange,
+        onPageChange,
         onChange
     }
 }

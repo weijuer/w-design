@@ -23,19 +23,10 @@ export const tableProps = {
         default: 'key'
     },
     rowSelection: {
-        type: [Boolean, Object] as PropType<boolean | any>,
-        default: false
+        type: [Boolean, Object] as PropType<boolean | any>
     },
     pagination: {
-        type: [Boolean, Object] as PropType<boolean | any>,
-        default() {
-            return {
-                currentIndex: 1,
-                pageSize: 10,
-                totalCount: 0,
-                pageSizes: [10, 20, 30]
-            };
-        }
+        type: [Boolean, Object] as PropType<boolean | any>
     },
     emptyContent: {
         type: [String, Object],
@@ -47,10 +38,17 @@ export const tableProps = {
     defaultSelectedKeys: {
         type: Array as PropType<Numeric[]>
     },
+    selectedKeys: {
+        type: Array as PropType<Numeric[]>
+    },
+    disabledKeys: {
+        type: Array as PropType<Numeric[]>
+    },
     className: String,
     color: String,
     hideHeader: Boolean,
     removeWrapper: Boolean,
+    hoverable: Boolean,
     striped: Boolean,
     bordered: Boolean
 }
