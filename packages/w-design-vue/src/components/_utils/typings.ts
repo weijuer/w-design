@@ -1,6 +1,7 @@
 import { type PropType } from 'vue'
 
 export type Numeric = string | number
+export type RecordType = Record<string, any>
 
 export type Size = 'small' | 'medium' | 'large'
 export type Orientation = 'vertical' | 'horizontal'

@@ -7,6 +7,7 @@
 
 .w-radio__group {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
 
   &-label {
@@ -16,7 +17,6 @@
 
   &.w-radio__group-vertical {
     flex-direction: column;
-    flex-wrap: wrap;
   }
 
   &.w-radio__group-horizontal {

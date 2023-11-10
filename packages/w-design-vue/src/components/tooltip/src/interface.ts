@@ -32,7 +32,7 @@ export const tooltipProps = {
                 'right-end'
             ].includes(value);
         },
-        default: 'top-start'
+        default: 'top'
     },
     openDelay: {
         type: [String, Number] as PropType<Numeric>,

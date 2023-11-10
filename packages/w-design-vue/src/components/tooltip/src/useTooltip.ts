@@ -90,10 +90,10 @@ export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>
         // vertical
         if (dir === 'top') {
             state.top = targetTop + popperOffsetTop
-            state.left = left + window.scrollX + Math.abs(width - popperWidth) * 0.5
+            state.left = left + window.scrollX + (width - popperWidth) * 0.5
         } else if (dir === 'bottom') {
             state.top = targetTop + popperOffsetBottom
-            state.left = left + window.scrollX + Math.abs(width - popperWidth) * 0.5
+            state.left = left + window.scrollX + (width - popperWidth) * 0.5
         }
 
         // start-end

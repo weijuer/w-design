@@ -9,7 +9,7 @@
 
   <w-preview title="With Arrow" desc="With Arrow">
     <w-space>
-      <w-tooltip arrowed content="an arrowed tooltip is beatiful">
+      <w-tooltip arrowed content="default">
         <w-button type="default">default</w-button>
       </w-tooltip>
 

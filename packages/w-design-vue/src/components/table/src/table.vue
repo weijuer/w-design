@@ -24,8 +24,18 @@
                 </div>
               </div>
             </th>
-            <th v-for="column in columns" :key="column.key" :class="column.sticky ? 'sticky' : null">
-              {{ column.label }}
+            <th
+              v-for="column in columns"
+              :key="column.key"
+              :class="[{ sticky: column.sticky, 'w-table__thead-column-sort': column.sorter }]"
+            >
+              <div class="w-table__column-sorter" @click="onSorterClick(column)">
+                <span>{{ column.label }}</span>
+                <svg v-if="column.sorter" class="w-icon w-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
+                  <polygon class="arrow-up" points="6 0 10 5 2 5 6 0"></polygon>
+                  <polygon class="arrow-down" points="6 12 2 7 10 7 6 12"></polygon>
+                </svg>
+              </div>
             </th>
           </tr>
           <tr tabindex="-1" aria-hidden="true" class="w-table__thead-empty"></tr>
@@ -132,6 +142,7 @@ const {
   isRowSelectedAll,
   onSelectAll,
   onSelect,
+  onSorterClick,
   onPageSizeChange,
   onPageChange
 } = useTable(props, emit)

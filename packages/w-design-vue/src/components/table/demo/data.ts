@@ -1,11 +1,107 @@
-const columns = [
+type TableNormalDataType = {
+    key: string;
+    name: string;
+    age: number;
+    status: string;
+};
+
+const normalColumns = [
+    {
+        key: 'name',
+        label: 'NAME',
+        defaultSortOrder: 'descend'
+    },
+    {
+        key: 'role',
+        label: 'ROLE'
+    },
+    {
+        key: 'status',
+        label: 'STATUS'
+    }
+]
+
+const normalRows = [
+    {
+        key: '1',
+        name: 'Tony Reichert',
+        role: 'CEO',
+        status: 'Active'
+    },
+    {
+        key: '2',
+        name: 'Zoey Lang',
+        role: 'Technical Lead',
+        status: 'Paused'
+    },
+    {
+        key: '3',
+        name: 'Jane Fisher',
+        role: 'Senior Developer',
+        status: 'Active'
+    },
+    {
+        key: '4',
+        name: 'William Howard',
+        role: 'Community Manager',
+        status: 'Vacation'
+    }
+]
+
+const sortColumns = [
+    {
+        key: 'name',
+        label: 'NAME',
+        order: 'descend',
+        sorter: (a: TableNormalDataType, b: TableNormalDataType) => a.name.length - b.name.length
+    },
+    {
+        key: 'age',
+        label: 'AGE',
+        order: 'descend',
+        sorter: (a: TableNormalDataType, b: TableNormalDataType) => a.age - b.age
+    },
+    {
+        key: 'status',
+        label: 'STATUS'
+    }
+]
+
+const sortRows = [
+    {
+        key: '1',
+        name: 'Tony Reichert',
+        age: 43,
+        status: 'Active'
+    },
+    {
+        key: '2',
+        name: 'Zoey Lang',
+        age: 25,
+        status: 'Paused'
+    },
+    {
+        key: '3',
+        name: 'Jane Fisher',
+        age: 30,
+        status: 'Active'
+    },
+    {
+        key: '4',
+        name: 'William Howard',
+        age: 50,
+        status: 'Vacation'
+    }
+]
+
+const customColumns = [
     { label: "NAME", key: "name", scopedSlot: 'name' },
     { label: "ROLE", key: "role", scopedSlot: 'role' },
     { label: "STATUS", key: "status", scopedSlot: 'status' },
     { label: "ACTIONS", key: "actions", scopedSlot: 'actions' },
 ];
 
-const users = [
+const customRows = [
     {
         id: 1,
         name: "Tony Reichert",
@@ -58,4 +154,5 @@ const users = [
     },
 ];
 
-export { columns, users };
+
+export { normalColumns, sortColumns, sortRows, normalRows, customColumns, customRows };

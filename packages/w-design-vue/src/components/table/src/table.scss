@@ -59,6 +59,13 @@ $sizes: (
           border-top-right-radius: 0.5rem;
           border-bottom-right-radius: 0.5rem;
         }
+
+        &.w-table__thead-column-sort {
+          cursor: pointer;
+          &:active {
+            background-color: darken(#e1e1e1, 10%);
+          }
+        }
       }
 
       &.w-table__thead-empty {
@@ -214,4 +221,10 @@ $sizes: (
       }
     }
   }
+}
+
+.w-table__column-sorter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

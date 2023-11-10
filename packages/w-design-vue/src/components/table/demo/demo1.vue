@@ -28,16 +28,22 @@
       according to the key of the column.
     </template>
     <w-space fill>
-      <w-table row-key="id" :columns="customColumns" :rows="users">
+      <w-table row-key="id" :columns="customColumns" :rows="customRows">
         <template #name="{ row }">
-          <w-avatar :src="row.avatar"></w-avatar>
-          {{ row.email }}
+          <div class="user">
+            <w-avatar></w-avatar>
+            <div class="info">
+              <span class="name">{{ row.name }}</span>
+              <span class="desc">{{ row.email }}</span>
+            </div>
+          </div>
         </template>
 
         <template #role="{ row }">
-          <span>{{ row.role }}</span>
-          <br />
-          <span>{{ row.team }}</span>
+          <div class="info">
+            <span class="name">{{ row.role }}</span>
+            <span class="desc">{{ row.team }}</span>
+          </div>
         </template>
 
         <template #status="{ row }">
@@ -45,7 +51,17 @@
         </template>
 
         <template #actions="{ row }">
-          <w-button @click="viewUser(row)">View</w-button>
+          <div class="btn-group">
+            <w-tooltip content="Details">
+              <w-button @click="onDetailsClick(row)" icon="password-on"></w-button>
+            </w-tooltip>
+            <w-tooltip content="Edit user">
+              <w-button icon="file"></w-button>
+            </w-tooltip>
+            <w-tooltip type="danger" content="Delete user">
+              <w-button type="danger" icon="delete-filled"></w-button>
+            </w-tooltip>
+          </div>
         </template>
       </w-table>
     </w-space>
@@ -136,11 +152,27 @@
       ></w-table>
     </w-space>
   </w-preview>
+
+  <w-preview title="Sorting Rows">
+    <template #desc>
+      Table supports sorting its data when a column header is pressed. To designate that a Column should support
+      sorting, provide it with the allowsSorting prop.
+    </template>
+    <w-space fill>
+      <w-table
+        type="primary"
+        selection-mode="multiple"
+        :disabled-keys="['2', '3']"
+        :columns="sortColumns"
+        :rows="sortRows"
+      ></w-table>
+    </w-space>
+  </w-preview>
 </template>
 
 <script setup>
 import { reactive } from 'vue'
-import { columns as customColumns, users } from './data'
+import { customColumns, customRows, normalColumns as columns, normalRows as rows, sortColumns, sortRows } from './data'
 
 const state = reactive({
   simpleColor: 'default',
@@ -155,51 +187,14 @@ const statusColorMap = {
 }
 
 const colors = ['default', 'primary', 'success', 'warning', 'info', 'danger']
-const rows = [
-  {
-    key: '1',
-    name: 'Tony Reichert',
-    role: 'CEO',
-    status: 'Active'
-  },
-  {
-    key: '2',
-    name: 'Zoey Lang',
-    role: 'Technical Lead',
-    status: 'Paused'
-  },
-  {
-    key: '3',
-    name: 'Jane Fisher',
-    role: 'Senior Developer',
-    status: 'Active'
-  },
-  {
-    key: '4',
-    name: 'William Howard',
-    role: 'Community Manager',
-    status: 'Vacation'
-  }
-]
-
-const columns = [
-  {
-    key: 'name',
-    label: 'NAME'
-  },
-  {
-    key: 'role',
-    label: 'ROLE'
-  },
-  {
-    key: 'status',
-    label: 'STATUS'
-  }
-]
 
 const onSelect = (selectedKeys, selectedRows) => {
   console.log('onSelected', selectedKeys, selectedRows)
   state.selectedKeys1 = selectedKeys
+}
+
+const onDetailsClick = (row) => {
+  console.log('onDetailsClick', row)
 }
 </script>
 
@@ -218,5 +213,25 @@ const onSelect = (selectedKeys, selectedRows) => {
     width: 8rem;
     height: 4rem;
   }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+
+  .desc {
+    color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.btn-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 </style>
