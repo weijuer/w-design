@@ -2,7 +2,7 @@ type TableNormalDataType = {
     key: string;
     name: string;
     age: number;
-    status: string;
+    birthday: string;
 };
 
 const normalColumns = [
@@ -62,8 +62,9 @@ const sortColumns = [
         sorter: (a: TableNormalDataType, b: TableNormalDataType) => a.age - b.age
     },
     {
-        key: 'status',
-        label: 'STATUS'
+        key: 'birthday',
+        label: 'BIRTHDAY',
+        sorter: (a: TableNormalDataType, b: TableNormalDataType) => a.age - b.age
     }
 ]
 
@@ -72,25 +73,25 @@ const sortRows = [
         key: '1',
         name: 'Tony Reichert',
         age: 43,
-        status: 'Active'
+        birthday: '1988-01-12'
     },
     {
         key: '2',
         name: 'Zoey Lang',
         age: 25,
-        status: 'Paused'
+        birthday: '2023-01-12'
     },
     {
         key: '3',
         name: 'Jane Fisher',
         age: 30,
-        status: 'Active'
+        birthday: '1990-10-25'
     },
     {
         key: '4',
         name: 'William Howard',
         age: 50,
-        status: 'Vacation'
+        birthday: '2004-10-25'
     }
 ]
 

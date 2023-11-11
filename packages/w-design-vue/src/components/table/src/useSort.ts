@@ -1,23 +1,46 @@
+import { reactive } from 'vue'
+import { RecordType } from '../../_utils'
+export const useSorter = () => {
 
-export const useSorter = (sortInfo: any) => {
+    const sortInfo = reactive({
+        field: '',
+        order: 'descend',
+        sorter: (): any => { }
+    })
 
+    const onSorterClick = (column: RecordType) => {
+        const { key, sorter, defaultOrder = 'none' } = column
 
+        if (sortInfo.field !== key) {
+            sortInfo.field = key;
+            sortInfo.sorter = sorter;
+            sortInfo.order = defaultOrder
+        } else {
+            sortInfo.order = sortInfo.order === 'descend' ? 'ascend' : 'descend'
+        }
 
-    const sorter = (a: any, b: any) => {
+        console.log('onSorterClick', sortInfo)
+    }
+
+    const compareFn = (a: any, b: any): number => {
         const aValue = a[sortInfo.field];
         const bValue = b[sortInfo.field];
+        const direction = sortInfo.order;
 
-        console.log('sortInfo', sortInfo)
-        console.log('a Vs. b', aValue, bValue)
-
-        if (sortInfo.order === 'ascend') {
-            return aValue - bValue;
+        if (isNaN(aValue) || isNaN(bValue)) {
+            return 'ascend' == direction || 'none' == direction
+                ? aValue.toString().localeCompare(bValue)
+                : bValue.toString().localeCompare(aValue)
         } else {
-            return bValue - aValue;
+            return 'ascend' == direction || 'none' == direction
+                ? Number(aValue) - Number(bValue)
+                : Number(bValue) - Number(aValue)
         }
     }
 
     return {
-        sorter
+        sortInfo,
+        onSorterClick,
+        compareFn
     }
 }

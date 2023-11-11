@@ -62,8 +62,14 @@ $sizes: (
 
         &.w-table__thead-column-sort {
           cursor: pointer;
+
           &:active {
             background-color: darken(#e1e1e1, 10%);
+          }
+
+          &.w-table__thead-column--asc .w-table__sort-icon .arrow-up,
+          &.w-table__thead-column--desc .w-table__sort-icon .arrow-down {
+            fill: var(--color-contrast-higher);
           }
         }
       }

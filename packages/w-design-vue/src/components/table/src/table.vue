@@ -24,11 +24,7 @@
                 </div>
               </div>
             </th>
-            <th
-              v-for="column in columns"
-              :key="column.key"
-              :class="[{ sticky: column.sticky, 'w-table__thead-column-sort': column.sorter }]"
-            >
+            <th v-for="column in columns" :key="column.key" :class="getColumnClass(column)">
               <div class="w-table__column-sorter" @click="onSorterClick(column)">
                 <span>{{ column.label }}</span>
                 <svg v-if="column.sorter" class="w-icon w-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
@@ -137,6 +133,7 @@ const {
   colspan,
   isRowSelection,
   getIndeterminate,
+  getColumnClass,
   getRowIndex,
   isRowSelected,
   isRowSelectedAll,

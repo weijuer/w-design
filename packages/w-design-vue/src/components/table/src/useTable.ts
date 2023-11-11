@@ -1,9 +1,7 @@
-import { SetupContext, computed, reactive, ref, watch } from 'vue'
+import { SetupContext, computed, ref, watch } from 'vue'
 import { TableEmits, TableProps } from './interface'
-import { Numeric } from 'src/components/_utils'
+import { Numeric, RecordType } from 'src/components/_utils'
 import { useSorter } from './useSort'
-// import { useEventListener, useDebounceFn } from 'Hooks'
-import { RecordType } from '../../_utils'
 
 export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit']) => {
     const tableRef = ref<HTMLTableElement>()
@@ -13,14 +11,7 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
     const isHoverable = ref(hoverable ? hoverable : selectionMode)
 
     // sort
-    const sortInfo = reactive({
-        field: '',
-        order: 'descend',
-        sorter: (): any => { }
-    })
-    // const filterInfo = ref({})
-
-    const { sorter } = useSorter(sortInfo)
+    const { sortInfo, onSorterClick, compareFn } = useSorter()
 
     const tableClass = computed(() => {
         const { className, type, selectionMode, striped, bordered } = props
@@ -38,22 +29,16 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
     })
 
     const dataSource = computed(() => {
-        const { rowKey, rows = [], disabledKeys = [] } = props
-        const { field } = sortInfo
+        const { field, order } = sortInfo
+        const copiedRows = getTableDataSource()
 
-        const copiedRows = [...rows]
-        if (field) {
-            return copiedRows.map(row => {
-                const disabled = disabledKeys.includes(row[rowKey])
-                return { ...row, disabled }
-            }).sort(sorter)
+        console.log('dataSource:field', field)
+
+        if (field && order !== 'none') {
+            return copiedRows.sort(compareFn)
         } else {
-            return copiedRows.map(row => {
-                const disabled = disabledKeys.includes(row[rowKey])
-                return { ...row, disabled }
-            })
+            return copiedRows
         }
-
     })
 
     // 是否支持选择
@@ -77,6 +62,27 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
         const checkbleDataSource = getCheckbleDataSource();
         return checkbleDataSource.length != selectedRowKeys.value.length
     })
+
+    const getColumnClass = (column: RecordType) => {
+        const { sticky, sorter } = column
+
+        return [
+            {
+                'w-table__thead-column-sticky': sticky,
+                'w-table__thead-column-sort': sorter,
+            }
+        ]
+    }
+
+    const getTableDataSource = () => {
+        const { rowKey, rows = [], disabledKeys = [] } = props
+        const copiedRows = [...rows]
+
+        return copiedRows.map(row => {
+            const disabled = disabledKeys.includes(row[rowKey])
+            return { ...row, disabled }
+        })
+    }
 
     const getCheckbleDataSource = () => {
         const {
@@ -168,13 +174,6 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
         emit('select', selectedRowKeys.value, selectedRows.value)
     }
 
-    const onSorterClick = (column: RecordType) => {
-        const { key, sorter, defaultOrder } = column
-        sortInfo.field = key;
-        sortInfo.sorter = sorter;
-        sortInfo.order = defaultOrder;
-    }
-
     const onPageSizeChange = () => {
 
     }
@@ -201,6 +200,7 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
         colspan,
         isRowSelection,
         getIndeterminate,
+        getColumnClass,
         getRowIndex,
         isRowSelected,
         isRowSelectedAll,

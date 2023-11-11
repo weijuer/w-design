@@ -159,13 +159,7 @@
       sorting, provide it with the allowsSorting prop.
     </template>
     <w-space fill>
-      <w-table
-        type="primary"
-        selection-mode="multiple"
-        :disabled-keys="['2', '3']"
-        :columns="sortColumns"
-        :rows="sortRows"
-      ></w-table>
+      <w-table type="primary" :columns="sortColumns" :rows="sortRows"></w-table>
     </w-space>
   </w-preview>
 </template>
