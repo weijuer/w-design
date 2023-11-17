@@ -1,24 +1,24 @@
 <template>
   <w-preview title="Default" desc="Default">
-    <w-space orientation="vertical" fill>
+    <w-space orientation="vertical">
       <w-pagination v-model:current="state.current1" :total="50"></w-pagination>
     </w-space>
   </w-preview>
 
   <w-preview title="Disabled" desc="Disabled">
-    <w-space orientation="vertical" fill>
+    <w-space orientation="vertical">
       <w-pagination v-model:current="state.current2" :total="50" disabled></w-pagination>
     </w-space>
   </w-preview>
 
   <w-preview title="Simple" desc="Simple">
-    <w-space orientation="vertical" fill>
+    <w-space orientation="vertical">
       <w-pagination v-model:current="state.current3" :total="50" simple></w-pagination>
     </w-space>
   </w-preview>
 
   <w-preview title="Ellipses" desc="Ellipses">
-    <w-space orientation="vertical" fill>
+    <w-space orientation="vertical">
       <w-pagination v-model:current="state.current4" :total="100" ellipses></w-pagination>
     </w-space>
   </w-preview>

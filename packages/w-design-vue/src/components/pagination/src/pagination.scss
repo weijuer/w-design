@@ -15,7 +15,8 @@ $sizes: (
     --row-gap: var(--space-3xs);
     --column-gap: var(--space-3xs);
 
-    display: flex;
+    position: relative;
+    display: inline-flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: var(--row-gap) var(--column-gap);
@@ -32,12 +33,15 @@ $sizes: (
     width: var(--w-pagination-size);
     height: var(--w-pagination-size);
     text-decoration: none;
+    background-color: var(--color-contrast-lower);
     border-radius: var(--w-radius-medium);
     color: var(--color-contrast-high);
     user-select: none;
     cursor: pointer;
     will-change: transform;
-    transition: transform 0.2s;
+    transition:
+      transform 0.2s,
+      background-color 0.2s;
 
     &:active {
       transform: translateY(2px);
@@ -47,15 +51,25 @@ $sizes: (
       background-color: rgba(20, 21, 26, 0.1);
     }
 
-    &.w-pagination__item-selected {
-      color: var(--color-bg);
-      background-color: var(--color-contrast-higher);
-      box-shadow: var(--shadow-sm);
-    }
-
     &.w-pagination__item-disabled {
       opacity: 0.5;
       pointer-events: none;
+    }
+  }
+
+  &__item-shuttle {
+    position: absolute;
+    left: 0;
+    transform-origin: center;
+    color: var(--color-bg);
+    background-color: var(--color-contrast-higher);
+    box-shadow: var(--shadow-sm);
+    z-index: 20;
+
+    &[data-moving='true'] {
+      transition-property: transform;
+      transition-timing-function: ease;
+      transition-duration: 0.25s;
     }
   }
 
@@ -88,7 +102,7 @@ $sizes: (
   // themes
   @each $key, $val in $themes {
     &.w-pagination__#{$key} {
-      .w-pagination__item-selected {
+      .w-pagination__item-shuttle {
         background-color: $val;
       }
     }

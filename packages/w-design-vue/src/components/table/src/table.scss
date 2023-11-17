@@ -39,6 +39,7 @@ $sizes: (
   .w-table__thead {
     tr {
       th {
+        position: relative;
         padding-left: 0.75rem;
         padding-right: 0.75rem;
         height: 2.5rem;
@@ -48,7 +49,7 @@ $sizes: (
         text-align: left;
         white-space: nowrap;
         vertical-align: middle;
-        background-color: #e1e1e1;
+        background-color: #f4f4f5;
 
         &:first-child {
           border-top-left-radius: 0.5rem;
@@ -60,15 +61,35 @@ $sizes: (
           border-bottom-right-radius: 0.5rem;
         }
 
+        &:not(:last-child) {
+          &::after {
+            display: block;
+            content: '';
+            position: absolute;
+            top: 50%;
+            inset-inline-end: 0;
+            width: 1px;
+            height: 1.6em;
+            background-color: darken(#f4f4f5, 10%);
+            transform: translateY(-50%);
+            transition: background-color 0.2s;
+          }
+        }
+
         &.w-table__thead-column-sort {
           cursor: pointer;
 
           &:active {
-            background-color: darken(#e1e1e1, 10%);
+            background-color: darken(#f4f4f5, 6%);
           }
 
-          &.w-table__thead-column--asc .w-table__sort-icon .arrow-up,
-          &.w-table__thead-column--desc .w-table__sort-icon .arrow-down {
+          .w-table__sort-icon .arrow-up,
+          .w-table__sort-icon .arrow-down {
+            fill: var(--color-contrast-low);
+          }
+
+          &.w-table__thead-column--ascend .w-table__sort-icon .arrow-up,
+          &.w-table__thead-column--descend .w-table__sort-icon .arrow-down {
             fill: var(--color-contrast-higher);
           }
         }

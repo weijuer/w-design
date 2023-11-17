@@ -24,8 +24,13 @@
                 </div>
               </div>
             </th>
-            <th v-for="column in columns" :key="column.key" :class="getColumnClass(column)">
-              <div class="w-table__column-sorter" @click="onSorterClick(column)">
+            <th
+              v-for="column in columns"
+              :key="column.key"
+              :class="getColumnClass(column)"
+              @click="onSorterClick(column)"
+            >
+              <div class="w-table__column-sorter">
                 <span>{{ column.label }}</span>
                 <svg v-if="column.sorter" class="w-icon w-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
                   <polygon class="arrow-up" points="6 0 10 5 2 5 6 0"></polygon>
@@ -71,7 +76,7 @@
                 :key="column.name"
                 v-for="column in columns"
                 :title="column.ellipsis ? row[column.name] : null"
-                :class="{ sticky: column.sticky, 'w-normal-cell': column.with }"
+                :class="{ sticky: column.fixed, 'w-normal-cell': column.width }"
                 role="gridcell"
               >
                 <slot
@@ -102,12 +107,7 @@
       </slot>
     </table>
 
-    <w-pagination
-      v-if="pagination"
-      v-bind="{ ...pagination }"
-      @page-size-change="onPageSizeChange"
-      @change="onPageChange"
-    />
+    <w-pagination v-if="pagination" v-bind="{ ...pagination }" />
   </div>
 </template>
 
@@ -139,9 +139,7 @@ const {
   isRowSelectedAll,
   onSelectAll,
   onSelect,
-  onSorterClick,
-  onPageSizeChange,
-  onPageChange
+  onSorterClick
 } = useTable(props, emit)
 </script>
 

@@ -1,7 +1,7 @@
 import { SetupContext, computed, ref, watch } from 'vue'
 import { TableEmits, TableProps } from './interface'
 import { Numeric, RecordType } from 'src/components/_utils'
-import { useSorter } from './useSort'
+import { useSort } from './useSort'
 
 export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit']) => {
     const tableRef = ref<HTMLTableElement>()
@@ -11,7 +11,7 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
     const isHoverable = ref(hoverable ? hoverable : selectionMode)
 
     // sort
-    const { sortInfo, onSorterClick, compareFn } = useSorter()
+    const { sortDescriptor, onSorterClick, compareFn } = useSort()
 
     const tableClass = computed(() => {
         const { className, type, selectionMode, striped, bordered } = props
@@ -29,10 +29,8 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
     })
 
     const dataSource = computed(() => {
-        const { field, order } = sortInfo
+        const { field, order } = sortDescriptor
         const copiedRows = getTableDataSource()
-
-        console.log('dataSource:field', field)
 
         if (field && order !== 'none') {
             return copiedRows.sort(compareFn)
@@ -64,9 +62,12 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
     })
 
     const getColumnClass = (column: RecordType) => {
-        const { sticky, sorter } = column
+        const { key, sticky, sorter } = column
+        const { field, order } = sortDescriptor
 
         return [
+            'w-table__thead-column',
+            order && field === key ? `w-table__thead-column--${order}` : '',
             {
                 'w-table__thead-column-sticky': sticky,
                 'w-table__thead-column-sort': sorter,
@@ -174,17 +175,6 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
         emit('select', selectedRowKeys.value, selectedRows.value)
     }
 
-    const onPageSizeChange = () => {
-
-    }
-
-    const onPageChange = () => { }
-
-    const onChange = () => {
-        const { pagination } = props
-        emit('change', pagination)
-    }
-
     watch(
         [() => props.selectedKeys, () => defaultSelectedKeys],
         () => {
@@ -206,9 +196,6 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
         isRowSelectedAll,
         onSelectAll,
         onSelect,
-        onSorterClick,
-        onPageSizeChange,
-        onPageChange,
-        onChange
+        onSorterClick
     }
 }

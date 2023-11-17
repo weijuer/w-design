@@ -1,6 +1,12 @@
 import { SetupContext, computed, ref, watch } from 'vue'
 import { PaginationEmits, PaginationProps, PaginationItem } from './interface'
 
+const sizes = {
+    small: -0.25,
+    medium: 0,
+    large: 0.25
+}
+
 export const usePagination = (props: PaginationProps, emit: SetupContext<PaginationEmits>['emit']) => {
     const { current, defaultCurrent, pageSize, defaultPageSize } = props
     const _current = ref(current ? current : defaultCurrent)
@@ -17,6 +23,16 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
                 'is-disabled': disabled
             }
         ]
+    })
+
+    const shuttleStyle = computed(() => {
+        const { size = 'medium' } = props
+        const current = _current.value
+        const offset = 2.5 + sizes[size]
+
+        return {
+            transform: `translateX(${(current) * offset}rem) scale(1)`
+        }
     })
 
     const totalPage = computed(() => {
@@ -117,6 +133,7 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
 
     return {
         paginationClass,
+        shuttleStyle,
         pages,
         _current,
         totalPage,

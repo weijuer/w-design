@@ -1,6 +1,9 @@
 <template>
   <nav class="w-pagination" aria-label="Pagination" :class="paginationClass">
     <ol class="w-pagination__list">
+      <li v-if="!simple" class="w-pagination__item w-pagination__item-shuttle" :style="shuttleStyle">
+        <span>{{ _current }}</span>
+      </li>
       <li v-if="showControls">
         <a
           :class="['w-pagination__item', { 'w-pagination__item-disabled': disabled || isFirst }]"
@@ -64,10 +67,8 @@ import { usePagination } from './usePagination'
 const props = defineProps(paginationProps)
 const emit = defineEmits(paginationEmits)
 
-const { paginationClass, _current, totalPage, pages, isFirst, isLast, onPrev, onNext, onChange } = usePagination(
-  props,
-  emit
-)
+const { paginationClass, shuttleStyle, _current, totalPage, pages, isFirst, isLast, onPrev, onNext, onChange } =
+  usePagination(props, emit)
 </script>
 
 <style src="./pagination.scss" lang="scss" />

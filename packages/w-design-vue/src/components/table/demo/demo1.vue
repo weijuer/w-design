@@ -52,15 +52,9 @@
 
         <template #actions="{ row }">
           <div class="btn-group">
-            <w-tooltip content="Details">
-              <w-button @click="onDetailsClick(row)" icon="password-on"></w-button>
-            </w-tooltip>
-            <w-tooltip content="Edit user">
-              <w-button icon="file"></w-button>
-            </w-tooltip>
-            <w-tooltip type="danger" content="Delete user">
-              <w-button type="danger" icon="delete-filled"></w-button>
-            </w-tooltip>
+            <w-button @click="onDetailsClick(row)" icon="password-on"></w-button>
+            <w-button icon="file"></w-button>
+            <w-button type="danger" icon="delete-filled"></w-button>
           </div>
         </template>
       </w-table>
@@ -162,16 +156,52 @@
       <w-table type="primary" :columns="sortColumns" :rows="sortRows"></w-table>
     </w-space>
   </w-preview>
+
+  <w-preview title="Paginated Table">
+    <template #desc> You can use the Pagination component to paginate the table. </template>
+    <w-space fill>
+      <w-table type="primary" :columns="columns" :rows="paginatedItems" :pagination="pagination"></w-table>
+    </w-space>
+  </w-preview>
 </template>
 
 <script setup>
 import { reactive } from 'vue'
-import { customColumns, customRows, normalColumns as columns, normalRows as rows, sortColumns, sortRows } from './data'
+import {
+  customColumns,
+  customRows,
+  normalColumns as columns,
+  normalRows as rows,
+  sortColumns,
+  sortRows,
+  paginatedRows
+} from './data'
+import { computed } from 'vue'
 
 const state = reactive({
   simpleColor: 'default',
   multipleColor: 'default',
   selectedKeys1: ['2']
+})
+
+const paginatedItems = computed(() => {
+  const start = (pagination.current - 1) * pagination.pageSize
+  const end = pagination.current * pagination.pageSize
+
+  return paginatedRows.slice(start, end)
+})
+
+const pagination = reactive({
+  current: 1,
+  pageSize: 5,
+  total: paginatedRows.length,
+  onChange(current, pageSize) {
+    console.log('onChange', current, pageSize)
+    pagination.current = current
+  },
+  onPageSizeChange(current, pageSize) {
+    pagination.pageSize = pageSize
+  }
 })
 
 const statusColorMap = {

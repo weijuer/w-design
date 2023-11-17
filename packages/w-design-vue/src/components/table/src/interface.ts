@@ -3,13 +3,30 @@ import { Numeric, Type } from 'src/components/_utils'
 
 export type Trigger = 'hover' | 'click'
 export type SelectMode = 'single' | 'multiple'
+export type SortOrder = 'ascend' | 'descend'
+
+export type ColumnType = {
+    key: string;
+    label: string;
+    name: string;
+    width?: Numeric;
+    defaultSortOrder?: SortOrder;
+    order?: SortOrder | 'none';
+    sorter?: boolean | ((a: any, b: any) => number);
+    align?: 'start' | 'center' | 'end';
+    fixed?: 'start' | 'end';
+    render?: (record: any) => any;
+    scopedSlot?: string;
+    ellipsis?: boolean;
+    disabled?: boolean;
+}
 
 export const tableProps = {
     type: {
         type: String as PropType<Type>,
     },
     columns: {
-        type: Array as PropType<any[]>,
+        type: Array as PropType<ColumnType[]>,
         dafault: []
     },
     rows: {

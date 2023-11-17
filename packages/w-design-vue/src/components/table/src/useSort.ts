@@ -1,31 +1,44 @@
 import { reactive } from 'vue'
-import { RecordType } from '../../_utils'
-export const useSorter = () => {
+import { RecordType, isFunction } from '../../_utils'
 
-    const sortInfo = reactive({
+type SortDescriptor = {
+    field: string;
+    order: 'ascend' | 'descend' | 'none';
+    sorter: boolean | ((a: any, b: any) => number);
+}
+
+export const useSort = () => {
+
+    const sortDescriptor: SortDescriptor = reactive({
         field: '',
-        order: 'descend',
-        sorter: (): any => { }
+        order: 'ascend',
+        sorter: false
     })
 
     const onSorterClick = (column: RecordType) => {
-        const { key, sorter, defaultOrder = 'none' } = column
-
-        if (sortInfo.field !== key) {
-            sortInfo.field = key;
-            sortInfo.sorter = sorter;
-            sortInfo.order = defaultOrder
-        } else {
-            sortInfo.order = sortInfo.order === 'descend' ? 'ascend' : 'descend'
+        const { key, sorter, defaultOrder = 'ascend' } = column
+        if (!sorter) {
+            return null
         }
 
-        console.log('onSorterClick', sortInfo)
+        if (sortDescriptor.field !== key) {
+            sortDescriptor.field = key;
+            sortDescriptor.sorter = sorter;
+            sortDescriptor.order = defaultOrder
+        } else {
+            sortDescriptor.order = sortDescriptor.order === 'ascend' ? 'descend' : sortDescriptor.order === 'descend' ? 'none' : 'ascend'
+        }
     }
 
     const compareFn = (a: any, b: any): number => {
-        const aValue = a[sortInfo.field];
-        const bValue = b[sortInfo.field];
-        const direction = sortInfo.order;
+        const aValue = a[sortDescriptor.field];
+        const bValue = b[sortDescriptor.field];
+        const direction = sortDescriptor.order;
+
+        if (isFunction(sortDescriptor.sorter)) {
+            const cmp = sortDescriptor.sorter(aValue, bValue)
+            return 'ascend' == direction || 'none' == direction ? cmp : -cmp
+        }
 
         if (isNaN(aValue) || isNaN(bValue)) {
             return 'ascend' == direction || 'none' == direction
@@ -39,7 +52,7 @@ export const useSorter = () => {
     }
 
     return {
-        sortInfo,
+        sortDescriptor,
         onSorterClick,
         compareFn
     }
