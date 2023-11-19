@@ -9,8 +9,8 @@
         :style="modalStyle"
         :data-open="modelValue"
         :data-dismissable="dismissable"
-        @click="onOverlayClick"
       >
+        <div class="w-modal__overlay" @click="onOverlayClick"></div>
         <div class="w-modal__content" :style="bodyStyle">
           <w-button
             v-if="closable"

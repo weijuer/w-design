@@ -24,8 +24,24 @@ $placements: (
   z-index: 9999;
   overflow-x: auto;
   perspective: 800px;
-  background-color: rgba(0, 0, 0, 0.3);
-  transition: opacity 0.3s;
+  // background-color: rgba(0, 0, 0, 0.3);
+  // transition: opacity 0.3s;
+
+  .w-modal__overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s;
+
+    &-blur {
+      backdrop-filter: var(--w-modal-backdrop-blur);
+    }
+
+    &-transparent {
+      background-color: transparent;
+    }
+  }
 
   .w-modal__content {
     display: flex;

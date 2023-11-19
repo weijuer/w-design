@@ -1,5 +1,6 @@
 import { SetupContext, computed, ref, watch } from 'vue'
-import { PaginationEmits, PaginationProps, PaginationItem } from './interface'
+import { PaginationEmits, PaginationProps, PaginationItemType } from './interface'
+import { range } from '../../_utils'
 
 const sizes = {
     small: -0.25,
@@ -28,10 +29,12 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
     const shuttleStyle = computed(() => {
         const { size = 'medium' } = props
         const current = _current.value
-        const offset = 2.5 + sizes[size]
+
+        const activeIndex = pages.value.findIndex((item) => item === current)
+        const offset = (activeIndex + 1) * (2.5 + sizes[size])
 
         return {
-            transform: `translateX(${(current) * offset}rem) scale(1)`
+            transform: `translateX(${offset}rem) scale(1)`
         }
     })
 
@@ -42,54 +45,48 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
     })
 
     const pages = computed(() => {
-        const { showPageSize, ellipses } = props
-        const pageCount = totalPage.value
+        const { siblings = 1, boundaries = 1 } = props
+        const totalPageNumbers = siblings * 2 + 3 + boundaries * 2
+        const total = totalPage.value
         const current = _current.value
-        const pages: PaginationItem[] = []
 
-        let start = 1, end = pageCount
-        const isMaxSized = showPageSize < pageCount
-
-        if (isMaxSized) {
-            start = Math.max(current - Math.floor(showPageSize / 2), 1);
-            end = start + showPageSize - 1;
-
-            console.log(start, end)
-
-            if (end > pageCount) {
-                end = pageCount;
-                start = end - showPageSize + 1;
-            }
+        if (totalPageNumbers >= total) {
+            return formatRange(range(1, total))
         }
 
-        // process middle
-        for (let number = start + 1; number <= end - 1; number++) {
-            const page = { type: 'number', number, text: number, active: number === current };
-            pages.push(page);
+        const leftSiblingIndex = Math.max(current - siblings, boundaries)
+        const rightSiblingIndex = Math.min(current + siblings, total - boundaries)
+
+        const shouldShowLeftDots = leftSiblingIndex > boundaries + 2
+        const shouldShowRightDots = rightSiblingIndex < total - (boundaries + 1)
+
+        if (!shouldShowLeftDots && shouldShowRightDots) {
+            const leftItemCount = siblings * 2 + boundaries + 2
+
+            return formatRange([
+                ...range(1, leftItemCount),
+                PaginationItemType.DOTS,
+                ...range(total - (boundaries - 1), total),
+            ]);
         }
 
-        if (ellipses && isMaxSized && showPageSize > 0) {
+        if (shouldShowLeftDots && !shouldShowRightDots) {
+            const rightItemCount = boundaries + 1 + 2 * siblings
 
-            if (start > 1) {
-                const prevPages = { type: 'dot', number: start - 1, text: '•••', active: false };
-                pages.unshift(prevPages);
-            }
-
-            if (end < pageCount) {
-                const nextPages = { type: 'dot', number: end + 1, text: '•••', active: false };
-                pages.push(nextPages);
-            }
+            return formatRange([
+                ...range(1, boundaries),
+                PaginationItemType.DOTS,
+                ...range(total - rightItemCount, total),
+            ]);
         }
 
-        // process start and end
-        const startItem = { type: 'number', number: 1, text: 1, active: 1 === current }
-        const endItem = { type: 'number', number: pageCount, text: pageCount, active: pageCount === current }
-        pages.unshift(startItem)
-        pages.push(endItem)
-
-        console.log(pages)
-
-        return pages
+        return formatRange([
+            ...range(1, boundaries),
+            PaginationItemType.DOTS,
+            ...range(leftSiblingIndex, rightSiblingIndex),
+            PaginationItemType.DOTS,
+            ...range(total - boundaries + 1, total),
+        ])
     })
 
     const isFirst = computed(() => _current.value === 1)
@@ -99,10 +96,21 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
 
     const isActive = (page: number) => page === _current.value
 
+    const formatRange = (range: any[]) => {
+        // const { showControls } = props
+
+        // if (showControls) {
+        //     return [PaginationItemType.PREV, ...range, PaginationItemType.NEXT]
+        // }
+
+        return range
+    }
+
     const onPrev = () => {
         if (isPrev.value) {
             _current.value--
             emit('update:current', _current.value)
+            emit('change', _current.value, _pageSize.value)
         }
     }
 
@@ -110,7 +118,24 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
         if (isNext.value) {
             _current.value++
             emit('update:current', _current.value)
+            emit('change', _current.value, _pageSize.value)
         }
+    }
+
+    const onSpeedChange = (type: string) => {
+        const total = totalPage.value
+        let page = type === 'pre' ? _current.value - 5 : _current.value + 5
+        if (page > total) {
+            page = total
+        }
+
+        if (page < 1) {
+            page = 1
+        }
+
+        _current.value = page
+        emit('update:current', page)
+        emit('change', page, _pageSize.value)
     }
 
     const onChange = (page: number, event: Event) => {
@@ -145,6 +170,7 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
         onPrev,
         onNext,
         onChange,
+        onSpeedChange,
         onPageSizeChange
     }
 }

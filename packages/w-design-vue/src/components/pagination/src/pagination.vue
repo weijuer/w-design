@@ -23,20 +23,25 @@
         </li>
       </template>
       <template v-else>
-        <li v-for="{ type, text, number, active } of pages" :key="text">
+        <li v-for="(page, index) of pages" :key="page">
           <a
-            v-if="type === 'number'"
+            v-if="typeof page === 'number'"
             rel="nofollow"
             :class="[
               'w-pagination__item',
-              { 'w-pagination__item-selected': active, 'w-pagination__item-disabled': disabled }
+              { 'w-pagination__item-selected': isActive(page), 'w-pagination__item-disabled': disabled }
             ]"
-            :aria-label="'Go to page ' + text"
-            @click="onChange(number, $event)"
+            :aria-label="'Go to page ' + page"
+            @click="onChange(page, $event)"
           >
-            {{ text }}
+            {{ page }}
           </a>
-          <span v-else class="w-pagination__item w-pagination__item-ellipsis">•••</span>
+          <span
+            v-else
+            class="w-pagination__item w-pagination__item-ellipsis"
+            @click="onSpeedChange(index === 1 ? 'pre' : 'next')"
+            >•••</span
+          >
         </li>
       </template>
       <li v-if="showControls">
@@ -67,8 +72,20 @@ import { usePagination } from './usePagination'
 const props = defineProps(paginationProps)
 const emit = defineEmits(paginationEmits)
 
-const { paginationClass, shuttleStyle, _current, totalPage, pages, isFirst, isLast, onPrev, onNext, onChange } =
-  usePagination(props, emit)
+const {
+  paginationClass,
+  shuttleStyle,
+  _current,
+  totalPage,
+  pages,
+  isFirst,
+  isLast,
+  isActive,
+  onPrev,
+  onNext,
+  onChange,
+  onSpeedChange
+} = usePagination(props, emit)
 </script>
 
 <style src="./pagination.scss" lang="scss" />

@@ -59,7 +59,7 @@ export const modalProps = {
         default: true
     },
     content: {
-        type: [Function, String],
+        type: [Function, String] as PropType<(h: any) => void | string>,
         default: () => { }
     },
     width: [String, Number],

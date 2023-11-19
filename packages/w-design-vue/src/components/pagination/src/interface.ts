@@ -4,7 +4,7 @@ import { type Size, Type, Numeric } from 'src/components/_utils'
 export enum PaginationItemType {
     NEXT = 'next',
     PREV = 'prev',
-    DOT = 'dot',
+    DOTS = 'dot',
 }
 
 export type PaginationItem = {
@@ -37,9 +37,13 @@ export const paginationProps = {
         type: Number,
         default: 0
     },
-    showPageSize: {
+    siblings: {
         type: Number,
-        default: 5
+        default: 1
+    },
+    boundaries: {
+        type: Number,
+        default: 1
     },
     pageSizeOptions: {
         type: Array as PropType<Numeric[]>,
