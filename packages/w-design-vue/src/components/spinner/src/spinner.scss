@@ -1,0 +1,78 @@
+@use 'sass:string';
+@use 'sass:list';
+
+@import '../../_common/index';
+
+:root {
+  --w-spinner-size: 2rem;
+  --w-spinner-color: var(--color-primary);
+  --w-spinner-delay: 0.8s;
+}
+
+$sizes: (
+  small: -0.5,
+  medium: 0,
+  large: 0.5
+);
+
+.w-spinner {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &__spinner {
+    position: relative;
+    display: flex;
+    width: var(--w-spinner-size);
+    height: var(--w-spinner-size);
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-width: 3px;
+      border-color: transparent transparent var(--w-spinner-color) transparent;
+      border-radius: 9999px;
+      will-change: transform;
+    }
+
+    &::after {
+      border-style: solid;
+      animation: spinner-spin var(--w-spinner-delay) ease infinite;
+    }
+
+    &::before {
+      opacity: 0.75;
+      border-style: dotted;
+      animation: spinner-spin var(--w-spinner-delay) linear infinite;
+    }
+  }
+
+  &__label {
+    font-size: var(--w-font-size-medium);
+    line-height: var(--w-line-height-medium);
+    text-transform: capitalize;
+  }
+
+  // colors
+  @each $theme-name, $theme-value in $themes {
+    &.w-spinner__#{$theme-name} {
+      --w-spinner-color: var(--color-#{$theme-name}, #{$theme-value});
+
+      .w-spinner__label {
+        color: var(--w-spinner-color);
+      }
+    }
+  }
+
+  // sizes
+  @each $size-name, $size-value in $sizes {
+    &.w-spinner__#{$size-name} {
+      --w-spinner-size: calc(2rem + #{$size-value}rem);
+    }
+  }
+}

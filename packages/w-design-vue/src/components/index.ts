@@ -29,6 +29,7 @@ export * from './pagination'
 export * from './scroll-shadow'
 export * from './tooltip'
 export * from './table'
+export * from './spinner'
 
 // form
 export * from './checkbox'

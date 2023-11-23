@@ -19,3 +19,8 @@
   @content;
   border-color: $color;
 }
+
+@mixin border-half-radius($dir: left, $size: 4px) {
+  border-top-#{$dir}-radius: $size;
+  border-bottom-#{$dir}-radius: $size;
+}

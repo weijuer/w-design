@@ -1,6 +1,6 @@
 <template>
   <div class="w-table-wrapper">
-    <table ref="tableRef" class="w-table" :class="tableClass">
+    <table ref="tableRef" class="w-table" :class="tableClass" :data-loading="isloading">
       <slot>
         <thead class="w-table__thead" :class="{ hidden: hideHeader }" role="rowheader">
           <tr role="row">
@@ -95,6 +95,11 @@
               </td>
             </tr>
           </template>
+          <tr v-if="isloading" key="loading" role="row">
+            <td :colspan="colspan" class="w-table__loading-content">
+              <w-spinner />
+            </td>
+          </tr>
         </tbody>
 
         <tfoot class="w-table-tfoot" v-if="$slots.tfoot" role="rowgroup">
@@ -107,7 +112,9 @@
       </slot>
     </table>
 
-    <w-pagination v-if="pagination" v-bind="{ ...pagination }" />
+    <slot name="end">
+      <w-pagination v-if="pagination" v-bind="{ ...pagination }" />
+    </slot>
   </div>
 </template>
 
@@ -120,6 +127,7 @@ export default {
 <script lang="ts" setup>
 import WCheckbox from '../../checkbox'
 import WPagination from '../../pagination'
+import WSpinner from '../../spinner'
 import { tableEmits, tableProps } from './interface'
 import { useTable } from './useTable'
 
@@ -133,6 +141,7 @@ const {
   colspan,
   isRowSelection,
   getIndeterminate,
+  isloading,
   getColumnClass,
   getRowIndex,
   isRowSelected,

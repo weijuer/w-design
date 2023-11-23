@@ -14,24 +14,32 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
     const _pageSize = ref(pageSize ? pageSize : defaultPageSize)
 
     const paginationClass = computed(() => {
-        const { className, size, type, disabled } = props
+        const { className, size, type, variant, disabled, compact } = props
 
         return [
             className,
             type ? 'w-pagination__' + type : '',
             size ? 'w-pagination__' + size : '',
+            variant ? 'w-pagination__' + variant : '',
             {
-                'is-disabled': disabled
+                'is-disabled': disabled,
+                'is-compact': compact,
             }
         ]
     })
 
+    const isShowControl = computed(() => {
+        const { showControls, simple, compact } = props
+        return showControls || simple || compact
+    })
+
     const shuttleStyle = computed(() => {
-        const { size = 'medium' } = props
+        const { size = 'medium', compact } = props
         const current = _current.value
+        const gap = compact ? 0 : 0.25
 
         const activeIndex = pages.value.findIndex((item) => item === current)
-        const offset = (activeIndex + 1) * (2.5 + sizes[size])
+        const offset = (isShowControl.value ? activeIndex + 1 : activeIndex) * (2.25 + sizes[size] + gap)
 
         return {
             transform: `translateX(${offset}rem) scale(1)`
@@ -158,6 +166,7 @@ export const usePagination = (props: PaginationProps, emit: SetupContext<Paginat
 
     return {
         paginationClass,
+        isShowControl,
         shuttleStyle,
         pages,
         _current,

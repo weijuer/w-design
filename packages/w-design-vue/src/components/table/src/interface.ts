@@ -4,6 +4,7 @@ import { Numeric, Type } from 'src/components/_utils'
 export type Trigger = 'hover' | 'click'
 export type SelectMode = 'single' | 'multiple'
 export type SortOrder = 'ascend' | 'descend'
+export type LoadingState = "loading" | "sorting" | "loadingMore" | "error" | "idle" | "filtering" | "searching"
 
 export type ColumnType = {
     key: string;
@@ -60,6 +61,10 @@ export const tableProps = {
     },
     disabledKeys: {
         type: Array as PropType<Numeric[]>
+    },
+    loadingState: {
+        type: String as PropType<LoadingState>,
+        default: 'idle'
     },
     className: String,
     color: String,

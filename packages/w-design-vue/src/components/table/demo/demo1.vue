@@ -163,10 +163,25 @@
       <w-table type="primary" :columns="columns" :rows="paginatedItems" :pagination="pagination"></w-table>
     </w-space>
   </w-preview>
+
+  <w-preview title="Async Pagination">
+    <template #desc>
+      It is also possible to use the Pagination component to paginate the table asynchronously.
+    </template>
+    <w-space fill>
+      <w-table
+        type="primary"
+        :columns="columns"
+        :rows="data ?? []"
+        :loading-state="loadingState"
+        :pagination="pagination2"
+      ></w-table>
+    </w-space>
+  </w-preview>
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import {
   customColumns,
   customRows,
@@ -176,7 +191,7 @@ import {
   sortRows,
   paginatedRows
 } from './data'
-import { computed } from 'vue'
+import useAsyncList from './useAsyncList'
 
 const state = reactive({
   simpleColor: 'default',
@@ -220,6 +235,36 @@ const onSelect = (selectedKeys, selectedRows) => {
 const onDetailsClick = (row) => {
   console.log('onDetailsClick', row)
 }
+
+const { isLoading, data, loadMore } = useAsyncList({
+  async load() {
+    // 这里替换为实际的异步数据获取逻辑，例如从 API 请求数据
+    // const response = await fetch(`https://swapi.py4e.com/api/people/?page=${pagination2.current}`)
+    // const result = await response.json()
+    // return result
+
+    // 模拟数据
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        // 随机排序
+        resolve(rows.sort(() => Math.random() - 0.5))
+      }, 2000)
+    })
+  }
+})
+
+const pagination2 = reactive({
+  current: 1,
+  pageSize: 10,
+  total: 50,
+  onChange(current, pageSize) {
+    console.log('onChange', current, pageSize)
+    loadMore.value = true
+    pagination2.current = current
+  }
+})
+
+const loadingState = computed(() => (isLoading.value || data?.length === 0 ? 'loading' : 'idle'))
 </script>
 
 <style scoped lang="scss">

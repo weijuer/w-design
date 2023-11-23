@@ -14,6 +14,8 @@ export type PaginationItem = {
     active?: boolean
 }
 
+type VariantType = 'flat' | 'bordered' | 'light' | 'faded'
+
 export const paginationProps = {
     type: {
         type: String as PropType<Type>,
@@ -54,8 +56,10 @@ export const paginationProps = {
         default: () => { }
     },
     showControls: {
-        type: Boolean,
-        default: true
+        type: Boolean
+    },
+    variant: {
+        type: String as PropType<VariantType>,
     },
     current: Number,
     pageSize: Number,
@@ -65,6 +69,7 @@ export const paginationProps = {
     ellipses: Boolean,
     disabled: Boolean,
     closable: Boolean,
+    compact: Boolean,
 }
 
 export const paginationEmits = ['update:current', 'update:page-size', 'change', 'page-size-change']

@@ -61,6 +61,13 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
         return checkbleDataSource.length != selectedRowKeys.value.length
     })
 
+    const isloading = computed(() => {
+        const { loadingState } = props
+
+        console.log('loadingState', loadingState);
+        return loadingState === 'loading'
+    })
+
     const getColumnClass = (column: RecordType) => {
         const { key, sticky, sorter } = column
         const { field, order } = sortDescriptor
@@ -190,6 +197,7 @@ export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit
         colspan,
         isRowSelection,
         getIndeterminate,
+        isloading,
         getColumnClass,
         getRowIndex,
         isRowSelected,

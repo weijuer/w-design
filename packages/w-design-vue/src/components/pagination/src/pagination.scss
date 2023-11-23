@@ -11,15 +11,22 @@ $sizes: (
 );
 
 .w-pagination {
-  &__list {
-    --row-gap: var(--space-3xs);
-    --column-gap: var(--space-3xs);
+  margin: -0.625rem;
+  padding: 0.625rem;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__list {
     position: relative;
     display: inline-flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: var(--row-gap) var(--column-gap);
+    gap: 0.25rem;
 
     > li {
       display: inline-flex;
@@ -55,6 +62,27 @@ $sizes: (
       opacity: 0.5;
       pointer-events: none;
     }
+
+    &.w-pagination__item-ellipsis {
+      position: relative;
+
+      .w-icon {
+        opacity: 0;
+        position: absolute;
+      }
+
+      &:hover {
+        background-color: rgba(150, 150, 150, 0.242);
+
+        .w-icon {
+          opacity: 1;
+        }
+
+        .w-pagination__item-dots {
+          opacity: 0;
+        }
+      }
+    }
   }
 
   &__item-shuttle {
@@ -62,9 +90,13 @@ $sizes: (
     left: 0;
     transform-origin: center;
     color: var(--color-bg);
-    background-color: var(--color-contrast-higher);
+    background-color: var(--color-primary);
     box-shadow: var(--shadow-sm);
     z-index: 20;
+
+    &:hover {
+      background-color: var(--color-primary);
+    }
 
     &[data-moving='true'] {
       transition-property: transform;
@@ -90,6 +122,49 @@ $sizes: (
     padding: 0;
     border: 0;
     background-color: transparent;
+  }
+
+  &.is-compact {
+    .w-pagination__list {
+      gap: 0;
+
+      .w-pagination__item {
+        border-radius: 0;
+      }
+
+      .w-pagination__item-prev {
+        @include border-half-radius(left, var(--w-radius-medium));
+      }
+
+      .w-pagination__item-next {
+        @include border-half-radius(right, var(--w-radius-medium));
+      }
+    }
+  }
+
+  &.w-pagination__bordered {
+    .w-pagination__list {
+      .w-pagination__item:not(.w-pagination__item-shuttle) {
+        background-color: transparent;
+        border: 2px solid var(--color-contrast-lower);
+      }
+    }
+  }
+
+  &.w-pagination__light {
+    .w-pagination__list {
+      .w-pagination__item:not(.w-pagination__item-shuttle) {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &.w-pagination__faded {
+    .w-pagination__list {
+      .w-pagination__item:not(.w-pagination__item-shuttle) {
+        background-color: fade-out(hsl(240, 4%, 85%), 0.6);
+      }
+    }
   }
 
   // sizes
