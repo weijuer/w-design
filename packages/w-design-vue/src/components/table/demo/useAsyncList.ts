@@ -1,7 +1,7 @@
 import { ref, Ref, onMounted, watchEffect } from 'vue';
 
 interface UseAsyncListOptions<T, P> {
-    load: (args: P) => Promise<T[]>;
+    load: (params: P) => Promise<T[]>;
 }
 
 interface UseAsyncListReturn<T> {
@@ -26,7 +26,6 @@ const useAsyncList = <T, P>({ load }: UseAsyncListOptions<T, P>): UseAsyncListRe
 
             const result = await load(params);
             data.value = result;
-            console.log(result)
         } catch (err) {
             error.value = 'Error fetching data';
         } finally {

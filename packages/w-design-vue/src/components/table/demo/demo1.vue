@@ -169,13 +169,13 @@
       It is also possible to use the Pagination component to paginate the table asynchronously.
     </template>
     <w-space fill>
-      <w-table
-        type="primary"
-        :columns="columns"
-        :rows="data ?? []"
-        :loading-state="loadingState"
-        :pagination="pagination2"
-      ></w-table>
+      <w-table type="primary" :columns="columns" :rows="data ?? []" :loading-state="loadingState">
+        <template #end>
+          <w-space justify="center">
+            <w-pagination compact v-bind="{ ...pagination2 }" />
+          </w-space>
+        </template>
+      </w-table>
     </w-space>
   </w-preview>
 </template>
@@ -247,8 +247,8 @@ const { isLoading, data, loadMore } = useAsyncList({
     return new Promise((resolve) => {
       setTimeout(() => {
         // 随机排序
-        resolve(rows.sort(() => Math.random() - 0.5))
-      }, 2000)
+        resolve([...rows.sort(() => Math.random() - 0.5)])
+      }, 1000)
     })
   }
 })
