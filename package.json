@@ -16,8 +16,8 @@
     "docs:dev": "pnpm -C docs dev",
     "docs:build": "pnpm -C docs build",
     "docs:serve": "pnpm -C docs serve",
-    "docs:dev:packages": "vitepress dev packages",
-    "docs:build:packages": "vitepress build packages"
+    "docs:dev:packages": "vitepress dev",
+    "docs:build:packages": "vitepress build"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^6.0.1",

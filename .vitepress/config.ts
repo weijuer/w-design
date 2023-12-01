@@ -2,7 +2,7 @@ import { getFunctionsSideBar } from './utils/update'
 
 const FunctionsSideBar = await getFunctionsSideBar()
 
-console.log('FunctionsSideBar', FunctionsSideBar)
+console.log('FunctionsSideBar', JSON.stringify(FunctionsSideBar, null, 4))
 
 export default {
     title: 'W.Design',
@@ -14,21 +14,19 @@ export default {
 
     themeConfig: {
         base: './',
-        editLinks: true,
-        editLinkText: '编辑此页',
-        lastUpdated: '上次更新',
         nav: [
             { text: 'Get Started', link: '/' },
-            { text: 'W Design', link: '/w-design-vue/' },
-            { text: 'W Use', link: '/w-use/' },
+            // { text: 'W Design', link: '/w-design-vue/' },
+            { text: 'W Use', link: '/w-use/', activeMatch: '/w-use/' },
         ],
         sidebar: {
             '/w-use': FunctionsSideBar,
-            '/w-design-vue': FunctionsSideBar,
+            // '/w-design-vue': await getFunctionsSideBar('w-desing-vue'),
         }
     },
+    srcDir: './packages',
     rewrites: {
-        ':pkg/src/:fname/(.*)': ':pkg/:fname/index.md'
+        ':pkg/src/:fname/(.*)': ':pkg/:fname/index.md',
     }
 }
 

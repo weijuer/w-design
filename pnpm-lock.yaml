@@ -69,16 +69,6 @@ importers:
         specifier: ^0.34.6
         version: 0.34.6
 
-  docs:
-    dependencies:
-      '@w-design/w-design-vue':
-        specifier: workspace:^
-        version: link:../packages/w-design-vue
-    devDependencies:
-      vitepress:
-        specifier: 1.0.0-rc.31
-        version: 1.0.0-rc.31(@algolia/client-search@4.20.0)(search-insights@2.6.0)(typescript@5.3.2)
-
   examples/web:
     dependencies:
       '@w-design/icons':
