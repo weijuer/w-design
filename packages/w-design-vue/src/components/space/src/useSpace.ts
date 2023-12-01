@@ -21,7 +21,7 @@ export const useSpace = (props: SpaceProps) => {
     const spaceStyle = computed(() => {
         const { size } = props
 
-        const spaceGap = Array.isArray(size) ? size.map(addUnit).join(' ') : addUnit(size!)
+        const spaceGap = Array.isArray(size) ? size.map((i) => addUnit(i)).join(' ') : addUnit(size!)
 
         return {
             '--w-space-gap': spaceGap

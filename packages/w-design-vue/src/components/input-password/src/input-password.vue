@@ -2,7 +2,7 @@
   <w-input ref="_ref" class="w-input-password" v-bind="$attrs" :type="visible ? 'text' : 'password'">
     <template #end>
       <w-button
-        size="tiny"
+        size="small"
         class="w-input-password__btn"
         @click="onToggle"
         @mouseup="onMouseup"

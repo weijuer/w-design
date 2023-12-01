@@ -1,5 +1,6 @@
 {
   "private": true,
+  "type": "module",
   "packageManager": "pnpm@7.13.0",
   "workspaces": [
     "packages/*",
@@ -10,19 +11,35 @@
     "dev": "pnpm -F w-design-vue dev",
     "build": "pnpm -F w-design-vue build",
     "web:dev": "pnpm -F w-design-vue-example dev",
-    "play:dev": "pnpm -F playground dev",
     "icons:build": "pnpm -F icons build",
+    "play:dev": "pnpm -C playgrounds/vite dev",
     "docs:dev": "pnpm -C docs dev",
     "docs:build": "pnpm -C docs build",
-    "docs:serve": "pnpm -C docs serve"
+    "docs:serve": "pnpm -C docs serve",
+    "docs:dev:packages": "vitepress dev packages",
+    "docs:build:packages": "vitepress build packages"
   },
   "devDependencies": {
-    "esbuild": "^0.18.16",
-    "eslint": "^8.48.0",
-    "prettier": "^3.0.2",
-    "rollup": "^3.26.3",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.6"
+    "@rollup/plugin-json": "^6.0.1",
+    "@rollup/plugin-replace": "^5.0.5",
+    "@w-design/eslint-config": "workspace:^",
+    "@w-design/icons": "workspace:^",
+    "@w-design/use": "workspace:^",
+    "@w-design/w-design-vue": "workspace:^",
+    "esbuild": "^0.19.8",
+    "eslint": "^8.54.0",
+    "fs-extra": "^11.2.0",
+    "pnpm": "^8.11.0",
+    "prettier": "^3.1.0",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.6.1",
+    "rollup-plugin-dts": "^6.1.0",
+    "simple-git": "^3.21.0",
+    "typescript": "^5.3.2",
+    "vite": "^5.0.3",
+    "vite-plugin-inspect": "^0.8.0",
+    "vitepress": "1.0.0-rc.31",
+    "vitest": "^0.34.6"
   },
   "engines": {
     "node": "^14.18.0 || >=16.x",

@@ -35,7 +35,7 @@ export const useTextarea = (props: TextareaProps, emit: SetupContext<TextareaEmi
     const characterCount = computed(() => {
         const { showCount, maxlength } = props
 
-        return showCount ? `${inputValue.value?.length} / ${maxlength}` : ''
+        return showCount ? `${(inputValue.value as string)?.length} / ${maxlength}` : ''
     })
 
     const onPressEnter = (event: KeyboardEvent) => {

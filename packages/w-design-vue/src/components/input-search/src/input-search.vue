@@ -1,7 +1,7 @@
 <template>
   <w-input ref="_ref" class="w-input-search" v-bind="$attrs" :readonly="loading">
     <template #end>
-      <w-button size="tiny" :loading="loading" class="w-input-search__btn" @click="onSearch">
+      <w-button size="small" :loading="loading" class="w-input-search__btn" @click="onSearch">
         <w-icon v-if="!loading" name="search"></w-icon>
       </w-button>
     </template>
