@@ -26,7 +26,7 @@ export async function getFunctionsSideBar(name: string = 'w-use') {
     const dir = join(DIR_SRC, `${name}/src`)
     const functions = await listFunctions(dir)
 
-    console.log('functions', functions)
+    // console.log('functions', functions)
 
     const sidebar = {
         text: name,

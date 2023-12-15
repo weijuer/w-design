@@ -1,17 +1,15 @@
+import Inspect from 'vite-plugin-inspect'
+import markdownPreview from './plugins/vite-plugin-markdown-preview'
 import { getFunctionsSideBar } from './utils/update'
 
 const FunctionsSideBar = await getFunctionsSideBar()
 
-console.log('FunctionsSideBar', JSON.stringify(FunctionsSideBar, null, 4))
-
 export default {
     title: 'W.Design',
     description: 'A simple design system based on w-design',
-
-    markdown: {
-
+    vite: {
+        plugins: [Inspect(), markdownPreview()]
     },
-
     themeConfig: {
         base: './',
         nav: [

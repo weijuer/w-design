@@ -189,7 +189,8 @@ import {
   normalRows as rows,
   sortColumns,
   sortRows,
-  paginatedRows
+  paginatedRows,
+  statusColorMap
 } from './data'
 import useAsyncList from './useAsyncList'
 
@@ -218,12 +219,6 @@ const pagination = reactive({
     pagination.pageSize = pageSize
   }
 })
-
-const statusColorMap = {
-  active: 'success',
-  paused: 'danger',
-  vacation: 'warning'
-}
 
 const colors = ['default', 'primary', 'success', 'warning', 'info', 'danger']
 

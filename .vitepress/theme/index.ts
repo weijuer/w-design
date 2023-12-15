@@ -1,4 +1,5 @@
 import DefaultTheme from 'vitepress/theme'
+import { Preview } from './components'
 // custom theme layout
 // import Layout from './Layout.vue'
 import WDesign from '@w-design/w-design-vue'
@@ -12,5 +13,8 @@ export default {
     // app is the Vue 3 app instance from `createApp()`. router is VitePress'
     // custom router. `siteData`` is a `ref`` of current site-level metadata.
     app.use(WDesign)
+
+    // 
+    app.component('Preview', Preview)
   }
 }

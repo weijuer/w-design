@@ -1,5 +1,6 @@
 <template>
   <div class="w-table-wrapper">
+    <slot name="top"></slot>
     <table ref="tableRef" class="w-table" :class="tableClass" :data-loading="isloading">
       <slot>
         <thead class="w-table__thead" :class="{ hidden: hideHeader }" role="rowheader">

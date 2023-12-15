@@ -12,16 +12,16 @@
     "build": "pnpm -F w-design-vue build",
     "web:dev": "pnpm -F w-design-vue-example dev",
     "icons:build": "pnpm -F icons build",
+    "use:build": "pnpm -F use build",
     "play:dev": "pnpm -C playgrounds/vite dev",
-    "docs:dev": "pnpm -C docs dev",
-    "docs:build": "pnpm -C docs build",
-    "docs:serve": "pnpm -C docs serve",
-    "docs:dev:packages": "vitepress dev",
-    "docs:build:packages": "vitepress build"
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress serve"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^6.0.1",
     "@rollup/plugin-replace": "^5.0.5",
+    "@vitejs/plugin-vue": "^4.5.2",
     "@w-design/eslint-config": "workspace:^",
     "@w-design/icons": "workspace:^",
     "@w-design/use": "workspace:^",

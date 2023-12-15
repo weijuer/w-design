@@ -1,10 +1,10 @@
-# w-use
+---
+layout: home
+sidebar: false
 
-<script setup>
-import { useData } from 'vitepress'
+hero:
+  name: W-Use
+  text: Collection of Vue Composition Utilities
+  tagline: Collection of Essential Vue Composition Utilities
 
-// params is a Vue ref
-const { params } = useData()
-
-console.log(params.value)
-</script>
+---

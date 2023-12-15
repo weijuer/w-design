@@ -1,25 +1,33 @@
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, Ref } from 'vue';
+import { Position } from '../_utils';
+import { useEventListener } from '../useEventListener';
 
-export function useHover() {
+export interface useHoverOptions {
+    /**
+     * Callback when the dragging starts. Return `false` to prevent dragging.
+     */
+    onStart?: (position: Position, event: PointerEvent) => void | false
+
+    /**
+     * Callback during dragging.
+     */
+    onMove?: (position: Position, event: PointerEvent) => void
+
+    /**
+     * Callback when dragging end.
+     */
+    onEnd?: (position: Position, event: PointerEvent) => void
+}
+
+export function useHover<T>(target: Ref<T>, options: useHoverOptions = {}) {
     const isHovered = ref(false);
 
-    const onMouseEnter = () => {
-        isHovered.value = true;
-    };
+    const toggle = (entering: boolean) => {
+        isHovered.value = entering;
+    }
 
-    const onMouseLeave = () => {
-        isHovered.value = false;
-    };
+    useEventListener(target, 'mouseenter', () => toggle(true), { passive: true });
+    useEventListener(target, 'mouseleave', () => toggle(false), { passive: true });
 
-    onMounted(() => {
-        document.addEventListener('mouseenter', onMouseEnter);
-        document.addEventListener('mouseleave', onMouseLeave);
-    });
-
-    onBeforeUnmount(() => {
-        document.removeEventListener('mouseenter', onMouseEnter);
-        document.removeEventListener('mouseleave', onMouseLeave);
-    });
-
-    return isHovered;
+    return { isHovered };
 }

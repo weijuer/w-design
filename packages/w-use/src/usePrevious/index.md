@@ -1,9 +1,14 @@
+# usePrvious
+
+## Demo
+
+```vue preview
 <script setup lang="ts">
 import { usePrevious, useEventListener } from '@w-design/use'
 import { onMounted, ref, watchEffect } from 'vue'
 
 const eleRef = ref<HTMLElement | null>(null)
-const isInView = ref<any>(false)
+const isInView = ref(false)
 const wasInView = usePrevious(isInView)
 
 const checkInView = () => {
@@ -70,3 +75,4 @@ onMounted(() => {
   gap: 1rem;
 }
 </style>
+```
