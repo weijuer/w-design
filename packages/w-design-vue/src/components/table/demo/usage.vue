@@ -11,7 +11,7 @@
         row-key="id"
         @select="onSelect"
         type="primary"
-        :columns="usageColumns"
+        :columns="columns"
         :rows="usageData ?? []"
         :loading-state="usageLoadingState"
       >
@@ -47,20 +47,22 @@
         <template #top>
           <w-space justify="space-between">
             <w-input-search v-model="state.name" label="Name" placeholder="Name"></w-input-search>
-            <w-select v-model="state.status" :options="statusOptions"></w-select>
-            <w-select v-model="state.columns" :options="columnsOptions"></w-select>
+            <w-space>
+              <w-select v-model="state.status" :options="statusOptions"></w-select>
+              <w-select multiple v-model="state.columns" :options="columnsOptions"></w-select>
+            </w-space>
           </w-space>
           <w-space justify="space-between">
-            <div>Total {{ pagination3.total }} users</div>
+            <div>Total {{ pagination.total }} users</div>
             <div>
-              Rows per page: <w-select v-model="pagination3.pageSize" :options="pagination3.pageSizeOptions"></w-select>
+              Rows per page: <w-select v-model="pagination.pageSize" :options="pagination.pageSizeOptions"></w-select>
             </div>
           </w-space>
         </template>
         <template #end>
           <w-space justify="space-between">
-            <w-pagination v-bind="{ ...pagination3 }" />
-            <div>{{ pagination3.total }} of selected</div>
+            <w-pagination v-bind="{ ...pagination }" />
+            <div>{{ pagination.total }} of selected</div>
           </w-space>
         </template>
       </w-table>
@@ -83,19 +85,19 @@ const state = reactive({
   loading: false,
   name: '',
   status: '',
-  columns: [],
+  columns: ['id', 'name', 'email'],
   selectedKeys: []
 })
 
-const pagination3 = reactive({
+const pagination = reactive({
   current: 1,
   pageSize: 5,
   pageSizeOptions: [5, 10, 20],
-  total: 50,
+  total: usageRows.length,
   onChange(current, pageSize) {
-    console.log('onChange: pagination3', current, pageSize)
+    console.log('onChange: pagination', current, pageSize)
     usageLoadMore.value = true
-    pagination3.current = current
+    pagination.current = current
   }
 })
 
@@ -104,6 +106,8 @@ const usageLoadingState = computed(() => (isUsageLoading.value || usageData?.len
 const columnsOptions = computed(() => {
   return usageColumns.map(({ label, key: value }) => ({ label, value }))
 })
+
+const columns = computed(() => usageColumns.filter((item) => state.columns.includes(item.key)))
 
 const {
   isLoading: isUsageLoading,
@@ -114,15 +118,17 @@ const {
     // 模拟数据
     return new Promise((resolve) => {
       setTimeout(() => {
+        const start = (pagination.current - 1) * pagination.pageSize
+        const end = pagination.current * pagination.pageSize
+
         // 随机排序
-        resolve([...usageRows.sort(() => Math.random() - 0.5)])
+        resolve([...usageRows.slice(start, end)])
       }, 1000)
     })
   }
 })
 
 const onSelect = (selectedKeys, selectedRows) => {
-  console.log('onSelected', selectedKeys, selectedRows)
   state.selectedKeys = selectedKeys
 }
 </script>

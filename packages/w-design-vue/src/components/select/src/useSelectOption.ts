@@ -20,8 +20,8 @@ export const useSelectOption = (props: SelectOptionProps, emit: SetupContext<Sel
         const { value, selected } = props
 
         if (selectContext) {
-            const { mode, modelValue: selectedVal } = selectContext.props
-            return mode === 'multiple' ? selectedVal.includes(value) : selectedVal === value
+            const { multiple, modelValue: selectedVal } = selectContext.props
+            return multiple ? selectedVal.includes(value) : selectedVal === value
         } else {
             return selected
         }

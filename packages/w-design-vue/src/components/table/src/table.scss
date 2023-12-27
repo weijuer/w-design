@@ -25,7 +25,11 @@ $sizes: (
   gap: 1rem;
   border-radius: var(--w-radius-large);
   box-shadow: var(--w-shadow);
-  overflow: auto;
+
+  .w-table__main {
+    position: relative;
+    overflow: auto;
+  }
 }
 
 .w-table {
