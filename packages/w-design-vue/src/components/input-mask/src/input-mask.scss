@@ -1,0 +1,78 @@
+@import '../../_common/index';
+
+:root {
+  --w-input-mask-width: 7em;
+  --w-input-mask-btn-width: 1.75em;
+  --w-input-mask-btn-gap: 4px;
+}
+
+.w-input-mask {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--w-input-mask-btn-gap);
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+  }
+
+  &__input {
+    min-width: var(--w-input-mask-width);
+    width: var(--w-input-mask-width);
+    @extend .form-control;
+  }
+
+  &__btns {
+    position: absolute;
+    top: var(--w-input-mask-btn-gap);
+    right: var(--w-input-mask-btn-gap);
+    bottom: var(--w-input-mask-btn-gap);
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--w-input-mask-btn-gap);
+    width: var(--w-input-mask-btn-width);
+
+    .w-input-mask__btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0;
+      width: 100%;
+      height: calc(50% - var(--w-input-mask-btn-gap) / 2);
+      border: 0;
+      background-color: var(--color-contrast-lower);
+      border-radius: var(--w-radius-tiny);
+      -webkit-tap-highlight-color: transparent;
+
+      &:not(:disabled):focus,
+      &:not(:disabled):focus-visible {
+        outline: none;
+      }
+    }
+  }
+
+  &.is-splitted {
+    .w-input-mask__input {
+      order: 1;
+    }
+
+    .w-input-mask__btn {
+      padding: 0;
+      width: var(--w-input-mask-btn-width);
+      height: var(--w-input-mask-btn-width);
+      background-color: var(--color-contrast-lower);
+      border: 0;
+      flex-shrink: 0;
+
+      &-plus {
+        order: 2;
+      }
+    }
+  }
+}
