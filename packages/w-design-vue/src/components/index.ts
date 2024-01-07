@@ -39,6 +39,7 @@ export * from './input'
 export * from './input-search'
 export * from './input-password'
 export * from './input-number'
+export * from './input-mask'
 export * from './textarea'
 export * from './select'
 
