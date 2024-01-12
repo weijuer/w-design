@@ -24,8 +24,6 @@
   }
 
   &__input {
-    min-width: var(--w-input-mask-width);
-    width: var(--w-input-mask-width);
     @extend .form-control;
   }
 

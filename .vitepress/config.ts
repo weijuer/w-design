@@ -1,5 +1,6 @@
 import Inspect from 'vite-plugin-inspect'
 import markdownPreview from './plugins/vite-plugin-markdown-preview'
+// import vueCodePreview from './plugins/vite-plugin-vue-code-preview'
 import { getFunctionsSideBar } from './utils/update'
 
 const FunctionsSideBar = await getFunctionsSideBar()

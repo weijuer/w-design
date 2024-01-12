@@ -1,7 +1,7 @@
 <template>
   <w-preview title="Default" desc="Default">
     <w-space>
-      <w-input-mask v-model="state.mask1" mask="____-____" placeholder="____-____"></w-input-mask>
+      <w-input-mask v-model="state.date" mask="11/11/1111" placeholder="dd/mm/yyyy"></w-input-mask>
     </w-space>
   </w-preview>
 </template>
@@ -11,10 +11,10 @@ import { watchEffect } from 'vue'
 import { reactive } from 'vue'
 
 const state = reactive({
-  mask1: ''
+  date: ''
 })
 
 watchEffect(() => {
-  console.log('input-mask1:', state.mask1)
+  console.log('input-date:', state.date)
 })
 </script>

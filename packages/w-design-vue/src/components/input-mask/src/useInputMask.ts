@@ -1,6 +1,35 @@
-import { SetupContext, computed, nextTick, onMounted, ref } from 'vue'
+import { SetupContext, computed, nextTick, onMounted, ref, watch } from 'vue'
 import { type InputMaskProps, InputMaskEmits } from './interface'
-// import { type Numeric } from '../../_utils'
+import { Numeric, RecordType } from 'src/components/_utils'
+
+const DIGIT_RE = /^[0-9]$/;
+const LETTER_RE = /^[A-Za-zА-Яа-я]$/;
+const ALPHANNUMERIC_RE = /^[0-9A-Za-aА-Яа-я]$/;
+
+const DEFAULT_FORMAT_CHARS: RecordType = {
+    '1': {
+        // number
+        vilidate: (char: string) => DIGIT_RE.test(char)
+    },
+    'a': {
+        // letter
+        vilidate: (char: string) => LETTER_RE.test(char)
+    },
+    'A': {
+        // letter, forced upper case
+        vilidate: (char: string) => LETTER_RE.test(char),
+        transform: (char: string) => char.toUpperCase()
+    },
+    '*': {
+        // alphanumeric
+        vilidate: (char: string) => ALPHANNUMERIC_RE.test(char)
+    },
+    '#': {
+        // alphanumeric, forced upper case
+        vilidate: (char: string) => ALPHANNUMERIC_RE.test(char),
+        transform: (char: string) => char.toUpperCase()
+    }
+}
 
 export const useInputMask = (props: InputMaskProps, emit: SetupContext<InputMaskEmits>['emit']) => {
     const _ref = ref<HTMLInputElement>()
@@ -43,35 +72,63 @@ export const useInputMask = (props: InputMaskProps, emit: SetupContext<InputMask
             autocapitalize,
             autocorrect,
             onInput,
-            onKeydown: onPressEnter
+            onKeydown,
+            onCut,
+            onPaste,
         }
     })
+
+    const validate = (mask: string, char: string): boolean => {
+        if (!char || !maskPattern[mask]) {
+            return false
+        } else {
+            const charRegex = maskPattern[mask]
+            return charRegex.test(char)
+        }
+    }
+
+    const transform = (mask: string, char: string): string => {
+        switch (mask) {
+            case 'A':
+            case '#':
+                return char.toUpperCase()
+            default:
+                return char
+        }
+    }
 
     const applyMask = (value: string) => {
 
         const { mask = '', slotChar } = props
 
-        let maskedValue = '';
+        let formattedValue = '';
         let valueIndex = 0;
+        let maskIndex = 0;
 
-        for (let i = 0; i < mask.length; i++) {
-            const maskChar = mask[i];
+        while (maskIndex < mask.length) {
+            const maskChar = mask[maskIndex];
             const valueChar = value[valueIndex];
-            const validValueChar = /\d/.test(valueChar);
+            const validValueChar = validate(maskChar, valueChar);
 
-            console.log('applyMask', maskChar, valueChar)
-
-            if (maskChar === slotChar && validValueChar) {
-                maskedValue += valueChar;
-                valueIndex++;
+            if (maskChar === slotChar) {
+                if (validValueChar) {
+                    formattedValue += transform(maskChar, valueChar);
+                    valueIndex++
+                    maskIndex++
+                } else {
+                    formattedValue += maskChar;
+                    valueIndex++
+                    maskIndex++
+                }
             } else {
-                maskedValue += maskChar;
+                formattedValue += maskChar;
+                valueIndex++
+                maskIndex++
             }
         }
 
-        return maskedValue;
+        return formattedValue;
     };
-
 
 
     const updateValue = (value: string) => {
@@ -84,7 +141,6 @@ export const useInputMask = (props: InputMaskProps, emit: SetupContext<InputMask
 
             // 找到下一个可输入的位置并设置光标
             const cursorIndex = formattedValue.indexOf(slotChar);
-
 
             console.log('cursorIndex', cursorIndex);
 
@@ -102,13 +158,9 @@ export const useInputMask = (props: InputMaskProps, emit: SetupContext<InputMask
         }
     };
 
-    const onPressEnter = (event: KeyboardEvent) => {
-        if (event.key === 'Enter') {
-            emit('press-enter', event)
-        }
-
+    const onKeydown = (event: KeyboardEvent) => {
         // 处理删除键，确保删除字符后光标位置正确
-        if (event.key === 'Backspace' || event.key === 'Delete') {
+        if (['Backspace', 'Delete'].includes(event.key)) {
             nextTick(() => {
                 onInput(event as unknown as InputEvent);
             });
@@ -121,22 +173,38 @@ export const useInputMask = (props: InputMaskProps, emit: SetupContext<InputMask
     const onMousedown = (e: MouseEvent) => e.preventDefault()
     const onMouseup = (e: MouseEvent) => e.preventDefault()
 
-    // watch(
-    //     () => props.modelValue,
-    //     (modelValue) => {
-    //         inputValue.value = modelValue
-    //     },
-    // );
+    const onCut = (event: Event) => {
+        event.preventDefault()
+        if (_ref.value?.selectionStart !== _ref.value?.selectionEnd) {
+            try {
+                document.execCommand('copy');
+            } catch (err) {
+                console.error(err)
+            }
+        }
+    }
 
-    // watch(
-    //     () => inputValue.value,
-    //     (newValue) => {
-    //         // applyMask(newValue as string);
-    //     }
-    // );
+    const onPaste = (event: MouseEvent) => {
+        event.preventDefault()
+        const text = event.clipboardData.getData('text');
+        updateValue(text)
+    }
+
+    // const paste2 = async () => {
+    //     const text = await navigator.clipboard.readText();
+    //     updateValue(text)
+    // }
+
+    watch(
+        () => props.modelValue,
+        (modelValue: Numeric) => {
+            console.log('watch', modelValue)
+            inputValue.value = modelValue
+        },
+    );
 
     onMounted(() => {
-        // applyMask(inputValue.value as string);
+        applyMask(inputValue.value as string);
     });
 
     return {
@@ -145,7 +213,6 @@ export const useInputMask = (props: InputMaskProps, emit: SetupContext<InputMask
         inputMaskAttrs,
         onMousedown,
         onMouseup,
-        onPressEnter,
         blur,
         focus
     }

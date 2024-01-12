@@ -179,6 +179,8 @@ $sizes: (
   &__selection-single {
     .w-table__tbody {
       tr {
+        user-select: none;
+
         td {
           &:first-child {
             border-top-left-radius: 0.5rem;
@@ -190,6 +192,14 @@ $sizes: (
             border-bottom-right-radius: 0.5rem;
           }
         }
+      }
+    }
+  }
+
+  &__selection-multiple {
+    .w-table__tbody {
+      tr {
+        user-select: none;
       }
     }
   }

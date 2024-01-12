@@ -2,11 +2,12 @@ import type { Plugin } from 'vite'
 // create-vitepress-demo
 export default function MarkdownTransform(): Plugin {
 
-    const virtualModuleId = 'virtual:components'
+    const virtualModuleId = 'virtual:markdown-preview'
     const resolvedVirtualModuleId = '\0' + virtualModuleId
+    let codePreviewSource: string;
 
     return {
-        name: 'vite:markdown-preview',
+        name: 'markdown-preview',
         enforce: 'pre',
         resolveId(id) {
             if (id === virtualModuleId) {
@@ -15,8 +16,9 @@ export default function MarkdownTransform(): Plugin {
         },
         load(id) {
             if (id === resolvedVirtualModuleId) {
-                // return codePreviewSource
-                return `export const message = 'hello world'`
+                return codePreviewSource
+                return `const message = 'hello world'
+export default message`
             }
         },
         async transform(code, id) {
@@ -41,8 +43,12 @@ export default function MarkdownTransform(): Plugin {
                 // remove template
                 const purityTemplate = template.replace(templateTagRegx, '')
 
+                // return `<script>import Demo from 'virtual:markdown-preview';</script>`
+
                 return `${purityTemplate}\n${script}\n${style}\n${match}\n`
             })
+
+            // codePreviewSource = code
 
             return {
                 code: code,

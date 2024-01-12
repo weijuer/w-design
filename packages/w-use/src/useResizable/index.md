@@ -11,7 +11,7 @@ Make elements resizable.
 ```html
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useResizable } from '@vueuse/core'
+import { useResizable } from '@w-design/use'
 
 const el = ref<HTMLElement | null>(null)
 

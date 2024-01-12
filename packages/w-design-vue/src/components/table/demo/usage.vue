@@ -62,7 +62,7 @@
         <template #end>
           <w-space justify="space-between">
             <w-pagination v-bind="{ ...pagination }" />
-            <div>{{ pagination.total }} of selected</div>
+            <div>{{ state.selectedKeys.length }} of {{ pagination.pageSize }} selected</div>
           </w-space>
         </template>
       </w-table>
