@@ -1,4 +1,4 @@
-import { Command } from 'commander';
+import { Command } from 'commander'
 import { version } from '../package.json'
 import { getValueByKey, setValue } from './utils/file'
 
@@ -33,7 +33,7 @@ program
     .option('-f, --file <path>', 'path of the config file')
     .action(async <T extends { file: string }>(key: string, value: any, options: T) => {
         console.log('update action', key, value, options.file)
-        setValue(options.file, key, value);
+        setValue(options.file, key, value)
     })
 
 // get command
@@ -48,7 +48,7 @@ program
     })
 
 // parse
-program.parse();
+program.parse()
 
 // console.log('options', program.opts())
 

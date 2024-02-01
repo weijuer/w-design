@@ -13,5 +13,5 @@ export default {
         format: 'cjs',
     }],
     plugins: [commonjs(), json(), typescript()],
-    external: ['fs', 'path', 'commander'],
+    external: ['node:fs/promises', 'path', 'commander', 'chalk'],
 };
