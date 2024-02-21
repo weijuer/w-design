@@ -1,62 +1,67 @@
 import { SetupContext, computed, nextTick, onMounted, ref, watch } from 'vue'
 import { type InputMaskProps, InputMaskEmits } from './interface'
-import { Numeric, RecordType } from 'src/components/_utils'
+import { Numeric, RecordType, copy } from '../../_utils'
 
-const DIGIT_RE = /^[0-9]$/;
-const LETTER_RE = /^[A-Za-zА-Яа-я]$/;
-const ALPHANNUMERIC_RE = /^[0-9A-Za-aА-Яа-я]$/;
+const DIGIT_RE = /^[0-9]$/
+const LETTER_RE = /^[A-Za-zА-Яа-я]$/
+const ALPHANNUMERIC_RE = /^[0-9A-Za-aА-Яа-я]$/
 
-const DEFAULT_FORMAT_CHARS: RecordType = {
+const DEFAULT_PLACEHOLDER_CHAR = '_'
+const DEFAULT_FORMAT_CHARACTERS: RecordType = {
     '1': {
         // number
-        vilidate: (char: string) => DIGIT_RE.test(char)
+        validate: (char: string) => DIGIT_RE.test(char)
     },
-    'a': {
+    a: {
         // letter
-        vilidate: (char: string) => LETTER_RE.test(char)
+        validate: (char: string) => LETTER_RE.test(char)
     },
-    'A': {
+    A: {
         // letter, forced upper case
-        vilidate: (char: string) => LETTER_RE.test(char),
+        validate: (char: string) => LETTER_RE.test(char),
         transform: (char: string) => char.toUpperCase()
     },
     '*': {
         // alphanumeric
-        vilidate: (char: string) => ALPHANNUMERIC_RE.test(char)
+        validate: (char: string) => ALPHANNUMERIC_RE.test(char)
     },
     '#': {
         // alphanumeric, forced upper case
-        vilidate: (char: string) => ALPHANNUMERIC_RE.test(char),
+        validate: (char: string) => ALPHANNUMERIC_RE.test(char),
         transform: (char: string) => char.toUpperCase()
     }
+}
+
+function mergeFormatCharacters(formatCharacters: RecordType) {
+    const merged = copy(DEFAULT_FORMAT_CHARACTERS)
+    if (formatCharacters) {
+        const chars = Object.keys(formatCharacters)
+        for (let i = 0, l = chars.length; i < l; i++) {
+            const char = chars[i]
+            if (formatCharacters[char] == null) {
+                delete merged[char]
+            }
+            else {
+                merged[char] = formatCharacters[char]
+            }
+        }
+    }
+    return merged
 }
 
 export const useInputMask = (props: InputMaskProps, emit: SetupContext<InputMaskEmits>['emit']) => {
     const _ref = ref<HTMLInputElement>()
     const inputValue = ref(props.defaultValue ? props.defaultValue : props.modelValue)
 
-    const inputMaskClass = computed(() => {
-        const { splitted } = props
+    const placeholderChar = props.placeholderChar || DEFAULT_PLACEHOLDER_CHAR
+    let formatCharacters: RecordType = DEFAULT_FORMAT_CHARACTERS
 
-        return [
-            {
-                'is-splitted': splitted
-            }
-        ]
-    })
+    let pattern: string = ''
 
     const inputMaskAttrs = computed(() => {
-        const {
-            name,
-            mask,
-            disabled,
-            readonly,
-            autofocus,
-            placeholder,
-            autocomplete,
-            autocapitalize,
-            autocorrect
-        } = props
+        const { name, mask, disabled, readonly, autofocus, placeholder, autocomplete, autocapitalize, autocorrect } = props
+
+        console.log('inputMaskAttrs:=>inputValue', inputValue.value)
 
         return {
             ref: _ref,
@@ -74,96 +79,94 @@ export const useInputMask = (props: InputMaskProps, emit: SetupContext<InputMask
             onInput,
             onKeydown,
             onCut,
-            onPaste,
+            onPaste
         }
     })
 
-    const validate = (mask: string, char: string): boolean => {
-        if (!char || !maskPattern[mask]) {
-            return false
-        } else {
-            const charRegex = maskPattern[mask]
-            return charRegex.test(char)
-        }
-    }
+    const initMask = () => {
+        const { mask } = props
+        if (mask) {
 
-    const transform = (mask: string, char: string): string => {
-        switch (mask) {
-            case 'A':
-            case '#':
-                return char.toUpperCase()
-            default:
-                return char
-        }
-    }
-
-    const applyMask = (value: string) => {
-
-        const { mask = '', slotChar } = props
-
-        let formattedValue = '';
-        let valueIndex = 0;
-        let maskIndex = 0;
-
-        while (maskIndex < mask.length) {
-            const maskChar = mask[maskIndex];
-            const valueChar = value[valueIndex];
-            const validValueChar = validate(maskChar, valueChar);
-
-            if (maskChar === slotChar) {
-                if (validValueChar) {
-                    formattedValue += transform(maskChar, valueChar);
-                    valueIndex++
-                    maskIndex++
-                } else {
-                    formattedValue += maskChar;
-                    valueIndex++
-                    maskIndex++
-                }
+            if (typeof mask === 'string') {
+                pattern = mask
             } else {
-                formattedValue += maskChar;
+                const { formatCharacters: fcs } = mask
+                formatCharacters = copy(fcs)
+            }
+        }
+    }
+
+    const isEditableIndex = (index: number) => {
+        return formatCharacters[pattern[index]]
+    }
+
+    const isValidAtIndex = (char: string, index: number) => {
+        return formatCharacters[pattern[index]].validate(char)
+    }
+
+    const transform = (char: string, index: number) => {
+        const format = formatCharacters[pattern[index]]
+        return typeof format.transform == 'function' ? format.transform(char) : char
+    }
+
+    const formatValue = (value: string) => {
+        const valueBuffer = new Array(value.length)
+        let valueIndex = 0
+
+        for (let i = 0; i < value.length; i++) {
+            console.log('formatValue', i, valueIndex, valueBuffer)
+            if (isEditableIndex(i)) {
+                if (value.length <= valueIndex && !isValidAtIndex(value[valueIndex], i)) {
+                    break
+                }
+
+                valueBuffer[i] = value.length > valueIndex && isValidAtIndex(value[valueIndex], i) ? transform(value[i], i) : ''
                 valueIndex++
-                maskIndex++
+            } else {
+                valueBuffer[i] = pattern[i]
+
+                if (value.length > valueIndex && value[valueIndex] === pattern[i]) {
+                    valueIndex++
+                }
             }
         }
 
-        return formattedValue;
-    };
-
+        return valueBuffer
+    }
 
     const updateValue = (value: string) => {
-        const { slotChar } = props
 
-        if (value !== props.modelValue) {
-            const formattedValue = applyMask(value)
-            inputValue.value = formattedValue;
-            emit('update:modelValue', formattedValue);
+        // if (value !== props.modelValue) {
+        const formattedValue = formatValue(value)
+        inputValue.value = formattedValue.join('')
+        emit('update:modelValue', inputValue.value)
+        emit('input', inputValue.value)
 
-            // 找到下一个可输入的位置并设置光标
-            const cursorIndex = formattedValue.indexOf(slotChar);
+        // 找到下一个可输入的位置并设置光标
+        const cursorIndex = formattedValue.indexOf(placeholderChar)
 
-            console.log('cursorIndex', cursorIndex);
+        console.log('cursorIndex', cursorIndex)
 
-            if (cursorIndex !== -1 && _ref.value) {
-                nextTick(() => {
-                    _ref.value?.setSelectionRange(cursorIndex, cursorIndex);
-                });
-            }
+        if (cursorIndex !== -1 && _ref.value) {
+            nextTick(() => {
+                _ref.value?.setSelectionRange(cursorIndex, cursorIndex)
+            })
         }
+        // }
     }
 
     const onInput = (event: Event) => {
         if (!(event as KeyboardEvent).isComposing) {
-            updateValue((event.target as HTMLInputElement).value);
+            updateValue((event.target as HTMLInputElement).value)
         }
-    };
+    }
 
     const onKeydown = (event: KeyboardEvent) => {
         // 处理删除键，确保删除字符后光标位置正确
         if (['Backspace', 'Delete'].includes(event.key)) {
             nextTick(() => {
-                onInput(event as unknown as InputEvent);
-            });
+                onInput(event as unknown as InputEvent)
+            })
         }
     }
 
@@ -177,16 +180,16 @@ export const useInputMask = (props: InputMaskProps, emit: SetupContext<InputMask
         event.preventDefault()
         if (_ref.value?.selectionStart !== _ref.value?.selectionEnd) {
             try {
-                document.execCommand('copy');
+                document.execCommand('copy')
             } catch (err) {
                 console.error(err)
             }
         }
     }
 
-    const onPaste = (event: MouseEvent) => {
+    const onPaste = (event: ClipboardEvent) => {
         event.preventDefault()
-        const text = event.clipboardData.getData('text');
+        const text = event.clipboardData?.getData('text') || ''
         updateValue(text)
     }
 
@@ -200,16 +203,16 @@ export const useInputMask = (props: InputMaskProps, emit: SetupContext<InputMask
         (modelValue: Numeric) => {
             console.log('watch', modelValue)
             inputValue.value = modelValue
-        },
-    );
+        }
+    )
 
     onMounted(() => {
-        applyMask(inputValue.value as string);
-    });
+        initMask()
+        // formatValue(inputValue.value as string)
+    })
 
     return {
         _ref,
-        inputMaskClass,
         inputMaskAttrs,
         onMousedown,
         onMouseup,

@@ -13,9 +13,10 @@ export interface Pattern {
 
 export const inputMaskProps = {
     ...inputProps,
-    slotChar: {
+    placeholderChar: {
         type: String,
-        default: '#'
+        default: '_',
+        validate: (value: string) => !!(value && value.length === 1)
     },
     mask: {
         type: [String, Object],
@@ -25,7 +26,11 @@ export const inputMaskProps = {
     tokens: {
         type: Object as PropType<Pattern>
     },
-    splitted: Boolean
+    upperCase: { type: Boolean, default: true },
+    phone: Boolean,
+    currency: Boolean,
+    date: Boolean,
+    creditCard: Boolean,
 }
 
 export const inputMaskEmits = [...inputEmits, 'keydown', 'complete', 'keypress', 'paste']

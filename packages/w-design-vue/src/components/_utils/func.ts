@@ -51,3 +51,19 @@ export const sort = (a: any, b: any, direction: string, dateFormat: string = 'yy
                 ? Number(a) > Number(b)
                 : Number(b) > Number(a)
 }
+
+export function extend(dest: Record<any, any>, src: Record<any, any>) {
+    if (src) {
+        const props = Object.keys(src)
+        for (let i = 0, l = props.length; i < l; i++) {
+            dest[props[i]] = src[props[i]]
+        }
+    }
+    return dest
+}
+
+export function copy(obj: object) {
+    return extend({}, obj)
+}
+
+export const toCamelCase = (str: string): string => str.trim().replace(/[-_\s]+(.)?/g, (_, c) => (c ? c.toUpperCase() : ''))

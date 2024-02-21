@@ -81,6 +81,7 @@ export const inputProps = {
 }
 
 export const inputEmits = [
+    'input',
     'blur',
     'focus',
     'clear',

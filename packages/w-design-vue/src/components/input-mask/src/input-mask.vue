@@ -1,5 +1,5 @@
 <template>
-  <div class="w-input-mask" :class="inputMaskClass">
+  <div class="w-input-mask">
     <input class="w-input-mask__input" v-bind="inputMaskAttrs" />
   </div>
 </template>
@@ -18,7 +18,7 @@ import { useInputMask } from './useInputMask'
 const props = defineProps(inputMaskProps)
 const emit = defineEmits(inputMaskEmits)
 
-const { inputMaskClass, inputMaskAttrs } = useInputMask(props, emit)
+const { inputMaskAttrs } = useInputMask(props, emit)
 </script>
 
 <style src="./input-mask.scss" lang="scss"></style>
