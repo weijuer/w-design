@@ -29,7 +29,7 @@
     <label v-if="label" class="float-label">{{ label }}</label>
     <slot name="end"></slot>
     <span v-if="clearable" :class="['w-input__btn', { active: isClearBtn }]" role="button" @click="onClear">
-      <w-icon name="delete"></w-icon>
+      <w-icon name="close-outlined"></w-icon>
     </span>
   </div>
 </template>

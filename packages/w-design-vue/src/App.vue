@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 // import Demo from './components/table/demo/usage.vue'
-// import Demo from './components/select/demo/demo1.vue'
+// import Demo from './components/input/demo/demo1.vue'
 import Demo from './components/input-mask/demo/demo1.vue'
 </script>
 

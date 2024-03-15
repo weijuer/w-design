@@ -33,7 +33,7 @@ export const inputMaskProps = {
     creditCard: Boolean,
 }
 
-export const inputMaskEmits = [...inputEmits, 'keydown', 'complete', 'keypress', 'paste']
+export const inputMaskEmits = [...inputEmits, 'change', 'keydown', 'complete', 'keypress', 'paste']
 
 export type InputMaskProps = ExtractPropTypes<typeof inputMaskProps>
 export type InputMaskEmits = typeof inputMaskEmits

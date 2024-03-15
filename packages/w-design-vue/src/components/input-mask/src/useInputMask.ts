@@ -91,7 +91,7 @@ export const useInputMask = (props: InputMaskProps, emit: SetupContext<InputMask
                 pattern = mask
             } else {
                 const { formatCharacters: fcs } = mask
-                formatCharacters = copy(fcs)
+                formatCharacters = mergeFormatCharacters(fcs)
             }
         }
     }
@@ -110,11 +110,10 @@ export const useInputMask = (props: InputMaskProps, emit: SetupContext<InputMask
     }
 
     const formatValue = (value: string) => {
-        const valueBuffer = new Array(value.length)
+        const valueBuffer = new Array(pattern.length)
         let valueIndex = 0
 
-        for (let i = 0; i < value.length; i++) {
-            console.log('formatValue', i, valueIndex, valueBuffer)
+        for (let i = 0; i < pattern.length; i++) {
             if (isEditableIndex(i)) {
                 if (value.length <= valueIndex && !isValidAtIndex(value[valueIndex], i)) {
                     break
@@ -136,23 +135,26 @@ export const useInputMask = (props: InputMaskProps, emit: SetupContext<InputMask
 
     const updateValue = (value: string) => {
 
-        // if (value !== props.modelValue) {
-        const formattedValue = formatValue(value)
-        inputValue.value = formattedValue.join('')
-        emit('update:modelValue', inputValue.value)
-        emit('input', inputValue.value)
+        console.log('updateValue', value, props.modelValue)
 
-        // 找到下一个可输入的位置并设置光标
-        const cursorIndex = formattedValue.indexOf(placeholderChar)
+        if (value !== props.modelValue) {
+            const formattedValue = formatValue(value)
+            inputValue.value = formattedValue.join('')
 
-        console.log('cursorIndex', cursorIndex)
+            emit('update:modelValue', formattedValue.join(''))
+            emit('change', inputValue.value)
 
-        if (cursorIndex !== -1 && _ref.value) {
-            nextTick(() => {
-                _ref.value?.setSelectionRange(cursorIndex, cursorIndex)
-            })
+            // 找到下一个可输入的位置并设置光标
+            const cursorIndex = formattedValue.indexOf(placeholderChar)
+
+            // console.log('cursorIndex', cursorIndex)
+
+            if (cursorIndex !== -1 && _ref.value) {
+                nextTick(() => {
+                    _ref.value?.setSelectionRange(cursorIndex, cursorIndex)
+                })
+            }
         }
-        // }
     }
 
     const onInput = (event: Event) => {
