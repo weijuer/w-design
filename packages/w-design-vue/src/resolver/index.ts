@@ -32,7 +32,7 @@ function getSideEffects(
 ): SideEffectsInfo | undefined {
     const { importStyle = 'css' } = options
 
-    if (!importStyle)
+    if (!importStyle || partialName.endsWith('-item'))
         return
 
     if (importStyle === 'sass') {
@@ -59,13 +59,15 @@ export default function WDesignVueResolver(options: WDesignVueResolverOptions = 
             if (options.exclude && name.match(options.exclude))
                 return
             if (/^W[A-Z]/.test(name)) {
-                const compName = name.slice(2)
+                const compName = name.slice(1)
                 const partialName = kebabCase(compName)
 
                 console.log('WDesignVueResolver', compName, partialName)
 
                 return {
-                    from: `w-design-vue/es/${partialName}`,
+                    name,
+                    from: 'w-design-vue',
+                    // from: `w-design-vue/es/components/${partialName}`,
                     sideEffects: getSideEffects(partialName, options),
                 }
             }

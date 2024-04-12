@@ -62,7 +62,7 @@ export default defineConfig({
       extensions: ['vue'],
       // UI库
       resolvers: [WDesignVueResolver({
-        importStyle: css
+        importStyle: 'css'
       })],
     })
   ]

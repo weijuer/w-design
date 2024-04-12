@@ -4,6 +4,7 @@
     "title": "W Design Vue Example",
     "description": "A simple example for testing w-design-vue.",
     "private": true,
+    "type": "module",
     "author": "Weijuer<https://github.com/weijuer>",
     "scripts": {
         "dev": "vite",

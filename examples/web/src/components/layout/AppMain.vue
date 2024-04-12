@@ -1,22 +1,18 @@
 <template>
   <w-layout :has-aside="true">
     <w-aside>
-      <w-menu class="app-menu" theme="dark">
+      <!-- <w-menu class="app-menu" theme="dark">
         <w-menu-item v-for="route in routes" :key="route.name">
           <router-link :to="{ name: route.name }" class="app-router-link">
             {{ route.name }}
           </router-link>
         </w-menu-item>
-      </w-menu>
+      </w-menu> -->
     </w-aside>
     <w-layout>
       <w-breadcrumb>
         <w-breadcrumb-item v-for="(route, index) in routeList" :key="route.name">
-          <router-link
-            v-if="index != routeList.length - 1"
-            :to="route.path"
-            class="app-router-link"
-          >
+          <router-link v-if="index != routeList.length - 1" :to="route.path" class="app-router-link">
             {{ route.name }}
           </router-link>
           <template v-else>
@@ -38,33 +34,33 @@
 <script>
 export default {
   name: 'app-main'
-};
+}
 </script>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { computed, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
-const router = useRouter();
-const route = useRoute();
-const routes = ref(router.getRoutes());
-const routeList = ref([]);
-const childrenRoutes = ref([]);
+const router = useRouter()
+const route = useRoute()
+const routes = ref(router.getRoutes())
+const routeList = ref([])
+const childrenRoutes = ref([])
 
 watch(
   () => route.name,
-  (newName) => {
-    const children = routes.value.find((_route) => newName === _route.name)?.children;
-    childrenRoutes.value = children;
+  newName => {
+    const children = routes.value.find(_route => newName === _route.name)?.children
+    childrenRoutes.value = children
   }
-);
+)
 
 // 获取路由面包屑
-router.afterEach((to) => {
-  routeList.value = route.matched.filter((route) => {
-    return route.path !== '/index';
-  });
-});
+router.afterEach(to => {
+  routeList.value = route.matched.filter(route => {
+    return route.path !== '/index'
+  })
+})
 </script>
 
 <style lang="scss" scoped>

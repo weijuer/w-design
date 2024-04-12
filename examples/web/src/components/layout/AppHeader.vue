@@ -3,31 +3,31 @@
     <a class="logo" href="/">
       <span class="text-magic text-magic-tex-stroke">W-Design-Vue</span>
     </a>
-    <w-menu class="app-menu" theme="dark" mode="horizontal">
+    <!-- <w-menu class="app-menu" theme="dark" mode="horizontal">
       <w-menu-item>
         <router-link class="app-router-link" to="/"> Index </router-link>
       </w-menu-item>
       <w-menu-item>
         <router-link class="app-router-link" to="/examples"> Examples </router-link>
       </w-menu-item>
-    </w-menu>
+    </w-menu> -->
   </w-header>
 </template>
 
 <script>
 export default {
   name: 'app-header'
-};
+}
 </script>
 
 <script setup>
-import { ref } from 'vue';
-const theme = ref('moon');
+import { ref } from 'vue'
+const theme = ref('moon')
 
 // 切换暗黑模式
 function toggleTheme() {
-  theme.value = theme.value === 'moon' ? 'sun' : 'moon';
-  document.body.classList.toggle('dark-mode');
+  theme.value = theme.value === 'moon' ? 'sun' : 'moon'
+  document.body.classList.toggle('dark-mode')
 }
 </script>
 
