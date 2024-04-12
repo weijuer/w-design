@@ -1,7 +1,7 @@
 import { SetupContext, computed, provide, ref, watch } from 'vue'
 import { SelectEmits, SelectProps, isOptionGroupArray, isOptionArray, isNumbericArray, Option, SELECT_KEY } from './interface'
 import { Numeric } from '../../_utils'
-import { useEventListener } from 'Hooks'
+import { useEventListener } from '@w-design/use'
 
 export const useSelect = (props: SelectProps, emit: SetupContext<SelectEmits>['emit']) => {
     const _ref = ref<HTMLElement>()

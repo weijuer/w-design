@@ -29,8 +29,53 @@ npx msw init public
 
 # CDN
 
+1.全量UMD引入
+
 ```html
-<script src="https://unpkg.com/@w-design-vue/w-design-vue.umd.js"></script>
+<div id="app"></div>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/@w-design/w-design-vue.umd.js"></script>
+
+<script>
+    const app = Vue.createApp({
+        template: `
+        <section>
+            <w-button type="default">Default Button</w-button>
+        </section>
+        `,
+    })
+
+    app.use(wd)
+    app.mount('#app')
+</script>
+```
+
+2.  ESM部分引入
+```html
+<div id="app"></div>
+<script type="importmap">
+    {
+        "imports": {
+            "vue": "https://esm.sh/vue/dist/vue.esm-bundler.js",
+            "@w-design/w-design-vue": "./node_modules/@w-design/w-design-vue/dist/index.mjs"
+        }
+    }
+</script>
+<script type="module">
+    import { createApp } from "vue";
+    import {WButton} from "@w-design/w-design-vue";
+
+    const app = Vue.createApp({
+        template: `
+        <section>
+            <w-button type="default">Default Button</w-button>
+        </section>
+        `,
+    })
+
+    app.use(wd)
+    app.mount('#app')
+</script>
 ```
 
 # 🦄 Usage

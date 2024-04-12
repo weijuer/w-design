@@ -1,5 +1,5 @@
 import Switch from './src/switch.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WSwitch = withInstall(Switch)
 

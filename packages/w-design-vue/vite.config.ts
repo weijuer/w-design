@@ -1,9 +1,7 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import Vue from '@vitejs/plugin-vue';
-// import Components from "unplugin-vue-components/vite";
-// import AutoImport from "unplugin-auto-import/vite";
-// import dts from "vite-plugin-dts";
+import vue from '@vitejs/plugin-vue';
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
   resolve: {
@@ -22,32 +20,50 @@ export default defineConfig({
     dedupe: ['vue']
   },
   build: {
-    outDir: 'lib',
+    minify: false,
+    // css分离
+    cssCodeSplit: true,
+    rollupOptions: {
+      external: ['vue', '@w-design/utils', '@w-design/use'],
+      input: ['src/index.ts', 'src/resolver/index.ts'],
+      output: [
+        {
+          dir: 'es',
+          format: 'esm',
+          entryFileNames: '[name].js',
+          preserveModules: true,
+          preserveModulesRoot: 'src'
+        },
+        {
+          dir: 'lib',
+          format: 'cjs',
+          exports: 'named',
+          entryFileNames: '[name].js',
+          preserveModules: true,
+          preserveModulesRoot: 'src'
+        },
+        // {
+        //   dir: 'dist',
+        //   format: 'iife',
+        //   name: 'WDesignVue',
+        //   entryFileNames: '[name].js',
+        //   exports: 'named',
+        //   globals: {
+        //     vue: 'Vue'
+        //   }
+        // }
+      ]
+    },
     lib: {
       entry: 'src/index.ts',
-      name: 'w-design-vue'
+      name: 'WDesignVue',
     },
-    rollupOptions: {
-      external: ['vue'],
-      output: {
-        globals: {
-          vue: 'Vue'
-        }
-      }
-    }
   },
   plugins: [
-    // dts({
-    //   tsConfigFilePath: './tsconfig.declaration.json'
-    // }),
-    // Components({
-    //   dirs: ["src/components"],
-    //   extensions: ["vue"],
-    //   exclude: ['*/demo/*'],
-    // }),
-    // AutoImport({
-    //   imports: ["vue", "vue-router", "pinia"],
-    // }),
-    Vue()
+    vue(),
+    dts({
+      outDir: 'es',
+      tsconfigPath: './tsconfig.declaration.json'
+    }),
   ]
 });

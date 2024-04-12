@@ -1,5 +1,5 @@
 import Spinner from './src/spinner.vue';
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WSpinner = withInstall(Spinner)
 

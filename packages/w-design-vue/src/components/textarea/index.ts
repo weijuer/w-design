@@ -1,5 +1,5 @@
 import Textarea from './src/textarea.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WTextarea = withInstall(Textarea)
 

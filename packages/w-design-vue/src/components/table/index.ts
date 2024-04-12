@@ -1,5 +1,5 @@
 import Table from './src/table.vue';
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WTable = withInstall(Table)
 

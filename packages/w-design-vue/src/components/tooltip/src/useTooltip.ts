@@ -1,6 +1,6 @@
 import { SetupContext, computed, nextTick, onBeforeUnmount, reactive, ref } from 'vue'
 import { TooltipEmits, TooltipProps } from './interface'
-import { useEventListener, useDebounceFn } from 'Hooks'
+import { useEventListener, useDebounceFn } from '@w-design/use'
 import { addUnit } from '../../_utils'
 
 export const useTooltip = (props: TooltipProps, emit: SetupContext<TooltipEmits>['emit']) => {

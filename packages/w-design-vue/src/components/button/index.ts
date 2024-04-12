@@ -1,5 +1,6 @@
 import Button from './src/button.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
+export { buttonProps, type ButtonProps } from './src/interface'
 
 export const WButton = withInstall(Button)
 

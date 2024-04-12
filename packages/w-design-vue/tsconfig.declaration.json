@@ -1,17 +1,11 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-        "declaration": true,
-        "declarationDir": ".",
-        "emitDeclarationOnly": true
-    },
-    "include": [
-        "es/**/*",
-        "lib/**/*"
-    ],
-    "exclude": [
-        "node_modules",
-        "**/test/**/*",
-        "**/demo/**/*",
-    ]
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "./es",
+    "emitDeclarationOnly": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/test/**/*", "**/demo/**/*"]
 }

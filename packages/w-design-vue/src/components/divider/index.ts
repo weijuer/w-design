@@ -1,5 +1,5 @@
 import Divider from './src/divider.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WDivider = withInstall(Divider)
 

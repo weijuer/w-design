@@ -15,5 +15,6 @@ pnpm-debug.log*
 cache
 
 # Dist
+es
 lib
 dist

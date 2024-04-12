@@ -4,20 +4,20 @@
   </li>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'WMenuItemItem'
 }
 </script>
 
-<script setup>
+<script setup lang="ts">
 import { menuItemEmits, menuItemProps } from './interface'
-import { useMenuItemItem } from './useMenuItem'
+import { useMenuItem } from './useMenuItem'
 
 const props = defineProps(menuItemProps)
 const emit = defineEmits(menuItemEmits)
 
-useMenuItemItem(props, emit)
+useMenuItem(props, emit)
 </script>
 
 <style scoped lang="scss" src="./menuItem-item.scss"></style>

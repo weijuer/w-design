@@ -1,5 +1,5 @@
 import Tooltip from './src/tooltip.vue';
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WTooltip = withInstall(Tooltip)
 

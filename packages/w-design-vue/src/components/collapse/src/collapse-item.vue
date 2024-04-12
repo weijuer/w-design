@@ -27,8 +27,8 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useParent } from 'Hooks'
-import { COLLAPSE_KEY, collapseItemProps } from './interface'
+import { useParent } from '@w-design/use'
+import { COLLAPSE_KEY, collapseItemProps, CollapseProvide } from './interface'
 import collapseTransition from './collapse-transition.vue'
 import WIcon from '../../icon'
 
@@ -39,12 +39,12 @@ const contentRef = ref<HTMLElement>()
 const { parent, index } = useParent(COLLAPSE_KEY)
 
 const name = computed(() => props.name ?? index.value)
-const expanded = computed(() => parent?.isExpanded(name.value))
+const expanded = computed(() => (parent as unknown as CollapseProvide).isExpanded(name.value))
 
 const itemClass = computed(() => ({ 'w-collapse__item--expanded': expanded.value }))
 
 const toggle = (newValue = !expanded.value) => {
-  parent?.toggle(name.value, newValue)
+  ;(parent as unknown as CollapseProvide).toggle(name.value, newValue)
 }
 
 const toggleTitle = () => {

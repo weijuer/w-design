@@ -2,7 +2,7 @@ import { CSSProperties, computed, useAttrs } from 'vue'
 import { ScrollShadowProps } from './interface'
 import { addUnit } from '../../_utils'
 
-export const useScrollShadow = (props: ScrollShadowProps) => {
+export const useScrollShadow: any = (props: ScrollShadowProps) => {
 
     const scrollShadowClass = computed(() => {
         const { className, disabled, hideScrollBar } = props

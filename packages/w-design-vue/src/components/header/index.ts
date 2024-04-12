@@ -1,5 +1,5 @@
 import Header from './src/header.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WHeader = withInstall(Header)
 

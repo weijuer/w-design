@@ -1,0 +1,11 @@
+{
+  "name": "@w-design/utils",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A collection of utils for w-design",
+  "main": "index.ts",
+  "module": "index.ts",
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}

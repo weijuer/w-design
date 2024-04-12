@@ -1,5 +1,5 @@
 import InputSearch from './src/input-search.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WInputSearch = withInstall(InputSearch)
 

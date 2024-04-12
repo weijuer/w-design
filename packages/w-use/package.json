@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "description": "A Collection of essential Vue Composition Utilities",
     "main": "lib/index.cjs.js",
-    "module": "lib/index.esm.mjs",
+    "module": "src/index.ts",
     "typings": "lib/index.d.ts",
     "exports": {
         ".": {

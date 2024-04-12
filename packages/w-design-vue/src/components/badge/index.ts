@@ -1,5 +1,5 @@
 import Badge from './src/badge.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WBadge = withInstall(Badge)
 

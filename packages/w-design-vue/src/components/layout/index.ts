@@ -1,5 +1,5 @@
 import Layout from './src/layout.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WLayout = withInstall(Layout)
 

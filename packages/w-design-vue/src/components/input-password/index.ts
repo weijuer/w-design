@@ -1,5 +1,5 @@
 import InputPassword from './src/input-password.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WInputPassword = withInstall(InputPassword)
 

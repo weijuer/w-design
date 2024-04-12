@@ -1,5 +1,5 @@
 import Footer from './src/footer.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WFooter = withInstall(Footer)
 

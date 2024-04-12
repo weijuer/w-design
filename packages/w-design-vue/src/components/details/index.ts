@@ -1,5 +1,5 @@
 import Details from './src/details.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WDetails = withInstall(Details)
 

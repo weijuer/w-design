@@ -3,6 +3,8 @@ import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import pages from 'vite-plugin-pages';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import Components from 'unplugin-vue-components/vite'
+import WDesignVueResolver from 'w-design-vue/resolver'
 
 export default defineConfig({
   resolve: {
@@ -53,6 +55,15 @@ export default defineConfig({
       symbolId: 'icon-[dir]-[name]',
       inject: 'body-first',
       customDomId: '__w_svg_icons__'
+    }),
+    Components({
+      // 自己组件
+      dirs: ['src/components'],
+      extensions: ['vue'],
+      // UI库
+      resolvers: [WDesignVueResolver({
+        importStyle: css
+      })],
     })
   ]
 });

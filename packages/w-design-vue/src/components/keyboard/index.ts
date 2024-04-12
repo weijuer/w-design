@@ -1,5 +1,5 @@
 import Keyboard from './src/keyboard.vue';
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WKbd = withInstall(Keyboard)
 

@@ -1,5 +1,5 @@
 import Preview from './src/preview.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WPreview = withInstall(Preview)
 

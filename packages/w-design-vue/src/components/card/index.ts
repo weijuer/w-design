@@ -1,5 +1,5 @@
 import Card from './src/card.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WCard = withInstall(Card)
 

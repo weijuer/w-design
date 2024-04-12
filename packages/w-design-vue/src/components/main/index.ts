@@ -1,5 +1,5 @@
 import Main from './src/main.vue'
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WMain = withInstall(Main)
 

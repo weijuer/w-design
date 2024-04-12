@@ -1,7 +1,7 @@
 import { SetupContext, computed, ref } from 'vue'
 import { type ModalProps, ModalEmits } from './interface'
 import { addUnit } from '../../_utils'
-import { useEventListener } from 'Hooks'
+import { useEventListener } from '@w-design/use'
 
 export const useModal = (props: ModalProps, emit: SetupContext<ModalEmits>['emit']) => {
     const _ref = ref<HTMLElement>()

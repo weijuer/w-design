@@ -1,5 +1,5 @@
 import ScrollShadow from './src/scroll-shadow.vue';
-import { withInstall } from '../../utils'
+import { withInstall } from '@w-design/utils'
 
 export const WScrollShadow = withInstall(ScrollShadow)
 
