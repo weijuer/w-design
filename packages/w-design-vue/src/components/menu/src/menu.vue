@@ -1,12 +1,14 @@
 <template>
-  <ul role="menu" :class="['w-menu', mode ? 'w-menu-' + mode : '', theme ? 'w-menu-' + theme : '']">
-    <slot></slot>
-  </ul>
+  <nav class="w-menus" aria-label="Menus">
+    <ul role="menu" :class="['w-menu', mode ? 'w-menu-' + mode : '', theme ? 'w-menu-' + theme : '']">
+      <slot></slot>
+    </ul>
+  </nav>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'WMenu',
+  name: 'w-menu',
   inheritAttrs: false
 }
 </script>
@@ -21,4 +23,4 @@ const emit = defineEmits(menuEmits)
 useMenu(props, emit)
 </script>
 
-<style scoped lang="scss" src="./menu.scss"></style>
+<style lang="scss" src="./menu.scss"></style>

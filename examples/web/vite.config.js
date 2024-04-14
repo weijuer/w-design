@@ -57,6 +57,7 @@ export default defineConfig({
       customDomId: '__w_svg_icons__'
     }),
     Components({
+      dts: false,
       // 自己组件
       dirs: ['src/components'],
       extensions: ['vue'],

@@ -24,18 +24,8 @@ export const menuProps = {
 }
 
 export const menuItemProps = {
-    node: {
-        type: [String, Number],
-        required: true
-    },
-    title: {
-        type: [String, Object],
-        required: true
-    },
-    icon: {
-        type: Object,
-        default: null
-    },
+    title: String,
+    icon: String,
     expanded: Boolean,
     selected: Boolean,
     checked: Boolean,

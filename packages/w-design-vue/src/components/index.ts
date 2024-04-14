@@ -8,6 +8,7 @@ export * from './footer'
 export * from './guide'
 export * from './divider'
 export * from './space'
+export * from './menu'
 
 // componenets
 export * from './avatar'
