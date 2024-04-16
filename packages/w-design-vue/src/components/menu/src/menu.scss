@@ -1,8 +1,11 @@
+@use '_Common/_var';
+
 :root {
   --menu-item-height: 32px;
 }
 
-.w-menu {
+.w-menu__list {
+  // padding-inline-start: 22px;
   list-style: none;
 
   .w-menu__item {
@@ -29,6 +32,11 @@
         text-overflow: ellipsis;
         padding-right: var(--space-2xs);
       }
+    }
+
+    .start,
+    .end {
+      display: inline-flex;
     }
 
     .start {

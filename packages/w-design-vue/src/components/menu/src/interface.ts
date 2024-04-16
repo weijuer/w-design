@@ -35,7 +35,12 @@ export const menuItemProps = {
     disabled: Boolean
 }
 
-export const menuEmits = ['click', 'change']
+export const menuItemGroupProps = {
+    title: String,
+    disabled: Boolean
+}
+
+export const menuEmits = ['open', 'close', 'select']
 export const menuItemEmits = ['click']
 
 export type MenuProps = ExtractPropTypes<typeof menuProps>

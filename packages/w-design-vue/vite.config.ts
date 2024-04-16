@@ -15,7 +15,8 @@ export default defineConfig({
       Assets: resolve('src/assets'),
       Hooks: resolve('src/hooks'),
       Mocks: resolve('src/mocks'),
-      Utils: resolve('src/utils')
+      Utils: resolve('src/utils'),
+      _Common: resolve('src/components/_common'),
     },
     dedupe: ['vue']
   },

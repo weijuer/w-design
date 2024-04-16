@@ -1,4 +1,4 @@
-import { SetupContext, computed, ref } from 'vue'
+import { CSSProperties, SetupContext, computed, ref, useAttrs } from 'vue'
 import { type MenuProps, MenuEmits } from './interface'
 import { type Numeric } from '../../_utils'
 
@@ -14,6 +14,14 @@ export const useMenu = (props: MenuProps, emit: SetupContext<MenuEmits>['emit'])
                 'is-disabled': disabled
             }
         ]
+    })
+
+    const menuStyle = computed(() => {
+        const { style } = useAttrs()
+
+        return {
+            ...(style as CSSProperties)
+        }
     })
 
     const onPressEnter = (event: KeyboardEvent) => {
@@ -46,6 +54,7 @@ export const useMenu = (props: MenuProps, emit: SetupContext<MenuEmits>['emit'])
     return {
         _ref,
         menuClass,
+        menuStyle,
         onMousedown,
         onMouseup,
         onPressEnter,

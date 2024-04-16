@@ -46,7 +46,7 @@
 
 <script setup>
 import { reactive } from 'vue'
-import { usePokemonList } from 'Mocks/usePokemonList'
+import { usePokemonList } from '@w-design/utils'
 
 const state = reactive({
   select1: '',

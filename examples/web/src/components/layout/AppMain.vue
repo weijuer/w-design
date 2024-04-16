@@ -1,13 +1,13 @@
 <template>
   <w-layout :has-aside="true">
     <w-aside>
-      <!-- <w-menu class="app-menu" theme="dark">
+      <w-menu class="app-menu" theme="dark">
         <w-menu-item v-for="route in routes" :key="route.name">
           <router-link :to="{ name: route.name }" class="app-router-link">
             {{ route.name }}
           </router-link>
         </w-menu-item>
-      </w-menu> -->
+      </w-menu>
     </w-aside>
     <w-layout>
       <w-breadcrumb>

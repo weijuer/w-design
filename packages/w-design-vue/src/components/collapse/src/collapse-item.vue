@@ -6,7 +6,7 @@
       </slot>
       <div class="w-collapse__toggle">
         <slot name="icon" :expanded="expanded">
-          <w-icon name="left-arrow"></w-icon>
+          <w-icon name="arrow-left"></w-icon>
           <!-- <div class="icon left-arrow__light"></div> -->
         </slot>
       </div>

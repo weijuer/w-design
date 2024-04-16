@@ -3,14 +3,14 @@
     <a class="logo" href="/">
       <span class="text-magic text-magic-tex-stroke">W-Design-Vue</span>
     </a>
-    <!-- <w-menu class="app-menu" theme="dark" mode="horizontal">
+    <w-menu class="app-menu" theme="dark" mode="horizontal">
       <w-menu-item>
-        <router-link class="app-router-link" to="/"> Index </router-link>
+        <router-link class="app-router-link" to="/">Index</router-link>
       </w-menu-item>
       <w-menu-item>
-        <router-link class="app-router-link" to="/examples"> Examples </router-link>
+        <router-link class="app-router-link" to="/examples">Examples</router-link>
       </w-menu-item>
-    </w-menu> -->
+    </w-menu>
   </w-header>
 </template>
 

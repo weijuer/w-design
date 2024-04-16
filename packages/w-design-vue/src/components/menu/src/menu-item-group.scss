@@ -1,0 +1,18 @@
+:root {
+  --menu-item-height: 32px;
+}
+
+.w-menu__item-group {
+  &:not(:last-of-type) {
+    border-bottom: 1px solid rgba(20, 21, 26, 0.1);
+  }
+
+  > .w-menu__text {
+    display: inline-block;
+    padding-inline-start: 22px;
+    height: var(--menu-item-height);
+    line-height: var(--menu-item-height);
+    font-size: 0.8125rem;
+    color: var(--color-contrast-medium);
+  }
+}
