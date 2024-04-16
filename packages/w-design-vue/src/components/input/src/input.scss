@@ -1,4 +1,5 @@
-@import '../../_common/index';
+@use '../../_common/var' as *;
+@import '../../_common/static';
 
 :root {
   --w-input-padding: 1.85em;

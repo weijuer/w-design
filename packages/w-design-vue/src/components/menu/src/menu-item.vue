@@ -1,16 +1,12 @@
 <template>
-  <li role="menu-item" :class="['w-menu__item']">
+  <li role="menu-item" :class="menuItemClass" @click="onSelect(value)">
     <slot>
       <a href="javascript:;" class="w-menu__item-link">
-        <span class="start" v-if="icon">
-          <slot name="start">
-            <w-icon class="w-button__icon-left" :name="icon"></w-icon>
-          </slot>
-        </span>
-        <span class="w-menu__text">{{ title }}</span>
-        <span class="end">
-          <slot name="end"></slot>
-        </span>
+        <slot name="start">
+          <w-icon class="w-button__icon-left" v-if="icon" :name="icon"></w-icon>
+        </slot>
+        <span class="w-menu__text">{{ label }}</span>
+        <slot name="end"></slot>
       </a>
     </slot>
   </li>
@@ -30,5 +26,5 @@ import WIcon from '../../icon'
 const props = defineProps(menuItemProps)
 const emit = defineEmits(menuItemEmits)
 
-useMenuItem(props, emit)
+const { menuItemClass, onSelect } = useMenuItem(props, emit)
 </script>

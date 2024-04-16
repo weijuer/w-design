@@ -1,7 +1,15 @@
-import { PropType, type ExtractPropTypes } from 'vue'
+import { InjectionKey, PropType, type ExtractPropTypes } from 'vue'
+import { Numeric } from 'src/components/_utils'
 
 export type MenuMode = 'vertical' | 'horizontal' | 'vertical-right' | 'inline'
 export type MenuTheme = 'light' | 'dark'
+
+export type MenuProvide = {
+    props: MenuProps,
+    updateValue: (option: Numeric) => void;
+};
+
+export const MENU_KEY: InjectionKey<MenuProvide> = Symbol('menu');
 
 export const menuProps = {
     mode: {
@@ -18,13 +26,27 @@ export const menuProps = {
         },
         default: 'light'
     },
-    modelValue: [String, Array],
-    defaultValue: [String, Array],
+    modelValue: {
+        type: [String, Number, Array] as PropType<Numeric | Numeric[]>,
+        default: ''
+    },
+    selectedKeys: {
+        type: [String, Number, Array] as PropType<Numeric | Numeric[]>,
+    },
+    defaultSelectedKeys: {
+        type: [String, Number, Array] as PropType<Numeric | Numeric[]>,
+        default: ''
+    },
+    multiple: Boolean,
     disabled: Boolean
 }
 
 export const menuItemProps = {
-    title: String,
+    value: {
+        type: [String, Number] as PropType<Numeric>,
+        default: ''
+    },
+    label: String,
     icon: String,
     expanded: Boolean,
     selected: Boolean,
@@ -36,7 +58,7 @@ export const menuItemProps = {
 }
 
 export const menuItemGroupProps = {
-    title: String,
+    label: String,
     disabled: Boolean
 }
 

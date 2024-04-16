@@ -1,6 +1,6 @@
-@use './var';
+@use './var' as *;
 @use './layout';
-@import './staitc';
-@import './animate';
-@import './mixin';
-@import './utils';
+@use './static';
+@use './animate' as *;
+@use './mixin' as *;
+@use './utils' as *;

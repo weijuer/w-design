@@ -1,24 +1,25 @@
 @use '_Common/_var';
 
 :root {
-  --menu-item-height: 32px;
+  --menu-item-height: 44px;
 }
 
 .w-menu__list {
-  // padding-inline-start: 22px;
   list-style: none;
 
   .w-menu__item {
     position: relative;
 
     &-link {
-      align-items: center;
-      border-radius: var(--radius-md);
-      color: hsla(var(--color-contrast-high-hsl), 0.9);
       display: flex;
-      font-size: var(--text-md);
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.375rem 9px 0.375rem 33px;
       height: var(--menu-item-height);
-      padding: 0 9px 0 33px;
+      font-size: var(--w-font-size-medium);
+      border-radius: var(--w-radius-medium);
+      color: hsla(var(--color-contrast-high-hsl), 0.9);
       text-decoration: none;
       transition: 0.2s;
 
@@ -27,24 +28,11 @@
       }
 
       .w-menu__text {
-        white-space: nowrap;
+        flex: 1 1 0%;
         overflow: hidden;
+        white-space: nowrap;
         text-overflow: ellipsis;
-        padding-right: var(--space-2xs);
       }
-    }
-
-    .start,
-    .end {
-      display: inline-flex;
-    }
-
-    .start {
-      margin-right: 8px;
-    }
-
-    .end {
-      margin-left: auto;
     }
   }
 }

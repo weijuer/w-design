@@ -1,7 +1,7 @@
 @use 'sass:string';
 @use 'sass:list';
 
-@import '../../_common/index';
+@use '../../_common/var' as *;
 
 :root {
   --w-table-size: 2.25rem;

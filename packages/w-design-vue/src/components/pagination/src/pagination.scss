@@ -1,4 +1,5 @@
-@import '../../_common/index';
+@use '../../_common/var' as *;
+@use '../../_common/mixin' as *;
 
 :root {
   --w-pagination-size: 2.25rem;

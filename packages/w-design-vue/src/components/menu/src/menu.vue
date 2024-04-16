@@ -1,5 +1,5 @@
 <template>
-  <ul role="menu" :class="['w-menu__list', mode ? 'w-menu-' + mode : '', theme ? 'w-menu-' + theme : '']">
+  <ul role="menu" :class="menuClass" :style="menuStyle">
     <slot></slot>
   </ul>
 </template>

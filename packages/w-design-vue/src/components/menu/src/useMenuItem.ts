@@ -1,38 +1,59 @@
-import { SetupContext, computed, ref } from 'vue'
-import { type MenuItemProps, MenuItemEmits } from './interface'
+import { SetupContext, computed, inject } from 'vue'
+import { type MenuItemProps, MenuItemEmits, MENU_KEY } from './interface'
+import { Numeric } from 'src/components/_utils'
 
 export const useMenuItem = (props: MenuItemProps, emit: SetupContext<MenuItemEmits>['emit']) => {
-    const _ref = ref<HTMLInputElement>()
+
+    const menuContext: any = inject(MENU_KEY, null)
 
     const menuItemClass = computed(() => {
-        const { disabled } = props
 
         return [
+            'w-menu__item',
             {
-                'is-disabled': disabled
+                'is-selected': isSelected.value,
+                'is-disabled': isDisabled.value,
             }
         ]
     })
 
-    const onPressEnter = (event: KeyboardEvent) => {
-        if (event.key === 'Enter') {
-            emit('press-enter', event)
+    const isSelected = computed(() => {
+        const { value, selected } = props
+
+        if (menuContext) {
+            const { multiple, modelValue: selectedVal } = menuContext.props
+            return multiple ? selectedVal.includes(value) : selectedVal === value
+        } else {
+            return selected
+        }
+    })
+
+    const isDisabled = computed(() => {
+        const { disabled } = props
+
+        if (menuContext) {
+            return menuContext.props.disabled || disabled
+        } else {
+            return disabled
+        }
+    })
+
+    const onSelect = (value: Numeric) => {
+        const { disabled } = props
+        if (disabled) {
+            return
+        }
+
+        if (menuContext) {
+            menuContext.updateValue(value)
+        } else {
+            emit('select', value)
         }
     }
-
-    const blur = () => _ref.value?.blur()
-    const focus = () => _ref.value?.focus()
-
-    const onMousedown = (e: MouseEvent) => e.preventDefault()
-    const onMouseup = (e: MouseEvent) => e.preventDefault()
-
     return {
-        _ref,
         menuItemClass,
-        onMousedown,
-        onMouseup,
-        onPressEnter,
-        blur,
-        focus
+        isSelected,
+        isDisabled,
+        onSelect
     }
 }

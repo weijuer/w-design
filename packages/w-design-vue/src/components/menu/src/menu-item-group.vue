@@ -1,6 +1,6 @@
 <template>
   <li role="menu-item-group" class="w-menu__item w-menu__item-group">
-    <span class="w-menu__text">{{ title }}</span>
+    <span class="w-menu__text">{{ label }}</span>
     <ul class="w-menu__list">
       <slot></slot>
     </ul>
