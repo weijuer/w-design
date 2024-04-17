@@ -6,6 +6,7 @@ export type MenuTheme = 'light' | 'dark'
 
 export type MenuProvide = {
     props: MenuProps,
+    isSelected: (name: Numeric) => boolean;
     updateValue: (option: Numeric) => void;
 };
 

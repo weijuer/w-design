@@ -6,7 +6,6 @@ export const useMenu = (props: MenuProps, emit: SetupContext<MenuEmits>['emit'])
     const _ref = ref<HTMLUListElement>()
 
     const inputValue = ref(props.defaultSelectedKeys ? props.defaultSelectedKeys : props.modelValue);
-    const isExpanded = ref(false)
 
     const menuClass = computed(() => {
         const { mode, theme, disabled } = props
@@ -39,13 +38,10 @@ export const useMenu = (props: MenuProps, emit: SetupContext<MenuEmits>['emit'])
         }
     }
 
-    const onToggle = () => {
-        isExpanded.value = !isExpanded.value
-    }
 
     const updateValue = (value: Numeric) => {
         if (value !== props.modelValue) {
-            // inputValue.value = value
+            inputValue.value = value
             emit('update:modelValue', value)
         }
     }
@@ -57,7 +53,7 @@ export const useMenu = (props: MenuProps, emit: SetupContext<MenuEmits>['emit'])
         }
     )
 
-    provide(MENU_KEY, { props, updateValue });
+    provide(MENU_KEY, { props, isSelected, updateValue });
 
     return {
         _ref,

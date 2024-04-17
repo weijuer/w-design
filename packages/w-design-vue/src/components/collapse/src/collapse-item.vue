@@ -1,5 +1,5 @@
 <template>
-  <div ref="_ref" class="w-collapse__item" :class="itemClass">
+  <div ref="_ref" :class="itemClass">
     <div class="w-collapse__header" @click="toggleTitle">
       <slot name="title">
         <div class="w-collapse__title" v-if="props.title" v-html="props.title"></div>
@@ -26,33 +26,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useParent } from '@w-design/use'
-import { COLLAPSE_KEY, collapseItemProps, CollapseProvide } from './interface'
+import { collapseItemProps } from './interface'
 import collapseTransition from './collapse-transition.vue'
 import WIcon from '../../icon'
+import { useCollapseItem } from './useCollapseItem'
 
 const props = defineProps(collapseItemProps)
-const _ref = ref<HTMLElement>()
-const contentRef = ref<HTMLElement>()
-
-const { parent, index } = useParent(COLLAPSE_KEY)
-
-const name = computed(() => props.name ?? index.value)
-const expanded = computed(() => (parent as unknown as CollapseProvide).isExpanded(name.value))
-
-const itemClass = computed(() => ({ 'w-collapse__item--expanded': expanded.value }))
-
-const toggle = (newValue = !expanded.value) => {
-  ;(parent as unknown as CollapseProvide).toggle(name.value, newValue)
-}
-
-const toggleTitle = () => {
-  const { disabled, readonly } = props
-  if (!disabled && !readonly) {
-    toggle()
-  }
-}
+const { _ref, itemClass, expanded, toggleTitle } = useCollapseItem(props)
 
 defineExpose({
   ref: _ref

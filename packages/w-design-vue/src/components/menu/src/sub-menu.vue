@@ -1,9 +1,19 @@
 <template>
-  <li role="menu-item" :class="['w-sub-menu']">
-    <span class="w-menu__text">{{ label }}</span>
-    <w-menu>
+  <li role="sub-menu" :class="['w-sub-menu']">
+    <a href="javascript:;" class="w-menu__item-link">
+      <slot name="start">
+        <w-icon class="w-button__icon-left" v-if="icon" :name="icon"></w-icon>
+      </slot>
+      <span class="w-menu__text">{{ label }}</span>
+      <div class="w-sub-menu__toggle">
+        <slot name="end">
+          <w-icon name="arrow-left"></w-icon>
+        </slot>
+      </div>
+    </a>
+    <ul class="w-menu__list">
       <slot></slot>
-    </w-menu>
+    </ul>
   </li>
 </template>
 
@@ -17,8 +27,6 @@ export default {
 import { menuItemEmits, menuItemProps } from './interface'
 import { useMenuItem } from './useMenuItem'
 import WIcon from '../../icon'
-import WMenu from '..'
-import { WMenuItem } from '..'
 
 const props = defineProps(menuItemProps)
 const emit = defineEmits(menuItemEmits)

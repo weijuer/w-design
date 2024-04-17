@@ -27,6 +27,8 @@
     }
 
     .w-collapse__toggle {
+      display: inline-flex;
+
       .icon,
       svg {
         transition: transform 0.2s ease-in-out;

@@ -6,26 +6,19 @@ export const useMenuItem = (props: MenuItemProps, emit: SetupContext<MenuItemEmi
 
     const menuContext: any = inject(MENU_KEY, null)
 
+    console.log('menuContext', menuContext)
+
     const menuItemClass = computed(() => {
+
+        const { value } = props
 
         return [
             'w-menu__item',
             {
-                'is-selected': isSelected.value,
+                'is-selected': menuContext.isSelected(value),
                 'is-disabled': isDisabled.value,
             }
         ]
-    })
-
-    const isSelected = computed(() => {
-        const { value, selected } = props
-
-        if (menuContext) {
-            const { multiple, modelValue: selectedVal } = menuContext.props
-            return multiple ? selectedVal.includes(value) : selectedVal === value
-        } else {
-            return selected
-        }
     })
 
     const isDisabled = computed(() => {
@@ -52,7 +45,6 @@ export const useMenuItem = (props: MenuItemProps, emit: SetupContext<MenuItemEmi
     }
     return {
         menuItemClass,
-        isSelected,
         isDisabled,
         onSelect
     }

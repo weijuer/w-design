@@ -1,6 +1,4 @@
-@use './var' as *;
 @use './layout';
-@use './static';
-@use './animate' as *;
-@use './mixin' as *;
-@use './utils' as *;
+@use './animate';
+@use './mixin';
+@use './utils';

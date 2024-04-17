@@ -1,4 +1,4 @@
-@use '_Common/_var';
+@use '_Common/_var' as *;
 
 :root {
   --menu-item-height: 44px;
@@ -24,6 +24,7 @@
       transition: 0.2s;
 
       &:hover {
+        color: var(--color-primary);
         background-color: rgba(20, 21, 26, 0.05);
       }
 
@@ -32,6 +33,13 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+      }
+    }
+
+    &.is-selected {
+      .w-menu__item-link {
+        color: var(--color-primary);
+        background-color: rgba(20, 21, 26, 0.05);
       }
     }
   }
