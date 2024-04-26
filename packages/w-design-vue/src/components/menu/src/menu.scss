@@ -34,12 +34,28 @@
         white-space: nowrap;
         text-overflow: ellipsis;
       }
+
+      .w-menu__item--toggle {
+        display: inline-flex;
+
+        svg {
+          transition: transform 0.2s ease-in-out;
+        }
+      }
     }
 
     &.is-selected {
       .w-menu__item-link {
         color: var(--color-primary);
         background-color: rgba(20, 21, 26, 0.05);
+      }
+    }
+
+    &.is-expanded {
+      .w-menu__item--toggle {
+        svg {
+          transform: rotate(-90deg);
+        }
       }
     }
   }

@@ -1,12 +1,10 @@
 import { SetupContext, computed, inject } from 'vue'
-import { type MenuItemProps, MenuItemEmits, MENU_KEY } from './interface'
+import { type MenuItemProps, MenuItemEmits, MENU_KEY, MenuProvide } from './interface'
 import { Numeric } from 'src/components/_utils'
 
 export const useMenuItem = (props: MenuItemProps, emit: SetupContext<MenuItemEmits>['emit']) => {
 
     const menuContext: any = inject(MENU_KEY, null)
-
-    console.log('menuContext', menuContext)
 
     const menuItemClass = computed(() => {
 
@@ -16,6 +14,7 @@ export const useMenuItem = (props: MenuItemProps, emit: SetupContext<MenuItemEmi
             'w-menu__item',
             {
                 'is-selected': menuContext.isSelected(value),
+                'is-expanded': expanded.value,
                 'is-disabled': isDisabled.value,
             }
         ]
@@ -31,6 +30,8 @@ export const useMenuItem = (props: MenuItemProps, emit: SetupContext<MenuItemEmi
         }
     })
 
+    const expanded = computed(() => (menuContext as unknown as MenuProvide).isExpanded(props.value))
+
     const onSelect = (value: Numeric) => {
         const { disabled } = props
         if (disabled) {
@@ -38,14 +39,22 @@ export const useMenuItem = (props: MenuItemProps, emit: SetupContext<MenuItemEmi
         }
 
         if (menuContext) {
-            menuContext.updateValue(value)
+            menuContext.select(value)
         } else {
             emit('select', value)
         }
     }
+
+    const onToggle = () => {
+        console.log('onToggle', props.value, expanded.value)
+        menuContext.toggle(props.value, expanded.value)
+    }
+
     return {
         menuItemClass,
         isDisabled,
-        onSelect
+        expanded,
+        onSelect,
+        onToggle
     }
 }

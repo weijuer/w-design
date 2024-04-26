@@ -1,7 +1,6 @@
 {
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@7.13.0",
   "workspaces": [
     "packages/*",
     "examples/*",

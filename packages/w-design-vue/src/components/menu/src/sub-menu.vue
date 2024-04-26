@@ -1,19 +1,21 @@
 <template>
-  <li role="sub-menu" :class="['w-sub-menu']">
-    <a href="javascript:;" class="w-menu__item-link">
+  <li role="sub-menu" :class="menuItemClass">
+    <a @click="onToggle()" href="javascript:;" class="w-menu__item-link">
       <slot name="start">
         <w-icon class="w-button__icon-left" v-if="icon" :name="icon"></w-icon>
       </slot>
       <span class="w-menu__text">{{ label }}</span>
-      <div class="w-sub-menu__toggle">
-        <slot name="end">
+      <div class="w-menu__item--toggle">
+        <slot name="end" :expanded="expanded">
           <w-icon name="arrow-left"></w-icon>
         </slot>
       </div>
     </a>
-    <ul class="w-menu__list">
-      <slot></slot>
-    </ul>
+    <transition>
+      <ul class="w-menu__list" v-show="expanded">
+        <slot></slot>
+      </ul>
+    </transition>
   </li>
 </template>
 
@@ -31,5 +33,5 @@ import WIcon from '../../icon'
 const props = defineProps(menuItemProps)
 const emit = defineEmits(menuItemEmits)
 
-useMenuItem(props, emit)
+const { menuItemClass, onToggle, expanded } = useMenuItem(props, emit)
 </script>

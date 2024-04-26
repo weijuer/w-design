@@ -6,8 +6,10 @@ export type MenuTheme = 'light' | 'dark'
 
 export type MenuProvide = {
     props: MenuProps,
+    isExpanded: (name: Numeric) => boolean;
     isSelected: (name: Numeric) => boolean;
-    updateValue: (option: Numeric) => void;
+    select: (name: Numeric) => void;
+    toggle: (name: Numeric, expanded: boolean) => void;
 };
 
 export const MENU_KEY: InjectionKey<MenuProvide> = Symbol('menu');
@@ -27,18 +29,14 @@ export const menuProps = {
         },
         default: 'light'
     },
-    modelValue: {
-        type: [String, Number, Array] as PropType<Numeric | Numeric[]>,
-        default: ''
-    },
     selectedKeys: {
         type: [String, Number, Array] as PropType<Numeric | Numeric[]>,
     },
-    defaultSelectedKeys: {
+    expandedKeys: {
         type: [String, Number, Array] as PropType<Numeric | Numeric[]>,
-        default: ''
     },
     multiple: Boolean,
+    accordion: Boolean,
     disabled: Boolean
 }
 
@@ -63,7 +61,7 @@ export const menuItemGroupProps = {
     disabled: Boolean
 }
 
-export const menuEmits = ['open', 'close', 'select']
+export const menuEmits = ['update:selectedKeys', 'update:expandedKeys', , 'open', 'close', 'select']
 export const menuItemEmits = ['click']
 
 export type MenuProps = ExtractPropTypes<typeof menuProps>

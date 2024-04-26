@@ -1,0 +1,75 @@
+:root {
+  --w-grid-column-gap: 15px;
+  --w-grid-row-gap: 15px;
+  --w-grid-gap: 15px;
+
+  --border-radius: 4px;
+
+  // themes
+  // --color-default: #d4d4d8;
+  --color-default: #b4b4b4;
+  --color-primary: #4827ec;
+  --color-success: #52c41a;
+  --color-warning: #faad14;
+  --color-danger: #ff4d4f;
+  --color-info: #1890ff;
+
+  // color
+  --color-white: white;
+  --color-bg-lighter: hsl(0, 0%, 100%);
+  --color-bg-light: hsl(0, 0%, 100%);
+  --color-bg: hsl(0, 0%, 100%);
+  --color-bg-dark: hsl(240, 4%, 95%);
+  --color-bg-darker: hsl(240, 4%, 90%);
+
+  --color-contrast-lower: hsl(240, 4%, 85%);
+  --color-contrast-low: hsl(240, 4%, 65%);
+  --color-contrast-medium: hsl(225, 4%, 47%);
+  --color-contrast-high: hsl(230, 7%, 23%);
+  --color-contrast-higher: hsl(230, 13%, 9%);
+
+  --w-border-color-default: #eee;
+
+  // appearance
+  --w-disabled-opacity: 0.5;
+
+  --space-4xs: clamp(0.125rem, calc(0.125rem + 0vw), 0.125rem);
+  --space-3xs: clamp(0.25rem, calc(0.25rem + 0vw), 0.25rem);
+  --space-2xs: clamp(0.5rem, calc(0.5rem + 0vw), 0.5rem);
+  --space-xs: clamp(0.75rem, calc(0.75rem + 0vw), 0.75rem);
+  --space-sm: clamp(1rem, calc(1rem + 0vw), 1rem);
+  --space-md: clamp(1.5rem, calc(1.125rem + 0.78125vw), 1.75rem);
+  --space-lg: clamp(2.25rem, calc(1.125rem + 2.34375vw), 3rem);
+  --space-xl: clamp(3.5rem, calc(1.25rem + 4.6875vw), 5rem);
+  --space-2xl: clamp(5.75rem, calc(2.375rem + 7.03125vw), 8rem);
+  --space-3xl: clamp(9.25rem, calc(4.75rem + 9.375vw), 12.25rem);
+  --space-4xl: clamp(15rem, calc(7.5rem + 15.625vw), 20rem);
+
+  // box-shadow
+  --w-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.02), 0px 2px 10px 0px rgba(0, 0, 0, 0.06),
+    0px 0px 1px 0px rgba(0, 0, 0, 0.3);
+
+  // radius
+  --w-radius-tiny: 4px;
+  --w-radius-small: 8px;
+  --w-radius-medium: 12px;
+  --w-radius-large: 14px;
+  --w-radius-full: 9999px;
+
+  // font-size
+  --w-font-size-tiny: 0.75rem;
+  --w-font-size-small: 0.875rem;
+  --w-font-size-medium: 1rem;
+  --w-font-size-large: 1.125rem;
+
+  --w-index-header: 3;
+  --w-index-popover: 5;
+  --w-index-fixed-element: 10;
+  --w-index-overlay: 15;
+
+  // line-height
+  --w-line-height-tiny: 1rem;
+  --w-line-height-small: 1.25rem;
+  --w-line-height-medium: 1.5rem;
+  --w-line-height-large: 1.75rem;
+}

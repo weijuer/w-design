@@ -4,7 +4,7 @@
       {{ selectedText }}
       <template #end>
         <w-icon class="w-select__loading" v-if="loading" name="loading"></w-icon>
-        <w-icon v-else name="arrow-down"></w-icon>
+        <w-icon v-else :class="{ 'is-expanded': isExpanded }" name="arrow-down"></w-icon>
       </template>
     </w-button>
     <div class="w-select__dropdown" :aria-expanded="isExpanded">
