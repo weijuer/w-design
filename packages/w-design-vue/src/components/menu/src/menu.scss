@@ -52,6 +52,10 @@
     }
 
     &.is-expanded {
+      > .w-menu__item-link {
+        color: var(--color-primary);
+      }
+
       .w-menu__item--toggle {
         svg {
           transform: rotate(-90deg);

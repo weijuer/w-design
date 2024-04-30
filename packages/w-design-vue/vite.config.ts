@@ -62,9 +62,9 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    dts({
-      outDir: 'es',
-      tsconfigPath: './tsconfig.declaration.json'
-    }),
+    // dts({
+    //   outDir: 'es',
+    //   tsconfigPath: './tsconfig.declaration.json'
+    // }),
   ]
 });

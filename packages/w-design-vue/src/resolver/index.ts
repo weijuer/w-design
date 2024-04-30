@@ -1,11 +1,22 @@
-
+type Awaitable<T> = T | PromiseLike<T>;
 export interface ImportInfo {
     as?: string
     name?: string
     from: string
 }
 
-export type SideEffectsInfo = (ImportInfo | string)[] | ImportInfo | string | undefined
+type SideEffectsInfo = (ImportInfo | string)[] | ImportInfo | string | undefined
+interface ComponentInfo extends ImportInfo {
+    sideEffects?: SideEffectsInfo;
+}
+type ComponentResolveResult = Awaitable<string | ComponentInfo | null | undefined | void>;
+type ComponentResolverFunction = (name: string) => ComponentResolveResult;
+interface ComponentResolverObject {
+    type: 'component' | 'directive';
+    resolve: ComponentResolverFunction;
+}
+
+type ComponentResolver = ComponentResolverFunction | ComponentResolverObject;
 
 export interface WDesignVueResolverOptions {
     /**
@@ -49,10 +60,10 @@ function getSideEffects(
 /**
  * Resolver for W-Design-Vue
  * @link https://weijuer.github.io/w-design-vue/
- * @version @w-design-vue ^1.0.0, @vue ^3.2.0
+ * @version w-design-vue ^1.0.0, @vue ^3.2.0
  * @author weijuer
  */
-export default function WDesignVueResolver(options: WDesignVueResolverOptions = {}) {
+export default function WDesignVueResolver(options: WDesignVueResolverOptions = {}): ComponentResolver {
     return {
         type: 'component',
         resolve: (name: string) => {

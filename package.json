@@ -22,7 +22,8 @@
     "@w-design/eslint-config": "workspace:^",
     "@w-design/icons": "workspace:^",
     "@w-design/use": "workspace:^",
-    "@w-design/utils": "workspace:^"
+    "@w-design/utils": "workspace:^",
+    "w-design-vue": "workspace:^"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^6.1.0",

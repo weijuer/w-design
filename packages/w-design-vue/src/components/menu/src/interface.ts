@@ -61,7 +61,7 @@ export const menuItemGroupProps = {
     disabled: Boolean
 }
 
-export const menuEmits = ['update:selectedKeys', 'update:expandedKeys', , 'open', 'close', 'select']
+export const menuEmits = ['update:selectedKeys', 'update:expandedKeys', 'open', 'close', 'select']
 export const menuItemEmits = ['click']
 
 export type MenuProps = ExtractPropTypes<typeof menuProps>

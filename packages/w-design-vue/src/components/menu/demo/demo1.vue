@@ -3,7 +3,7 @@
     <w-space>
       <w-menu v-model:selected-keys="state.selectedKeys" @select="onSelect" style="width: 240px">
         <w-menu-item
-          v-for="{ label, value, icon } in state.menu1"
+          v-for="{ label, value, icon } in state.simpleMenus"
           :key="value"
           :label="label"
           :value="value"
@@ -15,14 +15,16 @@
 
   <w-preview title="Menu Item Group" desc="Menu Item Group">
     <w-space>
-      <w-menu style="width: 240px">
-        <w-menu-item-group label="Group 01">
-          <w-menu-item icon="moon" label="test 01"></w-menu-item>
-          <w-menu-item icon="sun" label="test 02"></w-menu-item>
-        </w-menu-item-group>
-        <w-menu-item-group label="Group 02">
-          <w-menu-item icon="moon" label="test 01"></w-menu-item>
-          <w-menu-item icon="sun" label="test 02"></w-menu-item>
+      <w-menu v-model:selected-keys="state.selectedKeys" style="width: 240px">
+        <w-menu-item-group v-for="menu in state.groupMenus" :key="menu.value" :label="menu.label">
+          <template v-if="menu.children">
+            <w-menu-item
+              v-for="child in menu.children"
+              :key="child.value"
+              :label="child.label"
+              :value="child.value"
+            ></w-menu-item>
+          </template>
         </w-menu-item-group>
       </w-menu>
     </w-space>
@@ -30,25 +32,26 @@
 
   <w-preview title="Sub Menu" desc="Sub Menu">
     <w-space>
-      <w-menu v-model:expanded-keys="state.expandedKeys" style="width: 240px">
-        <w-sub-menu label="Sub 01" value="sub01">
-          <w-menu-item
-            v-for="{ label, value, icon } in state.menu2"
-            :key="value"
-            :label="label"
-            :value="value"
-            :icon="icon"
-          ></w-menu-item>
-
-          <w-menu-item-group label="Group 02">
+      <w-menu
+        v-model:selected-keys="state.selectedKeys"
+        v-model:expanded-keys="state.expandedKeys"
+        accordion
+        style="width: 240px"
+      >
+        <w-sub-menu
+          v-for="subMenu in state.subMenus"
+          :key="subMenu.value"
+          :label="subMenu.label"
+          :value="subMenu.value"
+        >
+          <template v-if="subMenu.children">
             <w-menu-item
-              v-for="{ label, value, icon } in state.menu3"
-              :key="value"
-              :label="label"
-              :value="value"
-              :icon="icon"
+              v-for="child in subMenu.children"
+              :key="child.value"
+              :label="child.label"
+              :value="child.value"
             ></w-menu-item>
-          </w-menu-item-group>
+          </template>
         </w-sub-menu>
       </w-menu>
     </w-space>
@@ -57,25 +60,38 @@
 
 <script setup>
 import { reactive } from 'vue'
+import { uuid } from '@w-design/utils'
 
-const genMenuItem = num => {
-  const icons = ['sun', 'moon', 'file']
+const getItem = (label, value, icon, children, type = '') => {
+  let _children
 
-  return Array(num)
+  if (type) {
+    _children = Array(children)
+      .fill(1)
+      .map((_, index) => getItem(type + (index + 1), uuid(), ''))
+  }
+
+  return {
+    label,
+    value,
+    icon,
+    children: _children,
+    type
+  }
+}
+
+const genMenuItem = (navNum, subNum, label = 'Nav', type) => {
+  return Array(navNum)
     .fill(1)
-    .map((_, index) => ({
-      label: 'Item ' + (index + 1),
-      value: 'item_' + (index + 1),
-      icon: icons[Math.floor(Math.random() * icons.length)]
-    }))
+    .map((_, index) => getItem(label + (index + 1), uuid(), null, subNum, type))
 }
 
 const state = reactive({
   selectedKeys: [],
   expandedKeys: [],
-  menu1: genMenuItem(4),
-  menu2: genMenuItem(3),
-  menu3: genMenuItem(2)
+  simpleMenus: genMenuItem(4, 0, 'Nav'),
+  groupMenus: genMenuItem(2, 3, 'Group', 'group'),
+  subMenus: genMenuItem(3, 2, 'Sub', 'sub')
 })
 
 const onSelect = key => {
