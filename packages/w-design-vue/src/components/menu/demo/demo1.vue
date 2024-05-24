@@ -13,6 +13,20 @@
     </w-space>
   </w-preview>
 
+  <w-preview title="Horizontal" desc="Horizontal">
+    <w-space fill>
+      <w-menu mode="horizontal" v-model:selected-keys="state.selectedKeys" @select="onSelect" style="width: 240px">
+        <w-menu-item
+          v-for="{ label, value, icon } in state.simpleMenus"
+          :key="value"
+          :label="label"
+          :value="value"
+          :icon="icon"
+        ></w-menu-item>
+      </w-menu>
+    </w-space>
+  </w-preview>
+
   <w-preview title="Menu Item Group" desc="Menu Item Group">
     <w-space>
       <w-menu v-model:selected-keys="state.selectedKeys" style="width: 240px">

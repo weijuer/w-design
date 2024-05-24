@@ -1,14 +1,14 @@
 <template>
   <w-container class="demo-section">
     <demo />
-    <demo1 />
+    <!-- <demo1 /> -->
   </w-container>
 </template>
 
 <script setup lang="ts">
 // import Demo from './components/table/demo/usage.vue'
 import Demo from './components/menu/demo/demo1.vue'
-import Demo1 from './components/select/demo/demo1.vue'
+// import Demo1 from './components/select/demo/demo1.vue'
 // import Demo from './components/input-mask/demo/demo1.vue'
 </script>
 

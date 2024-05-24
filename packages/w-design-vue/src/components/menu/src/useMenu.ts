@@ -10,8 +10,8 @@ export const useMenu = (props: MenuProps, emit: SetupContext<MenuEmits>['emit'])
 
         return [
             'w-menu__list',
-            mode ? 'w-menu__' + mode : '',
-            theme ? 'w-menu__' + theme : '',
+            mode ? 'w-menu__list--' + mode : '',
+            theme ? 'w-menu__list--' + theme : '',
             {
                 'is-disabled': disabled
             }

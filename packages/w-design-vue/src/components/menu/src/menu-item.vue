@@ -1,7 +1,7 @@
 <template>
   <li role="menu-item" :class="menuItemClass" @click="onSelect(value)">
     <slot>
-      <a href="javascript:;" class="w-menu__item-link">
+      <a href="javascript:;" :class="['w-menu__item-link', icon ? 'has-icon' : '']">
         <slot name="start">
           <w-icon class="w-button__icon-left" v-if="icon" :name="icon"></w-icon>
         </slot>

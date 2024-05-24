@@ -1,5 +1,5 @@
 <template>
-  <li role="sub-menu" :class="menuItemClass">
+  <li role="sub-menu" :class="menuItemClass" class="sub-menu">
     <a @click="onToggle()" href="javascript:;" class="w-menu__item-link">
       <slot name="start">
         <w-icon class="w-button__icon-left" v-if="icon" :name="icon"></w-icon>

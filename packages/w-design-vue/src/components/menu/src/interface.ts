@@ -1,5 +1,5 @@
 import { InjectionKey, PropType, type ExtractPropTypes } from 'vue'
-import { Numeric } from 'src/components/_utils'
+import { Numeric, Type } from 'src/components/_utils'
 
 export type MenuMode = 'vertical' | 'horizontal' | 'vertical-right' | 'inline'
 export type MenuTheme = 'light' | 'dark'
@@ -18,16 +18,13 @@ export const menuProps = {
     mode: {
         type: String as PropType<MenuMode>,
         validator(value: string) {
-            return ['vertical', 'horizontal', 'vertical-right', 'inline'].includes(value)
+            return ['', 'vertical', 'horizontal', 'vertical-right', 'inline'].includes(value)
         },
-        default: 'vertical'
+        default: ''
     },
     theme: {
-        type: String as PropType<MenuTheme>,
-        validator(value: string) {
-            return ['light', 'dark'].includes(value)
-        },
-        default: 'light'
+        type: String as PropType<Type>,
+        default: ''
     },
     selectedKeys: {
         type: [String, Number, Array] as PropType<Numeric | Numeric[]>,
