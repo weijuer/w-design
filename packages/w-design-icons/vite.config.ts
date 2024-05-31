@@ -1,23 +1,23 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'path';
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import dts from 'vite-plugin-dts'
+// import { resolve } from 'node:path';
 
 export default defineConfig({
+  base: './',
   build: {
+    target: 'esnext',
+    minify: false,
     outDir: 'lib',
     lib: {
       entry: 'src/index.ts',
       formats: ['es', 'umd'],
       name: 'w-design-icon',
-      fileName: 'w-design-icon'
+      fileName: () => '[name].js'
     }
   },
   plugins: [
-    createSvgIconsPlugin({
-      iconDirs: [resolve('src/assets/icons')],
-      symbolId: 'icon-[dir]-[name]',
-      inject: 'body-first',
-      customDomId: '__w_svg_icons__'
+    dts({
+      rollupTypes: true,
     })
   ]
 });

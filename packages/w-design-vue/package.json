@@ -43,7 +43,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/weijuer/w-design-vue.git"
+    "url": "git+https://github.com/weijuer/w-design.git",
+    "directory": "packages/w-design-vue"
   },
   "author": "Weijuer<https://github.com/weijuer>",
   "license": "MIT",

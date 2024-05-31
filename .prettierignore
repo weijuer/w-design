@@ -1,5 +1,6 @@
 *.md
-# *.vue
+*.vue
 lib
 dist
 pnpm-lock.yaml
+!CHANGELOG.md

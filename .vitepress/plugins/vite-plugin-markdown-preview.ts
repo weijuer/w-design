@@ -1,24 +1,37 @@
 import type { Plugin } from 'vite'
-// create-vitepress-demo
-export default function MarkdownTransform(): Plugin {
+import MarkdownIt from 'markdown-it';
+
+export type MarkdownPreviewOptions = {
+    component?: string
+}
+
+const extractBlock = (content: string, type: string) => {
+    const regex = new RegExp(`<${type}[^>]*>([\\s\\S]*?)<\\/${type}>`, 'i');
+    const match = content.match(regex);
+    return match ? match[1].trim() : '';
+}
+
+export default function MarkdownPreview(options?: MarkdownPreviewOptions): Plugin {
 
     const virtualModuleId = 'virtual:markdown-preview'
     const resolvedVirtualModuleId = '\0' + virtualModuleId
     let codePreviewSource: string;
 
+
+
     return {
-        name: 'markdown-preview',
+        name: 'vite:markdown-preview',
         enforce: 'pre',
         resolveId(id) {
+            console.log('resolveId: (%s)', id)
             if (id === virtualModuleId) {
                 return resolvedVirtualModuleId
             }
         },
         load(id) {
+            console.log('load:(%s)', id)
             if (id === resolvedVirtualModuleId) {
-                return codePreviewSource
-                return `const message = 'hello world'
-export default message`
+                // return codePreviewSource
             }
         },
         async transform(code, id) {
@@ -26,6 +39,40 @@ export default message`
             if (!id.endsWith('.md')) {
                 return null
             }
+
+            const md = new MarkdownIt();
+            // 自定义渲染器
+            md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+                const token = tokens[idx];
+                const info = token.info ? token.info.trim() : '';
+
+                console.log('transform: fence', info)
+
+                if (info === 'vue preview') {
+                    const content = token.content;
+                    const result = `
+                        <template>
+                        ${extractBlock(content, 'template')}
+                        </template>
+                        <script>
+                        ${extractBlock(content, 'script')}
+                        </script>
+                        <style>
+                        ${extractBlock(content, 'style')}
+                        </style>
+                    `;
+                    return `<div class="vue-preview">${result}</div>`;
+                }
+                
+                return self.renderToken(tokens, idx, options);
+            };
+
+            const transformedCode = md.render(code);
+
+            return {
+                code: `export default ${JSON.stringify(transformedCode)}`,
+                map: null
+            };
 
             // Transform vue preview code blocks
             const vuePreviewBlockRegx = /```vue preview?\s*([\s\S]*?)\s*```/g
@@ -52,7 +99,7 @@ export default message`
 
             return {
                 code: code,
-                map: this.getCombinedSourcemap(),
+                map: null,
             }
         },
     }

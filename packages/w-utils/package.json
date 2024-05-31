@@ -6,6 +6,11 @@
   "main": "index.ts",
   "module": "index.ts",
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weijuer/w-design.git",
+    "directory": "packages/w-utils"
+  },
   "author": "",
   "license": "MIT"
 }
