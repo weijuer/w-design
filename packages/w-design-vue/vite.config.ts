@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'path';
+import { resolve } from 'node:path';
 import vue from '@vitejs/plugin-vue';
 import dts from "vite-plugin-dts";
 
@@ -30,7 +30,7 @@ export default defineConfig({
       output: [
         {
           dir: 'es',
-          format: 'esm',
+          format: 'es',
           entryFileNames: '[name].js',
           preserveModules: true,
           preserveModulesRoot: 'src'
@@ -45,6 +45,7 @@ export default defineConfig({
         },
         // {
         //   dir: 'dist',
+        //   inlineDynamicImports: false,
         //   format: 'iife',
         //   name: 'WDesignVue',
         //   entryFileNames: '[name].js',
@@ -63,7 +64,7 @@ export default defineConfig({
   plugins: [
     vue(),
     // dts({
-    //   outDir: 'es',
+    //   outDir: ['es', 'lib'],
     //   tsconfigPath: './tsconfig.declaration.json'
     // }),
   ]

@@ -18,7 +18,6 @@ export default function MarkdownPreview(options?: MarkdownPreviewOptions): Plugi
     let codePreviewSource: string;
 
 
-
     return {
         name: 'vite:markdown-preview',
         enforce: 'pre',
@@ -48,13 +47,13 @@ export default function MarkdownPreview(options?: MarkdownPreviewOptions): Plugi
 
                 console.log('transform: fence', info)
 
-                if (info === 'vue preview') {
+                if (info === 'vue1 preview') {
                     const content = token.content;
                     const result = `
                         <template>
                         ${extractBlock(content, 'template')}
                         </template>
-                        <script>
+                        <script setup>
                         ${extractBlock(content, 'script')}
                         </script>
                         <style>
@@ -63,14 +62,16 @@ export default function MarkdownPreview(options?: MarkdownPreviewOptions): Plugi
                     `;
                     return `<div class="vue-preview">${result}</div>`;
                 }
-                
+
                 return self.renderToken(tokens, idx, options);
             };
 
             const transformedCode = md.render(code);
 
+            console.log('transformedCode: (%s)', transformedCode)
+
             return {
-                code: `export default ${JSON.stringify(transformedCode)}`,
+                code: code,
                 map: null
             };
 
