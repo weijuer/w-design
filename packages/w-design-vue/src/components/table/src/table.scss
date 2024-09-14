@@ -222,7 +222,6 @@ $sizes: (
             &.is-row-selected {
               td {
                 cursor: default;
-                color: $theme-value;
                 background-color: rgba($theme-value, 0.2);
               }
             }

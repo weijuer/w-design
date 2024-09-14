@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@w-design/icons'
+// import '@w-design/icons'
 
 import wd from './index'
 

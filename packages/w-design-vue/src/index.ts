@@ -10,8 +10,8 @@ const install = (app: App) => {
 
     Object.keys(components).forEach((key) => {
         const component = components[key as keyof typeof components]
-        if ((component as SFCWithInstall<Plugin>).install) {
-            app.use((component as SFCWithInstall<Plugin>))
+        if ((component as unknown as SFCWithInstall<Plugin>).install) {
+            app.use((component as unknown as SFCWithInstall<Plugin>))
         }
     })
     app[INSTALLED_KEY] = true
