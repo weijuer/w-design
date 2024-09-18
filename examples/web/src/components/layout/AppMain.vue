@@ -71,12 +71,24 @@ router.afterEach(to => {
   .app-router-link {
     color: inherit;
     text-decoration: none;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.375rem 9px 0.375rem 9px;
+    height: var(--menu-item-height);
+    font-size: var(--w-font-size-medium);
+    border-radius: var(--w-radius-medium);
+    color: hsla(var(--color-contrast-high-hsl), 0.9);
+    text-decoration: none;
+    transition: all 0.2s;
   }
 }
 
 :deep(.app-main).app-main {
   padding: 24px 0;
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 126px);
 }
 
 .left-fade-enter-active {

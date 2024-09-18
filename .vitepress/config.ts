@@ -15,12 +15,12 @@ export default {
         base: './',
         nav: [
             { text: 'Get Started', link: '/' },
-            // { text: 'W Design', link: '/w-design-vue/' },
+            { text: 'W Design', link: '/w-design-vue/' },
             { text: 'W Use', link: '/w-use/', activeMatch: '/w-use/' },
         ],
         sidebar: {
             '/w-use': FunctionsSideBar,
-            // '/w-design-vue': await getFunctionsSideBar('w-desing-vue'),
+            '/w-design-vue': await getFunctionsSideBar('w-desing-vue'),
         }
     },
     srcDir: './packages',

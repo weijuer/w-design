@@ -44,12 +44,25 @@ function toggleTheme() {
   }
 
   .app-menu {
+    margin-left: auto;
     line-height: 64px;
     border-bottom: 0;
 
     .app-router-link {
       color: inherit;
       text-decoration: none;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.375rem 9px 0.375rem 9px;
+      height: var(--menu-item-height);
+      font-size: var(--w-font-size-medium);
+      border-radius: var(--w-radius-medium);
+      color: hsla(var(--color-contrast-high-hsl), 0.9);
+      text-decoration: none;
+      transition: all 0.2s;
     }
   }
 }
