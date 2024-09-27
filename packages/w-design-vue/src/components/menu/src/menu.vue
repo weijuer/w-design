@@ -1,5 +1,5 @@
 <template>
-  <ul role="menu" :class="menuClass" :style="menuStyle">
+  <ul data-role="menu" :class="menuClass" :style="menuStyle">
     <slot></slot>
   </ul>
 </template>

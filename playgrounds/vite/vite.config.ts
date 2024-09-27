@@ -11,6 +11,7 @@ export default defineConfig(({ command }) => ({
         : {
             alias: {
                 '@w-design/use': resolve(__dirname, '../../packages/w-use/src/index.ts'),
+                'w-design-vue': resolve(__dirname, '../../packages/w-design-vue/src/index.ts'),
             },
         },
     build: {
@@ -18,8 +19,8 @@ export default defineConfig(({ command }) => ({
         rollupOptions: {
             output: {
                 manualChunks: (id) => {
-                    if (id.includes('@w-design/'))
-                        return 'vueuse'
+                    if (id.includes('@w-design/use'))
+                        return 'w-use'
                     else
                         return 'vendor'
                 },
