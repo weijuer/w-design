@@ -1,0 +1,17 @@
+.w-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  color: #00000073;
+  transition: color 0.3s;
+
+  .w-breadcrumb__item-separator {
+    margin: 0 8px;
+    color: #00000073;
+  }
+
+  &:last-child {
+    .w-breadcrumb__item-separator {
+      display: none;
+    }
+  }
+}

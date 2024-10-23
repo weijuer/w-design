@@ -9,9 +9,5 @@ export const WMenuItem = withInstall(MenuItem)
 export const WMenuItemGroup = withInstall(MenuItemGroup)
 export const WSubMenu = withInstall(SubMenu)
 
-WMenu.WMeunItem = WMenuItem;
-WMenu.WMenuItemGroup = WMenuItemGroup;
-WMenu.WSubMenu = WSubMenu;
-
 export default WMenu
 

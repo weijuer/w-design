@@ -23,21 +23,8 @@ export const collapseProps = {
     },
 }
 
-export const collapseItemProps = {
-    title: {
-        type: [String, Object],
-        dafault: ''
-    },
-    name: {
-        type: [String, Number],
-        default: ''
-    },
-    disabled: Boolean,
-    readonly: Boolean,
-}
-
 export const collapseEmits = ['change', 'update:activeKey']
 
 export type CollapseProps = ExtractPropTypes<typeof collapseProps>
-export type CollapseItemProps = ExtractPropTypes<typeof collapseItemProps>
+
 export type CollapseEmits = typeof collapseEmits

@@ -1,10 +1,10 @@
 import Breadcrumb from './src/breadcrumb.vue'
-import BreadcrumbItem from './src/breadcrumb-item.vue'
 import { withInstall } from '@w-design/utils'
 
-export const WBreadcrumb = withInstall(Breadcrumb)
-export const WBreadcrumbItem = withInstall(BreadcrumbItem)
+export { breadcrumbProps } from './src/interface'
 
-WBreadcrumb.WBreadcrumbItem = WBreadcrumbItem;
+withInstall(Breadcrumb)
 
-export default WBreadcrumb;
+export const _BreadcrumbComponent = Breadcrumb
+
+export default Breadcrumb

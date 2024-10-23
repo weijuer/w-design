@@ -1,13 +1,17 @@
-
-import type { App, Plugin } from "vue"
+import type { App, Plugin, Component } from 'vue'
 
 export type SFCWithInstall<T> = T & Plugin
 
-export const withInstall = <T extends { name: string }>(comp: T) => {
+export const withInstall = <T = Component>(component: Component, target?: T): SFCWithInstall<T> => {
+  const sfcWithInstall = target ?? component
 
-    (comp as SFCWithInstall<T>).install = (app: App): void => {
-        app.component(comp.name, comp);
+  ;(sfcWithInstall as SFCWithInstall<T>).install = (app: App) => {
+    const { name } = component
+
+    if (name) {
+      app.component(name, component)
     }
+  }
 
-    return comp as SFCWithInstall<T>
+  return sfcWithInstall as SFCWithInstall<T>
 }

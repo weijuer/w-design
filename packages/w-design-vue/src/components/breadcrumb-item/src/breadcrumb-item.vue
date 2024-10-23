@@ -17,3 +17,5 @@ import { inject, toRefs } from 'vue'
 const breadcrumbContext: any = inject('breadcrumb', undefined)
 const { separator } = toRefs(breadcrumbContext)
 </script>
+
+<style src="./breadcrumb-item.scss" lang="scss" />

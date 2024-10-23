@@ -1,5 +1,5 @@
 import { createVNode, ref, render } from "vue"
-import { WModal as Modal } from '../../modal'
+import Modal from '../../modal'
 import { type ModalProps } from "src/components/modal/src/interface"
 import { isFunction, isPromise } from "src/components/_utils"
 

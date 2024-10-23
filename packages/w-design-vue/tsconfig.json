@@ -5,6 +5,8 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "jsxImportSource": "vue",
     "jsx": "preserve",
     "allowJs": true,
     "resolveJsonModule": true,
