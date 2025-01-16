@@ -1,4 +1,4 @@
-@import '../../_common/var';
+@use '../../_common/var' as *;
 
 :root {
   --w-avatar-width: 2em;

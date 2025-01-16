@@ -16,10 +16,8 @@
   </w-footer>
 </template>
 
-<script>
-export default {
-  name: 'Footer'
-};
+<script setup>
+import { WFooter } from 'w-design-vue';
 </script>
 
 <style lang="scss" scoped>

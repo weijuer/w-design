@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-// import Demo from './components/table/demo/usage.vue'
-import Demo from './components/menu/demo/demo1.vue'
+import Demo from './components/table/demo/usage.vue'
+// import Demo from './components/input-number/demo/demo1.vue'
 // import Demo from './components/input-mask/demo/demo1.vue'
 </script>
 

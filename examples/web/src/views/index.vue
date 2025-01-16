@@ -3,7 +3,6 @@
     <div class="hero">
       <w-icon name="delete" />
 
-
       <w-button type="primary" @click="visible = true">打开对话框</w-button>
       <w-modal v-model="visible" @close="onClose" />
 
@@ -19,12 +18,12 @@ export default {
 
 <script setup>
 import { ref } from 'vue';
+import { WButton, WIcon, WModal } from 'w-design-vue';
 
 const visible = ref(false);
 const onClose = () => {
   visible.value = false;
 };
-
 
 </script>
 

@@ -1,0 +1,21 @@
+
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": false,
+    "lib": ["ESNext", "DOM"],
+    "jsx": "preserve",
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*", "./mock/*"]
+    },
+    "types": []
+  },
+  "include": ["mock/*.js", "src/**/*.js", "src/**/*.vue", "vite.config.js"],
+  "exclude": ["dist", "node_modules"]
+}

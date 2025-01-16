@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite';
-import { resolve } from 'node:path';
-import vue from '@vitejs/plugin-vue';
-import dts from "vite-plugin-dts";
+import { defineConfig } from 'vite'
+import { resolve } from 'node:path'
+import vue from '@vitejs/plugin-vue'
+// import dts from "vite-plugin-dts";
 
 export default defineConfig({
   resolve: {
@@ -16,9 +16,20 @@ export default defineConfig({
       Hooks: resolve('src/hooks'),
       Mocks: resolve('src/mocks'),
       Utils: resolve('src/utils'),
-      _Common: resolve('src/components/_common'),
+      _Common: resolve('src/components/_common')
     },
     dedupe: ['vue']
+  },
+  css: {
+    preprocessorOptions: {
+      sass: {
+        additionalData: `@import (reference) "${resolve('src/style/variables.less')}";`
+      }
+    }
+  },
+  optimizeDeps: {
+    include: ['axios', 'pinia'],
+    exclude: []
   },
   build: {
     minify: false,
@@ -42,7 +53,7 @@ export default defineConfig({
           entryFileNames: '[name].js',
           preserveModules: true,
           preserveModulesRoot: 'src'
-        },
+        }
         // {
         //   dir: 'dist',
         //   inlineDynamicImports: false,
@@ -58,14 +69,14 @@ export default defineConfig({
     },
     lib: {
       entry: 'src/index.ts',
-      name: 'WDesignVue',
-    },
+      name: 'WDesignVue'
+    }
   },
   plugins: [
-    vue(),
+    vue()
     // dts({
     //   outDir: ['es', 'lib'],
     //   tsconfigPath: './tsconfig.declaration.json'
     // }),
   ]
-});
+})

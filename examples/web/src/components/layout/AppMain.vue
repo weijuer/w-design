@@ -38,8 +38,9 @@ export default {
 </script>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { WLayout, WMain, WBreadcrumb, WBreadcrumbItem, WAside, WMenu, WMenuItem } from 'w-design-vue';
 
 const router = useRouter()
 const route = useRoute()
@@ -56,7 +57,7 @@ watch(
 )
 
 // 获取路由面包屑
-router.afterEach(to => {
+router.afterEach(() => {
   routeList.value = route.matched.filter(route => {
     return route.path !== '/index'
   })

@@ -23,6 +23,7 @@ export default {
 <script setup>
 import { ref } from 'vue'
 const theme = ref('moon')
+import { WHeader, WMenu, WMenuItem } from 'w-design-vue';
 
 // 切换暗黑模式
 function toggleTheme() {
