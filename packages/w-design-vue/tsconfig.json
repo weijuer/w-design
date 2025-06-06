@@ -17,7 +17,7 @@
     "skipLibCheck": true,
     "noEmit": true,
     "types": [],
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@w-design/*": ["packages/*"],
       "Hooks": ["src/hooks"],

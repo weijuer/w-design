@@ -14,7 +14,11 @@ export default {
 <script setup lang="ts">
 import { inject, toRefs } from 'vue'
 
-const breadcrumbContext: any = inject('breadcrumb', undefined)
+interface BreadcrumbContext {
+  separator: string
+}
+
+const breadcrumbContext = inject<BreadcrumbContext>('breadcrumb', { separator: '•' })
 const { separator } = toRefs(breadcrumbContext)
 </script>
 

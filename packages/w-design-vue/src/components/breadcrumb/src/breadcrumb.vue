@@ -1,5 +1,5 @@
 <template>
-  <nav class="w-breadcrumbs" aria-label="Breadcrumbs">
+  <nav class="w-breadcrumb" aria-label="Breadcrumb">
     <ol ref="_ref" class="w-breadcrumb">
       <slot></slot>
     </ol>
