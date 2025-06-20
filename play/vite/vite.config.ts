@@ -1,6 +1,8 @@
-import { resolve } from 'node:path'
-import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
+import { fileURLToPath, URL } from 'node:url'
+import { defineConfig } from 'vite'
+
+const resolve = (path: string) => fileURLToPath(new URL(path, import.meta.url))
 
 export default defineConfig(({ command }) => ({
     plugins: [Vue()],
@@ -8,10 +10,20 @@ export default defineConfig(({ command }) => ({
         command === 'build'
             ? {}
             : {
-                  alias: {
-                      '@w-design/use': resolve(__dirname, '../../packages/w-use/src/index.ts'),
-                      'w-design-vue': resolve(__dirname, '../../packages/w-design-vue/src/index.ts')
-                  }
+                  alias: [
+                      {
+                          find: '@',
+                          replacement: resolve('src')
+                      },
+                      {
+                          find: 'w-design-vue',
+                          replacement: resolve('../../packages/design-vue')
+                      },
+                      {
+                          find: /^@w-design\/(.*)$/,
+                          replacement: resolve('../../packages/$1')
+                      }
+                  ]
               },
     build: {
         minify: false,

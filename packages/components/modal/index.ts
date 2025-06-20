@@ -1,6 +1,8 @@
-import Modal from './src/modal.vue'
 import { withInstall } from '@w-design/utils'
+import Modal from './src/modal.vue'
 
-withInstall(Modal)
+export const WModal = withInstall(Modal)
 
-export default Modal
+export default WModal
+
+export * from './src/interface'

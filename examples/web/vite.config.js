@@ -1,24 +1,38 @@
-import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import { resolve } from 'path';
+import { fileURLToPath, URL } from 'node:url';
+import Components from 'unplugin-vue-components/vite';
+import { defineConfig } from 'vite';
 import pages from 'vite-plugin-pages';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
-import Components from 'unplugin-vue-components/vite';
-import WDesignVueResolver from 'w-design-vue/resolver';
+// import WDesignVueResolver from 'w-design-vue/resolver';
 
-export default defineConfig({
+const resolve = (path) => fileURLToPath(new URL(path, import.meta.url));
+
+const baseAlias = [
+  { find: '@', replacement: resolve('src') },
+  { find: 'packages', replacement: resolve('packages') },
+  { find: 'lib', replacement: resolve('lib') },
+  { find: 'Layout', replacement: resolve('src/components/layout') },
+  { find: 'Widgets', replacement: resolve('src/components/widgets') },
+  { find: 'Assets', replacement: resolve('src/assets') },
+  { find: 'Hooks', replacement: resolve('src/hooks') },
+  { find: 'Utils', replacement: resolve('src/utils') },
+];
+
+const devAlias = [
+  {
+    find: 'w-design-vue',
+    replacement: resolve('../../packages/design-vue'),
+  },
+  {
+    find: /^@w-design\/(.*)$/,
+    replacement: resolve('../../packages/$1'),
+  },
+];
+
+export default defineConfig(({ command }) => ({
   resolve: {
-    alias: {
-      '@': resolve('src'),
-      packages: resolve('packages'),
-      lib: resolve('lib'),
-      Layout: resolve('src/components/layout'),
-      Widgets: resolve('src/components/widgets'),
-      Assets: resolve('src/assets'),
-      Hooks: resolve('src/hooks'),
-      Utils: resolve('src/utils'),
-      // 'w-design-vue': resolve('../../packages/w-design-vue/src/index.ts'),
-    },
+    alias: command === 'serve' ? [...baseAlias, ...devAlias] : baseAlias,
     dedupe: ['vue'],
   },
   css: {
@@ -75,10 +89,10 @@ export default defineConfig({
       extensions: ['vue'],
       // UI库
       resolvers: [
-        WDesignVueResolver({
-          importStyle: 'css',
-        }),
+        // WDesignVueResolver({
+        //   importStyle: 'css',
+        // }),
       ],
     }),
   ],
-});
+}));

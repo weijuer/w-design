@@ -1,4 +1,4 @@
-import { ref, Ref, toRefs, computed } from 'vue'
+import { computed, ref, Ref } from 'vue'
 import { MaybeRefOrGetter, PointerType, Position, Size, toValue } from '../_utils'
 import { useEventListener } from '../useEventListener'
 
@@ -172,7 +172,6 @@ export function useResizable<T>(target: Ref<T>, options: useResizableOptions = {
     useEventListener(draggingElement, 'pointerup', end, config)
 
     return {
-        ...toRefs(position),
         position,
         isResizing,
         style: computed(() => {

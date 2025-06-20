@@ -5,7 +5,7 @@ import { useResizable } from '@w-design/use'
 const resizerRef = ref(null)
 const triggerRef = ref(null)
 
-const { x, y, style, isResizing } = useResizable(resizerRef, {
+const { position, style, isResizing } = useResizable(resizerRef, {
   initialValue: { x: 40, y: 40 },
   handle: triggerRef,
   axis: 'x'
@@ -14,7 +14,7 @@ const { x, y, style, isResizing } = useResizable(resizerRef, {
 
 <template>
   <div ref="resizerRef" :style="style" :data-resizing="isResizing" class="resizable">
-    <span>I am at {{ x }}, {{ y }}</span>
+    <span>I am at {{ position.x }}, {{ position.y }}</span>
     <div ref="triggerRef" class="resizer resizer--right"></div>
     <div class="resizer resizer--bottom"></div>
   </div>

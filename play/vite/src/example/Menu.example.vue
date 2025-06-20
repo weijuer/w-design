@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from 'vue'
-import { Menu as WMenu, MenuItem as WMenuItem } from 'w-design-vue';
+import { WMenu, WMenuItem } from 'w-design-vue';
 import { uuid } from '@w-design/utils'
 
 const getItem = (label, value, icon, children, type = '') => {

@@ -11,7 +11,7 @@ import Menu from './example/Menu.example.vue'
     </template>
 </div> -->
 
-  <!-- <Resize></Resize> -->
+  <Resize></Resize>
 
-  <Menu></Menu>
+  <!-- <Menu></Menu> -->
 </template>
