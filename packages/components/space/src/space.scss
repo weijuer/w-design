@@ -1,0 +1,56 @@
+:root {
+  --w-space-padding: 0 4px;
+  --w-space-color: white;
+  --w-space-gap: 8px;
+}
+
+$aligns: (
+  start: flex-start,
+  center: center,
+  end: flex-end,
+  baseline: baseline
+);
+
+$justifies: (
+  start: flex-start,
+  center: center,
+  end: flex-end,
+  space-around: space-around,
+  space-between: space-between,
+  space-evenly: space-evenly
+);
+
+.w-space {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--w-space-gap);
+
+  &.w-space__vertical {
+    flex-direction: column;
+  }
+
+  &.is-fill {
+    display: flex;
+    align-items: normal;
+    width: 100%;
+  }
+
+  &.is-wrap {
+    flex-wrap: wrap;
+  }
+
+  // align
+  @each $key, $val in $aligns {
+    &.w-space__align-#{$key} {
+      align-items: #{$val};
+    }
+  }
+
+  // justify
+  @each $key, $val in $justifies {
+    &.w-space__justify-#{$key} {
+      justify-content: #{$val};
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "composite": true,
+        "module": "ESNext",
+        "types": ["node"],
+        "skipLibCheck": true
+    },
+    "include": ["packages/design-vue/package.json"],
+    "exclude": ["**/dist", "**/node_modules"]
+}

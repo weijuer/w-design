@@ -1,4 +1,6 @@
 packages:
-  - 'packages/**'
-  - 'examples/**'
-  - '!playground'
+    - 'packages/*'
+    - 'apps/*'
+    - 'tools/*'
+    - 'examples/*'
+    - 'play'

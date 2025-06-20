@@ -1,0 +1,69 @@
+@use "sass:color";
+@use "sass:map";
+@use '../../_common/var' as *;
+
+.w-alert {
+  padding: var(--space-sm);
+  font-size: var(--text-sm);
+  background-color: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.2);
+  border-radius: var(--w-radius-medium);
+  color: var(--color-contrast-higher);
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+
+  &.active {
+    position: static;
+    clip: auto;
+    clip-path: none;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+
+    &-text {
+      font-weight: 700;
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    margin-right: var(--space-2xs);
+    font-size: 24px;
+    border-radius: var(--w-radius-large);
+    background-color: color.adjust($color: map.get($themes, 'primary'), $alpha: -0.75);
+    color: color.adjust($color: map.get($themes, 'primary'), $alpha: -0.35);
+  }
+
+  &__description {
+    padding-left: 32px;
+    margin-top: var(--space-3xs);
+    line-height: 1.4;
+    opacity: 0.6;
+  }
+
+  .w-alert__close-btn {
+    font-size: 1.75rem;
+    background-color: transparent;
+    border: 0;
+  }
+
+  // themes
+  @each $key, $val in $themes {
+    &.w-alert__#{$key} {
+      background-color: color.adjust($color: $val, $alpha: -0.85);
+
+      .w-alert__icon {
+        background-color: color.adjust($color: $val, $alpha: -0.75);
+        color: color.adjust($color: $val, $alpha: -0.25);
+      }
+    }
+  }
+}

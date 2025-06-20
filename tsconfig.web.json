@@ -1,0 +1,11 @@
+{
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "composite": true,
+        "jsx": "preserve",
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "skipLibCheck": true
+    },
+    "include": ["packages", "packages/design-vue/package.json", "typings/env.d.ts"],
+    "exclude": ["node_modules", "**/dist"]
+}

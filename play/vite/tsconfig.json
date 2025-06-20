@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "jsx": "preserve",
+        "strict": true,
+        "target": "ES2015",
+        "module": "ESNext",
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "moduleResolution": "bundler",
+        "lib": ["esnext", "dom"],
+        "allowJs": true,
+        "baseUrl": "./",
+        "paths": {
+            "@w-design/use": ["../../packages/w-use/src/index.ts"]
+        }
+    }
+}

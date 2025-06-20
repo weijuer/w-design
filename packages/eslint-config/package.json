@@ -1,0 +1,46 @@
+{
+    "name": "@w-design/eslint-config",
+    "version": "1.0.0",
+    "description": "eslint config of W-Design",
+    "type": "module",
+    "main": "index.js",
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
+    "scripts": {
+        "update:deps": "pnpm update --latest --interactive"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/weijuer/w-design-vue.git",
+        "directory": "packages/eslint-config"
+    },
+    "bugs": "https://github.com/weijuer/w-design-vue/issues",
+    "author": "Weijuer",
+    "license": "MIT",
+    "dependencies": {
+        "@eslint/js": "^9.29.0",
+        "eslint-config-prettier": "^10.1.5",
+        "eslint-plugin-vue": "^10.2.0",
+        "globals": "^16.2.0",
+        "typescript-eslint": "^8.34.0"
+    },
+    "devDependencies": {
+        "eslint": "^9.29.0",
+        "typescript": "^5.8.3"
+    },
+    "peerDependencies": {
+        "eslint": "^9.10.0",
+        "eslint-plugin-vue": "^9.28.0 || ^10.0.0",
+        "typescript": ">=4.8.4"
+    },
+    "peerDependenciesMeta": {
+        "typescript": {
+            "optional": true
+        }
+    },
+    "engines": {
+        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+    }
+}

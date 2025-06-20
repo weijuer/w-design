@@ -1,0 +1,149 @@
+@use 'sass:list';
+
+$theme-bg: #00a2ff;
+$step-text-color: #fff;
+
+[data-target-highlighted] {
+    position: relative !important;
+    z-index: 2023 !important;
+}
+
+.w-guide {
+
+    .w-guide-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        zoom: 1;
+        z-index: 2020;
+        transition: all .3s;
+    }
+
+    .w-guide-target {
+        position: fixed;
+        z-index: 2021;
+        background: #fff;
+        box-shadow: inset 0px 0px 2px 2px $theme-bg;
+        transition: all .3s;
+    }
+}
+
+
+// step
+$positions: top right bottom left;
+
+@function opposite-position($position) {
+
+    @if $position ==top {
+        @return bottom
+    }
+
+    @if $position ==bottom {
+        @return top
+    }
+
+    @if $position ==left {
+        @return right
+    }
+
+    @if $position ==right {
+        @return left
+    }
+
+}
+
+@mixin tail($position) {
+    $pos: opposite-position($position);
+
+    content: '';
+    display: inline-block;
+    position: absolute;
+    #{$pos}: 100%;
+
+    @if list.index(left right, $position) != null {
+        top: 8px;
+    }
+
+    @if list.index(top bottom, $position) != null {
+        left: 8px;
+    }
+
+    border: 8px solid transparent;
+    border-#{$pos}-color: $theme-bg;
+}
+
+@mixin tailMaker($positions) {
+    @each $pos in $positions {
+        &.#{$pos} {
+            &:after {
+                @include tail($pos)
+            }
+        }
+    }
+}
+
+.w-step {
+    min-width: 240px;
+    max-width: 300px;
+    margin: 0;
+    padding: 20px 14px;
+    display: inline-block;
+    position: fixed;
+    z-index: 2021;
+    font-size: 14px;
+    line-height: 1.25;
+    color: $step-text-color;
+    background: $theme-bg;
+    border-radius: 4px;
+    transition: all .3s ease-out;
+
+    &.active {
+        display: block;
+    }
+
+    .w-step__header {
+        margin-bottom: 6px;
+        font-weight: 600;
+        line-height: 1.5;
+        zoom: 1;
+    }
+
+    .w-step__content {
+        line-height: 1.5;
+        font-weight: 400;
+        zoom: 1;
+    }
+
+    .w-step__actions {
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-end;
+
+        .w-step__actions-btn {
+            margin-right: 8px;
+            color: $step-text-color;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    @include tailMaker($positions)
+}
+
+/* 效果过程 */
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.8s linear;
+}
+
+/* 进场的瞬间与离场的效果添加 */
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+    transform: translateX(200px);
+}

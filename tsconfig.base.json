@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "rootDir": ".",
+        "baseUrl": ".",
+        "outDir": "dist",
+        "target": "ESNext",
+        "module": "ESNext",
+        "strict": true,
+        "allowJs": false,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        // 产物不消除注释
+        "removeComments": false,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "sourceMap": false,
+        "types": [],
+        "paths": {
+            "@w-design/components": ["packages/components"],
+            "@w-design/components/*": ["packages/components/*"],
+            "@w-design/utils": ["packages/utils"],
+            "@w-design/utils/*": ["packages/utils/*"],
+            "@w-design/use": ["packages/use"],
+            "@w-design/use/*": ["packages/use/*"],
+            "w-design-vue": ["packages/design-vue"]
+        }
+    },
+    "preserveSymlinks": true
+}

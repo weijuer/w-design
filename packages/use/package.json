@@ -1,0 +1,49 @@
+{
+    "name": "@w-design/use",
+    "type": "module",
+    "version": "1.0.0",
+    "description": "A Collection of essential Vue Composition Utilities",
+    "main": "lib/index.cjs.js",
+    "module": "index.ts",
+    "typings": "lib/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./lib/index.d.ts",
+            "import": "./index.ts",
+            "require": "./lib/index.cjs.js"
+        }
+    },
+    "sideEffects": false,
+    "files": [
+        "lib"
+    ],
+    "scripts": {
+        "dev": "rollup -wc",
+        "build": "rimraf lib && rollup -c",
+        "build:types": "tsc -p ./tsconfig.json --emitDeclarationOnly"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/weijuer/w-design-vue.git",
+        "directory": "packages/w-use"
+    },
+    "homepage": "https://github.com/weijuer/w-design-vue/tree/master/#readme",
+    "bugs": "https://github.com/weijuer/w-design-vue/issues",
+    "author": "Weijuer<https://github.com/weijuer>",
+    "license": "MIT",
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^25.0.7",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-node-resolve": "^15.2.3",
+        "@rollup/plugin-terser": "^0.4.4",
+        "@rollup/plugin-typescript": "^11.1.6",
+        "rollup": "^4.14.1",
+        "rollup-plugin-dts": "^6.1.0",
+        "typescript": "^5.4.5",
+        "vue": "^3.4.21"
+    }
+}
