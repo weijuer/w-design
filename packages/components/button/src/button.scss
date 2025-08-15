@@ -1,180 +1,184 @@
-@use "sass:color";
-@use "sass:map";
+@use 'sass:color';
+@use 'sass:map';
 @use '../../_common/var' as *;
 @use '../../_common/animate' as *;
 
 :root {
-  --w-button-size: 14px;
-  --w-button-border-radius: 6px;
-  --w-button-icon-size: 34px;
-  --w-button-height: 34px;
-  --w-button-font-size: 1em;
-  --w-button-padding-v: 0.5em;
-  --w-button-padding-h: 1em;
-  --w-button-gap: 6px;
+    --w-button-size: 14px;
+    --w-button-border-radius: 6px;
+    --w-button-icon-size: 34px;
+    --w-button-height: 34px;
+    --w-button-font-size: 1em;
+    --w-button-padding-v: 0.5em;
+    --w-button-padding-h: 1em;
+    --w-button-gap: 6px;
 }
 
 $btn-sizes: (
-  tiny: 0.5em,
-  small: 0.8em,
-  default: 1em,
-  medium: 1.2em,
-  large: 1.4em
+    tiny: 0.5em,
+    small: 0.8em,
+    default: 1em,
+    medium: 1.2em,
+    large: 1.4em
 );
 
+%button-base {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .w-button {
-  margin: 0;
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--w-button-gap);
-  white-space: nowrap;
-  font-size: var(--w-button-font-size, 1em);
-  line-height: 1;
-  user-select: none;
-  touch-action: manipulation;
-  padding-top: var(--w-button-padding-v);
-  padding-bottom: var(--w-button-padding-v);
-  padding-left: var(--w-button-padding-h);
-  padding-right: var(--w-button-padding-h);
-  cursor: pointer;
-  -webkit-font-smoothing: antialiased;
-  -webkit-tap-highlight-color: transparent;
-  border: 1px solid transparent;
-  border-radius: var(--w-button-border-radius, 6px);
-  transition:
-    outline-width 0.2s,
-    transform 0.2s;
+    @extend %button-base;
+    margin: 0;
+    position: relative;
+    gap: var(--w-button-gap);
+    white-space: nowrap;
+    font-size: var(--w-button-font-size, 1em);
+    line-height: 1;
+    user-select: none;
+    touch-action: manipulation;
+    padding-top: var(--w-button-padding-v);
+    padding-bottom: var(--w-button-padding-v);
+    padding-left: var(--w-button-padding-h);
+    padding-right: var(--w-button-padding-h);
+    cursor: pointer;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--w-button-border-radius, 6px);
+    transition:
+        outline-width 0.2s,
+        transform 0.2s;
 
-  & {
-    background-color: #fff;
-    border-color: #e0e0e6;
-    border-style: solid;
+    & {
+        background-color: #fff;
+        border-color: #e0e0e6;
+        border-style: solid;
 
-    &:not(:disabled):hover {
-      color: map.get($themes, 'primary');
-      border-color: map.get($themes, 'primary');
-    }
-  }
-
-  &.is-dashed {
-    border-style: dashed;
-  }
-
-  &.is-round {
-    --w-button-border-radius: 999px;
-  }
-
-  &.is-plain {
-    background-color: transparent;
-  }
-
-  &.is-disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
-  &.is-ringed {
-    &:not(:disabled):focus,
-    &:not(:disabled):focus-visible {
-      outline: 2px solid map.get($themes, 'primary');
-      outline-offset: 2px;
+        &:not(:disabled):hover {
+            color: map.get($themes, 'primary');
+            border-color: map.get($themes, 'primary');
+        }
     }
 
-    &::after {
-      // box-shadow: 0 0 0 8px currentColor;
-      outline: 8px solid currentColor;
-    }
-  }
-
-  &.is-flashed {
-    &:not(:disabled):active {
-      &::after {
-        opacity: 1;
-        outline: none;
-        box-shadow: none;
-        transition: none;
-      }
+    &.is-dashed {
+        border-style: dashed;
     }
 
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      opacity: 0;
-      transition: 0.45s;
+    &.is-round {
+        --w-button-border-radius: 999px;
     }
-  }
 
-  &.w-button__icon {
-    padding: 0;
-    width: var(--w-button-icon-size);
-    height: var(--w-button-icon-size);
-    font-size: 1.25rem;
-  }
-
-  &.is-loading {
-    .w-button__loading {
-      animation: spin 1.5s infinite linear;
+    &.is-plain {
+        background-color: transparent;
     }
-  }
 
-  // sizes
-  @each $key, $value in $btn-sizes {
-    &.w-button__#{$key} {
-      --w-button-font-size: #{$value};
+    &.is-disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
     }
-  }
 
-  &:not(:disabled):active {
-    transform: translateY(2px);
-  }
-
-  // colors
-  @each $theme-name, $theme-value in $themes {
-    &.w-button__#{$theme-name} {
-      color: if($theme-name == 'light', #888, #fff);
-      background-color: $theme-value;
-      border-color: $theme-value;
-
-      &:active,
-      &:hover {
-        color: if($theme-name == 'light', #888, #fff);
-        background-color: color.adjust($theme-value, $lightness: -10%);
-        border-color: color.adjust($theme-value, $lightness: -10%);
-      }
-
-      &.is-ringed {
+    &.is-ringed {
         &:not(:disabled):focus,
         &:not(:disabled):focus-visible {
-          outline: 2px solid $theme-value;
-          outline-offset: 2px;
+            outline: 2px solid map.get($themes, 'primary');
+            outline-offset: 2px;
         }
 
         &::after {
-          // box-shadow: 0 0 0 8px $theme-value;
-          outline: 8px solid $theme-value;
+            // box-shadow: 0 0 0 8px currentColor;
+            outline: 8px solid currentColor;
         }
-      }
-
-      &.is-plain {
-        color: $theme-value;
-        background-color: transparent;
-      }
-
-      &.is-outlined {
-        color: $theme-value;
-        background-color: transparent;
-        border-color: currentColor;
-      }
-
-      &.is-light {
-        color: var(--color-contrast-higher);
-        border-color: $theme-value;
-        background-color: color.adjust($color: $theme-value, $alpha: -0.65);
-      }
     }
-  }
+
+    &.is-flashed {
+        &:not(:disabled):active {
+            &::after {
+                opacity: 1;
+                outline: none;
+                box-shadow: none;
+                transition: none;
+            }
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            opacity: 0;
+            transition: 0.45s;
+        }
+    }
+
+    &.w-button__icon {
+        padding: 0;
+        width: var(--w-button-icon-size);
+        height: var(--w-button-icon-size);
+        font-size: 1.25rem;
+    }
+
+    &.is-loading {
+        .w-button__loading {
+            animation: spin 1.5s infinite linear;
+        }
+    }
+
+    // sizes
+    @each $key, $value in $btn-sizes {
+        &.w-button__#{$key} {
+            --w-button-font-size: #{$value};
+        }
+    }
+
+    &:not(:disabled):active {
+        transform: translateY(2px);
+    }
+
+    // colors
+    @each $theme-name, $theme-value in $themes {
+        &.w-button__#{$theme-name} {
+            color: if($theme-name == 'light', #888, #fff);
+            background-color: $theme-value;
+            border-color: $theme-value;
+
+            &:active,
+            &:hover {
+                color: if($theme-name == 'light', #888, #fff);
+                background-color: color.adjust($theme-value, $lightness: -10%);
+                border-color: color.adjust($theme-value, $lightness: -10%);
+            }
+
+            &.is-ringed {
+                &:not(:disabled):focus,
+                &:not(:disabled):focus-visible {
+                    outline: 2px solid $theme-value;
+                    outline-offset: 2px;
+                }
+
+                &::after {
+                    // box-shadow: 0 0 0 8px $theme-value;
+                    outline: 8px solid $theme-value;
+                }
+            }
+
+            &.is-plain {
+                color: $theme-value;
+                background-color: transparent;
+            }
+
+            &.is-outlined {
+                color: $theme-value;
+                background-color: transparent;
+                border-color: currentColor;
+            }
+
+            &.is-light {
+                color: var(--color-contrast-higher);
+                border-color: $theme-value;
+                background-color: color.adjust($color: $theme-value, $alpha: -0.65);
+            }
+        }
+    }
 }

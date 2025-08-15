@@ -1,0 +1,6 @@
+//  Calculate a spacing value for consistent margins and padding
+//  @param {number} $multiplier - The multiplier to apply to the base spacing value
+//  @return {number} The calculated spacing value
+@function space($multiplier: 1) {
+    @return $multiplier * 8px;
+}
