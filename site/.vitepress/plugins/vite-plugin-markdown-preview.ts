@@ -1,22 +1,20 @@
 import type { Plugin } from 'vite'
-import MarkdownIt from 'markdown-it';
+import MarkdownIt from 'markdown-it'
 
 export type MarkdownPreviewOptions = {
     component?: string
 }
 
 const extractBlock = (content: string, type: string) => {
-    const regex = new RegExp(`<${type}[^>]*>([\\s\\S]*?)<\\/${type}>`, 'i');
-    const match = content.match(regex);
-    return match ? match[1].trim() : '';
+    const regex = new RegExp(`<${type}[^>]*>([\\s\\S]*?)<\\/${type}>`, 'i')
+    const match = content.match(regex)
+    return match ? match[1].trim() : ''
 }
 
 export default function MarkdownPreview(options?: MarkdownPreviewOptions): Plugin {
-
     const virtualModuleId = 'virtual:markdown-preview'
     const resolvedVirtualModuleId = '\0' + virtualModuleId
-    let codePreviewSource: string;
-
+    let codePreviewSource: string
 
     return {
         name: 'vite:markdown-preview',
@@ -34,21 +32,20 @@ export default function MarkdownPreview(options?: MarkdownPreviewOptions): Plugi
             }
         },
         async transform(code, id) {
-
             if (!id.endsWith('.md')) {
                 return null
             }
 
-            const md = new MarkdownIt();
+            const md = new MarkdownIt()
             // 自定义渲染器
             md.renderer.rules.fence = (tokens, idx, options, env, self) => {
-                const token = tokens[idx];
-                const info = token.info ? token.info.trim() : '';
+                const token = tokens[idx]
+                const info = token.info ? token.info.trim() : ''
 
                 console.log('transform: fence', info)
 
                 if (info === 'vue1 preview') {
-                    const content = token.content;
+                    const content = token.content
                     const result = `
                         <template>
                         ${extractBlock(content, 'template')}
@@ -59,21 +56,21 @@ export default function MarkdownPreview(options?: MarkdownPreviewOptions): Plugi
                         <style>
                         ${extractBlock(content, 'style')}
                         </style>
-                    `;
-                    return `<div class="vue-preview">${result}</div>`;
+                    `
+                    return `<div class="vue-preview">${result}</div>`
                 }
 
-                return self.renderToken(tokens, idx, options);
-            };
+                return self.renderToken(tokens, idx, options)
+            }
 
-            const transformedCode = md.render(code);
+            const transformedCode = md.render(code)
 
             console.log('transformedCode: (%s)', transformedCode)
 
             return {
                 code: code,
                 map: null
-            };
+            }
 
             // Transform vue preview code blocks
             const vuePreviewBlockRegx = /```vue preview?\s*([\s\S]*?)\s*```/g
@@ -83,7 +80,6 @@ export default function MarkdownPreview(options?: MarkdownPreviewOptions): Plugi
             const styleRegx = /<style.*?>([\s\S]*?)<\/style>/g
 
             code = code.replace(vuePreviewBlockRegx, (match, code) => {
-
                 const [template] = code.match(templateRegx) || ['']
                 const [script] = code.match(scriptRegx) || ['']
                 const [style] = code.match(styleRegx) || ['']
@@ -100,8 +96,8 @@ export default function MarkdownPreview(options?: MarkdownPreviewOptions): Plugi
 
             return {
                 code: code,
-                map: null,
+                map: null
             }
-        },
+        }
     }
 }

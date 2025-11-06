@@ -1,0 +1,24 @@
+@import './variables.css';
+
+.w-btn {
+    padding: 4px 15px;
+    border-radius: 2px;
+    border: 1px solid #d9d9d9;
+    cursor: pointer;
+
+    &:hover {
+        border-color: var(--w-primary-color);
+        color: var(--w-primary-color);
+    }
+
+    &.w-btn-primary {
+        background: var(--w-primary-color);
+        color: #fff;
+        border-color: var(--w-primary-color);
+
+        &:hover {
+            background: var(--w-primary-color-hover);
+            border-color: var(--w-primary-color-hover);
+        }
+    }
+}

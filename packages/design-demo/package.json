@@ -1,0 +1,38 @@
+{
+    "name": "w-design-demo",
+    "version": "0.0.1",
+    "private": false,
+    "description": "A Vue 3 UI Library like Ant Design Vue",
+    "license": "MIT",
+    "type": "module",
+    "main": "./lib/index.js",
+    "module": "./es/index.js",
+    "types": "./es/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./es/index.js",
+            "require": "./lib/index.js",
+            "types": "./es/index.d.ts"
+        },
+        "./dist/style.css": "./dist/my-antd-lib.css",
+        "./es/*": "./es/*",
+        "./lib/*": "./lib/*"
+    },
+    "files": [
+        "dist",
+        "es",
+        "lib"
+    ],
+    "scripts": {
+        "clean": "rm -rf dist es lib",
+        "build:umd": "vite build --config vite.config.umd.ts",
+        "build:es": "vite build --config vite.config.es.ts",
+        "build:lib": "vite build --config vite.config.lib.ts",
+        "build": "pnpm run clean && pnpm run build:umd && pnpm run build:es && pnpm run build:lib"
+    },
+    "peerDependencies": {
+        "vue": "^3.2.0"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}

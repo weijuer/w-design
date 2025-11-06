@@ -1,20 +1,17 @@
 {
     "compilerOptions": {
-        "rootDir": ".",
-        "baseUrl": ".",
-        "outDir": "dist",
         "target": "ESNext",
         "module": "ESNext",
+        "moduleResolution": "node",
         "strict": true,
+        "jsx": "preserve",
         "allowJs": false,
         "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        // 产物不消除注释
-        "removeComments": false,
+        "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "moduleResolution": "node",
         "resolveJsonModule": true,
         "sourceMap": false,
+        "baseUrl": ".",
         "types": [],
         "paths": {
             "@w-design/components": ["packages/components"],

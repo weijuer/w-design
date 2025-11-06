@@ -2,7 +2,7 @@
     "name": "w-design-vue",
     "version": "1.0.0",
     "title": "W Design Vue",
-    "description": "A simple components library based on Vue 3.x",
+    "description": "A web components library based on Vue 3.x",
     "main": "lib/index.js",
     "module": "es/index.js",
     "unpkg": "dist/w-design-vue.min.js",
@@ -10,33 +10,32 @@
     "typings": "es/index.d.ts",
     "exports": {
         ".": {
-            "typings": "./es/index.d.ts",
             "import": "./es/index.js",
-            "require": "./lib/index.js"
+            "require": "./lib/index.js",
+            "types": "./es/index.d.ts"
         },
-        "./es": {
-            "types": "./es/index.d.ts",
-            "import": "./es/index.mjs"
-        },
-        "./lib": {
-            "types": "./lib/index.d.ts",
-            "require": "./lib/index.js"
-        },
+        "./dist/style.css": "./dist/style.css",
+        "./es": "./es/*",
+        "./lib": "./lib/*",
         "./resolver": {
             "import": "./es/resolver/index.js",
             "require": "./lib/resolver/index.js"
-        },
-        "./*": "./*"
+        }
     },
     "files": [
         "dist",
-        "lib",
         "es",
+        "lib",
         "README.md"
     ],
     "scripts": {
         "dev": "vite",
-        "build": "vue-tsc && vite build",
+        "clean": "rimraf 'dist/*' 'lib/*' 'es/*'",
+        "build:umd": "vite build --config vite.config.umd.ts",
+        "build:es": "vite build --config vite.config.es.ts",
+        "build:lib": "vite build --config vite.config.lib.ts",
+        "build": "pnpm run clean && pnpm run build:umd && pnpm run build:es && pnpm run build:lib",
+        "build:ts": "vue-tsc && vite build",
         "build:package": "rollup -c",
         "preview": "vite preview"
     },

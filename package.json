@@ -2,6 +2,7 @@
     "name": "w-design",
     "version": "1.0.0",
     "private": true,
+    "description": "Monorepo for w-design-vue and Docs",
     "type": "module",
     "packageManager": "pnpm@10.12.1",
     "workspaces": [
@@ -11,16 +12,16 @@
         "play"
     ],
     "scripts": {
-        "dev": "pnpm -F w-design-vue dev",
+        "dev": "pnpm -F w-design-docs dev",
         "build:design-vue": "pnpm -F w-design-vue build",
         "build:package": "pnpm -F w-design-vue build:package",
         "web:dev": "pnpm -F examples dev",
         "icons:build": "pnpm -F icons build",
         "use:build": "pnpm -F use build",
         "play:dev": "pnpm -C play/vite dev",
-        "docs:dev": "vitepress dev",
-        "docs:build": "vitepress build",
-        "docs:preview": "vitepress serve",
+        "docs:dev": "pnpm -F w-design-docs dev",
+        "docs:build": "pnpm -F w-design-docs build",
+        "docs:preview": "pnpm -F w-design-docs preview",
         "build": "pnpm -F '@w-design/*' run build",
         "test": "pnpm -F '@w-design/*' run test",
         "lint": "pnpm -F '@w-design/*' run lint",
@@ -39,7 +40,8 @@
         "@w-design/icons": "workspace:^",
         "@w-design/use": "workspace:^",
         "@w-design/utils": "workspace:^",
-        "w-design-vue": "workspace:^"
+        "w-design-vue": "workspace:^",
+        "w-design-demo": "workspace:*"
     },
     "devDependencies": {
         "@rollup/plugin-json": "^6.1.0",
@@ -47,6 +49,7 @@
         "@vitejs/plugin-vue": "^5.2.4",
         "esbuild": "^0.25.5",
         "eslint": "^9.29.0",
+        "fast-glob": "^3.3.3",
         "fs-extra": "^11.3.0",
         "lint-staged": "^15.5.2",
         "markdown-it": "^14.1.0",
@@ -59,6 +62,7 @@
         "simple-git-hooks": "^2.13.0",
         "typescript": "^5.8.3",
         "vite": "^6.3.5",
+        "vite-plugin-dts": "^4.5.4",
         "vite-plugin-inspect": "^11.1.0",
         "vitepress": "1.6.3",
         "vitest": "^3.2.3",

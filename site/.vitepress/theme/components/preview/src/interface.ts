@@ -9,7 +9,7 @@ export const previewProps = {
     },
     title: String,
     desc: [String, Object] as PropType<string | Slot>,
-    status: Boolean,
+    status: Boolean
 }
 
 export const previewEmits = ['click']
