@@ -1,12 +1,7 @@
 <template>
   <div class="live-demo">
-    <Repl
-      :store="store"
-      :show-compile-output="false"
-      :show-import-map="false"
-      :show-ts-config="false"
-      :clear-console="false"
-    />
+    <Repl :store="store" :show-compile-output="false" :show-import-map="false" :show-ts-config="false"
+      :clear-console="false" />
   </div>
   <div style="display: none" ref="codeSlot">
     <slot />
@@ -23,7 +18,7 @@ import '@vue/repl/style.css'
 const codeSlot = ref(null)
 const store = ref(null)
 
-onMounted(() => {
+const init = () => {
   // 2. 从隐藏插槽中获取原始代码
   const rawCode = codeSlot.value?.textContent || '<h3>Hello World</h3>'
 
@@ -36,37 +31,35 @@ onMounted(() => {
   })
 
   // 4. [核心] 设置 REPL 的文件
-  // 我们将用户的代码注入到 App.vue 的 <template> 中
   appStore.setFiles({
-    'App.vue': `
-          <script setup>
-          // 我们的库会通过 importMap 自动导入
-          import { MyButton } from 'my-antd-lib'
-          </script>
-
+    'App.vue': ` 
 <template>
   ${rawCode}
 </template>
 
+
+
 <style>
-/* [核心] 导入我们库的 CSS */
 @import '/lib/my-antd-lib.css';
 </style>
 `
-})
+  })
 
-// 5. [核心] 设置 Import Map
-// 这告诉 REPL "my-antd-lib" 应该从哪里加载
-appStore.setImportMap({
-imports: {
-'vue': `https://unpkg.com/vue@${version}/dist/vue.runtime.esm-browser.js`,
-'my-antd-lib': '/lib/my-antd-lib.mjs' // 指向我们 public 目录下的文件
+  // 5. [核心] 设置 Import Map
+  // 这告诉 REPL "my-antd-lib" 应该从哪里加载
+  appStore.setImportMap({
+    imports: {
+      'vue': `https://unpkg.com/vue@${version}/dist/vue.runtime.esm-browser.js`,
+      'my-antd-lib': '/lib/my-antd-lib.mjs' // 指向我们 public 目录下的文件
+    }
+  })
+
+  store.value = appStore
 }
-})
 
-store.value = appStore
+onMounted(() => {
+  init()
 })
-
 
 </script>
 

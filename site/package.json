@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "copy-lib": "pnpm -F design-demo build:umd && pnpm -F design-demo build:es-browser && rm -rf ./docs/public/lib && mkdir -p ./docs/public/lib && cp ../design-demo/dist/* ./docs/public/lib/",
+        "copy-lib": "pnpm -F design-demo build:umd && pnpm -F design-demo build:es-browser && rm -rf ./docs/public/lib && mkdir -p ./docs/public/lib && cp ../packages/design-demo/dist/* ./docs/public/lib/",
         "dev": "pnpm run copy-lib && vitepress dev --port 8080",
         "build": "pnpm run copy-lib && vitepress build",
         "preview": "vitepress preview"
