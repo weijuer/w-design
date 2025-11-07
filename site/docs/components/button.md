@@ -35,3 +35,10 @@ app.use(Button);
 | click    | 点击按钮时的回调 | (event) => void |   -   |
 
 支持原生 button 的其他所有属性。
+
+<LiveDemo>
+  <div v-pre>
+    <MyButton>试着修改我！</MyButton>
+    <MyButton type="primary">点我</MyButton>
+  </div>
+</LiveDemo>

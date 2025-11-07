@@ -40,13 +40,14 @@
         "@w-design/icons": "workspace:^",
         "@w-design/use": "workspace:^",
         "@w-design/utils": "workspace:^",
-        "w-design-vue": "workspace:^",
-        "@w-design/design-demo": "workspace:*"
+        "design-demo": "workspace:*",
+        "w-design-vue": "workspace:^"
     },
     "devDependencies": {
         "@rollup/plugin-json": "^6.1.0",
         "@rollup/plugin-replace": "^6.0.2",
         "@vitejs/plugin-vue": "^5.2.4",
+        "@vue/repl": "^4.7.0",
         "esbuild": "^0.25.5",
         "eslint": "^9.29.0",
         "fast-glob": "^3.3.3",

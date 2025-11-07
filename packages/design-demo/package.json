@@ -1,5 +1,5 @@
 {
-    "name": "@w-design/design-demo",
+    "name": "design-demo",
     "version": "0.0.1",
     "private": false,
     "description": "A Vue 3 UI Library like Ant Design Vue",
@@ -26,6 +26,7 @@
     "scripts": {
         "clean": "rm -rf dist es lib",
         "build:umd": "vite build --config vite.config.umd.ts",
+        "build:es-browser": "vite build --config vite.config.esm-browser.ts",
         "build:es": "vite build --config vite.config.es.ts",
         "build:lib": "vite build --config vite.config.lib.ts",
         "build": "pnpm run clean && pnpm run build:umd && pnpm run build:es && pnpm run build:lib"

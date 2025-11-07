@@ -8,6 +8,11 @@ import { Preview } from './components'
 import { WButton } from '@design-demo'
 // import { WButton } from 'w-design-demo'
 
+// [新] 导入 @vue/repl 的样式
+import '@vue/repl/style.css'
+// [新] 导入我们的 LiveDemo 组件
+import LiveDemo from './components/LiveDemo.vue'
+
 export default {
     ...DefaultTheme,
     // Layout,
@@ -18,5 +23,8 @@ export default {
         // You can add global app components here
         app.component('Preview', Preview)
         app.component('WButton', WButton)
+
+        // [新] 注册我们的实时 REPL 组件
+        app.component('LiveDemo', LiveDemo)
     }
 }
