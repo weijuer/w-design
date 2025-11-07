@@ -1,4 +1,4 @@
-@import './variables.css';
+@import url('../../../styles/variables.css');
 
 .w-btn {
     padding: 4px 15px;

@@ -8,9 +8,11 @@ export default defineConfig({
         ...baseConfig.build,
         outDir: 'lib',
         lib: undefined,
+        cssCodeSplit: true,
         rollupOptions: {
             external: ['vue'],
             input: resolve(__dirname, 'src/index.ts'),
+            preserveEntrySignatures: 'strict',
             output: {
                 format: 'cjs',
                 dir: 'lib',

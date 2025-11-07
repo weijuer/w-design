@@ -5,7 +5,8 @@ import { Preview } from './components'
 // custom theme layout
 // import Layout from './Layout.vue'
 
-import { WButton } from 'w-design-demo'
+import { WButton } from '@design-demo'
+// import { WButton } from 'w-design-demo'
 
 export default {
     ...DefaultTheme,

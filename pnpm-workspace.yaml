@@ -4,4 +4,4 @@ packages:
     - 'tools/*'
     - 'examples/*'
     - 'play'
-    - site
+    - 'site'

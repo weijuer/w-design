@@ -1,5 +1,5 @@
 {
-    "name": "w-design-demo",
+    "name": "@w-design/design-demo",
     "version": "0.0.1",
     "private": false,
     "description": "A Vue 3 UI Library like Ant Design Vue",
@@ -10,9 +10,9 @@
     "types": "./es/index.d.ts",
     "exports": {
         ".": {
+            "types": "./es/index.d.ts",
             "import": "./es/index.js",
-            "require": "./lib/index.js",
-            "types": "./es/index.d.ts"
+            "require": "./lib/index.js"
         },
         "./dist/style.css": "./dist/my-antd-lib.css",
         "./es/*": "./es/*",

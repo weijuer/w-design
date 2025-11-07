@@ -41,7 +41,7 @@
         "@w-design/use": "workspace:^",
         "@w-design/utils": "workspace:^",
         "w-design-vue": "workspace:^",
-        "w-design-demo": "workspace:*"
+        "@w-design/design-demo": "workspace:*"
     },
     "devDependencies": {
         "@rollup/plugin-json": "^6.1.0",

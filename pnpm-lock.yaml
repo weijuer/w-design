@@ -23,8 +23,8 @@ importers:
       '@w-design/utils':
         specifier: workspace:^
         version: link:packages/utils
-      w-design-demo:
-        specifier: workspace:*
+      design-demo:
+        specifier: workspace:^
         version: link:packages/design-demo
       w-design-vue:
         specifier: workspace:^
@@ -424,11 +424,7 @@ importers:
 
   packages/utils: {}
 
-  site:
-    dependencies:
-      w-design-demo:
-        specifier: workspace:*
-        version: link:../packages/design-demo
+  site: {}
 
 packages:
 

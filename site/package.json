@@ -3,12 +3,12 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "dev": "vitepress dev",
+        "dev": "vitepress dev --port 8080",
         "build": "vitepress build",
         "preview": "vitepress preview"
     },
     "dependencies": {
-        "w-design-demo": "workspace:*"
+        "design-demo": "workspace:*"
     },
     "devDependencies": {}
 }

@@ -17,9 +17,11 @@ export default defineConfig({
         ...baseConfig.build,
         outDir: 'es',
         lib: undefined,
+        cssCodeSplit: true,
         rollupOptions: {
             external: ['vue'],
             input: resolve(__dirname, 'src/index.ts'),
+            preserveEntrySignatures: 'strict',
             output: {
                 format: 'es',
                 dir: 'es',
