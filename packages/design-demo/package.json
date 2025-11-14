@@ -29,7 +29,7 @@
         "build:es-browser": "vite build --config vite.config.esm-browser.ts",
         "build:es": "vite build --config vite.config.es.ts",
         "build:lib": "vite build --config vite.config.lib.ts",
-        "build": "pnpm run clean && pnpm run build:umd && pnpm run build:es && pnpm run build:lib"
+        "build": "pnpm run clean && pnpm run build:umd && pnpm run build:es-browser && pnpm run build:es && pnpm run build:lib"
     },
     "peerDependencies": {
         "vue": "^3.2.0"

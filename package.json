@@ -14,6 +14,7 @@
     "scripts": {
         "dev": "pnpm -F w-design-docs dev",
         "build:design-vue": "pnpm -F w-design-vue build",
+        "build:demo": "pnpm -F design-demo build",
         "build:package": "pnpm -F w-design-vue build:package",
         "web:dev": "pnpm -F examples dev",
         "icons:build": "pnpm -F icons build",

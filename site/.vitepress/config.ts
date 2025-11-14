@@ -1,5 +1,6 @@
 import Inspect from 'vite-plugin-inspect'
 import markdownPreview from './plugins/vite-plugin-markdown-preview'
+import { replPlugin } from './plugins/repl-plugin'
 // import vueCodePreview from './plugins/vite-plugin-vue-code-preview'
 import { getFunctionsSideBar } from './utils/update'
 import { resolve } from 'path'
@@ -25,10 +26,20 @@ export default {
                         {
                             text: 'Button',
                             link: '/components/button'
+                        },
+                        {
+                            text: 'Popover',
+                            link: '/components/popover'
                         }
                     ]
                 }
             ]
+        }
+    },
+    markdown: {
+        config: (md: any) => {
+            md.use(markdownPreview)
+            md.use(replPlugin)
         }
     },
     vite: {
@@ -37,6 +48,9 @@ export default {
             alias: {
                 '@design-demo': resolve(__dirname, '../../packages/design-demo/src')
             }
+        },
+        optimizeDeps: {
+            exclude: ['@vue/repl']
         }
     },
     srcDir: './docs'

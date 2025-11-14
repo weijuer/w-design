@@ -11,5 +11,7 @@
     "dependencies": {
         "design-demo": "workspace:*"
     },
-    "devDependencies": {}
+    "devDependencies": {
+        "markdown-it": "^14.1.0"
+    }
 }

@@ -5,13 +5,14 @@ import { Preview } from './components'
 // custom theme layout
 // import Layout from './Layout.vue'
 
-import { WButton } from '@design-demo'
+// import { WButton } from '@design-demo'
 // import { WButton } from 'w-design-demo'
 
 // [新] 导入 @vue/repl 的样式
 import '@vue/repl/style.css'
 // [新] 导入我们的 LiveDemo 组件
-import LiveDemo from './components/LiveDemo.vue'
+// import LiveDemo from './components/LiveDemo.vue'
+import LiveReplDemo from './components/LiveReplDemo.vue'
 
 export default {
     ...DefaultTheme,
@@ -22,9 +23,10 @@ export default {
         // custom router. `siteData`` is a `ref`` of current site-level metadata.
         // You can add global app components here
         app.component('Preview', Preview)
-        app.component('WButton', WButton)
+        // app.component('WButton', WButton)
 
         // [新] 注册我们的实时 REPL 组件
-        app.component('LiveDemo', LiveDemo)
+        // app.component('LiveDemo', LiveDemo)
+        app.component('LiveReplDemo', LiveReplDemo)
     }
 }

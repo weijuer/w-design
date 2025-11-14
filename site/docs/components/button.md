@@ -16,6 +16,24 @@ const app = createApp();
 app.use(Button);
 ```
 
+## Usage
+
+```vue preview
+<script setup>
+import { ref } from 'vue';
+import { WButton } from 'design-demo';
+
+const count = ref(0);
+const toggle = ref(false);
+</script>
+
+<template>
+  <w-button @click="count++">Count: {{ count }}</w-button>
+  <w-button @click="toggle = !toggle" :type="toggle ? 'primary' : 'default'">Toggle</w-button>
+  <p v-if="toggle">This is toggled!</p>
+</template>
+```
+
 ## API
 通过设置 Button 的属性来产生不同的按钮样式，推荐顺序为：`type` -> `shape` -> `size` -> `loading` -> `disabled`。
 
@@ -35,10 +53,3 @@ app.use(Button);
 | click    | 点击按钮时的回调 | (event) => void |   -   |
 
 支持原生 button 的其他所有属性。
-
-<LiveDemo>
-  <div v-pre>
-    <MyButton>试着修改我！</MyButton>
-    <MyButton type="primary">点我</MyButton>
-  </div>
-</LiveDemo>

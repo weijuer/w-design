@@ -1,0 +1,82 @@
+:where(.w-popover-content) {
+    --popover-bg: #fff;
+    --popover-color: #333;
+    --popover-border: #dcdfe6;
+    --popover-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --popover-padding: 12px;
+    --popover-radius: 8px;
+    --popover-gap: 8px;
+    /* 弹窗与触发器之间的间隙 */
+}
+
+/* 锚点触发器的包裹器 */
+.w-popover-anchor {
+    /* 确保它是一个可以被“锚定”的实体 */
+    display: inline-block;
+}
+
+/* 弹窗内容 */
+.w-popover-content {
+    /* 1. 基础样式 (使用 CSS 变量) */
+    background: var(--popover-bg);
+    color: var(--popover-color);
+    border: 1px solid var(--popover-border);
+    box-shadow: var(--popover-shadow);
+    padding: var(--popover-padding);
+    border-radius: var(--popover-radius);
+
+    /* 2. [核心] Anchor Positioning API 
+        - position-fallback 定义了当首选位置失败时要尝试的备选方案
+    */
+    position-fallback: --w-popover-fallbacks;
+
+    /* 3. 首选位置 (Tries) 
+     - 我们首先尝试在锚点的“底部”显示
+     - (注意：我们必须在 @position-fallback 中定义它)
+    */
+
+    /* 移除 popover 默认的 ::backdrop 样式，如果需要的话 */
+    &::backdrop {
+        background-color: transparent;
+    }
+}
+
+/*
+  [核心] 4. 定义位置备选方案
+  这是 Anchor Positioning API 的魔法所在。
+  浏览器会按顺序尝试这些规则，直到找到一个
+  能让弹窗完全显示在视口内的位置。
+*/
+@position-fallback --w-popover-fallbacks {
+    /* 尝试 1: 底部居中 */
+    @try {
+        top: anchor(bottom, var(--popover-gap));
+        left: anchor(center);
+        translate: -50% 0;
+        /* 水平居中 */
+    }
+
+    /* 尝试 2: 顶部居中 */
+    @try {
+        bottom: anchor(top, var(--popover-gap));
+        left: anchor(center);
+        translate: -50% 0;
+        /* 水平居中 */
+    }
+
+    /* 尝试 3: 右侧居中 */
+    @try {
+        left: anchor(right, var(--popover-gap));
+        top: anchor(center);
+        translate: 0 -50%;
+        /* 垂直居中 */
+    }
+
+    /* 尝试 4: 左侧居中 */
+    @try {
+        right: anchor(left, var(--popover-gap));
+        top: anchor(center);
+        translate: 0 -50%;
+        /* 垂直居中 */
+    }
+}

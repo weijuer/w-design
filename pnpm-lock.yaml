@@ -432,6 +432,10 @@ importers:
       design-demo:
         specifier: workspace:*
         version: link:../packages/design-demo
+    devDependencies:
+      markdown-it:
+        specifier: ^14.1.0
+        version: 14.1.0
 
 packages:
 

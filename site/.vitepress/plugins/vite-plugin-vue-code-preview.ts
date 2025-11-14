@@ -1,4 +1,6 @@
-import MarkdownIt from 'markdown-it'
+import type MarkdownIt from 'markdown-it'
+import type Renderer from 'markdown-it/lib/renderer'
+import { hash } from 'vitepress'
 
 export default function vueCodePreviewPlugin(md: MarkdownIt): void {
     md.renderer.rules.fence = (tokens, idx, options, env, self) => {

@@ -13,7 +13,7 @@ export default defineConfig({
             // [关键] 格式为 es
             formats: ['es'],
             // [关键] 文件名
-            fileName: () => 'my-antd-lib.mjs'
+            fileName: () => 'w-design-demo.mjs'
         },
         rollupOptions: {
             // 保持 vue 外部化
