@@ -1,5 +1,5 @@
 import { PropType, type ExtractPropTypes } from 'vue'
-import { Type } from 'src/components/_utils'
+import { Type } from '../../_utils'
 
 export type ModalBackdrop = 'transparent' | 'opaque' | 'blur'
 export type ModalPlacement = 'auto' | 'top' | 'bottom' | 'center' | 'top-center' | 'bottom-center'

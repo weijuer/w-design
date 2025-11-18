@@ -1,5 +1,5 @@
 import { PropType, type ExtractPropTypes } from 'vue'
-import { type Size, Type, Numeric } from 'src/components/_utils'
+import { type Size, Type, Numeric } from '../../_utils'
 
 export enum PaginationItemType {
     NEXT = 'next',

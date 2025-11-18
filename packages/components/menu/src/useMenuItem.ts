@@ -1,6 +1,6 @@
 import { SetupContext, computed, inject } from 'vue'
 import { type MenuItemProps, MenuItemEmits, MENU_KEY, MenuProvide } from './interface'
-import { Numeric } from 'src/components/_utils'
+import { Numeric } from '../../_utils'
 
 export const useMenuItem = (props: MenuItemProps, emit: SetupContext<MenuItemEmits>['emit']) => {
     const menuContext: any = inject(MENU_KEY, null)

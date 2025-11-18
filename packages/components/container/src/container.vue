@@ -4,16 +4,12 @@
   </section>
 </template>
 
-
-
-<script>
-export default {
-  name: 'w-container',
-};
-</script>
-
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
+
+defineOptions({
+  name: 'w-container'
+});
 
 const props = defineProps({
   direction: {

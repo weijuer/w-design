@@ -1,5 +1,5 @@
 import { type PropType, ExtractPropTypes } from 'vue'
-import { Size, Type } from 'src/components/_utils'
+import { Size, Type } from '../../_utils'
 
 export type AttrType = 'button' | 'submit' | 'reset'
 

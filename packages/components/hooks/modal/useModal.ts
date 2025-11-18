@@ -1,7 +1,7 @@
 import { createVNode, ref, render } from 'vue'
 import Modal from '../../modal'
 import { type ModalProps } from 'src/components/modal/src/interface'
-import { isFunction, isPromise } from 'src/components/_utils'
+import { isFunction, isPromise } from '../../_utils'
 
 export type ModalFuncProps = Omit<ModalProps, 'modelValue'>
 

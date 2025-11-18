@@ -1,6 +1,6 @@
 import { SetupContext, computed, ref, watch } from 'vue'
 import { TableEmits, TableProps } from './interface'
-import { Numeric, RecordType } from 'src/components/_utils'
+import { Numeric, RecordType } from '../../_utils'
 import { useSort } from './useSort'
 
 export const useTable = (props: TableProps, emit: SetupContext<TableEmits>['emit']) => {

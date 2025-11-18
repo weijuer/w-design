@@ -1,9 +1,16 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'node:path'
-import VuePlugin from '@vitejs/plugin-vue'
+import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
 
 export default defineConfig({
+    plugins: [
+        vue(),
+        dts({
+            entryRoot: '../components',
+            outDir: ['es', 'lib']
+        })
+    ],
     resolve: {
         alias: {
             '@': resolve('src'),
@@ -23,9 +30,16 @@ export default defineConfig({
         exclude: []
     },
     build: {
+        target: 'modules',
+        // 输出目录
+        // outDir: 'dist',
         minify: false,
-        // css分离
+        // CSS 分离
         cssCodeSplit: true,
+        lib: {
+            entry: 'index.ts',
+            name: 'WDesignVue'
+        },
         rollupOptions: {
             external: ['vue', '@w-design/utils', '@w-design/use'],
             input: ['index.ts', 'resolver/index.ts'],
@@ -57,16 +71,6 @@ export default defineConfig({
                 //     }
                 // }
             ]
-        },
-        lib: {
-            entry: 'index.ts',
-            name: 'WDesignVue'
         }
-    },
-    plugins: [
-        VuePlugin(),
-        dts({
-            outDir: ['es', 'lib']
-        })
-    ]
+    }
 })

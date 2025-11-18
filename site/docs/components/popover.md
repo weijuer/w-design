@@ -13,69 +13,21 @@ app.use(WPopover);
 ## 基础用法
 通过设置 `content` 属性来设置弹出层的内容。
 ```vue preview
+<script setup>
+import { ref } from 'vue';
+import { WPopover, WButton } from '/lib/w-design-demo.mjs';
+</script>
+
 <template>
     <WPopover content="这是一个弹出层">
         <WButton>点击弹出</WButton>
     </WPopover>
 </template>
+
+<style>
+@import '/lib/design-demo.css';
+</style>
 ```
-
-## 弹出位置
-通过设置 `position` 属性来设置弹出层的位置，可选值为 `top`、`bottom`、`left`、`right`。
-```vue preview
-<template>
-    <WPopover content="这是一个弹出层" position="top">
-        <WButton>点击弹出</WButton>
-    </WPopover>
-</template>
-```
-
-## 触发方式
-通过设置 `trigger` 属性来设置弹出层的触发方式，可选值为 `hover`、`click`、`focus`。
-```vue preview
-<template>
-    <WPopover content="这是一个弹出层" trigger="click">
-        <WButton>点击弹出</WButton>
-    </WPopover>
-</template>
-```
-
-## 箭头位置
-通过设置 `arrowPosition` 属性来设置箭头的位置，可选值为 `top`、`bottom`、`left`、`right`。
-```vue preview
-<template>
-    <WPopover content="这是一个弹出层" arrowPosition="top">
-        <WButton>点击弹出</WButton>
-    </WPopover>
-</template>
-```
-
-## 弹出层内容
-通过设置 `content` 插槽来设置弹出层内容。
-```vue preview
-<template>
-    <WPopover>
-        <template #content>
-            <div>
-                <p>这是一个弹出层</p>
-            </div>
-        </template>
-        <WButton>点击弹出</WButton>
-    </WPopover>
-</template>
-```
-
-:::tip
-弹出层组件的插槽如下：
-- content: 弹出层内容
-:::
-
-## demo
-
-<WPopover content="这是一个弹出层" arrowPosition="top">
-    <WButton color="primary">点击弹出</WButton>
-</WPopover>
-
 
 ## API
 | 属性 | 说明 | 类型 | 默认值 | 必填 |

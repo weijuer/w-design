@@ -7,29 +7,16 @@
                 <span v-if="isModified" class="modified-badge">已修改</span>
             </div>
             <div class="actions">
-                <button 
-                    class="action-btn" 
-                    :class="{ active: showCode }"
-                    @click="toggleCodeVisibility"
-                    :title="showCode ? '隐藏代码' : '显示代码'"
-                >
+                <button class="action-btn" :class="{ active: showCode }" @click="toggleCodeVisibility"
+                    :title="showCode ? '隐藏代码' : '显示代码'">
                     <span class="icon">📄</span>
                     {{ showCode ? '隐藏代码' : '显示代码' }}
                 </button>
-                <button 
-                    class="action-btn" 
-                    @click="resetCode"
-                    :disabled="!isModified"
-                    title="重置代码"
-                >
+                <button class="action-btn" @click="resetCode" :disabled="!isModified" title="重置代码">
                     <span class="icon">🔄</span>
                     重置
                 </button>
-                <button 
-                    class="action-btn" 
-                    @click="toggleLayout"
-                    :title="`切换布局: ${editorLayout}`"
-                >
+                <button class="action-btn" @click="toggleLayout" :title="`切换布局: ${editorLayout}`">
                     <span class="icon">📐</span>
                     {{ layoutLabels[editorLayout] }}
                 </button>
@@ -37,17 +24,9 @@
         </div>
 
         <div class="content" :style="contentStyle">
-            <Repl 
-                :editor="Monaco" 
-                :store="store" 
-                :show-compile-output="false" 
-                :show-import-map="true"
-                :show-ts-config="false" 
-                :clear-console="false" 
-                :auto-resize="true" 
-                :layout="editorLayout"
-                @change="handleCodeChange"
-            />
+            <Repl :editor="Monaco" :store="store" :show-compile-output="false" :show-import-map="true"
+                :show-ts-config="false" :clear-console="false" :auto-resize="true" :layout="editorLayout"
+                @change="handleCodeChange" />
         </div>
     </div>
 </template>
@@ -93,22 +72,26 @@ const contentStyle = computed(() => ({
 }));
 
 // 解码代码
-const decodedCode = computed(() => 
+const decodedCode = computed(() =>
     props.isEncoded ? decodeURIComponent(props.rawCode) : props.rawCode
 );
 
-// 初始化 ReplStore
 const store = useStore({
-        mainFile: ref('App.vue'),
-        files: {
-            'App.vue': decodedCode.value
-        },
-        importMap: {
-            imports: {
-                'design-demo': '/lib/w-design-demo.mjs',
-                'vue': 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
-            }
-        }
+    // activeFilename: 'App.vue',
+    // mainFile: ref('App.vue'),
+    // files: {
+    //     'App.vue': decodedCode.value
+    // },
+});
+
+store.setImportMap({
+    imports: {
+        'design-demo': '/lib/w-design-demo.mjs',
+    }
+});
+
+store.setFiles({
+    'App.vue': decodedCode.value
 });
 
 // 监听代码变化
@@ -148,7 +131,7 @@ const resetCode = async () => {
 // 初始化
 onMounted(() => {
     originalCode.value = decodedCode.value;
-    
+
     // 监听外部代码变化
     watch(decodedCode, (newCode) => {
         if (!isModified.value) {
@@ -283,23 +266,23 @@ watch(editorLayout, (newLayout) => {
         margin: 1em 0;
         border-radius: 8px;
     }
-    
+
     .live-repl-wrapper .header {
         padding: 0.6em 1em;
         flex-direction: column;
         gap: 0.5em;
         align-items: stretch;
     }
-    
+
     .header-left {
         justify-content: center;
     }
-    
+
     .actions {
         justify-content: center;
         flex-wrap: wrap;
     }
-    
+
     .action-btn {
         font-size: 0.8em;
         padding: 0.3em 0.6em;
@@ -312,12 +295,12 @@ watch(editorLayout, (newLayout) => {
         border-color: var(--vp-c-divider-dark);
         background-color: var(--vp-c-bg-alt);
     }
-    
+
     .live-repl-wrapper .header {
         background-color: var(--vp-c-bg-soft-dark);
         border-bottom-color: var(--vp-c-divider-dark);
     }
-    
+
     .action-btn {
         background-color: var(--vp-c-bg-soft-dark);
         border-color: var(--vp-c-divider-dark);
@@ -331,7 +314,7 @@ watch(editorLayout, (newLayout) => {
         box-shadow: none;
         break-inside: avoid;
     }
-    
+
     .actions {
         display: none;
     }

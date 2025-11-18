@@ -1,15 +1,3 @@
-<template>
-    <span class="w-popover-anchor" :style="{ anchorName: anchorName }" :popovertarget="popoverId">
-        <slot />
-    </span>
-
-    <div :id="popoverId" popover="auto" class="w-popover-content" :style="{ positionAnchor: anchorName }">
-        <slot name="content">
-            <span>Popover Content</span>
-        </slot>
-    </div>
-</template>
-
 <script setup lang="ts">
 import { computed, useId } from 'vue';
 
@@ -18,5 +6,24 @@ import { computed, useId } from 'vue';
 const popoverId = useId();
 
 // 2. 我们基于此 ID 创建一个 CSS 兼容的锚点名称
-const anchorName = computed(() => `--w-popover-anchor-${popoverId}`);
+const anchorStyle = computed(() => ({
+    anchorName: `--w-popover-anchor-${popoverId}`
+}));
+
+const popoverStyle = computed(() => ({
+    positionAnchor: `--w-popover-anchor-${popoverId}`,
+    positionArea: 'center left'
+}));
 </script>
+
+<template>
+    <span class="w-popover-anchor" :style="anchorStyle" :popovertarget="popoverId">
+        <slot />
+    </span>
+
+    <div :id="popoverId" class="w-popover-content" :style="popoverStyle">
+        <slot name="content">
+            <span>Popover Content</span>
+        </slot>
+    </div>
+</template>

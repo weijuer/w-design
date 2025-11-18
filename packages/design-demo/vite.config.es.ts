@@ -1,12 +1,10 @@
-import { defineConfig } from 'vite'
+import { mergeConfig } from 'vite'
 import baseConfig from './vite.base.config'
 import dts from 'vite-plugin-dts'
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 
-export default defineConfig({
-    ...baseConfig,
+export default mergeConfig(baseConfig, {
     plugins: [
-        ...baseConfig.plugins!,
         dts({
             outDir: 'es',
             tsconfigPath: './tsconfig.json',
@@ -14,8 +12,9 @@ export default defineConfig({
         })
     ],
     build: {
-        ...baseConfig.build,
         outDir: 'es',
+        target: 'esnext',
+        minify: false,
         lib: undefined,
         cssCodeSplit: true,
         rollupOptions: {

@@ -1,5 +1,5 @@
 import { InjectionKey, PropType, type ExtractPropTypes } from 'vue'
-import { Numeric, Type } from 'src/components/_utils'
+import { Numeric, Type } from '../../_utils'
 
 export type MenuMode = 'vertical' | 'horizontal' | 'vertical-right' | 'inline'
 export type MenuTheme = 'light' | 'dark'

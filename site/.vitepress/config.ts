@@ -46,7 +46,7 @@ export default {
         // plugins: [Inspect(), markdownPreview()],
         resolve: {
             alias: {
-                '@design-demo': resolve(__dirname, '../../packages/design-demo/src')
+                'design-demo': resolve(__dirname, '../../packages/design-demo/src')
             }
         },
         optimizeDeps: {

@@ -5,16 +5,18 @@
     "description": "A Vue 3 UI Library like Ant Design Vue",
     "license": "MIT",
     "type": "module",
-    "main": "./lib/index.js",
-    "module": "./es/index.js",
-    "types": "./es/index.d.ts",
+    "main": "lib/index.js",
+    "module": "es/index.js",
+    "types": "es/index.d.ts",
     "exports": {
         ".": {
             "types": "./es/index.d.ts",
             "import": "./es/index.js",
             "require": "./lib/index.js"
         },
-        "./dist/style.css": "./dist/my-antd-lib.css",
+        "./package.json": "./package.json",
+        "./style.css": "./dist/design-demo.css",
+        "./dist/style.css": "./dist/design-demo.css",
         "./es/*": "./es/*",
         "./lib/*": "./lib/*"
     },
@@ -23,6 +25,16 @@
         "es",
         "lib"
     ],
+    "typesVersions": {
+        "*": {
+            "*": [
+                "./dist/*",
+                "./es/*",
+                "./lib/*",
+                "./*"
+            ]
+        }
+    },
     "scripts": {
         "clean": "rm -rf dist es lib",
         "build:umd": "vite build --config vite.config.umd.ts",

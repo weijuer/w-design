@@ -5,6 +5,9 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 export default [
+    {
+        ignores: ['**/node_modules', '**/dist', '!.vscode', '!.github', '!.devcontainer']
+    },
     { files: ['**/*.{js,mjs,cjs,ts,vue}'] },
     {
         languageOptions: {
@@ -22,20 +25,37 @@ export default [
     },
     {
         rules: {
-            // 'no-multiple-empty-lines': ['warn', { max: 1 }],
-
-            // 'vue/script-setup-uses-vars': 'error',
-            'vue/multi-word-component-names': 'off',
-            '@typescript-eslint/no-unused-expressions': [
+            'no-debugger': 'error',
+            'no-console': ['error', { allow: ['warn', 'error', 'info', 'clear'] }],
+            'no-unused-vars': 'off',
+            'no-undef': 'off',
+            'prefer-const': 'error',
+            'sort-imports': ['error', { ignoreDeclarationSort: true }],
+            'no-duplicate-imports': 'error',
+            // This rule enforces the preference for using '@ts-expect-error' comments in TypeScript
+            // code to indicate intentional type errors, improving code clarity and maintainability.
+            '@typescript-eslint/prefer-ts-expect-error': 'error',
+            // Enforce the use of 'import type' for importing types
+            '@typescript-eslint/consistent-type-imports': [
                 'error',
                 {
-                    allowShortCircuit: true,
-                    allowTernary: true
+                    fixStyle: 'inline-type-imports',
+                    disallowTypeAnnotations: false
+                }
+            ],
+            // Enforce the use of top-level import type qualifier when an import only has specifiers with inline type qualifiers
+            '@typescript-eslint/no-import-type-side-effects': 'error',
+            'vue/max-attributes-per-line': 'off',
+            'vue/singleline-html-element-content-newline': 'off',
+            'vue/multi-word-component-names': 'off',
+            'vue/html-self-closing': [
+                'error',
+                {
+                    html: { component: 'always', normal: 'always', void: 'any' },
+                    math: 'always',
+                    svg: 'always'
                 }
             ]
         }
-    },
-    {
-        ignores: ['node_modules', 'dist', '!.vscode', '!.github', '!.devcontainer']
     }
 ]

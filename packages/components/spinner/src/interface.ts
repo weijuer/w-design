@@ -1,5 +1,5 @@
 import { PropType, type ExtractPropTypes } from 'vue'
-import { Type, Size } from 'src/components/_utils'
+import { Type, Size } from '../../_utils'
 
 export const spinnerProps = {
     type: {

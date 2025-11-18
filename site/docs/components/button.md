@@ -32,6 +32,10 @@ const toggle = ref(false);
   <w-button @click="toggle = !toggle" :type="toggle ? 'primary' : 'default'">Toggle</w-button>
   <p v-if="toggle">This is toggled!</p>
 </template>
+
+<style>
+@import '/lib/design-demo.css';
+</style>
 ```
 
 ## API

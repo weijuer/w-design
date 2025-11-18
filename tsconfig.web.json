@@ -6,6 +6,6 @@
         "lib": ["DOM", "DOM.Iterable", "ESNext"],
         "skipLibCheck": true
     },
-    "include": ["packages", "packages/design-vue/package.json", "typings/env.d.ts"],
-    "exclude": ["node_modules", "**/dist"]
+    "include": ["packages"],
+    "exclude": ["**/node_modules", "**/dist"]
 }

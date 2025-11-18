@@ -1,5 +1,5 @@
 import { type App, createVNode, render, ComponentOptions } from 'vue'
-import { isFunction, isPromise } from 'src/components/_utils'
+import { isFunction, isPromise } from '../../_utils'
 import Modal from './modal.vue'
 
 export const ModalSymbol = Symbol('Modal')

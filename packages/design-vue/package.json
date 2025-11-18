@@ -7,16 +7,18 @@
     "module": "es/index.js",
     "unpkg": "dist/w-design-vue.min.js",
     "browser": "dist/w-design-vue.min.js",
-    "typings": "es/index.d.ts",
+    "types": "es/index.d.ts",
     "exports": {
         ".": {
+            "types": "./es/index.d.ts",
             "import": "./es/index.js",
-            "require": "./lib/index.js",
-            "types": "./es/index.d.ts"
+            "require": "./lib/index.js"
         },
+        "./package.json": "./package.json",
+        "./style.css": "./dist/style.css",
         "./dist/style.css": "./dist/style.css",
-        "./es": "./es/*",
-        "./lib": "./lib/*",
+        "./es/*": "./es/*",
+        "./lib/*": "./lib/*",
         "./resolver": {
             "import": "./es/resolver/index.js",
             "require": "./lib/resolver/index.js"
@@ -31,13 +33,17 @@
     "scripts": {
         "dev": "vite",
         "clean": "rimraf 'dist/*' 'lib/*' 'es/*'",
-        "build:umd": "vite build --config vite.config.umd.ts",
-        "build:es": "vite build --config vite.config.es.ts",
-        "build:lib": "vite build --config vite.config.lib.ts",
-        "build": "pnpm run clean && pnpm run build:umd && pnpm run build:es && pnpm run build:lib",
+        "build:es": "vite build -c vite.config.ts",
+        "build:es-browser": "vite build -c vite.config.esm-browser.ts",
+        "build": "pnpm run clean && pnpm run build:es && pnpm run build:es-browser",
         "build:ts": "vue-tsc && vite build",
         "build:package": "rollup -c",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "format": "prettier --write .",
+        "lint": "eslint .",
+        "typecheck": "vue-tsc --noEmit",
+        "release": "bumpp --all",
+        "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
     },
     "keywords": [
         "ui",

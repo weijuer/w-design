@@ -1,5 +1,5 @@
 import { PropType, type ExtractPropTypes } from 'vue'
-import { type Orientation } from 'src/components/_utils'
+import { type Orientation } from '../../_utils'
 
 export const scrollShadowProps = {
     size: {
