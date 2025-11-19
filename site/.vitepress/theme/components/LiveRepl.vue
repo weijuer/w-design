@@ -96,7 +96,7 @@ store.setFiles({
 
 // 监听代码变化
 const handleCodeChange = () => {
-    const currentCode = store.state.files['App.vue']?.code || '';
+    const currentCode = store.files['App.vue']?.code || '';
     isModified.value = currentCode !== originalCode.value;
 };
 
@@ -104,12 +104,12 @@ const handleCodeChange = () => {
 const toggleCodeVisibility = () => {
     showCode.value = !showCode.value;
     // 根据显示状态调整布局
-    editorLayout.value = showCode.value ? 'split' : 'vertical';
+    editorLayout.value = showCode.value ? 'horizontal' : 'vertical';
 };
 
 // 切换布局
 const toggleLayout = () => {
-    const layouts: Array<'horizontal' | 'vertical' | 'split'> = ['split', 'horizontal', 'vertical'];
+    const layouts: Array<'horizontal' | 'vertical'> = ['horizontal', 'vertical'];
     const currentIndex = layouts.indexOf(editorLayout.value);
     const nextIndex = (currentIndex + 1) % layouts.length;
     editorLayout.value = layouts[nextIndex];
@@ -123,8 +123,6 @@ const resetCode = async () => {
         });
         isModified.value = false;
         await nextTick();
-        // 触发重新编译
-        store.compile();
     }
 };
 

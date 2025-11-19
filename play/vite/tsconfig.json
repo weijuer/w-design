@@ -11,7 +11,8 @@
         "allowJs": true,
         "baseUrl": "./",
         "paths": {
-            "@w-design/use": ["../../packages/w-use/src/index.ts"]
+            "@w-design/*": ["../../packages/*"],
+            "w-design-vue": ["../../packages/design-vue"]
         }
     }
 }

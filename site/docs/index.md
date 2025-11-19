@@ -24,20 +24,3 @@ const message = ref('message')
 }
 </style>
 ```
-
-```vue preview
-<script setup>
-import { ref } from 'vue'
-const message = ref('message')
-</script>
-
-<template>
-  <div class="message">{{ message }}</div>
-</template>
-
-<style lang="scss">
-.message {
-  color: red;
-}
-</style>
-```

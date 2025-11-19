@@ -1,7 +1,5 @@
 import Inspect from 'vite-plugin-inspect'
-import markdownPreview from './plugins/vite-plugin-markdown-preview'
-import { replPlugin } from './plugins/repl-plugin'
-// import vueCodePreview from './plugins/vite-plugin-vue-code-preview'
+import { replPlugin } from './plugins/vite-plugin-repl'
 import { getFunctionsSideBar } from './utils/update'
 import { resolve } from 'path'
 
@@ -38,7 +36,6 @@ export default {
     },
     markdown: {
         config: (md: any) => {
-            md.use(markdownPreview)
             md.use(replPlugin)
         }
     },
@@ -46,7 +43,7 @@ export default {
         // plugins: [Inspect(), markdownPreview()],
         resolve: {
             alias: {
-                'design-demo': resolve(__dirname, '../../packages/design-demo/src')
+                '@design-demo-src': resolve(__dirname, '../../packages/design-demo/src')
             }
         },
         optimizeDeps: {

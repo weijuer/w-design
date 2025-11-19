@@ -14,12 +14,7 @@
         "baseUrl": ".",
         "types": [],
         "paths": {
-            "@w-design/components": ["packages/components"],
-            "@w-design/components/*": ["packages/components/*"],
-            "@w-design/utils": ["packages/utils"],
-            "@w-design/utils/*": ["packages/utils/*"],
-            "@w-design/use": ["packages/use"],
-            "@w-design/use/*": ["packages/use/*"],
+            "@w-design/*": ["packages/*"],
             "w-design-vue": ["packages/design-vue"]
         }
     },

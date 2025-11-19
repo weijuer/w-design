@@ -3,9 +3,8 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@design-demo": ["../packages/design-demo/src"]
+            "design-demo": ["../packages/design-demo"]
         }
     },
-    "include": ["../packages/design-demo/src/**/*"],
-    "exclude": ["../packages/design-demo/src/**/*.spec.ts"]
+    "include": ["../packages/design-demo/*"]
 }
