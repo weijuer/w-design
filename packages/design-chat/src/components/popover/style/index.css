@@ -3,10 +3,22 @@
     --popover-gap: 8px;
 }
 
+.w-popover-anchor {
+    position: absolute;
+}
+
 .w-popover-content {
     --w-popover-distance: 1em;
+    --w-popover-size: 1.2em;
 
     position: absolute;
     bottom: var(--w-popover-distance);
     position-try-fallbacks: flip-block;
+
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        width: var(--w-popover-size);
+    }
 }

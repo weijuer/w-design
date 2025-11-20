@@ -21,7 +21,7 @@ app.use(Button);
 ```vue preview
 <script setup>
 import { ref } from 'vue';
-import { WButton } from 'design-demo';
+import { WButton } from 'w-design-vue';
 
 const count = ref(0);
 const toggle = ref(false);

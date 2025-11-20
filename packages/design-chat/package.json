@@ -1,5 +1,5 @@
 {
-    "name": "design-demo",
+    "name": "design-chat",
     "version": "0.0.1",
     "private": false,
     "description": "A Vue 3 UI Library like Ant Design Vue",
@@ -15,8 +15,8 @@
             "require": "./lib/index.js"
         },
         "./package.json": "./package.json",
-        "./style.css": "./dist/design-demo.css",
-        "./dist/style.css": "./dist/design-demo.css",
+        "./style.css": "./dist/design-chat.css",
+        "./dist/style.css": "./dist/design-chat.css",
         "./es/*": "./es/*",
         "./lib/*": "./lib/*"
     },
@@ -37,11 +37,13 @@
     },
     "scripts": {
         "clean": "rm -rf dist es lib",
-        "build:umd": "vite build --config vite.config.umd.ts",
-        "build:es-browser": "vite build --config vite.config.esm-browser.ts",
-        "build:es": "vite build --config vite.config.es.ts",
-        "build:lib": "vite build --config vite.config.lib.ts",
-        "build": "pnpm run clean && pnpm run build:umd && pnpm run build:es-browser && pnpm run build:es && pnpm run build:lib"
+        "build": "vite build",
+        "build:umd": "vite build -c vite.config.umd.ts",
+        "build:es-browser": "vite build -c vite.config.esm-browser.ts",
+        "build:es": "vite build -c vite.config.es.ts",
+        "build:lib": "vite build -c vite.config.lib.ts",
+        "build:lite": "pnpm clean && pnpm build && pnpm build:es-browser",
+        "build:all": "pnpm run clean && pnpm run build:umd && pnpm run build:es-browser && pnpm run build:es && pnpm run build:lib"
     },
     "peerDependencies": {
         "vue": "^3.2.0"

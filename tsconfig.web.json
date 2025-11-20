@@ -6,6 +6,6 @@
         "lib": ["DOM", "DOM.Iterable", "ESNext"],
         "skipLibCheck": true
     },
-    "include": ["packages"],
+    "include": ["packages", "**/*.ts", "**/*.d.ts", "**/*.tsx", "**/*.vue"],
     "exclude": ["**/node_modules", "**/dist"]
 }

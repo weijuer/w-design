@@ -30,7 +30,7 @@ export default defineConfig({
         exclude: []
     },
     build: {
-        target: 'modules',
+        target: 'esnext',
         // 输出目录
         // outDir: 'dist',
         minify: false,

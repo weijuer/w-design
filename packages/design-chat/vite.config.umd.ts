@@ -9,9 +9,9 @@ export default defineConfig({
         outDir: 'dist',
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),
-            name: 'WDesignDemo',
+            name: 'WDesignChat',
             formats: ['umd'],
-            fileName: format => `w-design-demo.${format}.js`
+            fileName: format => `w-design-chat.${format}.js`
         },
         rollupOptions: {
             external: ['vue'],
@@ -21,7 +21,7 @@ export default defineConfig({
                 },
                 assetFileNames: assetInfo => {
                     if (assetInfo.names[0] === 'style.css') {
-                        return 'w-design-demo.css'
+                        return 'w-design-chat.css'
                     }
                     return assetInfo.names[0] as string
                 }

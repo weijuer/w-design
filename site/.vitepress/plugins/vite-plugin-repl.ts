@@ -13,8 +13,8 @@ export const replPlugin = (md: MarkdownIt) => {
             const rawCode = token.content.trim()
             const encodedCode = encodeURIComponent(rawCode)
 
-            // 渲染我们的 <LiveReplDemo> 组件
-            return `<LiveReplDemo raw-code="${encodedCode}" :is-encoded="true" />`
+            // 渲染我们的 <LiveRepl> 组件
+            return `<LiveRepl raw-code="${encodedCode}" :is-encoded="true" />`
         }
 
         // 3. 对于所有其他代码块 (如 ```js, ```vue 等)
