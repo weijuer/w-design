@@ -1,7 +1,7 @@
 <script setup name="WButton" lang="ts">
 import { computed, ref } from 'vue'
 
-interface ButtonProps {
+export interface ButtonProps {
     type?: 'button' | 'submit' | 'reset'
     color?:
     | 'default'
@@ -91,5 +91,3 @@ defineExpose({
         <slot name="end" />
     </button>
 </template>
-
-<style scoped></style>

@@ -1,0 +1,23 @@
+$namespace: 'w';
+$element-separator: '__';
+$modifier-separator: '--';
+
+@mixin b($block) {
+    $B: $namespace + '-' + $block !global;
+    .#{$B} {
+        @content;
+    }
+}
+
+@mixin e($element) {
+    $E: $element !global;
+    &__#{$E} {
+        @content;
+    }
+}
+
+@mixin m($modifier) {
+    &--#{$modifier} {
+        @content;
+    }
+}

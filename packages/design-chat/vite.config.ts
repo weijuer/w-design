@@ -17,7 +17,7 @@ export default defineConfig({
         minify: false,
         cssCodeSplit: true,
         lib: {
-            entry: 'src/index.ts',
+            entry: ['src/index.ts', 'src/resolver/index.ts'],
             name: 'WDesignChat',
             formats: ['es', 'cjs']
         },
