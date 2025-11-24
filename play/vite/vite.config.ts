@@ -20,6 +20,10 @@ export default defineConfig(({ command }) => ({
                           replacement: resolve('../../packages/design-vue')
                       },
                       {
+                          find: 'w-design-chat',
+                          replacement: resolve('../../packages/design-chat/src')
+                      },
+                      {
                           find: /^@w-design\/(.*)$/,
                           replacement: resolve('../../packages/$1')
                       }

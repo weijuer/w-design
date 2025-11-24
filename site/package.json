@@ -3,14 +3,12 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "copy-lib": "pnpm -F design-chat build:umd && pnpm -F design-chat build:es-browser && rm -rf ./vitepress/public/lib && mkdir -p ./vitepress/public/lib && cp ../packages/design-chat/dist/* ./vitepress/public/lib/",
+        "copy-lib": "pnpm -F design-chat build:lite && rm -rf ./.vitepress/public/lib && mkdir -p ./.vitepress/public/lib && cp ../packages/design-chat/dist/* ./.vitepress/public/lib/",
         "dev": "pnpm run copy-lib && vitepress dev --port 8080",
         "build": "pnpm run copy-lib && vitepress build",
         "preview": "vitepress preview"
     },
-    "dependencies": {
-        "design-demo": "workspace:*"
-    },
+    "dependencies": {},
     "devDependencies": {
         "markdown-it": "^14.1.0"
     }

@@ -1,17 +1,17 @@
 {
-    "name": "design-chat",
+    "name": "w-design-chat",
     "version": "0.0.1",
     "private": false,
     "description": "A Vue 3 UI Library like Ant Design Vue",
     "license": "MIT",
     "type": "module",
     "main": "lib/index.js",
-    "module": "es/index.js",
+    "module": "es/index.mjs",
     "types": "es/index.d.ts",
     "exports": {
         ".": {
             "types": "./es/index.d.ts",
-            "import": "./es/index.js",
+            "import": "./es/index.mjs",
             "require": "./lib/index.js"
         },
         "./package.json": "./package.json",
@@ -48,6 +48,7 @@
     "peerDependencies": {
         "vue": "^3.2.0"
     },
-    "dependencies": {},
-    "devDependencies": {}
+    "devDependencies": {
+        "unplugin-icons": "^22.5.0"
+    }
 }

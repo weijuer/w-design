@@ -41,7 +41,7 @@
         "@w-design/icons": "workspace:^",
         "@w-design/use": "workspace:^",
         "@w-design/utils": "workspace:^",
-        "design-demo": "workspace:*",
+        "w-design-chat": "workspace:*",
         "w-design-vue": "workspace:^"
     },
     "devDependencies": {

@@ -1,4 +1,41 @@
+:host,
 :root {
-    --w-primary-color: #1890ff;
-    --w-primary-color-hover: #40a9ff;
+    /* follow the user preferences */
+    color-scheme: light dark;
+
+    /* brand */
+    --w-color-brand: #f0bd26;
+    --w-color-brand-hover: #f2d92c;
+
+    /* theme */
+    --w-color-default: light-dark(#e4e4e7, #2e2e2e);
+    --w-color-primary: light-dark(#006fee, #0078d4);
+    --w-color-secondary: light-dark(#9353d3, #8a47c4);
+    --w-color-success: light-dark(#00c853, #00b359);
+    --w-color-warning: light-dark(#ff9800, #ff9800);
+    --w-color-info: light-dark(#009688, #009688);
+    --w-color-danger: light-dark(#f44336, #f44336);
+
+    /* theme-hover */
+    --w-color-default-hover: light-dark(#c9c9cf, #4d4d52);
+    --w-color-primary-hover: light-dark(#005bc4, #0078d4);
+    --w-color-secondary-hover: light-dark(#6d37a3, #8a47c4);
+    --w-color-success-hover: light-dark(#009e4b, #00b359);
+    --w-color-warning-hover: light-dark(#e68000, #ff9800);
+    --w-color-danger-hover: light-dark(#d3382c, #f44336);
+
+    /* color-contrast */
+    --w-color-contrast-lower: hsl(240, 6%, 26%);
+    --w-color-contrast-low: hsl(231, 3%, 41%);
+    --w-color-contrast-medium: hsl(231, 3%, 57%);
+    --w-color-contrast-high: hsl(240, 5%, 82%);
+    --w-color-contrast-higher: hsl(240, 100%, 99%);
+
+    /* radius */
+    --w-radius-none: 0;
+    --w-radius-tiny: 4px;
+    --w-radius-small: 8px;
+    --w-radius-medium: 12px;
+    --w-radius-large: 14px;
+    --w-radius-full: 9999px;
 }

@@ -27,3 +27,18 @@ const popoverStyle = computed(() => ({
         </slot>
     </div>
 </template>
+
+<style scoped>
+.w-popover-content {
+    --w-popover-gap: 8px;
+    --w-tooltip: v-bind('anchorStyle.anchorName');
+
+    &::before {
+        /* vertical position from tooltip  */
+        top: calc(anchor(var(--w-tooltip) top) - var(--w-popover-gap));
+        bottom: calc(anchor(var(--w-tooltip) bottom) - var(--w-popover-gap));
+        /* horizontal position from anchor */
+        left: calc(anchor(var(--w-tooltip) center) - var(--w-popover-size)/2);
+    }
+}
+</style>
