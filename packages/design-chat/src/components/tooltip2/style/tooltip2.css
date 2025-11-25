@@ -1,25 +1,43 @@
-:where(.w-popover-content) {
-    --popover-bg: #fff;
-    --popover-gap: 8px;
+@import '../../../styles/variables.css';
+
+:where(.w-tooltip__content) {
+    --w-tooltip-bg: #fff;
+    --w-tooltip-gap: 8px;
 }
 
-.w-popover-anchor {
-    position: absolute;
-}
-
-.w-popover-content {
-    --w-popover-distance: 1em;
-    --w-popover-size: 1.2em;
+.w-tooltip__content {
+    --w-tooltip-distance: 1em;
+    --w-tooltip-size: 1.2em;
 
     position: absolute;
-    bottom: var(--w-popover-distance);
-    margin-top: var(--w-popover-gap);
+    z-index: 0;
     position-try-fallbacks: flip-block;
+
+    padding: var(--w-space-xs);
+    width: max-content;
+    max-width: 15em;
+    border-radius: var(--w-radius-medium);
+    background-color: var(--w-tooltip-bg);
 
     &::before {
         content: '';
+        margin: inherit;
         position: absolute;
         z-index: -1;
-        width: var(--w-popover-size);
+        width: var(--w-tooltip-size);
+        height: var(--w-tooltip-size);
+        background-color: red;
+        /* background-color: inherit; */
+        /* vertical position from tooltip  */
+        top: calc(anchor(var(--w-tooltip) top) - var(--w-tooltip-distance));
+        bottom: calc(anchor(var(--w-tooltip) bottom) - var(--w-tooltip-distance));
+        /* horizontal position from anchor */
+        left: calc(anchor(var(--w-tooltip) center) - var(--w-tooltip-size) / 2);
+
+        clip-path: shape(
+            from top left,
+            curve to 50% 50% with 50% 10%,
+            curve to 100% 0% with 50% 10%
+        );
     }
 }

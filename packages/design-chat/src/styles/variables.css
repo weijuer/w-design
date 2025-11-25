@@ -38,4 +38,17 @@
     --w-radius-medium: 12px;
     --w-radius-large: 14px;
     --w-radius-full: 9999px;
+
+    /* space */
+    --w-space-4xs: clamp(0.125rem, calc(0.125rem + 0vw), 0.125rem);
+    --w-space-3xs: clamp(0.25rem, calc(0.25rem + 0vw), 0.25rem);
+    --w-space-2xs: clamp(0.5rem, calc(0.5rem + 0vw), 0.5rem);
+    --w-space-xs: clamp(0.75rem, calc(0.75rem + 0vw), 0.75rem);
+    --w-space-sm: clamp(1rem, calc(1rem + 0vw), 1rem);
+    --w-space-md: clamp(1.5rem, calc(1.125rem + 0.78125vw), 1.75rem);
+    --w-space-lg: clamp(2.25rem, calc(1.125rem + 2.34375vw), 3rem);
+    --w-space-xl: clamp(3.5rem, calc(1.25rem + 4.6875vw), 5rem);
+    --w-space-2xl: clamp(5.75rem, calc(2.375rem + 7.03125vw), 8rem);
+    --w-space-3xl: clamp(9.25rem, calc(4.75rem + 9.375vw), 12.25rem);
+    --w-space-4xl: clamp(15rem, calc(7.5rem + 15.625vw), 20rem);
 }

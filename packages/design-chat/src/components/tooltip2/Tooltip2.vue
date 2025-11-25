@@ -1,44 +1,219 @@
 <script setup lang="ts">
-import { computed, useId } from 'vue';
+import { cloneVNode, computed, nextTick, ref, useId, VNode } from 'vue';
 
-// [核心] 生成一个在服务端和客户端都唯一的 ID
-// 1. useId() 用于 popover 和 popovertarget 之间的关联
-const popoverId = useId();
+interface TooltipProps {
+    positionArea?: string
+    trigger?: Trigger
+    title?: string
+    content?: string
+    disabled?: boolean
+    modelValue?: boolean
+    offset?: number
+    showArrow?: boolean
+    transition?: string
+    width?: string | number
+    appendToBody?: boolean
+    boundariesSelector?: string
+}
 
-// 2. 我们基于此 ID 创建一个 CSS 兼容的锚点名称
-const anchorStyle = computed(() => ({
-    anchorName: `--w-popover-anchor-${popoverId}`
-}));
+interface TooltipEmits {
+    (e: 'update:modelValue', visible: boolean): void
+    (e: 'show'): void
+    (e: 'hide'): void
+}
 
-const popoverStyle = computed(() => ({
-    positionAnchor: `--w-popover-anchor-${popoverId}`,
-    positionArea: 'center left'
-}));
+// 定义Props及默认值
+const props = withDefaults(defineProps<TooltipProps>(), {
+    positionArea: 'top center',
+    trigger: 'click',
+    disabled: false,
+    modelValue: false,
+    offset: 10,
+    showArrow: true,
+    transition: 'scale',
+    width: 'auto',
+    appendToBody: true,
+    boundariesSelector: 'body',
+})
+
+const emit = defineEmits<TooltipEmits>()
+
+const slots = defineSlots<{
+    trigger: () => VNode[]
+    title: () => VNode[]
+    content: () => VNode[]
+}>()
+
+let timeoutId: number | null = null
+
+const tooltipId = useId();
+const visible = ref(props.modelValue)
+const triggerRef = ref<HTMLElement>()
+const tooltipRef = ref<HTMLElement>()
+
+const anchorName = computed(() => `--w-anchor-${tooltipId}`);
+const tooltipAnchorName = computed(() => `--w-tooltip-${tooltipId}`);
+
+const anchorStyle = computed(() => {
+
+    return {
+        anchorName: anchorName.value,
+    }
+});
+
+const tooltipStyle = computed(() => {
+    const { positionArea } = props;
+
+    return {
+        ['--w-anchor']: anchorName.value,
+        ['--w-tooltip']: tooltipAnchorName.value,
+        positionAnchor: anchorName.value,
+        anchorName: tooltipAnchorName.value,
+        positionArea
+    }
+});
+
+const triggerVNode = computed(() => {
+    const triggerSlot = slots.trigger?.()
+    if (!triggerSlot?.length) {
+        return null
+    }
+    const originalVNode = triggerSlot[0]
+    const originalProps = originalVNode.props ?? {}
+
+    // 创建事件处理器对象
+    const eventHandlers: Record<string, (event: Event) => void> = {}
+    if (props.trigger === 'click' && !props.disabled) {
+        eventHandlers.onClick = mergeEvents(originalProps.onClick, toggleTooltip)
+    }
+    else if (props.trigger === 'hover' && !props.disabled) {
+        eventHandlers.onMouseenter = mergeEvents(originalProps.onMouseenter, handleMouseEnter)
+        eventHandlers.onMouseleave = mergeEvents(originalProps.onMouseleave, handleMouseLeave)
+    }
+    else if (props.trigger === 'focus' && !props.disabled) {
+        eventHandlers.onFocus = mergeEvents(originalProps.onFocus, handleFocus)
+        eventHandlers.onBlur = mergeEvents(originalProps.onBlur, handleBlur)
+    }
+
+    return cloneVNode(originalVNode, {
+        ...originalProps,
+        ...eventHandlers,
+        ref: setTriggerEl,
+        tabindex: props.trigger === 'focus' ? '0' : originalProps?.tabindex,
+    })
+})
+
+function mergeEvents(oldFn: any, newFn: any) {
+    return function (e: Event) {
+        if (typeof oldFn === 'function')
+            oldFn(e)
+        newFn(e)
+    }
+}
+
+// 设置触发元素
+function setTriggerEl(el: any) {
+    if (el instanceof HTMLElement) {
+        triggerRef.value = el
+    }
+    else if (el?.$el) {
+        triggerRef.value = el.$el
+    }
+}
+
+// 显示Tooltip
+function showTooltip() {
+    if (props.disabled || visible.value)
+        return
+
+    visible.value = true
+    emit('update:modelValue', true)
+}
+
+// 隐藏Tooltip
+function hideTooltip() {
+    if (!visible.value)
+        return
+
+    visible.value = false
+    emit('update:modelValue', false)
+}
+
+// 切换Tooltip显示状态
+function toggleTooltip() {
+    if (visible.value) {
+        hideTooltip()
+    }
+    else {
+        showTooltip()
+    }
+}
+
+// 鼠标进入处理
+function handleMouseEnter() {
+    if (props.trigger !== 'hover' || props.disabled)
+        return
+
+    if (timeoutId) {
+        clearTimeout(timeoutId)
+        timeoutId = null
+    }
+
+    timeoutId = window.setTimeout(() => {
+        showTooltip()
+    }, 100)
+}
+
+// 鼠标离开处理
+function handleMouseLeave() {
+    if (props.trigger !== 'hover' || props.disabled)
+        return
+
+    if (timeoutId) {
+        clearTimeout(timeoutId)
+        timeoutId = null
+    }
+
+    timeoutId = window.setTimeout(() => {
+        hideTooltip()
+    }, 100)
+}
+
+function handleClickOutside(event: MouseEvent) {
+    const target = event.target as Node
+
+    if (
+        tooltipRef.value
+        && !tooltipRef.value.contains(target)
+        && triggerRef.value
+        && !triggerRef.value.contains(target)
+    ) {
+        hideTooltip()
+    }
+}
+
+// 焦点处理
+function handleFocus() {
+    if (props.trigger === 'focus' && !props.disabled) {
+        showTooltip()
+    }
+}
+
+function handleBlur() {
+    if (props.trigger === 'focus' && !props.disabled) {
+        hideTooltip()
+    }
+}
 </script>
 
 <template>
-    <span class="w-popover-anchor" :style="anchorStyle" :popovertarget="popoverId">
-        <slot />
-    </span>
+    <component class="w-anchor tooltip-trigger" :style="anchorStyle" :is="triggerVNode" v-if="triggerVNode" />
 
-    <div :id="popoverId" class="w-popover-content" :style="popoverStyle">
-        <slot name="content">
-            <span>Popover Content</span>
-        </slot>
-    </div>
+    <teleport v-if="appendToBody" to="body">
+        <transition :name="transition">
+            <div v-show="visible" ref="tooltipRef" :id="tooltipId" class="w-tooltip__content" :style="tooltipStyle">
+                <slot name="content" />
+            </div>
+        </transition>
+    </teleport>
 </template>
-
-<style scoped>
-.w-popover-content {
-    --w-popover-gap: 8px;
-    --w-tooltip: v-bind('anchorStyle.anchorName');
-
-    &::before {
-        /* vertical position from tooltip  */
-        top: calc(anchor(var(--w-tooltip) top) - var(--w-popover-gap));
-        bottom: calc(anchor(var(--w-tooltip) bottom) - var(--w-popover-gap));
-        /* horizontal position from anchor */
-        left: calc(anchor(var(--w-tooltip) center) - var(--w-popover-size)/2);
-    }
-}
-</style>

@@ -18,13 +18,24 @@ import { WButton, WTooltip2 } from 'w-design-chat'
 
   <!-- <w-button color="default" size="tiny" radius="tiny">按钮</w-button> -->
 
-  <w-tooltip2 placement="top-start">
+  <w-tooltip2 position-area="top center" trigger="hover">
     <template #trigger>
-      <w-button color="default" size="tiny" radius="tiny">按钮</w-button>
+      <w-button color="default" size="tiny" radius="tiny">按钮1</w-button>
     </template>
     <template #content>
-      <div class="w-tooltip-content">
-        这是一个弹出内容
+      <div class="w-content">
+        这是一个内容
+      </div>
+    </template>
+  </w-tooltip2>
+
+  <w-tooltip2 position-area="top center" trigger="click">
+    <template #trigger>
+      <w-button color="default" size="tiny" radius="tiny">按钮2</w-button>
+    </template>
+    <template #content>
+      <div class="w-content">
+        这是另一个内容
       </div>
     </template>
   </w-tooltip2>
@@ -44,5 +55,6 @@ import { WButton, WTooltip2 } from 'w-design-chat'
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 }
 </style>

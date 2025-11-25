@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
+import { resolve } from 'node:path'
 
 export default defineConfig({
     plugins: [
@@ -11,6 +12,13 @@ export default defineConfig({
             tsconfigPath: './tsconfig.json'
         })
     ],
+    resolve: {
+        alias: {
+            '@': resolve('src'),
+            packages: resolve('packages')
+        },
+        dedupe: ['vue']
+    },
     build: {
         target: 'esnext',
         outDir: 'dist',
