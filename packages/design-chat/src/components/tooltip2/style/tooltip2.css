@@ -1,23 +1,75 @@
 @import '../../../styles/variables.css';
 
-:where(.w-tooltip__content) {
+:where(.w-tooltip2) {
     --w-tooltip-bg: #fff;
     --w-tooltip-gap: 8px;
 }
 
-.w-tooltip__content {
+.w-tooltip2 {
     --w-tooltip-distance: 1em;
     --w-tooltip-size: 1.2em;
 
-    position: absolute;
-    z-index: 0;
-    position-try-fallbacks: flip-block;
-
     padding: var(--w-space-xs);
-    width: max-content;
+    width: fit-content;
     max-width: 15em;
+    max-height: calc(anchor-size(block) * 2);
     border-radius: var(--w-radius-medium);
     background-color: var(--w-tooltip-bg);
+    color: inherit;
+
+    position: absolute;
+    inset: auto;
+    z-index: 0;
+    position-anchor: var(--w-anchor);
+    position-try-fallbacks: flip-block;
+
+    &.w-tooltip--position-area {
+        position-area: var(--w-tooltip__position-area);
+    }
+
+    &.w-tooltip--top {
+        bottom: calc(anchor(top) + var(--w-tooltip-distance) / 2);
+        justify-self: anchor-center;
+
+        &::before {
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    &.w-tooltip--bottom {
+        top: calc(anchor(bottom) + var(--w-tooltip-distance) / 2);
+        justify-self: anchor-center;
+
+        &::before {
+            bottom: calc(100% - 0.5px);
+            left: 50%;
+            transform: translateX(-50%) rotate(180deg);
+        }
+    }
+
+    &.w-tooltip--left {
+        right: calc(anchor(left) + var(--w-tooltip-distance) / 2);
+        align-self: anchor-center;
+
+        &::before {
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%) rotate(270deg);
+        }
+    }
+
+    &.w-tooltip--right {
+        left: calc(anchor(right) + var(--w-tooltip-distance) / 2);
+        align-self: anchor-center;
+
+        &::before {
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+        }
+    }
 
     &::before {
         content: '';
@@ -26,14 +78,9 @@
         z-index: -1;
         width: var(--w-tooltip-size);
         height: var(--w-tooltip-size);
-        background-color: red;
-        /* background-color: inherit; */
-        /* vertical position from tooltip  */
-        top: calc(anchor(var(--w-tooltip) top) - var(--w-tooltip-distance));
-        bottom: calc(anchor(var(--w-tooltip) bottom) - var(--w-tooltip-distance));
-        /* horizontal position from anchor */
-        left: calc(anchor(var(--w-tooltip) center) - var(--w-tooltip-size) / 2);
+        background-color: inherit;
 
+        /* arrow-shape */
         clip-path: shape(
             from top left,
             curve to 50% 50% with 50% 10%,

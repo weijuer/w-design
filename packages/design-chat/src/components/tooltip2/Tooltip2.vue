@@ -2,6 +2,7 @@
 import { cloneVNode, computed, nextTick, ref, useId, VNode } from 'vue';
 
 interface TooltipProps {
+    placement?: Placement
     positionArea?: string
     trigger?: Trigger
     title?: string
@@ -24,7 +25,8 @@ interface TooltipEmits {
 
 // 定义Props及默认值
 const props = withDefaults(defineProps<TooltipProps>(), {
-    positionArea: 'top center',
+    placement: 'top',
+    positionArea: '',
     trigger: 'click',
     disabled: false,
     modelValue: false,
@@ -61,15 +63,27 @@ const anchorStyle = computed(() => {
     }
 });
 
+const tooltipClass = computed(() => {
+    const { positionArea, placement } = props;
+
+    return [
+        placement ? `w-tooltip--${placement}` : '',
+        positionArea ? 'w-tooltip--position-area' : '',
+        props.showArrow ? 'w-tooltip2--arrow' : '',
+    ]
+})
+
 const tooltipStyle = computed(() => {
-    const { positionArea } = props;
+    const { positionArea, placement } = props;
 
     return {
         ['--w-anchor']: anchorName.value,
         ['--w-tooltip']: tooltipAnchorName.value,
-        positionAnchor: anchorName.value,
-        anchorName: tooltipAnchorName.value,
-        positionArea
+        ['--w-tooltip__placement']: placement,
+        ['--w-tooltip__position-area']: positionArea,
+        // positionAnchor: anchorName.value,
+        // anchorName: tooltipAnchorName.value,
+        // positionArea
     }
 });
 
@@ -211,7 +225,8 @@ function handleBlur() {
 
     <teleport v-if="appendToBody" to="body">
         <transition :name="transition">
-            <div v-show="visible" ref="tooltipRef" :id="tooltipId" class="w-tooltip__content" :style="tooltipStyle">
+            <div v-show="visible" ref="tooltipRef" :id="tooltipId" class="w-tooltip2" :class="tooltipClass"
+                :style="tooltipStyle">
                 <slot name="content" />
             </div>
         </transition>
