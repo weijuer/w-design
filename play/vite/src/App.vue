@@ -1,10 +1,15 @@
 <script setup lang="ts">
+import { reactive } from 'vue';
 // import Card from './example/Card.vue'
 // import Resize from './example/Resize.vue'
 // import Menu from './example/Menu.example.vue'
 
 // import { WButton } from 'w-design-vue'
-import { WButton, WTooltip2 } from 'w-design-chat'
+import { WButton, WTooltip, WTooltip2 } from 'w-design-chat'
+
+const state = reactive({
+  visible: true,
+})
 </script>
 
 <template>
@@ -18,27 +23,27 @@ import { WButton, WTooltip2 } from 'w-design-chat'
 
   <!-- <w-button color="default" size="tiny" radius="tiny">按钮</w-button> -->
 
-  <w-tooltip2 placement="left" trigger="click">
+  <w-tooltip2 placement="top" trigger="click">
     <template #trigger>
       <w-button color="default" size="tiny" radius="tiny">按钮1</w-button>
     </template>
     <template #content>
       <div class="w-content">
-        这是另一个内容
+        这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容
       </div>
     </template>
   </w-tooltip2>
 
-  <w-tooltip2 position-area="left" trigger="click">
+  <w-tooltip v-model="state.visible" trigger="click">
     <template #trigger>
       <w-button color="default" size="tiny" radius="tiny">按钮2</w-button>
     </template>
     <template #content>
       <div class="w-content">
-        这是另一个内容
+        这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容
       </div>
     </template>
-  </w-tooltip2>
+  </w-tooltip>
 
   <!-- <Menu></Menu> -->
 </template>

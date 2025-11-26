@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { cloneVNode, computed, nextTick, ref, useId, VNode } from 'vue';
+import { cloneVNode, computed, nextTick, onMounted, onUnmounted, ref, useId, VNode } from 'vue';
 
 interface TooltipProps {
     placement?: Placement
@@ -14,7 +14,6 @@ interface TooltipProps {
     transition?: string
     width?: string | number
     appendToBody?: boolean
-    boundariesSelector?: string
 }
 
 interface TooltipEmits {
@@ -35,7 +34,6 @@ const props = withDefaults(defineProps<TooltipProps>(), {
     transition: 'scale',
     width: 'auto',
     appendToBody: true,
-    boundariesSelector: 'body',
 })
 
 const emit = defineEmits<TooltipEmits>()
@@ -218,6 +216,26 @@ function handleBlur() {
         hideTooltip()
     }
 }
+
+function handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape')
+        close()
+}
+
+// 组件挂载和卸载
+onMounted(() => {
+    document.addEventListener('click', handleClickOutside)
+    document.addEventListener('keydown', handleKeydown)
+})
+
+onUnmounted(() => {
+    document.removeEventListener('click', handleClickOutside)
+    document.removeEventListener('keydown', handleKeydown)
+
+    if (timeoutId) {
+        clearTimeout(timeoutId)
+    }
+})
 </script>
 
 <template>
