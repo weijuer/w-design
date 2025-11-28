@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
+import AI from './example/AI.vue'
 // import Card from './example/Card.vue'
 // import Resize from './example/Resize.vue'
 // import Menu from './example/Menu.example.vue'
 
 // import { WButton } from 'w-design-vue'
-import { WButton, WTooltip, WTooltip2 } from 'w-design-chat'
+import { WButton, WTooltip, WPopover, WebTooltip, WebPopover } from 'w-design-chat'
 
 const state = reactive({
   visible: true,
@@ -13,6 +14,7 @@ const state = reactive({
 </script>
 
 <template>
+  <AI />
   <!-- <div class="grid">
     <template v-for="index in 40" :key="index">
       <Card class="card">{{ index }}</Card>
@@ -23,7 +25,7 @@ const state = reactive({
 
   <!-- <w-button color="default" size="tiny" radius="tiny">按钮</w-button> -->
 
-  <w-tooltip2 placement="top" trigger="click">
+  <web-popover positionArea="top span-left" trigger="click">
     <template #trigger>
       <w-button color="default" size="tiny" radius="tiny">按钮1</w-button>
     </template>
@@ -32,9 +34,9 @@ const state = reactive({
         这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容
       </div>
     </template>
-  </w-tooltip2>
+  </web-popover>
 
-  <w-tooltip v-model="state.visible" trigger="click">
+  <w-popover v-model="state.visible" trigger="click">
     <template #trigger>
       <w-button color="default" size="tiny" radius="tiny">按钮2</w-button>
     </template>
@@ -43,7 +45,7 @@ const state = reactive({
         这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容
       </div>
     </template>
-  </w-tooltip>
+  </w-popover>
 
   <!-- <Menu></Menu> -->
 </template>

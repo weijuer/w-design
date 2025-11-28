@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { cloneVNode, computed, nextTick, onMounted, onUnmounted, ref, useId, VNode } from 'vue';
+import { cloneVNode, computed, onMounted, onUnmounted, ref, useId, VNode } from 'vue';
 
 interface TooltipProps {
     placement?: Placement
@@ -24,7 +24,6 @@ interface TooltipEmits {
 
 // 定义Props及默认值
 const props = withDefaults(defineProps<TooltipProps>(), {
-    placement: 'top',
     positionArea: '',
     trigger: 'click',
     disabled: false,
@@ -51,8 +50,8 @@ const visible = ref(props.modelValue)
 const triggerRef = ref<HTMLElement>()
 const tooltipRef = ref<HTMLElement>()
 
-const anchorName = computed(() => `--w-anchor-${tooltipId}`);
-const tooltipAnchorName = computed(() => `--w-tooltip-${tooltipId}`);
+const anchorName = computed(() => `--web-anchor-${tooltipId}`);
+const tooltipAnchorName = computed(() => `--web-tooltip-${tooltipId}`);
 
 const anchorStyle = computed(() => {
 
@@ -65,23 +64,43 @@ const tooltipClass = computed(() => {
     const { positionArea, placement } = props;
 
     return [
-        placement ? `w-tooltip--${placement}` : '',
-        positionArea ? 'w-tooltip--position-area' : '',
-        props.showArrow ? 'w-tooltip2--arrow' : '',
+        placement ? `web-tooltip--${placement}` : '',
+        positionArea ? 'web-tooltip--area' : '',
+        props.showArrow ? 'web-tooltip--with-arrow' : '',
     ]
 })
 
 const tooltipStyle = computed(() => {
-    const { positionArea, placement } = props;
+    const { positionArea } = props;
+
+    const margin = () => {
+        switch (positionArea) {
+            case 'top':
+            case 'top span-left':
+            case 'top span-right':
+                return '0 0 calc(var(--web-tooltip-size) * 0.5)';
+            case 'bottom':
+            case 'bottom span-left':
+            case 'bottom span-right':
+                return 'calc(var(--web-tooltip-size) * 0.5) 0 0';
+            case 'left':
+            case 'left span-top':
+            case 'left span-bottom':
+                return '0 calc(var(--web-tooltip-size) * 0.5) 0 0';
+            case 'right':
+            case 'right span-top':
+            case 'right span-bottom':
+                return '0 0 0 calc(var(--web-tooltip-size) * 0.5)';
+            default:
+                return '0 0';
+        }
+    };
 
     return {
-        ['--w-anchor']: anchorName.value,
-        ['--w-tooltip']: tooltipAnchorName.value,
-        ['--w-tooltip__placement']: placement,
-        ['--w-tooltip__position-area']: positionArea,
-        // positionAnchor: anchorName.value,
-        // anchorName: tooltipAnchorName.value,
-        // positionArea
+        ['--web-anchor']: anchorName.value,
+        ['--web-tooltip']: tooltipAnchorName.value,
+        ['--web-tooltip--area']: positionArea,
+        ['--web-tooltip--margin']: margin(),
     }
 });
 
@@ -239,14 +258,21 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <component class="w-anchor tooltip-trigger" :style="anchorStyle" :is="triggerVNode" v-if="triggerVNode" />
+    <component class="web-anchor web-tooltip-trigger" :style="anchorStyle" :is="triggerVNode" v-if="triggerVNode" />
 
     <teleport v-if="appendToBody" to="body">
         <transition :name="transition">
-            <div v-show="visible" ref="tooltipRef" :id="tooltipId" class="w-tooltip2" :class="tooltipClass"
+            <div v-show="visible" ref="tooltipRef" :id="tooltipId" class="web-tooltip" :class="tooltipClass"
                 :style="tooltipStyle">
                 <slot name="content" />
             </div>
         </transition>
     </teleport>
+
+    <transition v-else :name="transition">
+        <div v-show="visible" ref="tooltipRef" :id="tooltipId" class="web-tooltip" :class="tooltipClass"
+            :style="tooltipStyle">
+            <slot name="content" />
+        </div>
+    </transition>
 </template>

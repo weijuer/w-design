@@ -1,3 +1,5 @@
 export { default as WButton } from './button'
-export { default as WTooltip2 } from './tooltip2'
 export { default as WTooltip } from './tooltip'
+export { default as WPopover } from './popover'
+export { default as WebTooltip } from './web/tooltip'
+export { default as WebPopover } from './web/popover'
