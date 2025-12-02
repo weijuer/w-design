@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { cloneVNode, computed, onMounted, onUnmounted, ref, useId, VNode } from 'vue';
+import { cloneVNode, computed, onMounted, onUnmounted, ref, useId, VNode } from 'vue'
 
 interface TooltipProps {
     placement?: Placement
@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
     showArrow: true,
     transition: 'scale',
     width: 'auto',
-    appendToBody: true,
+    appendToBody: true
 })
 
 const emit = defineEmits<TooltipEmits>()
@@ -41,17 +41,19 @@ const slots = defineSlots<{
     content: () => VNode[]
 }>()
 
-const popoverId = useId();
+const id = useId()
 const visible = ref(props.modelValue)
 const triggerRef = ref<HTMLElement>()
 const popoverRef = ref<HTMLElement>()
 
+const popoverId = computed(() => `web-popover-${id}`)
+
 const popoverClass = computed(() => {
-    const { placement } = props;
+    const { placement } = props
 
     return [
         placement ? `web-popover--${placement}` : '',
-        props.showArrow ? 'web-popover--with-arrow' : '',
+        props.showArrow ? 'web-popover--with-arrow' : ''
     ]
 })
 
@@ -66,7 +68,7 @@ const triggerVNode = computed(() => {
     return cloneVNode(originalVNode, {
         ...originalProps,
         ref: setTriggerEl,
-        tabindex: props.trigger === 'focus' ? '0' : originalProps?.tabindex,
+        tabindex: props.trigger === 'focus' ? '0' : originalProps?.tabindex
     })
 })
 
@@ -74,26 +76,42 @@ const triggerVNode = computed(() => {
 function setTriggerEl(el: any) {
     if (el instanceof HTMLElement) {
         triggerRef.value = el
-    }
-    else if (el?.$el) {
+    } else if (el?.$el) {
         triggerRef.value = el.$el
     }
 }
 </script>
 
 <template>
-    <component class="web-popover-trigger" :popovertarget="popoverId" :is="triggerVNode" v-if="triggerVNode" />
+    <component
+        class="web-popover-trigger"
+        :popovertarget="popoverId"
+        :is="triggerVNode"
+        v-if="triggerVNode"
+    />
 
     <teleport v-if="appendToBody" to="body">
         <transition :name="transition">
-            <div ref="popoverRef" popover="auto" :id="popoverId" class="web-popover" :class="popoverClass">
+            <div
+                ref="popoverRef"
+                popover="auto"
+                :id="popoverId"
+                class="web-popover"
+                :class="popoverClass"
+            >
                 <slot name="content" />
             </div>
         </transition>
     </teleport>
 
     <transition v-else :name="transition">
-        <div v-show="visible" ref="popoverRef" :id="popoverId" class="web-popover" :class="popoverClass">
+        <div
+            v-show="visible"
+            ref="popoverRef"
+            :id="popoverId"
+            class="web-popover"
+            :class="popoverClass"
+        >
             <slot name="content" />
         </div>
     </transition>

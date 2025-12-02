@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted, Ref, toRefs, computed } from 'vue'
+import { ref, Ref, toRefs, computed } from 'vue'
 import { MaybeRefOrGetter, PointerType, Position, Size, toValue } from '../_utils'
 import { useEventListener } from '../useEventListener'
 

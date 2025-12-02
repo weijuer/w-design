@@ -22,7 +22,14 @@
     inset: auto;
     z-index: 0;
     position-anchor: var(--web-anchor);
-    position-try-fallbacks: flip-block, flip-inline;
+    position-try:
+        flip-block,
+        flip-inline,
+        flip-block flip-inline;
+    position-try-fallbacks:
+        flip-block,
+        flip-inline,
+        flip-block flip-inline;
 
     &.web-tooltip--with-arrow {
         &::before {

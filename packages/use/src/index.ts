@@ -8,6 +8,7 @@ export * from './useHover'
 export * from './useMouse'
 export * from './useRelation'
 export * from './useResizable'
+export * from './useDraggable'
 
 // Util
 export * from './useCounter'
