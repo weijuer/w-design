@@ -1,23 +1,23 @@
-.w-tooltip {
+.w-popover {
     --size: 1.5em;
     --position: 50%;
     --radius: 1em;
 
-    --tooltip-bg-color: #fff;
-    --tooltip-border-color: transparent;
-    --tooltip-title-color: #303133;
-    --tooltip-text-color: #606266;
+    --popover-bg-color: #fff;
+    --popover-border-color: transparent;
+    --popover-title-color: #303133;
+    --popover-text-color: #606266;
 
     min-width: 150px;
     max-width: 400px;
     position: absolute;
     z-index: 2000;
-    background: var(--tooltip-bg-color, #fff);
+    background: var(--popover-bg-color, #fff);
     border-radius: var(--w-radius-medium);
     box-shadow: var(--w-shadow-medium);
     word-wrap: balance;
 
-    &.w-tooltip--with-arrow {
+    &.w-popover--with-arrow {
         --arrow-size: 20px;
 
         &::after {
@@ -35,7 +35,7 @@
             );
         }
 
-        &.w-tooltip--top {
+        &.w-popover--top {
             &::after {
                 top: 100%;
                 left: 50%;
@@ -43,7 +43,7 @@
             }
         }
 
-        &.w-tooltip--top-start {
+        &.w-popover--top-start {
             &::after {
                 top: 100%;
                 left: var(--arrow-size);
@@ -51,7 +51,7 @@
             }
         }
 
-        &.w-tooltip--top-end {
+        &.w-popover--top-end {
             &::after {
                 top: 100%;
                 left: calc(100% - var(--arrow-size));
@@ -59,7 +59,7 @@
             }
         }
 
-        &.w-tooltip--bottom {
+        &.w-popover--bottom {
             &::after {
                 bottom: 100%;
                 left: 50%;
@@ -67,7 +67,7 @@
             }
         }
 
-        &.w-tooltip--bottom-start {
+        &.w-popover--bottom-start {
             &::after {
                 bottom: 100%;
                 left: var(--arrow-size);
@@ -75,7 +75,7 @@
             }
         }
 
-        &.w-tooltip--bottom-end {
+        &.w-popover--bottom-end {
             &::after {
                 bottom: 100%;
                 left: calc(100% - var(--arrow-size));
@@ -83,7 +83,7 @@
             }
         }
 
-        &.w-tooltip--left {
+        &.w-popover--left {
             &::after {
                 left: 100%;
                 top: 50%;
@@ -91,7 +91,7 @@
             }
         }
 
-        &.w-tooltip--left-start {
+        &.w-popover--left-start {
             &::after {
                 left: 100%;
                 top: var(--arrow-size);
@@ -99,7 +99,7 @@
             }
         }
 
-        &.w-tooltip--left-end {
+        &.w-popover--left-end {
             &::after {
                 left: 100%;
                 top: calc(100% - var(--arrow-size));
@@ -107,7 +107,7 @@
             }
         }
 
-        &.w-tooltip--right {
+        &.w-popover--right {
             &::after {
                 right: 100%;
                 top: 50%;
@@ -115,7 +115,7 @@
             }
         }
 
-        &.w-tooltip--right-start {
+        &.w-popover--right-start {
             &::after {
                 right: 100%;
                 top: var(--arrow-size);
@@ -123,7 +123,7 @@
             }
         }
 
-        &.w-tooltip--right-end {
+        &.w-popover--right-end {
             &::after {
                 right: 100%;
                 top: calc(100% - var(--arrow-size));
@@ -132,8 +132,8 @@
         }
     }
 
-    /* 确保tooltip在body中正确定位 */
-    &.tooltip--body {
+    /* 确保popover在body中正确定位 */
+    &.popover--body {
         position: fixed;
     }
 
@@ -188,7 +188,7 @@
     }
 }
 
-.w-tooltip__arrow {
+.w-popover__arrow {
     position: absolute;
     width: 20px;
     height: 20px;
@@ -199,62 +199,62 @@
     clip-path: shape(from top left, curve to 50% 50% with 50% 0%, curve to 100% 0 with 50% 0);
 }
 
-.w-tooltip__header {
+.w-popover__header {
     padding: 12px 16px;
 
-    .tooltip__title {
+    .popover__title {
         margin: 0;
         font-size: 14px;
         font-weight: 600;
-        color: var(--tooltip-title-color, #303133);
+        color: var(--popover-title-color, #303133);
         line-height: 1.4;
     }
 }
 
-.w-tooltip__content {
+.w-popover__content {
     padding: 12px 16px;
     text-wrap: balance;
 
-    .tooltip__text {
+    .popover__text {
         margin: 0;
         font-size: 13px;
-        color: var(--tooltip-text-color, #606266);
+        color: var(--popover-text-color, #606266);
         line-height: 1.5;
     }
 }
 
 /* 深色主题支持 */
 @media (prefers-color-scheme: dark) {
-    .tooltip {
-        --tooltip-bg-color: #303133;
-        --tooltip-border-color: #4c4d4f;
-        --tooltip-header-bg: #262727;
-        --tooltip-title-color: #e4e7ed;
-        --tooltip-text-color: #c0c4cc;
+    .popover {
+        --popover-bg-color: #303133;
+        --popover-border-color: #4c4d4f;
+        --popover-header-bg: #262727;
+        --popover-title-color: #e4e7ed;
+        --popover-text-color: #c0c4cc;
     }
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-    .tooltip {
+    .popover {
         max-width: calc(100vw - 40px);
 
-        .tooltip__header,
-        .tooltip__content {
+        .popover__header,
+        .popover__content {
             padding: 10px 12px;
         }
     }
 }
 
 /* 无障碍支持 */
-.tooltip:focus {
-    outline: 2px solid var(--tooltip-focus-color, #409eff);
+.popover:focus {
+    outline: 2px solid var(--popover-focus-color, #409eff);
     outline-offset: 2px;
 }
 
 /* 打印样式 */
 @media print {
-    .tooltip {
+    .popover {
         display: none !important;
     }
 }

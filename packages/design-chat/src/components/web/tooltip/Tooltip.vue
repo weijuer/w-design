@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { cloneVNode, computed, onMounted, onUnmounted, ref, useId, VNode } from 'vue';
+import { cloneVNode, computed, onMounted, onUnmounted, ref, useId, VNode } from 'vue'
 
 interface TooltipProps {
     placement?: Placement
@@ -25,14 +25,14 @@ interface TooltipEmits {
 // 定义Props及默认值
 const props = withDefaults(defineProps<TooltipProps>(), {
     positionArea: '',
-    trigger: 'click',
+    trigger: 'hover',
     disabled: false,
     modelValue: false,
     offset: 10,
     showArrow: true,
     transition: 'scale',
     width: 'auto',
-    appendToBody: true,
+    appendToBody: true
 })
 
 const emit = defineEmits<TooltipEmits>()
@@ -45,64 +45,63 @@ const slots = defineSlots<{
 
 let timeoutId: number | null = null
 
-const tooltipId = useId();
+const tooltipId = useId()
 const visible = ref(props.modelValue)
 const triggerRef = ref<HTMLElement>()
 const tooltipRef = ref<HTMLElement>()
 
-const anchorName = computed(() => `--web-anchor-${tooltipId}`);
-const tooltipAnchorName = computed(() => `--web-tooltip-${tooltipId}`);
+const anchorName = computed(() => `--web-anchor-${tooltipId}`)
+const tooltipAnchorName = computed(() => `--web-tooltip-${tooltipId}`)
 
 const anchorStyle = computed(() => {
-
     return {
-        anchorName: anchorName.value,
+        anchorName: anchorName.value
     }
-});
+})
 
 const tooltipClass = computed(() => {
-    const { positionArea, placement } = props;
+    const { positionArea, placement } = props
 
     return [
         placement ? `web-tooltip--${placement}` : '',
         positionArea ? 'web-tooltip--area' : '',
-        props.showArrow ? 'web-tooltip--with-arrow' : '',
+        props.showArrow ? 'web-tooltip--with-arrow' : ''
     ]
 })
 
 const tooltipStyle = computed(() => {
-    const { positionArea } = props;
+    const { positionArea } = props
 
     const margin = () => {
         switch (positionArea) {
             case 'top':
             case 'top span-left':
             case 'top span-right':
-                return '0 0 calc(var(--web-tooltip-size) * 0.5)';
+                return '0 0 calc(var(--web-tooltip-size) * 0.5)'
             case 'bottom':
             case 'bottom span-left':
             case 'bottom span-right':
-                return 'calc(var(--web-tooltip-size) * 0.5) 0 0';
+                return 'calc(var(--web-tooltip-size) * 0.5) 0 0'
             case 'left':
             case 'left span-top':
             case 'left span-bottom':
-                return '0 calc(var(--web-tooltip-size) * 0.5) 0 0';
+                return '0 calc(var(--web-tooltip-size) * 0.5) 0 0'
             case 'right':
             case 'right span-top':
             case 'right span-bottom':
-                return '0 0 0 calc(var(--web-tooltip-size) * 0.5)';
+                return '0 0 0 calc(var(--web-tooltip-size) * 0.5)'
             default:
-                return '0 0';
+                return '0 0'
         }
-    };
+    }
 
     return {
         ['--web-anchor']: anchorName.value,
         ['--web-tooltip']: tooltipAnchorName.value,
         ['--web-tooltip--area']: positionArea,
-        ['--web-tooltip--margin']: margin(),
+        ['--web-tooltip--margin']: margin()
     }
-});
+})
 
 const triggerVNode = computed(() => {
     const triggerSlot = slots.trigger?.()
@@ -116,12 +115,10 @@ const triggerVNode = computed(() => {
     const eventHandlers: Record<string, (event: Event) => void> = {}
     if (props.trigger === 'click' && !props.disabled) {
         eventHandlers.onClick = mergeEvents(originalProps.onClick, toggleTooltip)
-    }
-    else if (props.trigger === 'hover' && !props.disabled) {
+    } else if (props.trigger === 'hover' && !props.disabled) {
         eventHandlers.onMouseenter = mergeEvents(originalProps.onMouseenter, handleMouseEnter)
         eventHandlers.onMouseleave = mergeEvents(originalProps.onMouseleave, handleMouseLeave)
-    }
-    else if (props.trigger === 'focus' && !props.disabled) {
+    } else if (props.trigger === 'focus' && !props.disabled) {
         eventHandlers.onFocus = mergeEvents(originalProps.onFocus, handleFocus)
         eventHandlers.onBlur = mergeEvents(originalProps.onBlur, handleBlur)
     }
@@ -130,14 +127,13 @@ const triggerVNode = computed(() => {
         ...originalProps,
         ...eventHandlers,
         ref: setTriggerEl,
-        tabindex: props.trigger === 'focus' ? '0' : originalProps?.tabindex,
+        tabindex: props.trigger === 'focus' ? '0' : originalProps?.tabindex
     })
 })
 
 function mergeEvents(oldFn: any, newFn: any) {
     return function (e: Event) {
-        if (typeof oldFn === 'function')
-            oldFn(e)
+        if (typeof oldFn === 'function') oldFn(e)
         newFn(e)
     }
 }
@@ -146,44 +142,47 @@ function mergeEvents(oldFn: any, newFn: any) {
 function setTriggerEl(el: any) {
     if (el instanceof HTMLElement) {
         triggerRef.value = el
-    }
-    else if (el?.$el) {
+    } else if (el?.$el) {
         triggerRef.value = el.$el
     }
 }
 
 // 显示Tooltip
 function showTooltip() {
-    if (props.disabled || visible.value)
-        return
+    if (props.disabled || visible.value) return
 
     visible.value = true
     emit('update:modelValue', true)
+
+    if (props.appendToBody && tooltipRef.value) {
+        document.body.appendChild(tooltipRef.value)
+    }
 }
 
 // 隐藏Tooltip
 function hideTooltip() {
-    if (!visible.value)
-        return
+    if (!visible.value) return
 
     visible.value = false
     emit('update:modelValue', false)
+
+    if (props.appendToBody && tooltipRef.value && tooltipRef.value.parentNode) {
+        tooltipRef.value.parentNode.removeChild(tooltipRef.value)
+    }
 }
 
 // 切换Tooltip显示状态
 function toggleTooltip() {
     if (visible.value) {
         hideTooltip()
-    }
-    else {
+    } else {
         showTooltip()
     }
 }
 
 // 鼠标进入处理
 function handleMouseEnter() {
-    if (props.trigger !== 'hover' || props.disabled)
-        return
+    if (props.trigger !== 'hover' || props.disabled) return
 
     if (timeoutId) {
         clearTimeout(timeoutId)
@@ -197,8 +196,7 @@ function handleMouseEnter() {
 
 // 鼠标离开处理
 function handleMouseLeave() {
-    if (props.trigger !== 'hover' || props.disabled)
-        return
+    if (props.trigger !== 'hover' || props.disabled) return
 
     if (timeoutId) {
         clearTimeout(timeoutId)
@@ -214,10 +212,10 @@ function handleClickOutside(event: MouseEvent) {
     const target = event.target as Node
 
     if (
-        tooltipRef.value
-        && !tooltipRef.value.contains(target)
-        && triggerRef.value
-        && !triggerRef.value.contains(target)
+        tooltipRef.value &&
+        !tooltipRef.value.contains(target) &&
+        triggerRef.value &&
+        !triggerRef.value.contains(target)
     ) {
         hideTooltip()
     }
@@ -237,8 +235,7 @@ function handleBlur() {
 }
 
 function handleKeydown(e: KeyboardEvent) {
-    if (e.key === 'Escape')
-        close()
+    if (e.key === 'Escape') close()
 }
 
 // 组件挂载和卸载
@@ -258,21 +255,42 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <component class="web-anchor web-tooltip-trigger" :style="anchorStyle" :is="triggerVNode" v-if="triggerVNode" />
+    <component
+        class="web-anchor web-tooltip-trigger"
+        :style="anchorStyle"
+        :is="triggerVNode"
+        v-if="triggerVNode"
+    />
 
     <teleport v-if="appendToBody" to="body">
         <transition :name="transition">
-            <div v-show="visible" ref="tooltipRef" :id="tooltipId" class="web-tooltip" :class="tooltipClass"
-                :style="tooltipStyle">
-                <slot name="content" />
+            <div
+                v-show="visible"
+                ref="tooltipRef"
+                :id="tooltipId"
+                class="web-tooltip"
+                :class="tooltipClass"
+                :style="tooltipStyle"
+            >
+                <slot name="content">
+                    {{ content }}
+                </slot>
             </div>
         </transition>
     </teleport>
 
     <transition v-else :name="transition">
-        <div v-show="visible" ref="tooltipRef" :id="tooltipId" class="web-tooltip" :class="tooltipClass"
-            :style="tooltipStyle">
-            <slot name="content" />
+        <div
+            v-show="visible"
+            ref="tooltipRef"
+            :id="tooltipId"
+            class="web-tooltip"
+            :class="tooltipClass"
+            :style="tooltipStyle"
+        >
+            <slot name="content">
+                {{ content }}
+            </slot>
         </div>
     </transition>
 </template>

@@ -177,6 +177,10 @@ importers:
         version: 3.5.16(typescript@5.8.3)
 
   packages/design-chat:
+    dependencies:
+      vue:
+        specifier: ^3.2.0
+        version: 3.5.16(typescript@5.8.3)
     devDependencies:
       unplugin-icons:
         specifier: ^22.5.0
@@ -230,12 +234,6 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.8.3
-
-  packages/design-demo:
-    dependencies:
-      vue:
-        specifier: ^3.2.0
-        version: 3.5.16(typescript@5.8.3)
 
   packages/design-vue:
     dependencies:

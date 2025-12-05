@@ -5,3 +5,8 @@ packages:
     - 'examples/*'
     - 'play'
     - 'site'
+
+shamefullyHoist: true
+shellEmulator: true
+sideEffectsCache: false
+strictPeerDependencies: false

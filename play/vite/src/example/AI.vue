@@ -36,13 +36,14 @@ const aiStyle = computed(() => ({
     --rotation: calc(90deg - var(--angle));
 
     background-image: conic-gradient(
-        #b9eee1 0.25turn,
-        #39b89a 0.25turn 0.5turn,
-        #b9eee1 0.5turn 0.75turn,
-        #39b89a 0.75turn 1turn
+        from 80deg at 45% 65%,
+        rgba(255, 255, 255, 0.3) 0.08turn,
+        transparent 0.08turn 0.5turn,
+        transparent 0.5turn 0.75turn,
+        transparent 0.75turn 1turn
     );
 
-    box-shadow: 3px 3px 4px 4px #0005;
+    box-shadow: 3px 3px 6px 4px #0005;
 
     &::before,
     &::after {

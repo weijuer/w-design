@@ -1,5 +1,6 @@
-import { computed, ref, Ref } from 'vue'
-import { MaybeRefOrGetter, PointerType, Position, Size, toValue } from '../_utils'
+import type { Ref, MaybeRefOrGetter } from 'vue'
+import { computed, ref, toValue } from 'vue'
+import { PointerType, Position, Size } from '../types'
 import { useEventListener } from '../useEventListener'
 
 export interface useResizableOptions {

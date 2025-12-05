@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref, useTemplateRef } from 'vue'
 import { useDraggable } from '@w-design/use'
 
 import AI from './example/AI.vue'
@@ -8,26 +8,25 @@ import AI from './example/AI.vue'
 // import Menu from './example/Menu.example.vue'
 
 // import { WButton } from 'w-design-vue'
-import { WButton, WTooltip, WPopover, WebTooltip, WebPopover } from 'w-design-chat'
+import { Button, Tooltip, Popover, WebTooltip, WebPopover } from 'w-design-chat'
 
-const targetRef = ref()
+const target = useTemplateRef<HTMLDivElement>('target')
 
-const { position } = useDraggable(targetRef, {
-    draggingElement: targetRef
+const { x, y, style } = useDraggable(target, {
+    initialValue: { x: 40, y: 40 }
 })
-const mouseStyle = computed(() => ({
-    position: 'absolute'
-    // left: `${Math.round(position.x)}px`,
-    // top: `${Math.round(position.y)}px`
-}))
+
 const state = reactive({
     visible: true
+})
+
+onMounted(() => {
+    console.log('onMounted: -->', target.value)
 })
 </script>
 
 <template>
-    {{ position }}
-    <AI />
+    <!-- <AI /> -->
     <!-- <div class="grid">
     <template v-for="index in 40" :key="index">
       <Card class="card">{{ index }}</Card>
@@ -38,35 +37,38 @@ const state = reactive({
 
     <!-- <w-button color="default" size="tiny" radius="tiny">按钮</w-button> -->
 
-    <web-popover positionArea="top span-left" trigger="click">
+    <web-tooltip placement="left" content="这是一个提示">
         <template #trigger>
-            <w-button
-                :ref="targetRef"
-                :style="mouseStyle"
-                color="default"
-                size="tiny"
-                radius="tiny"
-            >
-                按钮1
-            </w-button>
+            <Button color="default" size="tiny" radius="tiny">按钮1</Button>
         </template>
-        <template #content>
+        <!-- <template #content>
             <div class="w-content">
                 这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容
             </div>
-        </template>
-    </web-popover>
-
-    <web-tooltip v-model="state.visible" placement="top" trigger="click">
-        <template #trigger>
-            <w-button color="default" size="tiny" radius="tiny">按钮2</w-button>
-        </template>
-        <template #content>
-            <div class="w-content">
-                这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容
-            </div>
-        </template>
+        </template> -->
     </web-tooltip>
+
+    <div ref="target" :style="style" class="target">测试, {{ x }}, {{ y }}</div>
+
+    <popover title="聊天设置" :show-arrow="false" placement="top">
+        <template #trigger>
+            <Tooltip placement="left" trigger="hover" content="这是一个提示">
+                <template #trigger>
+                    <Button color="default" size="tiny" radius="tiny">按钮</Button>
+                </template>
+            </Tooltip>
+        </template>
+
+        <template #content>
+            <div class="popover-body">
+                <h5 class="popover__title">Temperature</h5>
+                <Slider :min="0" :max="2" :step="1" />
+
+                <h5 class="popover__title">TopK</h5>
+                <Slider :min="0" :max="128" :step="1" />
+            </div>
+        </template>
+    </popover>
 
     <!-- <Menu></Menu> -->
 </template>
@@ -83,5 +85,10 @@ const state = reactive({
     align-items: center;
     justify-content: center;
     gap: 1rem;
+}
+
+.target {
+    position: absolute;
+    cursor: move;
 }
 </style>

@@ -10,13 +10,13 @@
     --web-tooltip-size: 1.25em;
 
     margin: 0;
-    padding: var(--w-space-xs);
+    padding: var(--w-space-2xs);
     width: fit-content;
     max-width: 15rem;
     max-height: calc(anchor-size(block) * 3);
     border-radius: var(--w-radius-medium);
-    background-color: light-dark(#fff, #0e1217);
-    color: light-dark(#0e1217, #fff);
+    background-color: light-dark(#000, #0e1217);
+    color: light-dark(#fff, #fff);
 
     position: absolute;
     inset: auto;

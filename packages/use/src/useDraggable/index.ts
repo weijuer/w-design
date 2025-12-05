@@ -1,25 +1,26 @@
-import { ref, Ref, toRefs, computed } from 'vue'
-import { MaybeRefOrGetter, PointerType, Position, Size, toValue } from '../_utils'
+import type { MaybeRefOrGetter } from 'vue'
+import type { PointerType, Position, Size } from '../types'
+import { ref, toRefs, computed, reactive, toValue } from 'vue'
 import { useEventListener } from '../useEventListener'
 
 export interface useDraggableOptions {
     /**
-     * 是否为精确匹配
+     * Only start the dragging when click on the element directly
      * @default false
      */
-    exact?: boolean
+    exact?: MaybeRefOrGetter<boolean>
 
     /**
      * Prevent events defaults
      * @default false
      */
-    preventDefault?: boolean
+    preventDefault?: MaybeRefOrGetter<boolean>
 
     /**
      * Prevent events propagation
      * @default false
      */
-    stopPropagation?: boolean
+    stopPropagation?: MaybeRefOrGetter<boolean>
 
     /**
      * Whether dispatch events in capturing phase
@@ -86,9 +87,19 @@ export interface useDraggableOptions {
      * @default 'both'
      */
     axis?: 'x' | 'y' | 'both'
+
+    /**
+     * Disabled drag and drop.
+     *
+     * @default false
+     */
+    disabled?: MaybeRefOrGetter<boolean>
 }
 
-export function useDraggable<T>(target: Ref<T>, options: useDraggableOptions = {}) {
+export function useDraggable(
+    target: MaybeRefOrGetter<HTMLElement | SVGElement | null | undefined>,
+    options: useDraggableOptions = {}
+) {
     const {
         pointerTypes,
         preventDefault,
@@ -104,12 +115,14 @@ export function useDraggable<T>(target: Ref<T>, options: useDraggableOptions = {
         handle: draggingHandle = target
     } = options
 
-    const size = ref<Size>({ width: 200, height: 200 })
-    const position = ref<Position>(toValue(initialValue) ?? { x: 0, y: 0 })
+    const position = reactive<Position>(toValue(initialValue) ?? { x: 0, y: 0 })
 
-    let isResizing = ref(false)
-    let startX = 0
-    let startY = 0
+    const isDragging = ref(false)
+
+    const filterEvent = (e: PointerEvent) => {
+        if (pointerTypes) return pointerTypes.includes(e.pointerType as PointerType)
+        return true
+    }
 
     const handleEvent = (event: PointerEvent) => {
         if (toValue(preventDefault)) {
@@ -120,53 +133,50 @@ export function useDraggable<T>(target: Ref<T>, options: useDraggableOptions = {
         }
     }
 
-    const updateSize = (width: number, height: number) => {
-        size.value.width = width
-        size.value.height = height
-    }
-
     const start = (event: PointerEvent) => {
-        event.stopPropagation()
+        if (toValue(options.disabled) || !filterEvent(event)) return
+        if (toValue(exact) && event.target !== toValue(target)) return
 
-        isResizing.value = true
+        isDragging.value = true
 
-        position.value.x = event.clientX
-        position.value.y = event.clientY
-        startX = event.clientX - size.value.width
-        startY = event.clientY - size.value.height
+        position.x = event.clientX
+        position.y = event.clientY
 
-        onStart?.(position.value, event)
+        onStart?.(position, event)
         handleEvent(event)
     }
 
     const move = (event: PointerEvent) => {
-        if (!isResizing.value) {
+        if (toValue(options.disabled) || !filterEvent(event)) return
+
+        if (!isDragging.value) {
             return
         }
 
         if (axis === 'x' || axis === 'both') {
-            position.value.x = event.clientX
-            const newWidth = event.clientX - startX
-            updateSize(newWidth, size.value.height)
+            position.x = event.clientX
         }
 
         if (axis === 'y' || axis === 'both') {
-            position.value.y = event.clientY
-            const newHeight = event.clientY - startY
-            updateSize(size.value.width, newHeight)
+            position.y = event.clientY
         }
 
-        onMove?.(position.value, event)
+        onMove?.(position, event)
         handleEvent(event)
     }
 
     const end = (event: PointerEvent) => {
-        isResizing.value = false
-        onEnd?.(position.value, event)
+        if (toValue(options.disabled) || !filterEvent(event)) return
+
+        isDragging.value = false
+        onEnd?.(position, event)
         handleEvent(event)
     }
 
-    const config = { capture: options.capture ?? true }
+    const config = () => ({
+        capture: options.capture ?? true,
+        passive: !toValue(preventDefault)
+    })
     useEventListener(draggingHandle, 'pointerdown', start, config)
     useEventListener(draggingElement, 'pointermove', move, config)
     useEventListener(draggingElement, 'pointerup', end, config)
@@ -174,14 +184,7 @@ export function useDraggable<T>(target: Ref<T>, options: useDraggableOptions = {
     return {
         ...toRefs(position),
         position,
-        isResizing,
-        style: computed(() => {
-            const { width, height } = size.value
-
-            return {
-                width: `${width}px`,
-                height: `${height}px`
-            }
-        })
+        isDragging,
+        style: computed(() => `left: ${position.x}px; top: ${position.y}px;`)
     }
 }

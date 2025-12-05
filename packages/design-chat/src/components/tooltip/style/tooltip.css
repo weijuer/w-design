@@ -3,16 +3,17 @@
     --position: 50%;
     --radius: 1em;
 
-    --tooltip-bg-color: #fff;
+    --tooltip-bg-color: light-dark(#000, #fff);
     --tooltip-border-color: transparent;
     --tooltip-title-color: #303133;
-    --tooltip-text-color: #606266;
+    --tooltip-text-color: light-dark(#fff, #fff);
 
-    min-width: 150px;
+    width: fit-content;
     max-width: 400px;
     position: absolute;
     z-index: 2000;
-    background: var(--tooltip-bg-color, #fff);
+    background-color: var(--tooltip-bg-color, #fff);
+    color: var(--tooltip-text-color);
     border-radius: var(--w-radius-medium);
     box-shadow: var(--w-shadow-medium);
     word-wrap: balance;
@@ -212,7 +213,7 @@
 }
 
 .w-tooltip__content {
-    padding: 12px 16px;
+    padding: 8px 10px;
     text-wrap: balance;
 
     .tooltip__text {

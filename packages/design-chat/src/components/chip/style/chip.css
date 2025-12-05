@@ -1,0 +1,177 @@
+.w-chip {
+    --w-chip-padding: 0.25rem;
+    --w-chip-color: white;
+
+    margin: 0;
+    padding-inline: var(--w-chip-padding);
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 2rem;
+    max-width: fit-content;
+    height: 1.25rem;
+    line-height: 1.25rem;
+    font-size: var(--w-font-size-small);
+    border: 0;
+    border-radius: var(--w-radius-full);
+    appearance: none;
+    box-sizing: border-box;
+
+    /* color: contrast-color(var(--w-chip-color) 50%); */
+    color: hsl(from var(--w-chip-color) h s 10%);
+    background-color: var(--w-chip-color);
+
+    .w-chip__text {
+        padding-inline: var(--w-space-1);
+
+        .w-chip__small & {
+            padding-inline: var(--w-space-1);
+        }
+
+        .w-chip__medium &,
+        .w-chip__large & {
+            padding-inline: var(--w-space-2);
+        }
+    }
+
+    .w-chip__btn {
+        font-size: var(--w-font-size-tiny);
+        padding: 0;
+
+        .w-chip__medium &,
+        .w-chip__large & {
+            padding: 2px;
+        }
+
+        &:hover {
+            opacity: 0.8;
+        }
+
+        &:active {
+            opacity: 0.6;
+        }
+    }
+
+    /* sizes */
+    &.w-chip__tiny {
+        height: var(--w-line-height-tiny);
+        line-height: var(--w-line-height-tiny);
+        font-size: var(--w-font-size-tiny);
+    }
+
+    &.w-chip__small {
+        height: var(--w-line-height-small);
+        line-height: var(--w-line-height-small);
+        font-size: var(--w-font-size-tiny);
+    }
+
+    &.w-chip__medium {
+        height: var(--w-line-height-medium);
+        line-height: var(--w-line-height-medium);
+        font-size: var(--w-font-size-small);
+    }
+
+    &.w-chip__large {
+        height: var(--w-line-height-large);
+        line-height: var(--w-line-height-large);
+        font-size: var(--w-font-size-medium);
+    }
+
+    /* themes */
+    &.w-chip__default {
+        --w-chip-color: var(--w-color-default);
+    }
+
+    &.w-chip__primary {
+        --w-chip-color: var(--w-color-primary);
+        color: var(--w-color-contrast-higher);
+    }
+
+    &.w-chip__secondary {
+        --w-chip-color: var(--w-color-secondary);
+        color: var(--w-color-contrast-higher);
+    }
+
+    &.w-chip__success {
+        --w-chip-color: var(--w-color-success);
+    }
+
+    &.w-chip__warning {
+        --w-chip-color: var(--w-color-warning);
+    }
+
+    &.w-chip__danger {
+        --w-chip-color: var(--w-color-danger);
+        color: var(--w-color-contrast-higher);
+    }
+
+    /* radius */
+    &.w-chip__radius-tiny {
+        border-radius: var(--w-radius-tiny);
+    }
+
+    &.w-chip__radius-small {
+        border-radius: var(--w-radius-small);
+    }
+
+    &.w-chip__radius-medium {
+        border-radius: var(--w-radius-medium);
+    }
+
+    &.w-chip__radius-large {
+        border-radius: var(--w-radius-large);
+    }
+
+    &.w-chip__radius-full {
+        border-radius: var(--w-radius-full);
+    }
+
+    /* variant */
+    &.is-solid {
+        background-color: var(--w-chip-color);
+    }
+
+    &.is-bordered {
+        background-color: transparent;
+        color: var(--w-chip-color);
+        border: 1px solid var(--w-chip-color);
+    }
+
+    &.is-light {
+        background-color: transparent;
+        color: var(--w-chip-color);
+    }
+
+    &.is-flat {
+        background-color: hsl(from var(--w-chip-color) h s 95%);
+        color: hsl(from var(--w-chip-color) h s 35%);
+    }
+
+    &.is-faded {
+        background-color: hsl(from var(--w-chip-color) h s 95%);
+        border: 1px solid hsl(from var(--w-chip-color) h s 80%);
+        color: hsl(from var(--w-chip-color) h s 35%);
+    }
+
+    &.is-shadow {
+        box-shadow: --shadow(var(--w-chip-color));
+        box-shadow: 0 8px 16px -3px hsl(from var(--w-chip-color) h s 50%);
+    }
+
+    &.is-dot {
+        background-color: transparent;
+        border: 1px solid var(--w-color-default);
+
+        .w-chip__dot {
+            height: 0.5rem;
+            width: 0.5rem;
+            background-color: var(--w-chip-color);
+            border-radius: var(--w-radius-full);
+        }
+    }
+
+    &.is-disabled {
+        opacity: var(--w-disabled-opacity);
+        pointer-events: none;
+    }
+}
