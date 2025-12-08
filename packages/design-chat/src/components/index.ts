@@ -5,6 +5,7 @@ export { default as Icon } from './icon'
 export { default as Drawer } from './drawer'
 export { default as Card } from './card'
 export { default as Chip } from './chip'
+export { default as Avatar } from './avatar'
 
 // web
 export { default as WebTooltip } from './web/tooltip'

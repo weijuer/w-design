@@ -48,13 +48,13 @@
     &.w-button--tiny,
     &[data-size='tiny'] {
         --w-button-padding: 2px 4px;
-        --w-button-font-size: 12px;
+        --w-button-font-size: 10px;
     }
 
     &.w-button--small,
     &[data-size='small'] {
         --w-button-padding: 4px 8px;
-        --w-button-font-size: 14px;
+        --w-button-font-size: 12px;
     }
 
     &.w-button--medium,

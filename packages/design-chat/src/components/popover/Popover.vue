@@ -1,21 +1,11 @@
 <script setup lang="ts">
-import {
-    cloneVNode,
-    computed,
-    nextTick,
-    onMounted,
-    onUnmounted,
-    ref,
-    VNode,
-    VNodeArrayChildren,
-    watch
-} from 'vue'
+import { cloneVNode, computed, nextTick, onMounted, onUnmounted, ref, VNode, watch } from 'vue'
 
 interface PopoverProps {
     placement?: Placement
     trigger?: Trigger
-    title?: string
-    content?: string
+    title?: string | VNode
+    content?: string | VNode
     disabled?: boolean
     visible?: boolean
     offset?: number

@@ -1,0 +1,90 @@
+@import url('../../../styles/variables.css');
+
+.w-avatar {
+    --w-avatar-width: 2em;
+    --w-avatar-height: 2em;
+    --w-avatar-border-radius: 6px;
+
+    position: relative;
+    display: block;
+    font-size: 16px;
+    width: var(--w-avatar-width, 1em);
+    height: var(--w-avatar-height, 1em);
+    line-height: var(--w-avatar-height, 1em);
+    border-radius: 50%;
+    box-sizing: border-box;
+
+    .w-avatar__figure {
+        margin: 0;
+        padding: 0;
+        width: inherit;
+        height: inherit;
+        border-radius: inherit;
+        overflow: hidden;
+    }
+
+    .w-avatar__img,
+    .w-avatar__placeholder {
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        max-width: 100%;
+        fill: transparent;
+        background-color: var(--color-bg-dark);
+        color: var(--color-contrast-medium);
+        border-radius: inherit;
+    }
+
+    .w-avatar__initials,
+    .w-avatar__users-badge {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: inherit;
+        height: inherit;
+        border-radius: inherit;
+        background-color: var(--color-contrast-lower);
+        color: var(--color-contrast-higher);
+    }
+
+    .w-avatar__status {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        display: inline-block;
+        width: 0.52em;
+        height: 0.52em;
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px var(--color-bg);
+        background-color: var(--color-contrast-medium);
+    }
+
+    &.w-avatar__square {
+        border-radius: var(--w-avatar-border-radius);
+    }
+
+    &.is-bordered {
+        outline: 2px solid #e5e5e5;
+        outline-offset: 2px;
+    }
+
+    &.w-avatar__tiny {
+        font-size: var(--w-font-size-tiny);
+    }
+
+    &.w-avatar__small {
+        font-size: var(--w-font-size-small);
+    }
+
+    &.w-avatar__medium {
+        font-size: var(--w-font-size-medium);
+    }
+
+    &.w-avatar__large {
+        font-size: var(--w-font-size-large);
+    }
+}
