@@ -44,7 +44,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
 const emit = defineEmits<TooltipEmits>()
 
 const slots = defineSlots<{
-    trigger: () => VNode[]
+    default: () => VNode[]
     title: () => VNode[]
     content: () => VNode[]
 }>()
@@ -84,7 +84,7 @@ function mergeEvents(oldFn: any, newFn: any) {
 
 // 使用cloneVNode创建带事件的触发器VNode
 const triggerVNode = computed(() => {
-    const triggerSlot = slots.trigger?.()
+    const triggerSlot = slots.default?.()
     if (!triggerSlot?.length) {
         return null
     }

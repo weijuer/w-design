@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
 const emit = defineEmits<TooltipEmits>()
 
 const slots = defineSlots<{
-    trigger: () => VNode[]
+    default: () => VNode[]
     title: () => VNode[]
     content: () => VNode[]
 }>()
@@ -104,7 +104,7 @@ const tooltipStyle = computed(() => {
 })
 
 const triggerVNode = computed(() => {
-    const triggerSlot = slots.trigger?.()
+    const triggerSlot = slots.default?.()
     if (!triggerSlot?.length) {
         return null
     }

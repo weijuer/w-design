@@ -41,11 +41,6 @@ onMounted(() => {
         <template #trigger>
             <Button color="default" size="tiny" radius="tiny">按钮1</Button>
         </template>
-        <!-- <template #content>
-            <div class="w-content">
-                这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容这是另一个内容
-            </div>
-        </template> -->
     </web-tooltip>
 
     <div ref="target" :style="style" class="target">测试, {{ x }}, {{ y }}</div>
@@ -53,19 +48,13 @@ onMounted(() => {
     <popover title="聊天设置" :show-arrow="false" placement="top">
         <template #trigger>
             <Tooltip placement="left" trigger="hover" content="这是一个提示">
-                <template #trigger>
-                    <Button color="default" size="tiny" radius="tiny">按钮</Button>
-                </template>
+                <Button color="default" size="tiny" radius="tiny">按钮</Button>
             </Tooltip>
         </template>
 
         <template #content>
             <div class="popover-body">
                 <h5 class="popover__title">Temperature</h5>
-                <Slider :min="0" :max="2" :step="1" />
-
-                <h5 class="popover__title">TopK</h5>
-                <Slider :min="0" :max="128" :step="1" />
             </div>
         </template>
     </popover>

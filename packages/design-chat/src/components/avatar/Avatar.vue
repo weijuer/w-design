@@ -18,7 +18,7 @@ export interface AvatarProps {
 const { size = 0, status, square, bordered, statusColor, statusStyle } = defineProps<AvatarProps>()
 
 const emit = defineEmits<{
-    (e: 'click', event: MouseEvent): void
+    click: [event: MouseEvent]
 }>()
 
 const slots = useSlots()
