@@ -1,10 +1,23 @@
 import { defineConfig } from 'vite'
-import baseConfig from './vite.base.config'
+import vue from '@vitejs/plugin-vue'
+import { resolve } from 'node:path'
 
 export default defineConfig({
-    ...baseConfig,
+    plugins: [vue()],
+    resolve: {
+        alias: [
+            {
+                find: '@',
+                replacement: resolve('src')
+            },
+            {
+                find: /^@w-design\/(.*)$/,
+                replacement: resolve('../../packages/$1')
+            }
+        ],
+        dedupe: ['vue']
+    },
     build: {
-        ...baseConfig.build,
         target: 'esnext',
         minify: false,
         outDir: 'dist',
@@ -17,15 +30,7 @@ export default defineConfig({
         cssCodeSplit: true,
         rollupOptions: {
             // 保持 vue 外部化
-            external: ['vue'],
-            output: {
-                assetFileNames: assetInfo => {
-                    if (assetInfo.names[0] === 'style.css') {
-                        return 'w-design-chat.css'
-                    }
-                    return assetInfo.names[0] as string
-                }
-            }
+            external: ['vue']
         }
     }
 })

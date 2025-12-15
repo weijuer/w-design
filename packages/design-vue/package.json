@@ -5,8 +5,8 @@
     "description": "A web components library based on Vue 3.x",
     "main": "lib/index.js",
     "module": "es/index.js",
-    "unpkg": "dist/w-design-vue.min.js",
-    "browser": "dist/w-design-vue.min.js",
+    "unpkg": "dist/w-design-vue.mjs",
+    "browser": "dist/w-design-vue.mjs",
     "types": "es/index.d.ts",
     "exports": {
         ".": {
@@ -15,8 +15,8 @@
             "require": "./lib/index.js"
         },
         "./package.json": "./package.json",
-        "./style.css": "./dist/style.css",
-        "./dist/style.css": "./dist/style.css",
+        "./style.css": "./dist/index.css",
+        "./dist/style.css": "./dist/index.css",
         "./es/*": "./es/*",
         "./lib/*": "./lib/*",
         "./resolver": {

@@ -13,10 +13,16 @@ export default defineConfig({
         })
     ],
     resolve: {
-        alias: {
-            '@': resolve('src'),
-            packages: resolve('packages')
-        },
+        alias: [
+            {
+                find: '@',
+                replacement: resolve('src')
+            },
+            {
+                find: /^@w-design\/(.*)$/,
+                replacement: resolve('../../packages/$1')
+            }
+        ],
         dedupe: ['vue']
     },
     build: {

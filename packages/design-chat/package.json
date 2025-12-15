@@ -15,10 +15,14 @@
             "require": "./lib/index.js"
         },
         "./package.json": "./package.json",
-        "./style.css": "./dist/design-chat.css",
-        "./dist/style.css": "./dist/design-chat.css",
+        "./style.css": "./dist/index.css",
+        "./dist/style.css": "./dist/index.css",
         "./es/*": "./es/*",
-        "./lib/*": "./lib/*"
+        "./lib/*": "./lib/*",
+        "./resolver": {
+            "import": "./es/resolver/index.js",
+            "require": "./lib/resolver/index.js"
+        }
     },
     "files": [
         "dist",

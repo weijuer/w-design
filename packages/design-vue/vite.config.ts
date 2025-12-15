@@ -7,15 +7,22 @@ export default defineConfig({
     plugins: [
         vue(),
         dts({
-            entryRoot: '../components',
-            outDir: ['es', 'lib']
+            entryRoot: '.',
+            outDir: ['es', 'lib'],
+            tsconfigPath: './tsconfig.json'
         })
     ],
     resolve: {
-        alias: {
-            '@': resolve('src'),
-            packages: resolve('packages')
-        },
+        alias: [
+            {
+                find: '@',
+                replacement: resolve('src')
+            },
+            {
+                find: /^@w-design\/(.*)$/,
+                replacement: resolve('../../packages/$1')
+            }
+        ],
         dedupe: ['vue']
     },
     css: {
@@ -31,25 +38,22 @@ export default defineConfig({
     },
     build: {
         target: 'esnext',
-        // 输出目录
-        // outDir: 'dist',
         minify: false,
-        // CSS 分离
         cssCodeSplit: true,
         lib: {
-            entry: 'index.ts',
+            entry: ['index.ts', 'resolver/index.ts'],
             name: 'WDesignVue'
         },
         rollupOptions: {
-            external: ['vue', '@w-design/utils', '@w-design/use'],
-            input: ['index.ts', 'resolver/index.ts'],
+            external: ['vue'],
+            // input: ['index.ts', 'resolver/index.ts'],
             output: [
                 {
                     dir: 'es',
                     format: 'es',
                     entryFileNames: '[name].js',
                     preserveModules: true,
-                    preserveModulesRoot: 'src'
+                    preserveModulesRoot: '.'
                 },
                 {
                     dir: 'lib',
@@ -57,7 +61,7 @@ export default defineConfig({
                     exports: 'named',
                     entryFileNames: '[name].js',
                     preserveModules: true,
-                    preserveModulesRoot: 'src'
+                    preserveModulesRoot: '.'
                 }
                 // {
                 //     dir: 'dist',

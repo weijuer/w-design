@@ -1,4 +1,4 @@
-import { CSSProperties, SetupContext, computed, provide, ref, useAttrs } from 'vue'
+import { SetupContext, computed, provide, ref, useAttrs } from 'vue'
 import { type MenuProps, MenuEmits, MENU_KEY } from './interface'
 import { type Numeric } from '../../_utils'
 
@@ -22,7 +22,7 @@ export const useMenu = (props: MenuProps, emit: SetupContext<MenuEmits>['emit'])
         const { style } = useAttrs()
 
         return {
-            ...(style as CSSProperties)
+            ...(style as Record<string, any>)
         }
     })
 

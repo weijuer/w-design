@@ -5,24 +5,32 @@ import { resolve } from 'node:path'
 export default defineConfig({
     plugins: [vue()],
     resolve: {
-        alias: {
-            '@': resolve('src'),
-            packages: resolve('packages')
-        },
+        alias: [
+            {
+                find: '@',
+                replacement: resolve('src')
+            },
+            {
+                find: /^@w-design\/(.*)$/,
+                replacement: resolve('../../packages/$1')
+            }
+        ],
         dedupe: ['vue']
     },
     build: {
-        // dist 目录
+        target: 'esnext',
+        minify: true,
         outDir: 'dist',
+        cssCodeSplit: true,
         lib: {
-            entry: resolve(__dirname, 'index.ts'),
+            entry: 'index.ts',
             formats: ['es'],
+            name: 'WDesignVue',
             fileName: () => 'w-design-vue.mjs'
         },
         rollupOptions: {
             // 保持 vue 外部化
-            external: ['vue', '@w-design/utils', '@w-design/use']
-            // UMD 里的 globals 在 es 格式下不需要
+            external: ['vue']
         }
     }
 })

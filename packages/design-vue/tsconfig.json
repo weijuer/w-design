@@ -5,9 +5,10 @@
             "@/*": ["./src/*"]
         },
         "declaration": true,
-        "declarationDir": "es",
-        "emitDeclarationOnly": true
-    }
-    // "include": ["src/**/*.ts", "src/**/*.vue"],
-    // "exclude": ["node_modules", "dist", "lib", "es"]
+        // "declarationDir": "es",
+        "emitDeclarationOnly": false,
+        "outDir": "./es"
+    },
+    "include": ["../components"],
+    "exclude": ["node_modules", "dist", "lib", "es"]
 }
