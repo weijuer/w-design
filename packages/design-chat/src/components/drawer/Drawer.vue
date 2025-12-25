@@ -3,7 +3,7 @@ import { computed, onMounted, onUnmounted, watch } from 'vue'
 import Icon from '../icon'
 import Button from '../button'
 
-interface drawerProps {
+export interface drawerProps {
     modelValue?: boolean
     position?: 'left' | 'right' | 'top' | 'bottom'
     title?: string

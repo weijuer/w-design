@@ -37,19 +37,17 @@ onMounted(() => {
 
     <!-- <w-button color="default" size="tiny" radius="tiny">按钮</w-button> -->
 
-    <web-tooltip placement="left" content="这是一个提示">
-        <template #trigger>
-            <Button color="default" size="tiny" radius="tiny">按钮1</Button>
-        </template>
-    </web-tooltip>
+    <!-- <web-tooltip placement="left" content="这是一个提示">
+        <Button color="default" size="tiny" radius="tiny">按钮1</Button>
+    </web-tooltip> -->
 
-    <div ref="target" :style="style" class="target">测试, {{ x }}, {{ y }}</div>
+    <!-- <div ref="target" :style="style" class="target">测试, {{ x }}, {{ y }}</div> -->
 
-    <popover title="聊天设置" :show-arrow="false" placement="top">
+    <web-popover title="聊天设置" :show-arrow="false" placement="top">
         <template #trigger>
-            <Tooltip placement="left" trigger="hover" content="这是一个提示">
-                <Button color="default" size="tiny" radius="tiny">按钮</Button>
-            </Tooltip>
+            <Button color="default" size="tiny" radius="tiny">按钮</Button>
+            <!-- <Tooltip placement="left" trigger="hover" content="这是一个提示">
+            </Tooltip> -->
         </template>
 
         <template #content>
@@ -57,7 +55,7 @@ onMounted(() => {
                 <h5 class="popover__title">Temperature</h5>
             </div>
         </template>
-    </popover>
+    </web-popover>
 
     <!-- <Menu></Menu> -->
 </template>

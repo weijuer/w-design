@@ -1,3 +1,7 @@
+[interestfor] {
+    interest-delay: 0.1s;
+}
+
 .web-popover,
 [popover] {
     background: black;
@@ -13,16 +17,31 @@
         translate 0.7s ease-out,
         display 0.7s ease-out allow-discrete,
         overlay 0.7s ease-out allow-discrete;
-    translate: 0 -22rem;
+    /* translate: 0 -22rem; */
 
     &:popover-open {
+        opacity: 1;
         translate: 0 0;
+
+        @starting-style {
+            opacity: 0;
+            /* translate: 0 -22rem; */
+        }
     }
 }
 
 @starting-style {
     .web-popover:popover-open,
     [popover]:popover-open {
-        translate: 0 -22rem;
+        opacity: 0;
+        /* translate: 0 -22rem; */
     }
+}
+
+/*  for polyfill this must be a custom property */
+[interestfor] {
+  --interest-delay-start: 0.1s;
+  --interest-delay-end: 0.1s;
+  interest-delay-start var(--interest-delay-start);
+  interest-delay-end: var(--interest-delay-end);
 }

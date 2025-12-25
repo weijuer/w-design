@@ -5,7 +5,7 @@ defineOptions({
     name: 'WTooltip'
 })
 
-interface TooltipProps {
+export interface TooltipProps {
     placement?: Placement
     trigger?: Trigger
     title?: string
@@ -21,7 +21,7 @@ interface TooltipProps {
 }
 
 // Emits接口定义
-interface TooltipEmits {
+export interface TooltipEmits {
     (e: 'update:visible', visible: boolean): void
     (e: 'show'): void
     (e: 'hide'): void

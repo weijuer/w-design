@@ -1,7 +1,7 @@
 <script name="Chip" setup lang="ts">
 import { computed } from 'vue'
 
-interface ChipProps {
+export interface ChipProps {
     size?: Size
     color?: Color
     radius?: Radius

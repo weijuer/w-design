@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { cloneVNode, computed, onMounted, onUnmounted, ref, useId, VNode } from 'vue'
 
-interface TooltipProps {
+export interface TooltipProps {
     placement?: Placement
     positionArea?: string
     trigger?: Trigger
@@ -16,7 +16,7 @@ interface TooltipProps {
     appendToBody?: boolean
 }
 
-interface TooltipEmits {
+export interface TooltipEmits {
     (e: 'update:modelValue', visible: boolean): void
     (e: 'show'): void
     (e: 'hide'): void

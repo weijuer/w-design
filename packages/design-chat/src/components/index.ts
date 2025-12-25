@@ -6,7 +6,3 @@ export { default as Drawer } from './drawer'
 export { default as Card } from './card'
 export { default as Chip } from './chip'
 export { default as Avatar } from './avatar'
-
-// web
-export { default as WebTooltip } from './web/tooltip'
-export { default as WebPopover } from './web/popover'

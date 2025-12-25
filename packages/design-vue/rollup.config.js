@@ -29,7 +29,8 @@ const baseConfig = defineConfig({
         }),
         scss({
             includePaths: [
-                '../../components/**/src' // 添加组件库样式路径
+                // 添加基础组件路径
+                '../../components/**'
             ]
         }),
         json(),
@@ -101,8 +102,8 @@ const prodConfig = defineConfig({
 })
 
 export default [
-    merge.all([baseConfig, umdConfig, devConfig]),
-    merge.all([baseConfig, umdConfig, prodConfig]),
-    merge.all([baseConfig, esmConfig, devConfig]),
-    merge.all([baseConfig, esmConfig, prodConfig])
+    // merge.all([baseConfig, umdConfig, devConfig]),
+    merge.all([baseConfig, umdConfig, prodConfig])
+    // merge.all([baseConfig, esmConfig, devConfig]),
+    // merge.all([baseConfig, esmConfig, prodConfig])
 ]

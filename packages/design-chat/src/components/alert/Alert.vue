@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { Icon } from 'w-design-chat'
 
-interface AlertProps {
+export interface AlertProps {
     color?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'
     variant?: 'solid' | 'bordered' | 'flat' | 'faded'
     radius?: 'none' | 'tiny' | 'small' | 'medium' | 'large' | 'full'

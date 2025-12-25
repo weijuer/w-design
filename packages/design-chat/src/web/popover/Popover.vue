@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { cloneVNode, computed, onMounted, onUnmounted, ref, useId, VNode } from 'vue'
+import { cloneVNode, computed, onMounted, onUnmounted, ref, shallowRef, useId, VNode } from 'vue'
 
-interface TooltipProps {
+export interface TooltipProps {
     placement?: Placement
     trigger?: Trigger
     title?: string
@@ -15,7 +15,7 @@ interface TooltipProps {
     appendToBody?: boolean
 }
 
-interface TooltipEmits {
+export interface TooltipEmits {
     (e: 'update:modelValue', visible: boolean): void
     (e: 'show'): void
     (e: 'hide'): void
@@ -43,8 +43,8 @@ const slots = defineSlots<{
 
 const id = useId()
 const visible = ref(props.modelValue)
-const triggerRef = ref<HTMLElement>()
-const popoverRef = ref<HTMLElement>()
+const triggerRef = shallowRef<HTMLElement>()
+const popoverRef = shallowRef<HTMLElement>()
 
 const popoverId = computed(() => `web-popover-${id}`)
 
@@ -83,9 +83,10 @@ function setTriggerEl(el: any) {
 </script>
 
 <template>
-    <component
+    <Component
         class="web-popover-trigger"
-        :popovertarget="popoverId"
+        :popovertarget="trigger === 'click' ? popoverId : ''"
+        :interestfor="trigger === 'hover' ? popoverId : ''"
         :is="triggerVNode"
         v-if="triggerVNode"
     />
@@ -98,6 +99,7 @@ function setTriggerEl(el: any) {
                 :id="popoverId"
                 class="web-popover"
                 :class="popoverClass"
+                aria-label="actions"
             >
                 <slot name="content" />
             </div>
@@ -108,9 +110,11 @@ function setTriggerEl(el: any) {
         <div
             v-show="visible"
             ref="popoverRef"
+            popover="auto"
             :id="popoverId"
             class="web-popover"
             :class="popoverClass"
+            aria-label="actions"
         >
             <slot name="content" />
         </div>

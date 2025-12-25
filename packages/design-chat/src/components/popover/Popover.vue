@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { cloneVNode, computed, nextTick, onMounted, onUnmounted, ref, VNode, watch } from 'vue'
 
-interface PopoverProps {
+export interface PopoverProps {
     placement?: Placement
     trigger?: Trigger
     title?: string | VNode
@@ -17,7 +17,7 @@ interface PopoverProps {
 }
 
 // Emits接口定义
-interface PopoverEmits {
+export interface PopoverEmits {
     (e: 'update:visible', visible: boolean): void
     (e: 'show'): void
     (e: 'hide'): void

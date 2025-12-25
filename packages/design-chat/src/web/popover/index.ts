@@ -2,5 +2,5 @@ import Popover from './Popover.vue'
 import { withInstall } from '../../utils/withInstall'
 import './style'
 
-export const WPopover = withInstall(Popover)
-export default WPopover
+export const WebPopover = withInstall(Popover)
+export default WebPopover
