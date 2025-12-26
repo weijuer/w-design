@@ -12,7 +12,7 @@
         "baseUrl": "./",
         "paths": {
             "@w-design/*": ["../../packages/*"],
-            "w-design-vue": ["../../packages/design-vue"],
+            "w-design-vue": ["../../packages/design-vue/src"],
             "w-design-chat": ["../../packages/design-chat/src"]
         }
     }

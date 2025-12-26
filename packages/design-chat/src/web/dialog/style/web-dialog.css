@@ -1,0 +1,66 @@
+@media (prefers-reduced-motion: no-preference) {
+    body {
+        transition:
+            scale 0.8s var(--ease-in-out-5),
+            border-radius 0.8s var(--ease-in-out-5);
+
+        &:has(.push-z[open]) {
+            scale: 95%;
+            border-radius: var(--radius-3);
+            overflow: hidden;
+        }
+    }
+}
+
+.web-dialog {
+    --web-dialog-duration: 0.5s;
+
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    overflow: clip;
+
+    /* Exit Stage To */
+    transform: translateY(-20px);
+
+    &,
+    &::backdrop {
+        transition:
+            display 1s allow-discrete,
+            overlay 1s allow-discrete,
+            opacity 1s ease,
+            transform 1s ease;
+
+        /* Exit Stage To */
+        opacity: 0;
+    }
+
+    &::backdrop {
+        transition: opacity var(--web-dialog-duration) ease;
+        opacity: 0;
+        background-color: light-dark(#0003, #0008);
+        cursor: zoom-out;
+    }
+
+    /* On Stage */
+    &[open] {
+        opacity: 1;
+        transform: translateY(0px);
+
+        &::backdrop {
+            opacity: 0.8;
+        }
+    }
+
+    /* Enter Stage From */
+    @starting-style {
+        &[open],
+        &[open]::backdrop {
+            opacity: 0;
+        }
+
+        &[open] {
+            transform: translateY(20px);
+        }
+    }
+}

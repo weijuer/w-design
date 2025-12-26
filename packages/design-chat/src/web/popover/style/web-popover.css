@@ -4,44 +4,31 @@
 
 .web-popover,
 [popover] {
-    background: black;
-    color: white;
-    font-weight: 400;
-    padding: 1rem 1.5rem;
-    border-radius: 1rem;
-    max-width: 20ch;
-    line-height: 1.4;
-    top: 2rem;
     margin: 0 auto;
+    opacity: 0;
     transition:
-        translate 0.7s ease-out,
         display 0.7s ease-out allow-discrete,
-        overlay 0.7s ease-out allow-discrete;
-    /* translate: 0 -22rem; */
+        overlay 0.7s ease-out allow-discrete,
+        opacity 0.7s ease-out;
 
-    &:popover-open {
+    /* ON STAGE */
+    &:popover-open,
+    &:popover-open::backdrop,
+    [open],
+    [open]::backdrop {
         opacity: 1;
-        translate: 0 0;
 
+        /* OFF STAGE */
         @starting-style {
             opacity: 0;
-            /* translate: 0 -22rem; */
         }
-    }
-}
-
-@starting-style {
-    .web-popover:popover-open,
-    [popover]:popover-open {
-        opacity: 0;
-        /* translate: 0 -22rem; */
     }
 }
 
 /*  for polyfill this must be a custom property */
 [interestfor] {
-  --interest-delay-start: 0.1s;
-  --interest-delay-end: 0.1s;
-  interest-delay-start var(--interest-delay-start);
-  interest-delay-end: var(--interest-delay-end);
+    --interest-delay-start: 0.1s;
+    --interest-delay-end: 0.1s;
+    interest-delay-start: var(--interest-delay-start);
+    interest-delay-end: var(--interest-delay-end);
 }

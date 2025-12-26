@@ -8,7 +8,7 @@ import AI from './example/AI.vue'
 // import Menu from './example/Menu.example.vue'
 
 // import { WButton } from 'w-design-vue'
-import { Button, Tooltip, Popover, WebTooltip, WebPopover } from 'w-design-chat'
+import { Button, Tooltip, Popover, WebTooltip, WebPopover, WebDialog } from 'w-design-chat'
 
 const target = useTemplateRef<HTMLDivElement>('target')
 
@@ -17,7 +17,7 @@ const { x, y, style } = useDraggable(target, {
 })
 
 const state = reactive({
-    visible: true
+    visible: false
 })
 
 onMounted(() => {
@@ -35,7 +35,21 @@ onMounted(() => {
 
     <!-- <Resize></Resize> -->
 
-    <!-- <w-button color="default" size="tiny" radius="tiny">按钮</w-button> -->
+    <Button color="default" size="tiny" radius="tiny" @click="state.visible = !state.visible">
+        打开对话框
+    </Button>
+
+    <web-dialog v-model="state.visible">
+        <template #title>
+            <div>标题</div>
+        </template>
+        <template #content>
+            <div>内容</div>
+        </template>
+        <template #footer>
+            <div>底部</div>
+        </template>
+    </web-dialog>
 
     <!-- <web-tooltip placement="left" content="这是一个提示">
         <Button color="default" size="tiny" radius="tiny">按钮1</Button>
