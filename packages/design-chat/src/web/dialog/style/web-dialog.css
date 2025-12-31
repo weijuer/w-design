@@ -1,51 +1,62 @@
-@media (prefers-reduced-motion: no-preference) {
-    body {
-        transition:
-            scale 0.8s var(--ease-in-out-5),
-            border-radius 0.8s var(--ease-in-out-5);
+.web-dialog {
+    padding: 0;
+    inline-size: clamp(25ch, 60ch, 80vw);
+    border: none;
+    border-radius: var(--w-radius-large);
+    background-color: light-dark(white, black);
 
-        &:has(.push-z[open]) {
-            scale: 95%;
-            border-radius: var(--radius-3);
-            overflow: hidden;
+    .web-dialog__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        font-weight: bold;
+
+        .web-dialog__close-button {
+            inline-size: 1.65rem;
+            block-size: 1.65rem;
+            font-size: 1.25rem;
         }
     }
-}
 
-.web-dialog {
-    --web-dialog-duration: 0.5s;
+    .web-dialog__body {
+        padding: 1rem;
+    }
 
-    background: none;
-    box-shadow: none;
-    padding: 0;
-    overflow: clip;
-
-    /* Exit Stage To */
-    transform: translateY(-20px);
+    .web-dialog__footer {
+        display: flex;
+        justify-content: flex-end;
+        padding: 1rem;
+        gap: 1rem;
+    }
 
     &,
     &::backdrop {
         transition:
-            display 1s allow-discrete,
-            overlay 1s allow-discrete,
-            opacity 1s ease,
-            transform 1s ease;
+            display 0.3s allow-discrete,
+            overlay 0.3s allow-discrete,
+            opacity 0.3s,
+            transform 0.3s;
+        transition-timing-function: ease-in-out;
 
         /* Exit Stage To */
         opacity: 0;
     }
 
+    & {
+        /* Exit Stage To */
+        transform: translateY(10px);
+    }
+
     &::backdrop {
-        transition: opacity var(--web-dialog-duration) ease;
-        opacity: 0;
-        background-color: light-dark(#0003, #0008);
-        cursor: zoom-out;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(25px);
     }
 
     /* On Stage */
     &[open] {
         opacity: 1;
-        transform: translateY(0px);
+        transform: translateY(0);
 
         &::backdrop {
             opacity: 0.8;
@@ -60,7 +71,74 @@
         }
 
         &[open] {
-            transform: translateY(20px);
+            transform: translateY(10px);
+        }
+    }
+
+    html:has(&[open]) {
+        overflow: hidden;
+        scrollbar-gutter: auto;
+    }
+
+    &.slide-out {
+        --w-dialog-duration: 0.5s;
+        --w-dialog-overlay-color: rgba(0, 0, 0, 0.8);
+        --w-dialog-size: 400px;
+        --w-dialog-inset: 1.5rem;
+
+        container: dialog-panel / size;
+        padding: 0;
+        margin: 0;
+        margin-inline-end: auto;
+        box-shadow: none;
+        block-size: 100vh;
+        inline-size: min(var(--w-dialog-size), 80vw);
+        border: none;
+        overflow-y: hidden;
+        top: 0;
+        transition:
+            display var(--w-dialog-duration) allow-discrete,
+            overlay var(--w-dialog-duration) allow-discrete;
+
+        &::backdrop {
+            opacity: 0;
+            background-color: light-dark(#0003, #0008);
+            transition: opacity var(--w-dialog-duration) cubic-bezier(0.25, 0, 0.2, 1);
+        }
+
+        &[open] {
+            opacity: 1;
+            translate: 0;
+
+            &::backdrop {
+                opacity: 0.8;
+            }
+        }
+
+        @starting-style {
+            &[open],
+            &[open]::backdrop {
+                opacity: 0;
+            }
+
+            &[open] {
+                opacity: 0;
+                translate: calc((100% + var(--w-dialog-inset)) * -1) 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            & {
+                transition: opacity var(--w-dialog-duration) cubic-bezier(0.9, 0, 0.1, 1);
+                opacity: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            & {
+                transition: translate var(--w-dialog-duration) cubic-bezier(0.9, 0, 0.1, 1);
+                translate: calc((100% + var(--w-dialog-inset)) * -1) 0;
+            }
         }
     }
 }

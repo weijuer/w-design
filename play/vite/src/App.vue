@@ -35,20 +35,12 @@ onMounted(() => {
 
     <!-- <Resize></Resize> -->
 
-    <Button color="default" size="tiny" radius="tiny" @click="state.visible = !state.visible">
+    <Button color="default" size="tiny" radius="tiny" commandfor="dialog" command="show-modal">
         打开对话框
     </Button>
 
-    <web-dialog v-model="state.visible">
-        <template #title>
-            <div>标题</div>
-        </template>
-        <template #content>
-            <div>内容</div>
-        </template>
-        <template #footer>
-            <div>底部</div>
-        </template>
+    <web-dialog id="dialog" title="对话框" closeby="any">
+        <div>内容</div>
     </web-dialog>
 
     <!-- <web-tooltip placement="left" content="这是一个提示">
@@ -65,9 +57,7 @@ onMounted(() => {
         </template>
 
         <template #content>
-            <div class="popover-body">
-                <h5 class="popover__title">Temperature</h5>
-            </div>
+            <p class="popover__title">Temperature</p>
         </template>
     </web-popover>
 

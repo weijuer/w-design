@@ -4,23 +4,77 @@
 
 .web-popover,
 [popover] {
-    margin: 0 auto;
-    opacity: 0;
-    transition:
-        display 0.7s ease-out allow-discrete,
-        overlay 0.7s ease-out allow-discrete,
-        opacity 0.7s ease-out;
+    --w-popover-size: 0.5rem;
 
-    /* ON STAGE */
-    &:popover-open,
-    &:popover-open::backdrop,
-    [open],
-    [open]::backdrop {
+    padding: 0;
+    position: relative;
+    overflow: visible;
+    border-radius: var(--w-radius-large);
+    background-color: light-dark(white, black);
+
+    position-anchor: --anchor-icon;
+    inset: auto;
+    position-area: block-start;
+    position-try-fallbacks: flip-block;
+    margin-block: var(--w-popover-size, 0.5rem);
+    position-try-order: most-height;
+    position-visibility: anchors-visible;
+
+    .web-popover__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        font-weight: bold;
+    }
+
+    .web-popover__close-button {
+        position: absolute;
+        inset-block-start: -10px;
+        inset-inline-end: -10px;
+        aspect-ratio: 1;
+        line-height: 1;
+        inline-size: 1.65rem;
+        block-size: 1.65rem;
+        font-size: 1.25rem;
+    }
+
+    &,
+    &::backdrop {
+        transition:
+            display 0.5s allow-discrete,
+            overlay 0.5s allow-discrete,
+            opacity 0.5s,
+            transform 0.5s;
+
+        /* Exit Stage To */
+        opacity: 0;
+    }
+
+    & {
+        transform: translateY(10px);
+    }
+
+    /* On Stage */
+    &:popover-open {
         opacity: 1;
+        transform: translateY(0);
 
-        /* OFF STAGE */
-        @starting-style {
+        &::backdrop {
+            opacity: 0.5;
+        }
+    }
+
+    /* Enter Stage From */
+    @starting-style {
+
+        &:popover-open,
+        &:popover-open::backdrop {
             opacity: 0;
+        }
+
+        &:popover-open {
+            transform: translateY(10px);
         }
     }
 }

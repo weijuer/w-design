@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { cloneVNode, computed, ref, shallowRef, useId, VNode, watch } from 'vue'
+import { computed, ref, shallowRef, useAttrs, useId, VNode, watch } from 'vue'
+import { WButton } from '../../components/button'
 
 export interface TooltipProps {
     placement?: Placement
@@ -10,48 +11,70 @@ export interface TooltipProps {
     closeby?: string
     transition?: string
     appendToBody?: boolean
-}
-
-export interface TooltipEmits {
-    (e: 'update:modelValue', visible: boolean): void
-    (e: 'show'): void
-    (e: 'hide'): void
+    okText?: string
+    cancelText?: string
+    okType?: Color
+    confirmLoading?: boolean
 }
 
 // 定义Props及默认值
-const props = withDefaults(defineProps<TooltipProps>(), {
-    disabled: false,
-    modelValue: false,
-    closeby: 'none',
-    transition: 'scale',
-    appendToBody: true
-})
+const {
+    disabled = false,
+    placement = 'top',
+    modelValue = false,
+    closeby = 'none',
+    transition = 'scale',
+    appendToBody = true,
+    okText = 'Ok',
+    cancelText = 'Cancel',
+    okType = 'primary',
+    confirmLoading = false
+} = defineProps<TooltipProps>()
 
-const emit = defineEmits<TooltipEmits>()
+const emit = defineEmits<{
+    'update:modelValue': [visible: boolean]
+    ok: []
+    cancel: []
+}>()
 
 const slots = defineSlots<{
     title: () => VNode[]
-    content: () => VNode[]
+    default: () => VNode[]
+    footer: () => VNode[]
 }>()
 
-const id = useId()
-const visible = ref(props.modelValue)
+const attrs = useAttrs()
+
+const _id = useId()
+const visible = ref(modelValue)
 const dialogRef = shallowRef<HTMLElement>()
 
-const dialogId = computed(() => `web-dialog-${id}`)
+const dialogId = computed(() => (attrs.id as string) || `web-dialog-${_id}`)
 
 const dialogClass = computed(() => {
-    const { placement } = props
-
     return [placement ? `web-dialog--${placement}` : '']
 })
 
+const onOk = (e: Event) => {
+    emit('ok')
+}
+
+const onCancel = (e: Event) => {
+    emit('cancel')
+    emit('update:modelValue', false)
+}
+
 watch(
-    () => props.modelValue,
+    () => modelValue,
     value => {
         visible.value = value
     }
 )
+
+defineExpose({
+    visible,
+    dialogRef
+})
 </script>
 
 <template>
@@ -63,10 +86,54 @@ watch(
                 :id="dialogId"
                 class="web-dialog"
                 :class="dialogClass"
-                aria-label="actions"
                 :open="visible"
             >
-                <slot name="content" />
+                <slot name="title">
+                    <header class="web-dialog__header">
+                        <span class="web-dialog__title">{{ title }}</span>
+                        <w-button
+                            color="default"
+                            class="web-dialog__close-button"
+                            icon-only
+                            :commandfor="dialogId"
+                            command="close"
+                        >
+                            <svg
+                                aria-hidden="true"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M6 18 18 6M6 6l12 12"
+                                ></path>
+                            </svg>
+                        </w-button>
+                    </header>
+                </slot>
+
+                <div class="web-dialog__body">
+                    <slot name="default"></slot>
+                </div>
+
+                <slot name="footer">
+                    <footer class="web-dialog__footer">
+                        <w-button
+                            color="default"
+                            :commandfor="dialogId"
+                            command="close"
+                            @click="onCancel"
+                        >
+                            {{ cancelText }}
+                        </w-button>
+                        <w-button :color="okType" :loading="confirmLoading" @click="onOk">
+                            {{ okText }}
+                        </w-button>
+                    </footer>
+                </slot>
             </dialog>
         </transition>
     </teleport>
@@ -79,10 +146,7 @@ watch(
             :id="dialogId"
             class="web-dialog"
             :class="dialogClass"
-            aria-label="actions"
             :open="visible"
-        >
-            <slot name="content" />
-        </dialog>
+        ></dialog>
     </transition>
 </template>

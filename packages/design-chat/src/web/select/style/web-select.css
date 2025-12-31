@@ -1,0 +1,16 @@
+select,
+select::picker(select) {
+    appearance: base-select;
+}
+
+select {
+    border: none;
+    background: transparent;
+    width: 270px;
+    position: relative;
+    margin: 0 auto;
+
+    &::picker-icon {
+        display: none;
+    }
+}

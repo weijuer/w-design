@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { cloneVNode, computed, onMounted, onUnmounted, ref, shallowRef, useId, VNode } from 'vue'
+import { cloneVNode, computed, ref, shallowRef, useId, VNode } from 'vue'
+import { WButton } from '../../components/button'
 
 export interface TooltipProps {
     placement?: Placement
@@ -101,6 +102,31 @@ function setTriggerEl(el: any) {
                 :class="popoverClass"
                 aria-label="actions"
             >
+                <w-button
+                    color="default"
+                    class="web-popover__close-button"
+                    icon-only
+                    autofocus
+                    :popovertarget="popoverId"
+                    popoveraction="close"
+                >
+                    <svg
+                        aria-hidden="true"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M6 18 18 6M6 6l12 12"
+                        ></path>
+                    </svg>
+                </w-button>
+                <slot name="title">
+                    <header class="web-popover__header">{{ title }}</header>
+                </slot>
                 <slot name="content" />
             </div>
         </transition>
