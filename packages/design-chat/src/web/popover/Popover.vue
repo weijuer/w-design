@@ -7,6 +7,7 @@ export interface TooltipProps {
     trigger?: Trigger
     title?: string
     content?: string
+    popover?: 'auto' | 'hint' | 'manual'
     disabled?: boolean
     modelValue?: boolean
     offset?: number
@@ -48,6 +49,15 @@ const triggerRef = shallowRef<HTMLElement>()
 const popoverRef = shallowRef<HTMLElement>()
 
 const popoverId = computed(() => `web-popover-${id}`)
+const anchorName = computed(() => `--web-anchor-${id}`)
+const popoverAnchorName = computed(() => `--web-popover-${id}`)
+
+const anchorStyle = computed(() => {
+    return {
+        '--web-popover-anchor-name': anchorName.value,
+        anchorName: anchorName.value
+    }
+})
 
 const popoverClass = computed(() => {
     const { placement } = props
@@ -86,6 +96,7 @@ function setTriggerEl(el: any) {
 <template>
     <Component
         class="web-popover-trigger"
+        :style="anchorStyle"
         :popovertarget="trigger === 'click' ? popoverId : ''"
         :interestfor="trigger === 'hover' ? popoverId : ''"
         :is="triggerVNode"

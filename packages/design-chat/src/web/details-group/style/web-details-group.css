@@ -1,0 +1,5 @@
+.web-details-group {
+    display: grid;
+    gap: 4px;
+    max-inline-size: max-content;
+}

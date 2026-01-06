@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { computed, ref, shallowRef, useAttrs, useId, VNode, watch } from 'vue'
+import { computed, ref, shallowRef, useId, VNode, watch } from 'vue'
 import { WButton } from '../../components/button'
 
 export interface TooltipProps {
+    id: string
     placement?: Placement
     title?: string
     content?: string
-    disabled?: boolean
     modelValue?: boolean
-    closeby?: string
+    closeby?: 'none' | 'closerequest' | 'any'
     transition?: string
     appendToBody?: boolean
     okText?: string
@@ -19,7 +19,7 @@ export interface TooltipProps {
 
 // 定义Props及默认值
 const {
-    disabled = false,
+    id = 'web-dialog',
     placement = 'top',
     modelValue = false,
     closeby = 'none',
@@ -43,13 +43,11 @@ const slots = defineSlots<{
     footer: () => VNode[]
 }>()
 
-const attrs = useAttrs()
-
 const _id = useId()
 const visible = ref(modelValue)
 const dialogRef = shallowRef<HTMLElement>()
 
-const dialogId = computed(() => (attrs.id as string) || `web-dialog-${_id}`)
+const dialogId = computed(() => id || `web-dialog-${_id}`)
 
 const dialogClass = computed(() => {
     return [placement ? `web-dialog--${placement}` : '']
@@ -147,6 +145,53 @@ defineExpose({
             class="web-dialog"
             :class="dialogClass"
             :open="visible"
-        ></dialog>
+        >
+            <slot name="title">
+                <header class="web-dialog__header">
+                    <span class="web-dialog__title">{{ title }}</span>
+                    <w-button
+                        color="default"
+                        class="web-dialog__close-button"
+                        icon-only
+                        :commandfor="dialogId"
+                        command="close"
+                    >
+                        <svg
+                            aria-hidden="true"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6 18 18 6M6 6l12 12"
+                            ></path>
+                        </svg>
+                    </w-button>
+                </header>
+            </slot>
+
+            <div class="web-dialog__body">
+                <slot name="default"></slot>
+            </div>
+
+            <slot name="footer">
+                <footer class="web-dialog__footer">
+                    <w-button
+                        color="default"
+                        :commandfor="dialogId"
+                        command="close"
+                        @click="onCancel"
+                    >
+                        {{ cancelText }}
+                    </w-button>
+                    <w-button :color="okType" :loading="confirmLoading" @click="onOk">
+                        {{ okText }}
+                    </w-button>
+                </footer>
+            </slot>
+        </dialog>
     </transition>
 </template>

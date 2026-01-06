@@ -1,0 +1,175 @@
+.web-details {
+    --web-details-duration: 0.2s;
+    --ease-2: cubic-bezier(0.25, 0, 0.4, 1);
+    --ease-3: cubic-bezier(0.25, 0, 0.3, 1);
+    --ease-4: cubic-bezier(0.25, 0, 0.2, 1);
+    --ease-spring-4: linear(
+        0,
+        0.009,
+        0.037 1.7%,
+        0.153 3.6%,
+        0.776 10.3%,
+        1.001,
+        1.142 16%,
+        1.185,
+        1.209 19%,
+        1.215 19.9% 20.8%,
+        1.199,
+        1.165 25%,
+        1.056 30.3%,
+        1.008 33%,
+        0.973,
+        0.955 39.2%,
+        0.953 41.1%,
+        0.957 43.3%,
+        0.998 53.3%,
+        1.009 59.1% 63.7%,
+        0.998 78.9%,
+        1
+    );
+
+    inline-size: 100%;
+
+    @media (prefers-reduced-motion: no-preference) {
+        interpolate-size: allow-keywords;
+
+        &::details-content {
+            transition:
+                content-visibility var(--web-details-duration) allow-discrete,
+                opacity var(--web-details-duration),
+                block-size var(--web-details-duration),
+                border-radius var(--web-details-duration);
+        }
+
+        > summary {
+            transition:
+                outline-offset 0.2s var(--ease-3),
+                border-radius 0.2s var(--ease-3),
+                background-color 0.2s var(--ease-3);
+
+            > svg {
+                transition:
+                    opacity 0.2s var(--ease-2) 0.27s,
+                    translate 0.2s var(--ease-4) 0.27s,
+                    rotate 0.75s var(--ease-spring-4);
+            }
+
+            > .web-details__title {
+                transition: translate 0.2s var(--ease-4) 0.3s;
+            }
+        }
+    }
+
+    &::details-content {
+        border-radius: var(--w-radius-large);
+        border: 1px solid #e9ecef;
+        border-block-start: none;
+
+        opacity: 0;
+        block-size: 0;
+        overflow-y: clip;
+    }
+
+    &[open] {
+        &::details-content {
+            border-start-end-radius: 0px;
+            border-start-start-radius: 0px;
+
+            opacity: 1;
+            block-size: auto;
+        }
+
+        > summary {
+            border-end-end-radius: 0px;
+            border-end-start-radius: 0px;
+
+            &:not(:hover, :focus-visible) {
+                & > .web-details__title {
+                    color: #030507;
+                    translate: calc(-1 * 1.5rem - 16px) 0;
+                }
+
+                & > svg {
+                    translate: -10px 0;
+                    opacity: 0;
+                }
+            }
+
+            > svg {
+                rotate: 0.25turn;
+            }
+        }
+    }
+
+    > summary {
+        cursor: default;
+        font-weight: bold;
+        border: 1px solid #e9ecef;
+        border-radius: var(--w-radius-large);
+        padding: 1rem;
+        text-box: cap alphabetic;
+
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        list-style: none;
+
+        &:is(:hover, :focus-visible) {
+            background: #e9ecef;
+
+            > svg {
+                transition-delay: 0s;
+            }
+
+            > .web-details__title {
+                color: #030507;
+                transition-delay: 0s;
+            }
+        }
+
+        &:focus:not(:active) {
+            outline-offset: 5px;
+        }
+
+        &:active {
+            background-color: #dee2e6;
+        }
+
+        & > .web-details__title {
+            color: #495057;
+        }
+
+        & > svg {
+            block-size: 1.5cap;
+            aspect-ratio: 1;
+            flex-shrink: 0;
+
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 3px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    }
+
+    .web-details__content {
+        padding: 1rem;
+
+        .web-details__text {
+            color: #666;
+            line-height: 1.5;
+        }
+    }
+
+    footer {
+        padding: 1rem;
+        margin-block-start: 1rem;
+        background-color: #e9ecef;
+        border-radius: inherit;
+    }
+}
+
+/* safari remove marker */
+summary::-webkit-details-marker {
+    display: none;
+}

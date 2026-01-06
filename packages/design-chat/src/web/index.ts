@@ -1,3 +1,6 @@
 export { default as WebTooltip } from './tooltip'
 export { default as WebPopover } from './popover'
 export { default as WebDialog } from './dialog'
+export { default as WebSelect } from './select'
+export { default as WebDetails } from './details'
+export { default as WebDetailsGroup } from './details-group'
