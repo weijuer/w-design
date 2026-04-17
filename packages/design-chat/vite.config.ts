@@ -9,6 +9,8 @@ export default defineConfig({
         dts({
             entryRoot: 'src',
             outDir: ['es', 'lib'],
+            cleanVueFileName: true,
+            exclude: ['**/*.css', '**/style/**'],
             tsconfigPath: './tsconfig.json'
         })
     ],
@@ -42,8 +44,14 @@ export default defineConfig({
                 {
                     format: 'es',
                     preserveModules: true,
-                    preserveModulesRoot: 'src',
-                    entryFileNames: '[name].mjs',
+                    // preserveModulesRoot: 'src',
+                    entryFileNames: chunkInfo => {
+                        const baseName = chunkInfo.name
+                        if (baseName?.endsWith('.vue')) {
+                            return `${baseName.replace('.vue', '')}.mjs`
+                        }
+                        return '[name].mjs'
+                    },
                     dir: 'es'
                 },
                 {

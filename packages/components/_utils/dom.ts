@@ -1,4 +1,4 @@
-import { useRect } from '@w-design/use'
+import { useRect } from '@w-design/hooks'
 
 export type ScrollElement = Element | Window
 

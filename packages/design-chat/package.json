@@ -2,7 +2,7 @@
     "name": "w-design-chat",
     "version": "0.0.1",
     "private": false,
-    "description": "A Vue 3 UI Library like Ant Design Vue",
+    "description": "A Web Chat UI Library Based on Vue 3",
     "license": "MIT",
     "type": "module",
     "main": "lib/index.js",
@@ -41,7 +41,7 @@
     },
     "scripts": {
         "clean": "rm -rf dist es lib",
-        "build": "vite build",
+        "build": "pnpm clean && vite build",
         "build:umd": "vite build -c vite.config.umd.ts",
         "build:es-browser": "vite build -c vite.config.esm-browser.ts",
         "build:es": "vite build -c vite.config.es.ts",

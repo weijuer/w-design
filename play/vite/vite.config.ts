@@ -34,7 +34,7 @@ export default defineConfig(({ command }) => ({
         rollupOptions: {
             output: {
                 manualChunks: id => {
-                    if (id.includes('@w-design/use')) return 'w-use'
+                    if (id.includes('@w-design/hooks')) return 'w-use'
                     else return 'vendor'
                 }
             }

@@ -1,0 +1,17 @@
+{
+    "name": "@w-design/hooks",
+    "type": "module",
+    "version": "1.0.0",
+    "description": "W Design Hooks",
+    "main": "index.ts",
+    "module": "index.ts",
+    "unpkg": "index.js",
+    "jsdelivr": "index.js",
+    "types": "index.d.ts",
+    "peerDependencies": {
+        "vue": "catalog:"
+    },
+    "devDependencies": {
+        "vue": "catalog:"
+    }
+}

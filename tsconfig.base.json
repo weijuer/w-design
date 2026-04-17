@@ -2,20 +2,28 @@
     "compilerOptions": {
         "target": "ESNext",
         "module": "ESNext",
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "strict": true,
         "jsx": "preserve",
         "allowJs": false,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        "resolveJsonModule": true,
         "sourceMap": false,
-        "baseUrl": ".",
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "esModuleInterop": true,
+        "removeComments": false,
+        "rootDir": ".",
         "types": [],
         "paths": {
-            "@w-design/*": ["packages/*"],
-            "w-design-vue": ["packages/design-vue"]
+            "@w-design/*": ["./packages/*"],
+            "@w-design/components": ["./packages/components"],
+            "@w-design/components/*": ["./packages/components/*"],
+            "@w-design/utils": ["./packages/utils"],
+            "@w-design/utils/*": ["./packages/utils/*"],
+            "w-design-chat": ["./packages/w-design-chat"],
+            "w-design-vue": ["./packages/design-vue"]
         }
     },
     "preserveSymlinks": true

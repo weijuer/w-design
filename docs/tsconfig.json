@@ -1,0 +1,13 @@
+{
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {
+        "paths": {
+            "design-chat": ["../packages/design-chat"],
+            "w-design-vue": ["../packages/design-vue"],
+            "~/*": ["./.vitepress/vitepress/*"],
+            "vue": ["./node_modules/vue"]
+        }
+    },
+    "include": ["**/*", ".vitepress/**/*"],
+    "exclude": ["node_modules"]
+}

@@ -3,9 +3,11 @@
     "compilerOptions": {
         "composite": true,
         "jsx": "preserve",
-        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "jsxImportSource": "vue",
+        "lib": ["ESNext", "ESNext.Intl", "DOM", "DOM.Iterable"],
+        "types": [],
         "skipLibCheck": true
     },
-    "include": ["packages", "**/*.ts", "**/*.d.ts", "**/*.tsx", "**/*.vue"],
-    "exclude": ["**/node_modules", "**/dist"]
+    "include": ["packages", "**/*.ts", "**/*.d.ts"],
+    "exclude": ["node_modules", "**/dist"]
 }

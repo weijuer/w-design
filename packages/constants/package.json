@@ -1,0 +1,6 @@
+{
+    "name": "@w-design/constants",
+    "private": true,
+    "license": "MIT",
+    "main": "index.ts"
+}

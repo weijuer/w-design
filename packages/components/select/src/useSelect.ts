@@ -9,7 +9,7 @@ import {
     SELECT_KEY
 } from './interface'
 import { Numeric } from '../../_utils'
-import { useEventListener } from '@w-design/use'
+import { useEventListener } from '@w-design/hooks'
 
 export const useSelect = (props: SelectProps, emit: SetupContext<SelectEmits>['emit']) => {
     const _ref = ref<HTMLElement>()

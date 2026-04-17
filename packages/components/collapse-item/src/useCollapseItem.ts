@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
 import { CollapseItemProps } from './interface'
 import { COLLAPSE_KEY, CollapseProvide } from '../../collapse/src/interface'
-import { useParent } from '@w-design/use'
+import { useParent } from '@w-design/hooks'
 
 export const useCollapseItem = (props: CollapseItemProps) => {
     const _ref = ref<HTMLDivElement>()

@@ -1,6 +1,7 @@
-import type { App, Plugin } from 'vue'
-import { INSTALLED_KEY } from '@w-design/utils'
+import { INSTALLED_KEY } from '@w-design/constants'
 import { version } from './package.json'
+
+import type { App, Plugin } from 'vue'
 
 export const designInstaller = (components: Plugin[] = []) => {
     const install = (app: App) => {

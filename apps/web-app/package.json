@@ -9,7 +9,7 @@
     "dependencies": {
         "@w-design/eslint-config": "workspace:^",
         "@w-design/icons": "workspace:^",
-        "@w-design/use": "workspace:^",
+        "@w-design/hooks": "workspace:^",
         "w-design-vue": "workspace:^"
     },
     "keywords": [],

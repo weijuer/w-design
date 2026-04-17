@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useMouse } from '@w-design/use'
+import { useMouse } from '@w-design/hooks'
 const { x, y } = useMouse()
 
 const aiStyle = computed(() => ({

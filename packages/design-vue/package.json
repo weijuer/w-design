@@ -2,10 +2,10 @@
     "name": "w-design-vue",
     "version": "1.0.0",
     "title": "W Design Vue",
-    "description": "A web components library based on Vue 3.x",
+    "description": "A web components library based on vue 3.x",
     "main": "lib/index.js",
     "module": "es/index.js",
-    "unpkg": "dist/w-design-vue.mjs",
+    "unpkg": "dist/w-design-vue.js",
     "browser": "dist/w-design-vue.mjs",
     "types": "es/index.d.ts",
     "exports": {
@@ -30,8 +30,13 @@
         "lib",
         "README.md"
     ],
+    "style": "dist/index.css",
+    "sideEffects": [
+        "dist/*",
+        "es/components/*/style/*",
+        "lib/components/*/style/*"
+    ],
     "scripts": {
-        "dev": "vite",
         "clean": "rimraf 'dist/*' 'lib/*' 'es/*'",
         "build:es": "vite build -c vite.config.ts",
         "build:es-browser": "vite build -c vite.config.esm-browser.ts",
@@ -46,13 +51,14 @@
         "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
     },
     "keywords": [
-        "ui",
-        "vue",
-        "vue3",
+        "w-design-vue",
+        "w-design",
         "components",
         "component library",
         "ui framework",
-        "w-design-vue"
+        "ui",
+        "vue3",
+        "vue"
     ],
     "repository": {
         "type": "git",
@@ -69,7 +75,7 @@
     "bugs": "https://github.com/weijuer/w-design-vue/issues",
     "dependencies": {
         "@w-design/eslint-config": "workspace:^",
-        "@w-design/use": "workspace:^",
+        "@w-design/hooks": "workspace:^",
         "@w-design/utils": "workspace:^"
     },
     "devDependencies": {
@@ -103,7 +109,7 @@
         "vue-tsc": "^2.2.0"
     },
     "peerDependencies": {
-        "vue": "^3.2.0"
+        "vue": "^3.3.7"
     },
     "engines": {
         "node": "^18.0.0 || >=20.0.0",
@@ -111,8 +117,7 @@
     },
     "browserslist": [
         "> 1%",
-        "not ie 10",
+        "not ie 11",
         "not op_mini all"
-    ],
-    "sideEffects": false
+    ]
 }

@@ -1,18 +1,26 @@
+export * from './components'
+export * from './web'
+
+// 工具函数
+export * from './resolver'
+export * from './utils/withInstall'
+
 import type { App } from 'vue'
 
 import * as components from './components'
 import * as webComponents from './web'
 
-export * from './components'
-export * from './web'
-
 const install = (app: App) => {
     Object.values(components).forEach(component => {
-        app.use(component)
+        if (component.install) {
+            app.use(component)
+        }
     })
 
     Object.values(webComponents).forEach(component => {
-        app.use(component)
+        if (component.install) {
+            app.use(component)
+        }
     })
 }
 

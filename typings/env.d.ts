@@ -1,5 +1,5 @@
 import type { vShow } from 'vue'
-import type { INSTALLED_KEY } from '@w-design/utils'
+import type { INSTALLED_KEY } from '@w-design/constants'
 
 declare global {
     const process: {

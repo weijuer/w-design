@@ -1,6 +1,6 @@
 <script name="WAlert" setup lang="ts">
 import { computed, ref } from 'vue'
-import { Icon } from 'w-design-chat'
+import Icon from '../icon'
 
 export interface AlertProps {
     color?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'

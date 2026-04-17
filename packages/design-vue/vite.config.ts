@@ -9,7 +9,8 @@ export default defineConfig({
         dts({
             entryRoot: '.',
             outDir: ['es', 'lib'],
-            tsconfigPath: './tsconfig.json'
+            insertTypesEntry: true,
+            cleanVueFileName: true
         })
     ],
     resolve: {
@@ -41,12 +42,12 @@ export default defineConfig({
         minify: false,
         cssCodeSplit: true,
         lib: {
-            entry: ['index.ts', 'resolver/index.ts'],
+            entry: 'index.ts',
             name: 'WDesignVue'
         },
         rollupOptions: {
             external: ['vue'],
-            // input: ['index.ts', 'resolver/index.ts'],
+            input: ['index.ts'],
             output: [
                 {
                     dir: 'es',

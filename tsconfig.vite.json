@@ -5,5 +5,5 @@
         "types": ["node"]
     },
     "include": ["**/vite.config.*", "**/vitest.config.*"],
-    "exclude": [".vitepress"]
+    "exclude": ["docs"]
 }

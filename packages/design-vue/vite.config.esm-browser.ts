@@ -20,17 +20,31 @@ export default defineConfig({
     build: {
         target: 'esnext',
         minify: true,
-        outDir: 'dist',
         cssCodeSplit: true,
         lib: {
-            entry: 'index.ts',
-            formats: ['es'],
-            name: 'WDesignVue',
-            fileName: () => 'w-design-vue.mjs'
+            entry: 'index.ts'
         },
         rollupOptions: {
             // 保持 vue 外部化
-            external: ['vue']
+            external: ['vue'],
+            input: 'index.ts',
+            output: [
+                {
+                    dir: 'dist',
+                    format: 'umd',
+                    exports: 'named',
+                    name: 'WDesignVue',
+                    globals: {
+                        vue: 'Vue'
+                    },
+                    entryFileNames: 'w-design-vue.js'
+                },
+                {
+                    dir: 'dist',
+                    format: 'esm',
+                    entryFileNames: 'w-design-vue.mjs'
+                }
+            ]
         }
     }
 })

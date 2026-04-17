@@ -39,7 +39,7 @@
         "@w-design/components": "workspace:^",
         "@w-design/eslint-config": "workspace:^",
         "@w-design/icons": "workspace:^",
-        "@w-design/use": "workspace:^",
+        "@w-design/hooks": "workspace:^",
         "@w-design/utils": "workspace:^",
         "w-design-chat": "workspace:*",
         "w-design-vue": "workspace:^"

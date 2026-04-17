@@ -3,6 +3,8 @@
     "compilerOptions": {
         "composite": true,
         "module": "ESNext",
+        "types": ["node"],
         "skipLibCheck": true
-    }
+    },
+    "exclude": ["**/dist"]
 }

@@ -3,20 +3,13 @@
     "private": true,
     "version": "1.0.0",
     "description": "Common utility functions for w-design",
-    "main": "dist/index.js",
-    "module": "dist/index.esm.js",
-    "types": "dist/index.d.ts",
-    "files": [
-        "dist"
-    ],
-    "scripts": {
-        "build": "tsup src/index.ts --format cjs,esm --dts",
-        "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
-        "test": "jest"
+    "main": "index.ts",
+    "module": "index.ts",
+    "types": "index.d.ts",
+    "peerDependencies": {
+        "vue": "catalog:"
     },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/weijuer/w-design.git",
-        "directory": "packages/w-utils"
+    "devDependencies": {
+        "vue": "catalog:"
     }
 }

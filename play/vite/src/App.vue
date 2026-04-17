@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref, useTemplateRef } from 'vue'
-import { useDraggable } from '@w-design/use'
+import { useDraggable } from '@w-design/hooks'
 
 import AI from './example/AI.vue'
 // import Card from './example/Card.vue'
