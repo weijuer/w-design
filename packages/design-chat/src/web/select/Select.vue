@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, shallowRef, useId, VNode, watch } from 'vue'
+import { type VNode, computed, ref, shallowRef, useId, watch } from 'vue'
 
 export interface TooltipProps {
     placement?: Placement
@@ -30,9 +30,9 @@ const {
     appendToBody = true
 } = defineProps<TooltipProps>()
 
-const emit = defineEmits<TooltipEmits>()
+defineEmits<TooltipEmits>()
 
-const slots = defineSlots<{
+defineSlots<{
     default: () => VNode[]
 }>()
 
@@ -60,11 +60,21 @@ defineExpose({
 </script>
 
 <template>
-    <select ref="dialogRef" :id="dialogId" class="web-select">
-        <button>
+    <select
+        ref="dialogRef"
+        :id="dialogId"
+        class="web-select"
+        :class="dialogClass"
+        v-show="visible"
+        :data-closeby="closeby"
+        :data-transition="transition"
+        :disabled="disabled"
+        :data-append-to-body="appendToBody"
+    >
+        <!-- <button>
             <selectedcontent></selectedcontent>
             <span class="arrow"></span>
-        </button>
+        </button> -->
         <slot />
     </select>
 </template>

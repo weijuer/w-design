@@ -1,0 +1,46 @@
+import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import { URL, fileURLToPath } from 'node:url'
+import { defineConfig } from 'vite'
+
+const resolve = (path: string) => fileURLToPath(new URL(path, import.meta.url))
+
+export default defineConfig(({ command }) => {
+    return {
+        plugins: [vue(), vueJsx()],
+        resolve:
+            command === 'build'
+                ? {}
+                : {
+                      alias: [
+                          {
+                              find: '@',
+                              replacement: resolve('src')
+                          },
+                          {
+                              find: 'w-design-vue',
+                              replacement: resolve('../packages/design-vue')
+                          },
+                          {
+                              find: 'w-design-chat',
+                              replacement: resolve('../packages/design-chat/src')
+                          },
+                          {
+                              find: /^@w-design\/(.*)$/,
+                              replacement: resolve('../packages/$1')
+                          }
+                      ]
+                  },
+        build: {
+            minify: false,
+            rollupOptions: {
+                output: {
+                    manualChunks: id => {
+                        if (id.includes('@w-design/hooks')) return 'w-use'
+                        else return 'vendor'
+                    }
+                }
+            }
+        }
+    }
+})

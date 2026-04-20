@@ -1,17 +1,19 @@
-// eslint.config.js
 import pluginJs from '@eslint/js'
 import pluginVue from 'eslint-plugin-vue'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
+import { defineConfig } from 'eslint/config'
 
-export default [
+export default defineConfig([
     {
-        ignores: ['**/node_modules', '**/dist', '!.vscode', '!.github', '!.devcontainer']
+        ignores: ['node_modules', 'dist', 'play', '!.vscode', '!.github', '!.devcontainer']
     },
     { files: ['**/*.{js,mjs,cjs,ts,vue}'] },
     {
         languageOptions: {
-            globals: globals.browser
+            ecmaVersion: 'latest',
+            sourceType: 'module',
+            globals: { ...globals.browser, ...globals.es2025, ...globals.node }
         }
     },
     pluginJs.configs.recommended,
@@ -25,17 +27,31 @@ export default [
     },
     {
         rules: {
+            // js/ts
+            camelcase: ['error', { properties: 'never' }],
             'no-debugger': 'error',
             'no-console': ['error', { allow: ['warn', 'error', 'info', 'clear'] }],
             'no-unused-vars': 'off',
             'no-undef': 'off',
-            'prefer-const': 'error',
-            'sort-imports': ['error', { ignoreDeclarationSort: true }],
+            'no-return-await': 'error',
+            'no-var': 'error',
             'no-duplicate-imports': 'error',
-            // This rule enforces the preference for using '@ts-expect-error' comments in TypeScript
-            // code to indicate intentional type errors, improving code clarity and maintainability.
+            'prefer-const': ['warn', { destructuring: 'all', ignoreReadBeforeAssign: true }],
+            'sort-imports': [
+                'warn',
+                {
+                    ignoreCase: false,
+                    ignoreDeclarationSort: true,
+                    ignoreMemberSort: false,
+                    memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+                    allowSeparatedGroups: false
+                }
+            ],
+
+            // ts
+            '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/prefer-ts-expect-error': 'error',
-            // Enforce the use of 'import type' for importing types
+            '@typescript-eslint/no-import-type-side-effects': 'error',
             '@typescript-eslint/consistent-type-imports': [
                 'error',
                 {
@@ -43,19 +59,19 @@ export default [
                     disallowTypeAnnotations: false
                 }
             ],
-            // Enforce the use of top-level import type qualifier when an import only has specifiers with inline type qualifiers
-            '@typescript-eslint/no-import-type-side-effects': 'error',
+
+            // vue
             'vue/max-attributes-per-line': 'off',
             'vue/singleline-html-element-content-newline': 'off',
             'vue/multi-word-component-names': 'off',
             'vue/html-self-closing': [
                 'error',
                 {
-                    html: { component: 'always', normal: 'always', void: 'any' },
+                    html: { component: 'always', normal: 'any', void: 'always' },
                     math: 'always',
                     svg: 'always'
                 }
             ]
         }
     }
-]
+])

@@ -1,6 +1,7 @@
 {
     "name": "w-design-vue",
     "version": "1.0.0",
+    "type": "module",
     "title": "W Design Vue",
     "description": "A web components library based on vue 3.x",
     "main": "lib/index.js",

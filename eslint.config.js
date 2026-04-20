@@ -1,3 +1,1 @@
-import designConfig from '@w-design/eslint-config'
-
-export default [designConfig]
+export { default } from '@w-design/eslint-config'

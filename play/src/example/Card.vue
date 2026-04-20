@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usePrevious, useEventListener } from '@w-design/hooks'
+import { useEventListener, usePrevious } from '@w-design/hooks'
 import { onMounted, ref, watchEffect } from 'vue'
 
 const eleRef = ref<HTMLElement | null>(null)
@@ -35,7 +35,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="card" ref="eleRef" :data-inview="isInView"><slot></slot></div>
+    <div class="card" ref="eleRef" :data-inview="isInView"><slot /></div>
 </template>
 
 <style>

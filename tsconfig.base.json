@@ -17,11 +17,12 @@
         "rootDir": ".",
         "types": [],
         "paths": {
-            "@w-design/*": ["./packages/*"],
             "@w-design/components": ["./packages/components"],
             "@w-design/components/*": ["./packages/components/*"],
             "@w-design/utils": ["./packages/utils"],
             "@w-design/utils/*": ["./packages/utils/*"],
+            "@w-design/hooks": ["./packages/hooks"],
+            "@w-design/constants": ["./packages/constants"],
             "w-design-chat": ["./packages/w-design-chat"],
             "w-design-vue": ["./packages/design-vue"]
         }

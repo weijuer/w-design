@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from 'vue'
-import { WMenu, WMenuItem } from 'w-design-vue';
+import { WMenu, WMenuItem } from 'w-design-vue'
 import { uuid } from '@w-design/utils'
 
 const getItem = (label, value, icon, children, type = '') => {
@@ -36,13 +36,18 @@ const state = reactive({
 })
 
 const onSelect = key => {
-    console.log('onSelect', key)
+    console.info('onSelect', key)
 }
 </script>
 
 <template>
     <w-menu v-model:selected-keys="state.selectedKeys" @select="onSelect" style="width: 240px">
-        <w-menu-item v-for="{ label, value, icon } in state.simpleMenus" :key="value" :label="label" :value="value"
-            :icon="icon"></w-menu-item>
+        <w-menu-item
+            v-for="{ label, value, icon } in state.simpleMenus"
+            :key="value"
+            :label="label"
+            :value="value"
+            :icon="icon"
+        />
     </w-menu>
 </template>

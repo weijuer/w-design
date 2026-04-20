@@ -1,5 +1,5 @@
 <template>
-    <details-group class="web-details-group">
+    <section class="web-details-group">
         <slot />
-    </details-group>
+    </section>
 </template>

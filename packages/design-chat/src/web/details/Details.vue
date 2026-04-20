@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { type VNode, ref } from 'vue'
 
 export interface DetailsProps {
     title?: string
@@ -16,9 +16,9 @@ const emit = defineEmits<{
 }>()
 
 const slots = defineSlots<{
-    icon(props: { visible: boolean }): any
-    default(): any
-    footer(): any
+    icon(props: { visible: boolean }): VNode
+    default(): VNode
+    footer(): VNode
 }>()
 
 const visible = ref(open)
@@ -44,7 +44,7 @@ defineExpose({
         <summary>
             <slot name="icon" :visible="visible">
                 <svg aria-hidden viewBox="0 0 16 16" width="16" height="16">
-                    <path d="M5 2 L12 8 L5 14"></path>
+                    <path d="M5 2 L12 8 L5 14" />
                 </svg>
             </slot>
             <div class="web-details__title">{{ title }}</div>

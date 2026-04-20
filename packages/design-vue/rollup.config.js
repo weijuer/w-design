@@ -102,8 +102,12 @@ const prodConfig = defineConfig({
 })
 
 export default [
-    // merge.all([baseConfig, umdConfig, devConfig]),
-    merge.all([baseConfig, umdConfig, prodConfig])
-    // merge.all([baseConfig, esmConfig, devConfig]),
-    // merge.all([baseConfig, esmConfig, prodConfig])
+    // UMD 生产版本
+    merge.all([baseConfig, umdConfig, prodConfig]),
+    // UMD 开发版本
+    merge.all([baseConfig, umdConfig, devConfig]),
+    // ES 模块生产版本
+    merge.all([baseConfig, esmConfig, prodConfig]),
+    // ES 模块开发版本
+    merge.all([baseConfig, esmConfig, devConfig])
 ]

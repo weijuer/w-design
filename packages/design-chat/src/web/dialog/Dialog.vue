@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, shallowRef, useId, VNode, watch } from 'vue'
+import { type VNode, computed, ref, shallowRef, useId, watch } from 'vue'
 import { WButton } from '../../components/button'
 
 export interface TooltipProps {
@@ -37,7 +37,7 @@ const emit = defineEmits<{
     cancel: []
 }>()
 
-const slots = defineSlots<{
+defineSlots<{
     title: () => VNode[]
     default: () => VNode[]
     footer: () => VNode[]
@@ -53,11 +53,11 @@ const dialogClass = computed(() => {
     return [placement ? `web-dialog--${placement}` : '']
 })
 
-const onOk = (e: Event) => {
+const onOk = () => {
     emit('ok')
 }
 
-const onCancel = (e: Event) => {
+const onCancel = () => {
     emit('cancel')
     emit('update:modelValue', false)
 }
@@ -77,63 +77,61 @@ defineExpose({
 
 <template>
     <teleport v-if="appendToBody" to="body">
-        <transition :name="transition">
-            <dialog
-                ref="dialogRef"
-                :closeby="closeby"
-                :id="dialogId"
-                class="web-dialog"
-                :class="dialogClass"
-                :open="visible"
-            >
-                <slot name="title">
-                    <header class="web-dialog__header">
-                        <span class="web-dialog__title">{{ title }}</span>
-                        <w-button
-                            color="default"
-                            class="web-dialog__close-button"
-                            icon-only
-                            :commandfor="dialogId"
-                            command="close"
+        <dialog
+            ref="dialogRef"
+            :closeby="closeby"
+            :id="dialogId"
+            class="web-dialog"
+            :class="dialogClass"
+            :open="visible"
+        >
+            <slot name="title">
+                <header class="web-dialog__header">
+                    <span class="web-dialog__title">{{ title }}</span>
+                    <w-button
+                        color="default"
+                        class="web-dialog__close-button"
+                        icon-only
+                        :commandfor="dialogId"
+                        command="close"
+                    >
+                        <svg
+                            aria-hidden="true"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
                         >
-                            <svg
-                                aria-hidden="true"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M6 18 18 6M6 6l12 12"
-                                ></path>
-                            </svg>
-                        </w-button>
-                    </header>
-                </slot>
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6 18 18 6M6 6l12 12"
+                            />
+                        </svg>
+                    </w-button>
+                </header>
+            </slot>
 
-                <div class="web-dialog__body">
-                    <slot name="default"></slot>
-                </div>
+            <div class="web-dialog__body">
+                <slot name="default"></slot>
+            </div>
 
-                <slot name="footer">
-                    <footer class="web-dialog__footer">
-                        <w-button
-                            color="default"
-                            :commandfor="dialogId"
-                            command="close"
-                            @click="onCancel"
-                        >
-                            {{ cancelText }}
-                        </w-button>
-                        <w-button :color="okType" :loading="confirmLoading" @click="onOk">
-                            {{ okText }}
-                        </w-button>
-                    </footer>
-                </slot>
-            </dialog>
-        </transition>
+            <slot name="footer">
+                <footer class="web-dialog__footer">
+                    <w-button
+                        color="default"
+                        :commandfor="dialogId"
+                        command="close"
+                        @click="onCancel"
+                    >
+                        {{ cancelText }}
+                    </w-button>
+                    <w-button :color="okType" :loading="confirmLoading" @click="onOk">
+                        {{ okText }}
+                    </w-button>
+                </footer>
+            </slot>
+        </dialog>
     </teleport>
 
     <transition v-else :name="transition">
@@ -167,7 +165,7 @@ defineExpose({
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 d="M6 18 18 6M6 6l12 12"
-                            ></path>
+                            />
                         </svg>
                     </w-button>
                 </header>
