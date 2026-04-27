@@ -1,13 +1,13 @@
 {
-    "extends": "./tsconfig.base.json",
-    "compilerOptions": {
-        "composite": true,
-        "jsx": "preserve",
-        "jsxImportSource": "vue",
-        "lib": ["ESNext", "ESNext.Intl", "DOM", "DOM.Iterable"],
-        "types": [],
-        "skipLibCheck": true
-    },
-    "include": ["packages", "typings/env.d.ts", "typings/style.d.ts"],
-    "exclude": ["node_modules", "**/dist", "**/*.md"]
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "lib": ["ESNext", "ESNext.Intl", "DOM", "DOM.Iterable"],
+    "types": [],
+    "skipLibCheck": true
+  },
+  "include": ["packages", "typings/env.d.ts", "typings/style.d.ts"],
+  "exclude": ["node_modules", "**/dist", "**/*.md"]
 }

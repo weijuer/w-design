@@ -1,124 +1,124 @@
 {
-    "name": "w-design-vue",
-    "version": "1.0.0",
-    "type": "module",
-    "title": "W Design Vue",
-    "description": "A web components library based on vue 3.x",
-    "main": "lib/index.js",
-    "module": "es/index.js",
-    "unpkg": "dist/w-design-vue.js",
-    "browser": "dist/w-design-vue.mjs",
-    "types": "es/index.d.ts",
-    "exports": {
-        ".": {
-            "types": "./es/index.d.ts",
-            "import": "./es/index.js",
-            "require": "./lib/index.js"
-        },
-        "./package.json": "./package.json",
-        "./style.css": "./dist/index.css",
-        "./dist/style.css": "./dist/index.css",
-        "./es/*": "./es/*",
-        "./lib/*": "./lib/*",
-        "./resolver": {
-            "import": "./es/resolver/index.js",
-            "require": "./lib/resolver/index.js"
-        }
+  "name": "w-design-vue",
+  "version": "1.0.0",
+  "type": "module",
+  "title": "W Design Vue",
+  "description": "A web components library based on vue 3.x",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "unpkg": "dist/w-design-vue.js",
+  "browser": "dist/w-design-vue.mjs",
+  "types": "es/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js"
     },
-    "files": [
-        "dist",
-        "es",
-        "lib",
-        "README.md"
-    ],
-    "style": "dist/index.css",
-    "sideEffects": [
-        "dist/*",
-        "es/components/*/style/*",
-        "lib/components/*/style/*"
-    ],
-    "scripts": {
-        "clean": "rimraf 'dist/*' 'lib/*' 'es/*'",
-        "build:es": "vite build -c vite.config.ts",
-        "build:es-browser": "vite build -c vite.config.esm-browser.ts",
-        "build": "pnpm run clean && pnpm run build:es && pnpm run build:es-browser",
-        "build:ts": "vue-tsc && vite build",
-        "build:package": "rollup -c",
-        "preview": "vite preview",
-        "format": "prettier --write .",
-        "lint": "eslint .",
-        "typecheck": "vue-tsc --noEmit",
-        "release": "bumpp --all",
-        "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
-    },
-    "keywords": [
-        "w-design-vue",
-        "w-design",
-        "components",
-        "component library",
-        "ui framework",
-        "ui",
-        "vue3",
-        "vue"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/weijuer/w-design.git",
-        "directory": "packages/w-design-vue"
-    },
-    "author": "Weijuer<https://github.com/weijuer>",
-    "license": "MIT",
-    "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/w-design-vue"
-    },
-    "homepage": "https://github.com/weijuer/w-design-vue/tree/master/#readme",
-    "bugs": "https://github.com/weijuer/w-design-vue/issues",
-    "dependencies": {
-        "@w-design/eslint-config": "workspace:^",
-        "@w-design/hooks": "workspace:^",
-        "@w-design/utils": "workspace:^"
-    },
-    "devDependencies": {
-        "@eslint/js": "^9.18.0",
-        "@rollup/plugin-babel": "^6.0.4",
-        "@rollup/plugin-commonjs": "^28.0.2",
-        "@rollup/plugin-json": "^6.1.0",
-        "@rollup/plugin-node-resolve": "^16.0.0",
-        "@rollup/plugin-replace": "^6.0.2",
-        "@rollup/plugin-terser": "^0.4.4",
-        "@rollup/plugin-typescript": "^12.1.2",
-        "@vitejs/plugin-vue": "^5.2.1",
-        "deepmerge": "^4.3.1",
-        "esbuild": "^0.24.2",
-        "eslint": "^9.18.0",
-        "eslint-plugin-vue": "^9.32.0",
-        "fast-glob": "^3.3.3",
-        "postcss-custom-properties": "^14.0.6",
-        "prettier": "^3.2.5",
-        "rollup": "^4.30.1",
-        "rollup-plugin-esbuild": "^6.1.1",
-        "rollup-plugin-scss": "^4.0.1",
-        "sass": "^1.83.4",
-        "typescript": "^5.7.3",
-        "typescript-eslint": "^8.20.0",
-        "unplugin-auto-import": "^19.0.0",
-        "unplugin-vue-components": "^28.0.0",
-        "vite": "^6.0.7",
-        "vite-plugin-dts": "^4.5.0",
-        "vue": "^3.5.13",
-        "vue-tsc": "^2.2.0"
-    },
-    "peerDependencies": {
-        "vue": "^3.3.7"
-    },
-    "engines": {
-        "node": "^18.0.0 || >=20.0.0",
-        "pnpm": ">=8.6.10"
-    },
-    "browserslist": [
-        "> 1%",
-        "not ie 11",
-        "not op_mini all"
-    ]
+    "./package.json": "./package.json",
+    "./style.css": "./dist/index.css",
+    "./dist/style.css": "./dist/index.css",
+    "./es/*": "./es/*",
+    "./lib/*": "./lib/*",
+    "./resolver": {
+      "import": "./es/resolver/index.js",
+      "require": "./lib/resolver/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "es",
+    "lib",
+    "README.md"
+  ],
+  "style": "dist/index.css",
+  "sideEffects": [
+    "dist/*",
+    "es/components/*/style/*",
+    "lib/components/*/style/*"
+  ],
+  "scripts": {
+    "clean": "rimraf 'dist/*' 'lib/*' 'es/*'",
+    "build:es": "vite build -c vite.config.ts",
+    "build:es-browser": "vite build -c vite.config.esm-browser.ts",
+    "build": "pnpm run clean && pnpm run build:es && pnpm run build:es-browser",
+    "build:ts": "vue-tsc && vite build",
+    "build:package": "rollup -c",
+    "preview": "vite preview",
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "typecheck": "vue-tsc --noEmit",
+    "release": "bumpp --all",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+  },
+  "keywords": [
+    "w-design-vue",
+    "w-design",
+    "components",
+    "component library",
+    "ui framework",
+    "ui",
+    "vue3",
+    "vue"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weijuer/w-design.git",
+    "directory": "packages/w-design-vue"
+  },
+  "author": "Weijuer<https://github.com/weijuer>",
+  "license": "MIT",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/w-design-vue"
+  },
+  "homepage": "https://github.com/weijuer/w-design-vue/tree/master/#readme",
+  "bugs": "https://github.com/weijuer/w-design-vue/issues",
+  "dependencies": {
+    "@w-design/eslint-config": "workspace:^",
+    "@w-design/hooks": "workspace:^",
+    "@w-design/utils": "workspace:^"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-replace": "^6.0.2",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "deepmerge": "^4.3.1",
+    "esbuild": "^0.24.2",
+    "eslint": "^9.18.0",
+    "eslint-plugin-vue": "^9.32.0",
+    "fast-glob": "^3.3.3",
+    "postcss-custom-properties": "^14.0.6",
+    "prettier": "^3.2.5",
+    "rollup": "^4.30.1",
+    "rollup-plugin-esbuild": "^6.1.1",
+    "rollup-plugin-scss": "^4.0.1",
+    "sass": "^1.83.4",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0",
+    "unplugin-auto-import": "^19.0.0",
+    "unplugin-vue-components": "^28.0.0",
+    "vite": "^6.0.7",
+    "vite-plugin-dts": "^4.5.0",
+    "vue": "^3.5.13",
+    "vue-tsc": "^2.2.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.7"
+  },
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0",
+    "pnpm": ">=8.6.10"
+  },
+  "browserslist": [
+    "> 1%",
+    "not ie 11",
+    "not op_mini all"
+  ]
 }

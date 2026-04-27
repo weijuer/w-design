@@ -34,6 +34,7 @@ export * from './pagination'
 export * from './scroll-shadow'
 export * from './tooltip'
 export * from './table'
+export * from './tabs'
 export * from './spinner'
 
 // form

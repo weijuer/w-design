@@ -1,4 +1,5 @@
 // https://dev.to/codyhouse/flash-grid-learn-css-grid-by-building-a-grid-system-2c4f
+@use 'sass:meta';
 
 :root {
   --w-grid-rows: 1;
@@ -19,7 +20,9 @@ $breakpoints: (
 ) !default;
 
 @mixin create-selectors($breakpoint: null) {
-  $infix: if($breakpoint ==null, '', '__#{$breakpoint}');
+  $infix: if(
+    sass($breakpoint ==null): '' ; else: '__#{$breakpoint}'
+  );
 
   @for $i from 1 through $columns {
     .w-col#{$infix}-#{$i} {
