@@ -157,7 +157,6 @@ onUnmounted(() => {
   padding: 0;
 
   .w-tabs__header {
-    position: relative;
     display: flex;
     margin-bottom: 1.5rem;
     border-bottom: 1px solid #e9ecef;
@@ -170,9 +169,11 @@ onUnmounted(() => {
     }
 
     .w-tabs__nav {
+      position: relative;
       display: flex;
       width: 100%;
       gap: 0.5rem;
+      z-index: 1;
     }
 
     .w-tab__slider {
