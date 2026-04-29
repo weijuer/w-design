@@ -173,7 +173,6 @@ onUnmounted(() => {
       display: flex;
       width: 100%;
       gap: 0.5rem;
-      z-index: 1;
     }
 
     .w-tab__slider {
@@ -182,7 +181,7 @@ onUnmounted(() => {
       box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
       border-radius: 0.5rem;
       transition: all 0.3s ease;
-      z-index: -1;
+      z-index: 0;
     }
 
     .w-tab-button {
