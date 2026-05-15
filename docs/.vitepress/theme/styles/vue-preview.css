@@ -1,0 +1,209 @@
+.vp-vue-preview {
+  margin: 24px 0;
+  overflow: hidden;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+}
+
+.vp-vue-preview__stage {
+  position: relative;
+  min-height: 120px;
+  padding: 24px;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--vp-c-bg-soft) 72%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(color-mix(in srgb, var(--vp-c-bg-soft) 72%, transparent) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.vp-vue-preview__placeholder {
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+}
+
+.vp-vue-preview__error {
+  margin: 0;
+  white-space: pre-wrap;
+  color: #b42318;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.vp-vue-preview__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+}
+
+.vp-vue-preview__button {
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  font-size: 13px;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.vp-vue-preview__button:hover:not(:disabled) {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
+
+.vp-vue-preview__button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.vp-vue-preview__status {
+  margin-left: auto;
+  color: var(--vp-c-text-2);
+  font-size: 12px;
+}
+
+.vp-vue-preview__source-shell {
+  overflow: hidden;
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+.vp-vue-preview-source-enter-active,
+.vp-vue-preview-source-leave-active {
+  display: grid;
+  transition:
+    grid-template-rows 260ms ease,
+    opacity 220ms ease;
+}
+
+.vp-vue-preview-source-enter-active {
+  grid-template-rows: 0fr;
+}
+
+.vp-vue-preview-source-enter-to,
+.vp-vue-preview-source-leave-active {
+  grid-template-rows: 1fr;
+}
+
+.vp-vue-preview-source-leave-to {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.vp-vue-preview-source-enter-from {
+  opacity: 0;
+}
+
+.vp-vue-preview-source-enter-active > *,
+.vp-vue-preview-source-leave-active > * {
+  min-height: 0;
+}
+
+.vp-vue-preview-code {
+  overflow: hidden;
+  background: var(--vp-code-block-bg);
+}
+
+.vp-vue-preview-code__editor {
+  position: relative;
+  min-height: 220px;
+}
+
+.vp-vue-preview-code__editor.is-editable {
+  display: grid;
+}
+
+.vp-vue-preview-code__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 6px 12px;
+  border-bottom: 1px solid color-mix(in srgb, var(--vp-c-divider) 68%, transparent);
+}
+
+.vp-vue-preview-code__lang {
+  color: var(--vp-c-text-2);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.vp-vue-preview-code__bar .vp-vue-preview__button {
+  margin-left: auto;
+}
+
+.vp-vue-preview-code__content :where(pre),
+.vp-vue-preview-code__fallback {
+  margin: 0;
+  padding: 16px 18px;
+  overflow: auto;
+  background: transparent !important;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.vp-vue-preview-code__content,
+.vp-vue-preview-code__fallback,
+.vp-vue-preview-code__textarea {
+  min-height: 220px;
+}
+
+.vp-vue-preview-code__editor.is-editable .vp-vue-preview-code__content,
+.vp-vue-preview-code__editor.is-editable .vp-vue-preview-code__fallback,
+.vp-vue-preview-code__textarea {
+  grid-area: 1 / 1;
+}
+
+.vp-vue-preview-code__content {
+  overflow: auto;
+  pointer-events: none;
+}
+
+.dark .vp-vue-preview-code__content :where(.shiki),
+.dark .vp-vue-preview-code__content :where(.shiki span) {
+  background-color: var(--shiki-dark-bg) !important;
+  color: var(--shiki-dark) !important;
+}
+
+.vp-vue-preview-code__content :where(code),
+.vp-vue-preview-code__fallback code {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+}
+
+.vp-vue-preview-code__textarea {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+  padding: 16px 18px;
+  overflow: auto;
+  resize: vertical;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: transparent;
+  caret-color: var(--vp-c-text-1);
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre;
+  tab-size: 2;
+  -webkit-text-fill-color: transparent;
+}
+
+.vp-vue-preview-code__textarea::selection {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 24%, transparent);
+  -webkit-text-fill-color: transparent;
+}

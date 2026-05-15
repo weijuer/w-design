@@ -1,4 +1,4 @@
-import LiveRepl from './LiveRepl.vue'
-import Fieldset from './Fieldset.vue'
+import VuePreview from './VuePreview.vue'
+import DemoBlock from './DemoBlock.vue'
 
-export { LiveRepl, Fieldset }
+export { VuePreview, DemoBlock }

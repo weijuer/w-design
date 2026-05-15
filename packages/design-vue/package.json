@@ -33,9 +33,12 @@
   ],
   "style": "dist/index.css",
   "sideEffects": [
-    "dist/*",
     "es/components/*/style/*",
-    "lib/components/*/style/*"
+    "lib/components/*/style/*",
+    "*.vue",
+    "*.md",
+    "dist/*",
+    "*.css"
   ],
   "scripts": {
     "clean": "rimraf 'dist/*' 'lib/*' 'es/*'",
@@ -99,7 +102,6 @@
     "rollup": "^4.30.1",
     "rollup-plugin-esbuild": "^6.1.1",
     "rollup-plugin-scss": "^4.0.1",
-    "sass": "^1.83.4",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0",
     "unplugin-auto-import": "^19.0.0",

@@ -1,15 +1,22 @@
 {
-    "name": "w-design-docs",
-    "version": "1.0.0",
-    "private": true,
-    "scripts": {
-        "copy-lib": "pnpm -F design-chat build:lite && rm -rf ./.vitepress/public/lib && mkdir -p ./.vitepress/public/lib && cp ../packages/design-chat/dist/* ./.vitepress/public/lib/",
-        "dev": "pnpm run copy-lib && vitepress dev --port 8080",
-        "build": "pnpm run copy-lib && vitepress build",
-        "preview": "vitepress preview"
-    },
-    "dependencies": {},
-    "devDependencies": {
-        "markdown-it": "^14.1.0"
-    }
+  "name": "w-design-docs",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "copy-lib": "rm -rf ./.vitepress/public/lib && mkdir -p ./.vitepress/public/lib && cp ../packages/design-vue/dist/* ./.vitepress/public/lib/",
+    "dev": "pnpm run copy-lib && vitepress dev --port 8080",
+    "build": "pnpm run copy-lib && vitepress build",
+    "preview": "vitepress preview"
+  },
+  "dependencies": {
+    "ant-design-vue": "^4.2.6",
+    "shiki": "^4.0.2",
+    "w-design-vue": "workspace:^"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.5.34",
+    "markdown-it": "^14.1.0",
+    "vitepress": "1.6.3"
+  }
 }
