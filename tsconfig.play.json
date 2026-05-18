@@ -1,17 +1,17 @@
 {
-    "extends": "./tsconfig.web.json",
-    "compilerOptions": {
-        // "allowJs": true,
-        "lib": ["ESNext", "DOM", "DOM.Iterable"]
-    },
-    "include": [
-        "packages",
-        "typings/global.d.ts",
-        "typings/env.d.ts",
-        "typings/style.d.ts",
+  "extends": "./tsconfig.web.json",
+  "compilerOptions": {
+    // "allowJs": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"]
+  },
+  "include": [
+    "packages",
+    "typings/global.d.ts",
+    "typings/env.d.ts",
+    "typings/style.d.ts",
 
-        // playground
-        "play/main.ts",
-        "play/src/**/*"
-    ]
+    // playground
+    "play/main.ts",
+    "play/src/**/*"
+  ]
 }

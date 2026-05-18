@@ -1,3 +1,7 @@
+body {
+  background-color: var(--vp-c-bg);
+}
+
 .vp-vue-preview {
   margin: 24px 0;
   overflow: hidden;
@@ -9,6 +13,9 @@
 .vp-vue-preview__stage {
   position: relative;
   min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 24px;
   background:
     linear-gradient(

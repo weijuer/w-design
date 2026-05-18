@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "copy-lib": "rm -rf ./.vitepress/public/lib && mkdir -p ./.vitepress/public/lib && cp ../packages/design-vue/dist/* ./.vitepress/public/lib/",
-    "dev": "pnpm run copy-lib && vitepress dev --port 8080",
-    "build": "pnpm run copy-lib && vitepress build",
+    "dev": "vitepress dev --port 8080",
+    "build": "vitepress build",
     "preview": "vitepress preview"
   },
   "dependencies": {

@@ -1,9 +1,6 @@
-import type { Component, DefineComponent } from 'vue'
+import type { Component } from 'vue'
 
-declare module '*.vue' {
-  const component: DefineComponent<Record<string, unknown>, Record<string, unknown>, unknown>
-  export default component
-}
+declare module '*.css' {}
 
 declare module 'virtual:vue-preview-registry' {
   export const previewLoaders: Record<string, () => Promise<{ default: Component }>>
@@ -29,3 +26,5 @@ declare module 'virtual:vue-preview-registry' {
   export const previewSources: Record<string, string>
   export const previewStyles: Record<string, string[]>
 }
+
+export {}

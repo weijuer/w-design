@@ -56,6 +56,7 @@ $btn-sizes: (
     background-color: #fff;
     border-color: #e0e0e6;
     border-style: solid;
+    color: #888;
 
     &:not(:disabled):hover {
       color: map.get($themes, 'primary');

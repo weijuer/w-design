@@ -161,7 +161,7 @@ function resetSource() {
 
     <div class="vp-vue-preview__toolbar">
       <button type="button" class="vp-vue-preview__button" @click="isCollapsed = !isCollapsed">
-        {{ isCollapsed ? '展开源码' : '收起源码' }}
+        {{ isCollapsed ? 'Expand source' : 'Collapse source' }}
       </button>
       <button
         type="button"
@@ -169,7 +169,7 @@ function resetSource() {
         :disabled="!isDirty"
         @click="resetSource"
       >
-        重置
+        Reset
       </button>
       <span class="vp-vue-preview__status">{{ isDirty ? 'Live edit' : 'Vite module' }}</span>
     </div>
